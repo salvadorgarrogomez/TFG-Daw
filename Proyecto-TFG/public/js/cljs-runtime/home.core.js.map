@@ -1,0 +1,1 @@
+{"version":3,"sources":["home/core.cljs"],"mappings":";AAGA,iBAAA,jBAAMA;AAAN,AAAA,0FAAA,mDAAA,mFAAA,kDAAA,gCAAA,mFAAA,8CAAA","names":["home.core/page"],"sourcesContent":["(ns home.core\r\n  (:require [reagent.core :as r]))\r\n\r\n(defn page []\r\n  [:div\r\n   [:h1 \"P\u00e1gina de Inicio\"]\r\n   [:p \"Bienvenido a la p\u00e1gina de inicio\"]])\r\n"]}

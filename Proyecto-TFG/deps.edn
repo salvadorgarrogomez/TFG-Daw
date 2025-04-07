@@ -1,0 +1,16 @@
+{:paths ["src/clj" "src/cljs"]
+ :deps
+ {org.clojure/clojure {:mvn/version "1.12.0"}
+  org.clojure/clojurescript {:mvn/version "1.11.60"}
+  thheller/shadow-cljs {:mvn/version "2.28.22"}  ;; Versión correcta
+  alandipert/storage-atom {:mvn/version "2.0.1"}
+  binaryage/devtools {:mvn/version "1.0.3"}
+  reagent {:mvn/version "1.2.0"}  ;; Usa la última versión
+  cljs-http {:mvn/version "0.1.46"}
+  o2w {:mvn/version "0.8.5"}
+  o2w.cms {:mvn/version "0.0.30"}
+  o2w.chat {:mvn/version "0.0.10"}}
+
+ :aliases
+ {:cljs {:extra-deps {react {:mvn/version "17.0.2"}   ;; Igual que en package.json
+                      react-dom {:mvn/version "17.0.2"}}}}}

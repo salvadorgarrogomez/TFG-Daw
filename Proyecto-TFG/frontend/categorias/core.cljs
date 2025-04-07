@@ -1,0 +1,135 @@
+(ns categorias.core
+  (:require [reagent.core :as r]
+            [reagent.dom :as dom]
+            [app.db :refer [categorias fetch-categorias fetch-productos productos]]
+            [clojure.string :as str]))
+
+(defn obtener-productos [categoria-id]
+  (js/console.log "Obteniendo productos para la categoría" categoria-id)
+  (fetch-productos categoria-id))
+
+(defn agrupar-productos [productos]
+  (reduce (fn [acc producto]
+            (let [nombre (:nombre producto)]
+              (update acc nombre conj producto)))
+          {} productos))
+
+(def mensaje-categoria (r/atom "")) ;; Nuevo estado para el mensaje
+
+(defn obtener-descripcion-categoria [categoria-id]
+  (let [categoria (some #(when (= (:id %) categoria-id) %) @categorias)]
+    (get categoria :descripcion)))
+
+(defn obtener-mensaje-categoria [categoria-id]
+  (let [descripcion (obtener-descripcion-categoria categoria-id)]
+    (if (not-empty descripcion)
+      descripcion)))
+
+(defn page []
+  (r/create-class
+   {:component-did-mount
+    (fn []
+      (js/console.log "Componente montado. Llamando a fetch-categorias...")
+      (fetch-categorias))
+    :reagent-render
+    (fn []
+      [:div.row {:class "divProductosyCategorias"}
+
+       [:div.col-12.d-block.d-sm-none
+        [:div.dropdown
+         [:button.navbar-toggler.dropdown-toggle.desplegable
+          {:type "button"
+           :data-toggle "dropdown"
+           :aria-expanded "false"
+           :aria-controls "dropdown-categorias"}
+          [:span.navbar-toggler-icon.me-2]
+          "Selecciona una categoria de la carta"]
+
+         [:div.dropdown-menu {:id "dropdown-categorias"}
+          (for [categoria @categorias]
+            ^{:key (:id categoria)}
+            [:a.dropdown-item
+             {:style {:cursor "pointer"}
+              :on-click #(do
+                           (obtener-productos (:id categoria))
+                           (reset! mensaje-categoria (obtener-mensaje-categoria (:id categoria))))}
+             (:nombre categoria)])]]]
+
+
+       ;; Contenedor de botones (Categorías)
+       [:div.col-12.d-none.d-sm-block {:class "divButtons"}
+        (if (empty? @categorias)
+          [:p "Cargando categorías..."]
+          [:div {:class "buttonCategoria"}
+           (for [categoria @categorias]
+             ^{:key (:id categoria)}
+             [:button {:on-click #(do
+                                    (obtener-productos (:id categoria))
+                                    (reset! mensaje-categoria (obtener-mensaje-categoria (:id categoria))))
+                       :class "buttons"}
+              (:nombre categoria)])])]
+
+       [:div.col-12 {:class "mensaje-categoria"}
+        (if (not-empty @mensaje-categoria)
+          [:p @mensaje-categoria] "Selecciona uno de los elementos de nuestra carta.")]
+
+       ;; Bloque de productos
+       [:div.row
+        [:div.col-12 {:class "divProductos"}
+         (if (empty? @productos)
+           [:p.col-12]
+           [:ul.row {:class "productosUL"}
+            (let [productos-agrupados (agrupar-productos @productos)]
+              (for [[nombre lista-productos] productos-agrupados]
+                ^{:key nombre}
+                [:li.col-12 {:class "productosLI"}
+                 [:div {:class "producto-info"}
+                  [:div
+                   [:span {:class "negrita"} nombre] ;; nombre arriba
+                   (let [primer-producto (first lista-productos)
+                         descripcion-limpia (str/trim (:description primer-producto))]
+                     [:p {:class "description"}
+                      (if (empty? descripcion-limpia)
+                        " "
+                        descripcion-limpia)])]
+                  (for [producto lista-productos]
+                    ^{:key (:id producto)}
+                    [:div {:class "producto-item"} ;; Nuevo div para mejor alineación
+                     [:div {:class "precio-racion"} ;; Contenedor que agrupa precio y ración
+                      [:span {:class "precio"} (str (:precio producto) "€ ")]
+                      (let [tipo-porcion (:tipo_porcion producto)
+                            producto-id (:id producto)]  ;; Guardamos el ID del producto
+                        (cond
+                          (= tipo-porcion "Media ración")
+                          [:img {:class "racion"
+                                 :src "/imgs/medio-circulo.png"
+                                 :alt "Ración completa"
+                                 :style {:cursor "pointer"}
+                                 :on-click #(js/alert (str "ID del producto: " producto-id))}]
+                          (= tipo-porcion "Ración completa")
+                          [:img {:class "racion"
+                                 :src "/imgs/completo-circulo.png"
+                                 :alt "Ración completa"
+                                 :style {:cursor "pointer"}
+                                 :on-click #(js/alert (str "ID del producto: " producto-id))}]
+                          (= tipo-porcion "Por unidad")
+                          [:img {:class "racion"
+                                 :src "/imgs/unidad.png"
+                                 :alt "/Unidad"
+                                 :style {:cursor "pointer"}
+                                 :on-click #(js/alert (str "ID del producto: " (:id producto)))}]
+                          (= tipo-porcion "")
+                          [:img {:class "racion"
+                                 :src "/imgs/unidad.png"
+                                 :alt ""
+                                 :style {:cursor "pointer"}
+                                 :on-click #(js/alert (str "ID del producto: " producto-id))}]
+                          :else [:span (str "Tipo: " tipo-porcion)]))]])]]))])]]])}))
+
+
+;; Iniciar la aplicación
+(defn init []
+  (js/console.log "Iniciando la aplicación...")
+  (dom/render [page] (.getElementById js/document "app")))
+
+(init)
