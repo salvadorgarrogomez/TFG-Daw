@@ -1,62 +1,41 @@
 <?php
 
 namespace App\Http\Controllers;
+use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\DB;
-use Illuminate\Http\Request;
 
 class Principal extends Controller
 {
 
-    public function index()
-    {
-        return view('principal');
-    }
-
+    // Consulta para mostrar todos los productos al llamar a la api
     public function productos()
     {
-        // Realizamos la consulta a la tabla productos
         $productos = DB::select('SELECT * FROM productos');
-
-        // Limpiar los productos antes de devolverlos, por ejemplo, eliminando valores null
         $productos = array_map(function ($producto) {
-            if (is_null($producto->descripcion)) {
-                $producto->descripcion = "Descripción no disponible";  // Puedes poner un valor por defecto
-            }
             return $producto;
         }, $productos);
-
-        // Devolvemos los productos en formato JSON
         return response()->json($productos);
     }
 
+    // Consulta para mostrar todas las categorias, menos 2 id especificados, para que no aparezcan en la consulta, en orden de id
     public function categorias()
     {
-        // Realizamos la consulta a la tabla productos
-        $categorias = DB::select('SELECT * FROM categorias WHERE id NOT IN (0, 14) ORDER BY id;
-');
-
-        // Limpiar los productos antes de devolverlos, por ejemplo, eliminando valores null
+        $categorias = DB::select('SELECT * FROM categorias WHERE id NOT IN (0, 14) ORDER BY id');
         $categorias = array_map(function ($categoria) {
             return $categoria;
         }, $categorias);
-
-        // Devolvemos los productos en formato JSON
         return response()->json($categorias);
     }
 
 
+    // Consulta preparada, para mostrar todos lo productos en base al id de la categoria requerida
     public function productosPorCategoria($categoria_id)
     {
-        // Consulta para obtener productos de la categoría seleccionada
         $productos = DB::select('SELECT * FROM productos WHERE categoria_id = ? ORDER BY id', [$categoria_id]);
-
-        // Verificar si hay productos en la categoría
         if (empty($productos)) {
             return response()->json(['message' => 'No hay productos en esta categoría'], 404);
         }
-
         return response()->json($productos);
     }
-
 }

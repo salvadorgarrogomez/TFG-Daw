@@ -14,7 +14,7 @@
               (update acc nombre conj producto)))
           {} productos))
 
-(def mensaje-categoria (r/atom "")) ;; Nuevo estado para el mensaje
+(def mensaje-categoria (r/atom "")) 
 
 (defn obtener-descripcion-categoria [categoria-id]
   (let [categoria (some #(when (= (:id %) categoria-id) %) @categorias)]
@@ -34,7 +34,6 @@
     :reagent-render
     (fn []
       [:div.row {:class "divProductosyCategorias"}
-
        [:div.col-12.d-block.d-sm-none
         [:div.dropdown
          [:button.navbar-toggler.dropdown-toggle.desplegable
@@ -85,7 +84,7 @@
                 [:li.col-12 {:class "productosLI"}
                  [:div {:class "producto-info"}
                   [:div
-                   [:span {:class "negrita"} nombre] ;; nombre arriba
+                   [:span {:class "negrita"} nombre] 
                    (let [primer-producto (first lista-productos)
                          descripcion-limpia (str/trim (:description primer-producto))]
                      [:p {:class "description"}
@@ -94,11 +93,11 @@
                         descripcion-limpia)])]
                   (for [producto lista-productos]
                     ^{:key (:id producto)}
-                    [:div {:class "producto-item"} ;; Nuevo div para mejor alineación
+                    [:div {:class "producto-item"} ;; Div donde en su interior ira todo el contenido de cada producto
                      [:div {:class "precio-racion"} ;; Contenedor que agrupa precio y ración
                       [:span {:class "precio"} (str (:precio producto) "€ ")]
                       (let [tipo-porcion (:tipo_porcion producto)
-                            producto-id (:id producto)]  ;; Guardamos el ID del producto
+                            producto-id (:id producto)]  ;; Se guarda el ID de producto, al dar en las imagenes, saldra un alert en el navegador para ver el id
                         (cond
                           (= tipo-porcion "Media ración")
                           [:img {:class "racion"
@@ -127,9 +126,7 @@
                           :else [:span (str "Tipo: " tipo-porcion)]))]])]]))])]]])}))
 
 
-;; Iniciar la aplicación
+;; Inicio de la aplicación
 (defn init []
-  (js/console.log "Iniciando la aplicación...")
   (dom/render [page] (.getElementById js/document "app")))
-
 (init)

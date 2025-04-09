@@ -1,6 +1,7 @@
 (ns app.views
   (:require [reagent.core :as r]))
 
+;; Estructura que tendra el SPA (Single Page App) de clojure, lo que es la pagina principal, donde se presenta cada boton, al dar sobre ellos, cambia el aspecto del div principal app.
 (defn header []
   [:header.row
    [:img.col-12 {:class "logo"
@@ -26,8 +27,7 @@
      [:div.col-12
       [:p "Política de privacidad"]]]])
 
-
-
+;; Layout de la pagina principal
 (defn layout [content]
   [:div.container-fluid
    [header]

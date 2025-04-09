@@ -1,3 +1,5 @@
+@charset "UTF-8";
+@import "bootstrap/dist/css/bootstrap.min.css";
 @import "bootstrap/dist/css/bootstrap.min.css";
 body {
   padding-inline: 150px;
@@ -76,7 +78,6 @@ body {
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center center;
-  background-attachment: fixed;
   padding-top: 15px;
   border-radius: 25px;
   padding-bottom: 10px;
@@ -270,6 +271,26 @@ header {
   color: #ffffff;
 }
 
+.container {
+  position: relative; /* Asegura que el contenedor se comporte de forma estándar */
+  overflow: hidden; /* Permite el desplazamiento si el contenido lo necesita */
+  margin-bottom: 0px;
+}
+.container h3 {
+  font-size: 1.5rem;
+  text-align: left;
+  color: #ffffff;
+  padding-left: 25px;
+}
+.container .carousel-item {
+  transition: transform 0.5s ease-in-out;
+}
+
+@media (min-width: 480px) and (max-width: 1024px) {
+  .carousel-inner {
+    display: block;
+  }
+}
 .nosotros {
   background-color: white;
   border-radius: 5px;

@@ -3,6 +3,7 @@
             [reagent.dom :as dom]
             [clojure.string :as str]))
 
+;; Funcion page para estructurar la pagina
 (defn page []
   [:div
    [:div.row {:class "nosotros"}
@@ -34,5 +35,4 @@
 
 (defn init []
   (dom/render [page] (.getElementById js/document "app")))
-
 (init)
