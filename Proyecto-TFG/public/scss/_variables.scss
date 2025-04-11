@@ -1,0 +1,38 @@
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Nerko+One&display=swap');
+
+$fuente-principal: 'Lora', serif;
+$fuente-secundaria: 'Montserrat', sans-serif;
+$fuente-decorativa: 'Nerko One', cursive;
+
+body {
+  font-family: $fuente-principal;
+  color: #333;
+}
+
+h1 {
+    font-family: $fuente-secundaria;
+    font-size: 1.8rem;
+  }
+
+h2, h3 {
+  font-family: $fuente-secundaria;
+  font-size: 1.2rem;
+}
+
+p {
+    font-size: 0.9rem;
+}
+
+.mensaje-categoria {
+    font-size: 1.2rem;
+    font-family: $fuente-decorativa;
+}
+
+.mensaje-categoria p{
+    font-size: 1.2rem;
+    font-family: $fuente-decorativa;
+}
+
+.producto-info {
+    font-size: 1.2rem;
+}

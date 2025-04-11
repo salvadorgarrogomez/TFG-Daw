@@ -5,27 +5,28 @@
 (defn header []
   [:header.row
    [:img.col-12 {:class "logo"
-                :src "imgs/logoBar2.0.png"
-                :alt "Logo Bar El Escobar"}]
+                 :src "imgs/logoBar2.1.svg"
+                 :alt "Logo Bar El Escobar"}]
    [:nav.row {:class "navBar"}
-    [:ul.col-12 
+    [:ul.col-12
      [:li.col-4 [:a {:href "#/"} "Inicio"]]
-    ;;  [:li [:a {:href "#/productos"} "Productos"]]
      [:li.col-4 [:a {:href "#/categorias"} "Carta"]]
      [:li.col-4 [:a {:href "#/nosotros"} "Nosotros"]]]]])
 
 (defn footer []
   [:footer.container-fluid
    [:div.row
-    [:div.col-12
+    [:div.col-12 {:class "botonesFooter"}
      [:p "Teléfonos de contacto (reservas):"]
      [:a {:href "tel:+34623191754"}
       [:button [:span.ml-2 "623191754"]]]
      [:a {:href "tel:+34683572682"}
       [:button [:span.ml-2 "683572682"]]]]]
-    [:div.row
-     [:div.col-12
-      [:p "Política de privacidad"]]]])
+   [:div.row {:class "privacidad"}
+    [:div.col-12
+     [:a {:href "#/privacidad"} "Privacidad"]
+     [:a {:href "#/administracion"
+          :class "login"} "Login"]]]])
 
 ;; Layout de la pagina principal
 (defn layout [content]

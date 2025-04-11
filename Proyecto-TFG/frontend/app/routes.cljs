@@ -3,15 +3,17 @@
             [reitit.frontend :as rf]
             [home.core :as home]
             [categorias.core :as categorias]
-            [productos.core :as productos]
+            [privacidad.core :as privacidad]
             [nosotros.core :as nosotros]
+            [administracion.core :as administracion]
             [app.state :refer [current-route]]))  
 
 (def routes
   [["/" {:name :home :view home/page}]
-   ["/productos" {:name :productos :view productos/page}]
    ["/categorias" {:name :categorias :view categorias/page}]  
-   ["/nosotros" {:name :nosotros :view nosotros/page}]])
+   ["/nosotros" {:name :nosotros :view nosotros/page}]
+   ["/privacidad" {:name :productos :view privacidad/page}]
+   ["/administracion" {:name :administracion :view administracion/page}]])
 
 (def router (rf/router routes))
 

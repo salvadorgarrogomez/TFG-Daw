@@ -149,6 +149,7 @@ footer {
     padding-left: 0;
     padding-right: 0;
     padding-top: 5px;
+    text-decoration: none;
 
     button {
         margin-inline: 5px;
@@ -159,6 +160,32 @@ footer {
     button:hover {
         background-color: #800020;
         color: white;
+    }
+
+    p {
+        margin-bottom: 5px;
+    }
+
+    .privacidad {
+        margin-top: 5px;
+        margin-bottom: 5px;
+        text-align: center;
+
+        a {
+            text-decoration: none;
+            color: white;
+            margin-right: 10px;
+        }
+
+        a:hover {
+            color: black;
+        }
+
+        .login:hover {
+            color: #800020;
+            font-size: 1.2rem;
+        }
+
     }
 
 }
@@ -180,12 +207,13 @@ footer {
     }
 
     .desplegable {
-        margin-left: 20px;
+        margin-left: 10px;
+        margin-right: 5px;
     }
 
     .divProductosyCategorias {
         padding: 10px;
-        margin-bottom: 150px;
+        margin-bottom: 100px;
 
         h1 {
             padding-left: 0px;
