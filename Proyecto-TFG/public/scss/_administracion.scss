@@ -8,9 +8,18 @@
 }
 
 .panel {
-    background-color: aliceblue;
-    width: 100%;
-    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    background-color: white;
+    padding: 20px;
+    margin-inline: 75px;
+    margin-bottom: 100px;
+
+    .panelBotones {
+        text-align: center;
+    }
 }
 
 .entrada {
@@ -23,10 +32,63 @@
     margin-top: 50px;
     margin-bottom: 50px;
 
+    p {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    p input {
+        margin-left: 1rem;
+        flex: 1;
+        max-width: 60%;
+    }
+
 }
 
 .rowButton {
     text-align: center;
+}
+
+.botonesAdmin {
+    margin-top: 15px;
+    margin-bottom: 15px;
+    margin-inline: 0px;
+
+    button {
+        margin: 5px;
+        width: 170px;
+        height: auto;
+    }
+
+}
+
+table {
+    table-layout: fixed;
+    width: 100%;
+
+    th,
+    td {
+        width: 100px;
+        text-align: center;
+    }
+
+    th.id,
+    td.id {
+        width: 10px;
+        font-weight: bold;
+    }
+
+    th.tdButton,
+    td.tdButton {
+        width: 50px;
+        font-weight: bold;
+    }
+
+    button.nuevo {
+        width: 150px;
+    }
+
 }
 
 
@@ -36,8 +98,37 @@
         padding: 15px;
     }
 
+    .panel {
+        margin-inline: 0px;
+        padding: 15px;
+    }
+
     .entrada {
         margin: 0px;
+    }
+
+    table {
+        table-layout: fixed;
+        width: 100%;
+        margin-left: -25px;
+
+        th,
+        td {
+            width: 100px;
+        }
+
+        th.id,
+        td.id {
+            width: 10px;
+            font-weight: bold;
+        }
+
+        th.tdButton,
+        td.tdButton {
+            width: 40px;
+            font-weight: bold;
+        }
+
     }
 
 }

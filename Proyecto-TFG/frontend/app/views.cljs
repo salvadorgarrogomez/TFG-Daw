@@ -26,7 +26,7 @@
     [:div.col-12
      [:a {:href "#/privacidad"} "Privacidad"]
      [:a {:href "#/administracion"
-          :class "login"} "Login"]]]])
+          :class "login"} "Administración"]]]])
 
 ;; Layout de la pagina principal
 (defn layout [content]

@@ -6,6 +6,7 @@
             [privacidad.core :as privacidad]
             [nosotros.core :as nosotros]
             [administracion.core :as administracion]
+            [administracion.editar :as editar]
             [app.state :refer [current-route]]))  
 
 (def routes
@@ -13,7 +14,8 @@
    ["/categorias" {:name :categorias :view categorias/page}]  
    ["/nosotros" {:name :nosotros :view nosotros/page}]
    ["/privacidad" {:name :productos :view privacidad/page}]
-   ["/administracion" {:name :administracion :view administracion/page}]])
+   ["/administracion" {:name :administracion :view administracion/page}]
+   ["/editar/:tipo/:id" {:name :editar :view editar/page}]])
 
 (def router (rf/router routes))
 

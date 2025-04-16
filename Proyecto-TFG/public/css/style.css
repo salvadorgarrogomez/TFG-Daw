@@ -1,4 +1,3 @@
-@charset "UTF-8";
 @import "bootstrap/dist/css/bootstrap.min.css";
 @import "bootstrap/dist/css/bootstrap.min.css";
 @import url("https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Nerko+One&display=swap");
@@ -139,10 +138,6 @@ footer button {
   margin-inline: 5px;
   padding-right: 12px;
   width: 125px;
-}
-footer button:hover {
-  background-color: #800020;
-  color: white;
 }
 footer p {
   margin-bottom: 5px;
@@ -295,8 +290,8 @@ header {
 }
 
 .container {
-  position: relative; /* Asegura que el contenedor se comporte de forma estándar */
-  overflow: hidden; /* Permite el desplazamiento si el contenido lo necesita */
+  position: relative;
+  overflow: hidden;
   margin-bottom: 100px;
 }
 .container h3 {
@@ -338,10 +333,6 @@ header {
 .nosotros button {
   margin-inline: 5px;
   padding-right: 12px;
-}
-.nosotros button:hover {
-  background-color: #800020;
-  color: white;
 }
 .nosotros img {
   width: 50px;
@@ -426,6 +417,11 @@ p {
   font-size: 1.2rem;
 }
 
+button:hover {
+  background-color: #800020;
+  color: white;
+}
+
 .administracion {
   display: flex;
   justify-content: center;
@@ -436,9 +432,17 @@ p {
 }
 
 .panel {
-  background-color: aliceblue;
-  width: 100%;
-  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  background-color: white;
+  padding: 20px;
+  margin-inline: 75px;
+  margin-bottom: 100px;
+}
+.panel .panelBotones {
+  text-align: center;
 }
 
 .entrada {
@@ -451,9 +455,53 @@ p {
   margin-top: 50px;
   margin-bottom: 50px;
 }
+.entrada p {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.entrada p input {
+  margin-left: 1rem;
+  flex: 1;
+  max-width: 60%;
+}
 
 .rowButton {
   text-align: center;
+}
+
+.botonesAdmin {
+  margin-top: 15px;
+  margin-bottom: 15px;
+  margin-inline: 0px;
+}
+.botonesAdmin button {
+  margin: 5px;
+  width: 170px;
+  height: auto;
+}
+
+table {
+  table-layout: fixed;
+  width: 100%;
+}
+table th,
+table td {
+  width: 100px;
+  text-align: center;
+}
+table th.id,
+table td.id {
+  width: 10px;
+  font-weight: bold;
+}
+table th.tdButton,
+table td.tdButton {
+  width: 50px;
+  font-weight: bold;
+}
+table button.nuevo {
+  width: 150px;
 }
 
 @media (min-width: 480px) and (max-width: 1024px) {
@@ -461,7 +509,34 @@ p {
     margin-inline: 0px;
     padding: 15px;
   }
+  .panel {
+    margin-inline: 0px;
+    padding: 15px;
+  }
   .entrada {
     margin: 0px;
   }
+  table {
+    table-layout: fixed;
+    width: 100%;
+    margin-left: -25px;
+  }
+  table th,
+  table td {
+    width: 100px;
+  }
+  table th.id,
+  table td.id {
+    width: 10px;
+    font-weight: bold;
+  }
+  table th.tdButton,
+  table td.tdButton {
+    width: 40px;
+    font-weight: bold;
+  }
+}
+.divEditar {
+  background-color: white;
+  margin-bottom: 100px;
 }/*# sourceMappingURL=style.css.map */
