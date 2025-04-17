@@ -15,6 +15,18 @@ header {
     padding-inline: 0px;
 }
 
+.conjuntoImagenes {
+    padding-top: 25px;
+    margin: 10px;
+    width: 100%;
+    height: auto;  /* Ajusta el alto del contenedor */
+    object-fit: cover;  /* O usa 'contain' si prefieres mantener las proporciones */
+    overflow: hidden;  /* Evita que la imagen se salga del contenedor */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .navBar {
 
     ul {

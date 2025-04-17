@@ -6,6 +6,7 @@ use App\Http\Controllers\Principal;
 use App\Http\Controllers\Imagenes;
 use App\Http\Controllers\Login;
 use App\Http\Controllers\UpdateProducto;
+use App\Http\Controllers\UpdateCategoria;
 
 // Rutas para poder utilizar las clases implementadas de la api en el Controladdor Principal
 Route::get('/productos', action: [Principal::class, 'productos']);
@@ -21,3 +22,4 @@ Route::post('/login-admin', [Login::class, 'login']);
 Route::get('/usuarios', [Login::class, 'usuarios']);
 
 Route::put('/productos/{id}', [UpdateProducto::class, 'update']);
+Route::put('/categoria/{id}', [UpdateCategoria::class, 'update']);

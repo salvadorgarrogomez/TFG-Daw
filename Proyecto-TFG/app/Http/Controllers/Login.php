@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Usuario;
 use Illuminate\Http\Request;
 use Tymon\JWTAuth\Facades\JWTAuth;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
 
 class Login extends Controller
@@ -29,6 +28,7 @@ class Login extends Controller
                     'token' => $token,
                     'nombre' => $user->nombre,
                     'contrasenia' => $user->contrasenia,
+                    'id' => $user->id,
                     'rol' => $user->rol
                 ]);
             }

@@ -15,6 +15,7 @@ class Usuario extends Model implements JWTSubject
 
     // Define los campos que pueden ser asignados masivamente
     protected $fillable = [
+        'id',
         'nombre',
         'contrasenia',
         'rol',

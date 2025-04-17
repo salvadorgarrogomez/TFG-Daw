@@ -22,7 +22,7 @@
                   :response-format :json
                   :on-success (fn [response]
                                 (js/alert "Imagen subida con éxito")
-                                (db/cargar-imagenes)) 
+                                (db/cargar-imagenes))
                   :on-failure (fn [response]
                                 (js/alert "Error al subir la imagen"))}))))
 
@@ -46,6 +46,19 @@
         [:span.carousel-control-next-icon {:aria-hidden "true"}]
         [:span.sr-only "Next"]]])))
 
+(defn mostrar-imagenes-todas []
+  (let [imagenes @db/imagenes   ;; Obtención de las imágenes desde el atom
+        imagen-seleccionada (r/atom nil)] ;; Atom para la imagen seleccionada
+    (if (empty? imagenes)
+      [:div "No se encontraron imágenes."]
+      [:div
+       [:div.row
+        (for [{:keys [id descripcion imagen_base64 mime_type]} imagenes]
+          ^{:key id}
+          [:div.col-12.col-md-3 {:class "conjuntoImagenes"}
+           [:img {:src (str "data:" mime_type ";base64," imagen_base64)
+                  :alt descripcion}]])]])))
+
 ;; Formulario para subir imagenes a la base de datos
 ;; En este caso, solo permite subir imagenes de 1 en 1
 (defn formulario-subida []
@@ -64,10 +77,11 @@
       (db/cargar-imagenes))
     :reagent-render
     (fn []
-      [:div.row 
+      [:div.row
        [:div.col-12 {:class "container"}
         [:h3 "Galería de Imágenes"]
         [mostrar-imagenes]
+        [mostrar-imagenes-todas]
               ;;  [formulario-subida]
         ]])}))
 

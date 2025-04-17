@@ -104,12 +104,14 @@
      :response-format :json
      :keywords? true
      :handler #(do
-                 (let [{:keys [nombre rol token]} %]
+                 (let [{:keys [id nombre rol token]} %]
                    ;; Limpia todo antes por si había sesión anterior
+                   (.removeItem js/localStorage "id")
                    (.removeItem js/localStorage "usuario")
                    (.removeItem js/localStorage "rol")
                    (.removeItem js/localStorage "token")
                    ;; Guarda los nuevos datos
+                   (.setItem js/localStorage "id" id)
                    (.setItem js/localStorage "usuario" nombre)
                    (.setItem js/localStorage "rol" rol)
                    (.setItem js/localStorage "token" token)
@@ -144,6 +146,7 @@
   (reset! logged-in? false)
   (reset! auth-token nil)
   (reset! datos-usuario {:nombre nil :rol nil})
+  (.removeItem js/localStorage "id")
   (.removeItem js/localStorage "usuario")
   (.removeItem js/localStorage "token")
   (.removeItem js/localStorage "rol"))
@@ -172,10 +175,9 @@
                               (reset! mostrar-categorias? true)
                               (reset! mostrar-productos? false)
                               (fetch-list-categorias))} "Mostrar categorias"]
-       [:button {:on-click #(do
-                              (reset! mostrar-categorias? true)
-                              (reset! mostrar-productos? false)
-                              (fetch-list-categorias))} "Mostrar fotografias"]])]
+       [:button
+        {:on-click #(set! (.-hash js/location) "#/imagenes")}
+        "Mostrar fotografias"]])]
    (when @mostrar-productos?
      [render-productos])
    (when @mostrar-categorias?
