@@ -1,0 +1,36 @@
+.divNuevo {
+    background-color: white;
+    margin-bottom: 100px;
+    padding: 25px;
+    margin-inline: 75px;
+    align-items: center;
+    justify-content: center;
+
+    .divDatosNuevos {
+        text-align: left;
+        display: flex;
+        flex-direction: column;
+
+        input,
+        select {
+            margin-left: 5px;
+            align-self: flex-end;
+            width: 175px;
+        }
+    }
+}
+
+
+@media (min-width: 480px) and (max-width: 1686px) {
+    .divNuevo {
+        margin-inline: 0px;
+
+        .divDatosNuevos {
+            margin: 0 auto;
+            text-align: right;
+            display: flex;
+            flex-direction: column;
+        }
+    }
+    
+}

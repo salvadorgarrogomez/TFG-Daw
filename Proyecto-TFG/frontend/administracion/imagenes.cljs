@@ -2,6 +2,7 @@
   (:require [reagent.core :as r]
             [reagent.dom :as dom]
             [cljs-http.client :as http]
+            [app.state :as state]
             [app.db :as db]))
 
 (defonce imagen (r/atom nil)) ;; Átomo para almacenar la imagen seleccionada
@@ -42,28 +43,33 @@
 ;; Formulario para subir imagenes a la base de datos
 ;; En este caso, solo permite subir imagenes de 1 en 1
 (defn formulario-subida []
-  [:div 
+  [:div
    [:h2 "Subir Imagen"]
    [:input {:type "file"
             :on-change handle-file-change}]
    [:button {:on-click #(do
-                          (subir-imagen)
-                          (.reload js/location true))} "Subir Imagen"]])
+                          (subir-imagen))} "Subir Imagen"]])
 
 ;; Funcion page para estructurar la pagina
 (defn page []
-  (r/create-class
-   {:component-did-mount
-    (fn []
-      (js/console.log "Componente montado. Llamando a cargar-imagenes...")
-      (db/cargar-imagenes))
-    :reagent-render
-    (fn []
-      [:div.row
-       [:div.col-12 {:class "adminImagenes"}
-        [:h3 "Directorio de imagenes:"]
-        [formulario-subida]
-        [mostrar-imagenes-todas]]])}))
+  (if @state/acceso-imagenes?
+    (r/create-class
+     {:component-did-mount
+      (fn []
+        (js/console.log "Componente montado. Llamando a cargar-imagenes...")
+        (db/cargar-imagenes))
+      :reagent-render
+      (fn []
+        [:div.row
+         [:div.col-12 {:class "adminImagenes"}
+          [:h3 "Directorio de imágenes:"]
+          [formulario-subida]
+          [mostrar-imagenes-todas]]])})
+    ;; Mostrar mensaje si el acceso no está permitido
+    [:div.alert.alert-danger
+     [:h4 "⚠️ Acceso denegado"]
+     [:p "Para acceder a esta seccion, debes logearte y acceder desde su boton determinado."]]))
+
 
 ;; Inicializa la app
 (defn init []

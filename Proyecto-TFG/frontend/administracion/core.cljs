@@ -1,15 +1,17 @@
 (ns administracion.core
   (:require [reagent.core :as r]
-            [ajax.core :refer [POST]]
-            [app.db :refer [list-productos fetch-list-productos categorias fetch-list-categorias]]
+            [app.state :as state]
+            [ajax.core :refer [GET POST]]
+            [app.db :refer [list-productos fetch-list-productos categorias fetch-list-categorias eliminar-categoria eliminar-producto]]
             [reagent.dom :as dom]
             [reitit.frontend.easy :as rfe]))
 
-(defonce logged-in? (r/atom false))
+(defonce logged-in? (r/atom nil))
 (defonce loading? (r/atom false))
 (defonce usuario (r/atom ""))
 (defonce contrasenia (r/atom ""))
-(defonce datos-usuario (r/atom {:nombre nil :rol nil}))
+(def sesion-verificada? (r/atom false))
+(defonce datos-usuario (r/atom nil))
 (defonce auth-token (r/atom nil))
 (defonce mostrar-productos? (r/atom false))
 (defonce mostrar-categorias? (r/atom false))
@@ -17,16 +19,17 @@
 (defonce categoria-busqueda (r/atom ""))
 (defonce producto-busqueda (r/atom ""))
 
-(defn revisar-sesion []
-  (let [usuario-almacenado (.getItem js/localStorage "usuario")
-        rol-almacenado (.getItem js/localStorage "rol")
-        token-almacenado (.getItem js/localStorage "token")]
-    (when (and usuario-almacenado rol-almacenado token-almacenado)
-      (reset! usuario usuario-almacenado)
-      (reset! auth-token token-almacenado)
-      (reset! logged-in? true)
-      (reset! datos-usuario {:nombre usuario-almacenado :rol rol-almacenado})
-      true)))
+(defn verificar-sesion []
+  (GET "/api/admin"
+    {:with-credentials? true
+     :handler (fn [response]
+                (reset! logged-in? true)
+                (reset! datos-usuario (:usuario response))
+                (reset! sesion-verificada? true))
+     :error-handler (fn [_]
+                      (reset! logged-in? false)
+                      (reset! datos-usuario nil)
+                      (reset! sesion-verificada? true))}))
 
 (defn render-categorias []
   (let [texto (clojure.string/lower-case @categoria-busqueda)
@@ -53,13 +56,22 @@
           [:td {:class "tdButton"} id] [:td nombre] [:td.d-none.d-sm-table-cell descripcion]
           [:td {:class "tdButton"}
            [:button
-            {:on-click #(set! (.-hash js/location) (str "/editar/categoria/" id))}
+            {:on-click #(do
+                          (reset! app.state/acceso-editar? true)
+                          (set! (.-hash js/location) (str "/editar/categoria/" id)))}
             "Editar"]]
           [:td {:class "tdButton"} [:button
+                                    {:on-click #(eliminar-categoria id)}
                                     "Eliminar"]]])
        [:tr
-        [:td [:button {:class "nuevo"}
-              "Añadir nueva categoria"]]]]]]))
+        [:td
+         [:button
+          {:on-click
+           #(do
+              (reset! app.state/acceso-nuevo? true)
+              (set! (.-hash js/location) "/nuevo/categoria"))
+           :class "nuevo"}
+          "Añadir nueva categoria"]]]]]]))
 
 (defn render-productos []
   (let [texto (clojure.string/lower-case @producto-busqueda)
@@ -88,37 +100,46 @@
           [:td.d-none.d-lg-table-cell nombre_categoria] [:td.d-none.d-lg-table-cell tipo_plato] [:td tipo_porcion]
           [:td {:class "tdButton"}
            [:button
-            {:on-click #(set! (.-hash js/location) (str "/editar/producto/" id))}
+            {:on-click #(do
+                          (reset! app.state/acceso-editar? true)
+                          (set! (.-hash js/location) (str "/editar/producto/" id)))}
             "Editar"]]
           [:td {:class "tdButton"} [:button
+                                    {:on-click #(eliminar-producto id)}
                                     "Eliminar"]]])
        [:tr
-        [:td [:button {:class "nuevo"}
-              "Añadir nuevo producto"]]]]]]))
+        [:td
+         [:button
+          {:on-click
+           #(do
+              (reset! app.state/acceso-nuevo? true)
+              (set! (.-hash js/location) "/nuevo/producto"))
+           :class "nuevo"}
+          "Añadir nuevo producto"]]]]]]))
 
 (defn login []
-  (POST "/api/login-admin"
+  (POST "/api/login"
     {:params {:nombre @usuario
               :contrasenia @contrasenia}
      :format :json
      :response-format :json
      :keywords? true
+     :with-credentials? true ;; <-- también aquí para que Laravel devuelva la cookie
      :handler #(do
-                 (let [{:keys [id nombre rol token]} %]
-                   ;; Limpia todo antes por si había sesión anterior
-                   (.removeItem js/localStorage "id")
-                   (.removeItem js/localStorage "usuario")
-                   (.removeItem js/localStorage "rol")
-                   (.removeItem js/localStorage "token")
-                   ;; Guarda los nuevos datos
-                   (.setItem js/localStorage "id" id)
-                   (.setItem js/localStorage "usuario" nombre)
-                   (.setItem js/localStorage "rol" rol)
-                   (.setItem js/localStorage "token" token)
-                   ;; Actualiza los átomos de la sesión
-                   (reset! auth-token token)
-                   (reset! logged-in? true)
-                   (reset! datos-usuario {:nombre nombre :rol rol})))
+                 ;; Limpia cualquier estado anterior
+                 (reset! auth-token nil)
+                 (reset! logged-in? true)
+                 (reset! datos-usuario {:nombre (:nombre %) :rol (:rol %)})
+                 (js/localStorage.setItem "id" (:id %))
+
+                 ;; Y ahora verifica el rol desde el backend
+                 (GET "/api/admin"
+                   {:with-credentials? true
+                    :handler (fn [resp]
+                               (js/console.log "Verificado como admin" resp))
+                    :error-handler (fn [err]
+                                     (js/console.log "No eres admin" err))}))
+
      :error-handler #(do
                        (println "Error en la solicitud: " %)
                        (js/alert "Credenciales incorrectas.")
@@ -143,54 +164,78 @@
       [:button {:on-click login} "Entrar"]]]]])
 
 (defn logout []
-  (reset! logged-in? false)
-  (reset! auth-token nil)
-  (reset! datos-usuario {:nombre nil :rol nil})
-  (.removeItem js/localStorage "id")
-  (.removeItem js/localStorage "usuario")
-  (.removeItem js/localStorage "token")
-  (.removeItem js/localStorage "rol"))
-
+  (POST "/api/logout"
+    {:with-credentials? true
+     :handler (fn [_]
+                (reset! logged-in? false)
+                (reset! datos-usuario {:nombre nil :rol nil})
+                (js/localStorage.removeItem "id"))
+     :error-handler (fn [e]
+                      (js/console.log "Error cerrando sesión" e))}))
 
 (defn admin-panel []
-  (fetch-list-productos)
-  (fetch-list-categorias)
-  [:div.row {:class "panel"}
-   [:div.col-12 {:class "panelBotones"}
-    [:h2 (str "Bienvenido, " (:nombre @datos-usuario) "!")]
-    [:p (str "Tu rol es: " (:rol @datos-usuario))]
-    [:p "Tienes acceso al panel de administración."]
-    [:button {:on-click #(do
-                           (logout)
-                           (.reload js/location true))}
-     "Cerrar sesión"]
-    (when (= (:rol @datos-usuario) "admin")
-      [:div {:class "botonesAdmin"}
-       [:p "Eres administrador. Puedes editar el contenido."]
-       [:button {:on-click #(do
-                              (reset! mostrar-productos? true)
-                              (reset! mostrar-categorias? false)
-                              (fetch-list-productos))} "Mostrar productos"]
-       [:button {:on-click #(do
-                              (reset! mostrar-categorias? true)
-                              (reset! mostrar-productos? false)
-                              (fetch-list-categorias))} "Mostrar categorias"]
-       [:button
-        {:on-click #(set! (.-hash js/location) "#/imagenes")}
-        "Mostrar fotografias"]])]
-   (when @mostrar-productos?
-     [render-productos])
-   (when @mostrar-categorias?
-     [render-categorias])])
+  (cond
+    (not @sesion-verificada?)
+    [:div "Cargando sesión..."]
+
+    (nil? @datos-usuario)
+    [:div.row {:class "panel"}
+     [:div.col-12 {:class "panelBotones"}
+      [:h2 "Aviso importante!!!"]
+      [:p "No estas logeado, debes de cerrar sesion y logearte correctamente."]
+      [:button {:on-click #(do
+                             (logout)
+                             (.reload js/location true))}
+       "Cerrar sesión"]]]
+
+    (not @logged-in?)  ;; ya se verificó y no está logueado
+    [:div "Acceso denegado."]
+
+    :else ;; ya está todo listo
+    [:div.row {:class "panel"}
+     [:div.col-12 {:class "panelBotones"}
+      [:h2 (str "Bienvenido/a, " (:nombre @datos-usuario) "!")]
+      [:p (str "Tienes permisos, " (:rol @datos-usuario))]
+      [:p "Tienes acceso al panel de administración."]
+      [:button {:on-click #(do
+                             (logout)
+                             (.reload js/location true))}
+       "Cerrar sesión"]
+      (when (= (:rol @datos-usuario) "admin")
+        [:div {:class "botonesAdmin"}
+         [:p "Eres administrador. Puedes editar el contenido."]
+         [:button {:on-click #(do
+                                (reset! mostrar-productos? true)
+                                (reset! mostrar-categorias? false)
+                                (fetch-list-productos))}
+          "Mostrar productos"]
+         [:button {:on-click #(do
+                                (reset! mostrar-categorias? true)
+                                (reset! mostrar-productos? false)
+                                (fetch-list-categorias))}
+          "Mostrar categorías"]
+         [:button
+          {:on-click #(do
+                        (reset! app.state/acceso-imagenes? true)
+                        (set! (.-hash js/location) "#/imagenes"))}
+          "Mostrar fotografías"]])]
+
+     (when @mostrar-productos?
+       [render-productos])
+     (when @mostrar-categorias?
+       [render-categorias])]))
+
 
 (defn page []
-  (if @logged-in?
-    [admin-panel]
-    [login-form]))
+  (cond
+    (not @sesion-verificada?) [:p {:class "administracion"} "Verificando sesión..."]
+    @logged-in? [admin-panel]
+    :else [login-form]))
+
 
 ;; Monta la aplicación en el DOM
 (defn init []
-  (revisar-sesion)
+  (verificar-sesion)
   (dom/render [page] (.getElementById js/document "app")))
 
 ;; Llamar la función init para iniciar la aplicación

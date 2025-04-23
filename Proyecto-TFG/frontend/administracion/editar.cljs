@@ -1,6 +1,7 @@
 (ns administracion.editar
   (:require [reagent.core :as r]
             [reagent.dom :as dom]
+            [app.state :as state]
             [app.state :refer [current-route]]
             [app.db :refer [list-productos categorias]]))
 
@@ -15,23 +16,21 @@
 (defn get-producto-por-id [id]
   (some #(when (= (:id %) id) %) @list-productos))
 
-(defn obtener-id-categoria [nombre categorias]
-  (:id (first (filter #(= (:nombre %) nombre) categorias))))
-
 (defn get-categoria-por-id [id]
   (some #(when (= (:id %) id) %) @categorias))
 
-(defn actualizar-producto [producto campo valor]
+(defn tiene-mas-de-dos-decimales? [valor]
+  (let [[_ decimales] (clojure.string/split valor #"\.")]
+    (and decimales (> (count decimales) 2))))
+
+(defn actualizar-producto [producto campo valor valor-num]
   (let [id (:id @producto)
         usuario-id (js/localStorage.getItem "id")
         valor-parseado (case campo
                          ("es_vegetariano" "es_vegano" "es_sin_gluten" "es_sin_lactosa") (= valor "true")
                          ("precio" "categoria_id") (js/parseFloat valor)
                          valor)
-        body-extendido (clj->js (assoc {}
-                                       campo valor-parseado
-                                       "usuario_id" usuario-id
-                                       "_method" "PUT"))
+        body-extendido (clj->js (assoc {} campo valor-parseado "_method" "PUT" "usuario_id" usuario-id))
         url (str "/api/productos/" id)
         opciones #js {:method "POST"
                       :headers #js {"Content-Type" "application/json"}
@@ -128,6 +127,14 @@
          (for [{:keys [id nombre]} @categorias]
            ^{:key id} [:option {:value id} (str id " - " nombre)])]
 
+        (= @campo-seleccionado "precio")
+        [:input {:type "number"
+                 :step "0.01"
+                 :min "0"
+                 :value @nuevo-valor
+                 :placeholder (str (get @producto (keyword @campo-seleccionado)))
+                 :on-change #(reset! nuevo-valor (-> % .-target .-value))}]
+
         ;; Resto de campos usan input libre
         :else
         [:input {:type "text"
@@ -136,13 +143,31 @@
                  :on-change #(reset! nuevo-valor (-> % .-target .-value))}])
 
       [:br]
-      [:button {:on-click #(do
-                             (actualizar-producto producto @campo-seleccionado @nuevo-valor)
-                             (reset! nuevo-valor ""))}
+      [:button
+       {:on-click #(cond
+                     (= @campo-seleccionado "precio")
+                     (let [valor-num (js/parseFloat @nuevo-valor)]
+                       (cond
+                         (or (js/isNaN valor-num) (< valor-num 0))
+                         (js/alert "El precio debe ser un número mayor o igual que 0")
+                         (tiene-mas-de-dos-decimales? @nuevo-valor)
+                         (js/alert "El precio solo puede tener hasta dos decimales")
+                         :else
+                         (do
+                           (actualizar-producto producto @campo-seleccionado @nuevo-valor valor-num)
+                           (reset! nuevo-valor "")
+                           (js/alert "Producto actualizado, dale al boton de 'Mostrar productos' para actualizar el listado."))))
+                     :else
+                     (do
+
+                       (actualizar-producto producto @campo-seleccionado @nuevo-valor nil)
+                       (reset! nuevo-valor "")
+                       (reset! app.state/acceso-editar? true)
+                       (js/alert "Producto actualizado, dale al boton de 'Mostrar productos' para actualizar el listado.")))}
        "Actualizar campo"]])])
 
 
-(defn render-edicion-categoria [categoria]
+(defn render-edicion-categoria [id categoria]
   [:div
    [:h3 "Selecciona el campo que quieres modificar:"]
    [:select {:value (or @campo-seleccionado "")
@@ -162,68 +187,75 @@
       [:br]
       [:button {:on-click #(do
                              (actualizar-categoria categoria @campo-seleccionado @nuevo-valor)
-                             (reset! nuevo-valor ""))}
+                             (reset! nuevo-valor "")
+                             (reset! app.state/acceso-editar? true)
+                             (js/alert "Categoria actualizado, dale al boton de 'Mostrar categorias' para actualizar el listado."))}
        "Actualizar campo"]])])
 
-(defn page []
-  (let [params (get-in @current-route [:parameters :path])
-        tipo (:tipo params)
-        id (js/parseInt (:id params))]
-    (r/with-let [_ (reset! producto (get-producto-por-id id))]
-      (r/with-let [_ (reset! categoria (get-categoria-por-id id))]
-        (case tipo
-          "producto"
-          (if @producto
-            [:div.row {:class "divEditar"}
-             [:div.col-12 {:class "volverAtras"}
-              [:button
-               {:on-click #(set! (.-hash js/location) "#/administracion")}
-               "Volver al panel de Administración"]]
-             [:div.col-12.col-md-6 {:class "divDatos"}
-              [:h1 "Datos del producto seleccionado:"]
-              [:p [:strong "ID: "] (:id @producto)]
-              [:p [:strong "Nombre: "] (:nombre @producto)]
-              [:p [:strong "Descripción: "] (:description @producto)]
-              [:p [:strong "Precio: "] (str (:precio @producto) " €")]
-              [:p [:strong "Categoría: "] (:nombre_categoria @producto)]
-              [:p [:strong "Tipo de plato: "] (:tipo_plato @producto)]
-              [:p [:strong "Tipo de porción: "] (:tipo_porcion @producto)]
-              [:h3 [:strong "Restricciones alimentarias: "]]
-              [:p [:strong "Vegetariano: "]
-               (if (:es_vegetariano @producto)
-                 [:span {:style {:color "green"}} "✔️"]
-                 [:span {:style {:color "red"}} "❌"])]
-              [:p [:strong "Vegano: "]
-               (if (:es_vegano @producto)
-                 [:span {:style {:color "green"}} "✔️"]
-                 [:span {:style {:color "red"}} "❌"])]
-              [:p [:strong "Gluten: "]
-               (if (:es_sin_gluten @producto)
-                 [:span {:style {:color "green"}} "✔️"]
-                 [:span {:style {:color "red"}} "❌"])]
-              [:p [:strong "Lactosa: "]
-               (if (:es_sin_lactosa @producto)
-                 [:span {:style {:color "green"}} "✔️"]
-                 [:span {:style {:color "red"}} "❌"])]]
-             [:div.col-12.col-md-6 {:class "divActualizar"}
-              [render-edicion-producto producto]]]
-            [:div {:class "divEditar"} "Producto no encontrado"])
 
-          "categoria"
-          (if @categoria
-            [:div.row {:class "divEditar"}
-             [:div.col-12 {:class "volverAtras"}
-              [:button
-               {:on-click #(set! (.-hash js/location) "#/administracion")}
-               "Volver al panel de Administración"]]
-             [:div.col-12.col-md-6 {:class "divDatos"}
-              [:h1 "Editar categoría:"]
-              [:p [:strong "ID: "] (:id @categoria)]
-              [:p [:strong "Nombre: "] (:nombre @categoria)]
-              [:p [:strong "Descripción: "] (:descripcion @categoria)]]
-             [:div.col-12.col-md-6 {:class "divActualizar"}
-              [render-edicion-categoria categoria]]]
-            [:div {:class "divEditar"} "Producto no encontrado"]))))))
+(defn page []
+  (if @state/acceso-editar?
+    (let [params (get-in @current-route [:parameters :path])
+          tipo (:tipo params)
+          id (js/parseInt (:id params))]
+      (r/with-let [_ (reset! producto (get-producto-por-id id))]
+        (r/with-let [_ (reset! categoria (get-categoria-por-id id))]
+          (case tipo
+            "producto"
+            (if @producto
+              [:div.row {:class "divEditar"}
+               [:div.col-12 {:class "volverAtras"}
+                [:button
+                 {:on-click #(set! (.-hash js/location) "#/administracion")}
+                 "Volver al panel de Administración"]]
+               [:div.col-12.col-md-6 {:class "divDatos"}
+                [:h1 "Datos del producto seleccionado:"]
+                [:p [:strong "ID: "] (:id @producto)]
+                [:p [:strong "Nombre: "] (:nombre @producto)]
+                [:p [:strong "Descripción: "] (:description @producto)]
+                [:p [:strong "Precio: "] (str (:precio @producto) " €")]
+                [:p [:strong "Categoría: "] (:nombre_categoria @producto)]
+                [:p [:strong "Tipo de plato: "] (:tipo_plato @producto)]
+                [:p [:strong "Tipo de porción: "] (:tipo_porcion @producto)]
+                [:h3 [:strong "Restricciones alimentarias: "]]
+                [:p [:strong "Vegetariano: "]
+                 (if (:es_vegetariano @producto)
+                   [:span {:style {:color "green"}} "✔️"]
+                   [:span {:style {:color "red"}} "❌"])]
+                [:p [:strong "Vegano: "]
+                 (if (:es_vegano @producto)
+                   [:span {:style {:color "green"}} "✔️"]
+                   [:span {:style {:color "red"}} "❌"])]
+                [:p [:strong "Gluten: "]
+                 (if (:es_sin_gluten @producto)
+                   [:span {:style {:color "green"}} "✔️"]
+                   [:span {:style {:color "red"}} "❌"])]
+                [:p [:strong "Lactosa: "]
+                 (if (:es_sin_lactosa @producto)
+                   [:span {:style {:color "green"}} "✔️"]
+                   [:span {:style {:color "red"}} "❌"])]]
+               [:div.col-12.col-md-6 {:class "divActualizar"}
+                [render-edicion-producto producto]]]
+              [:div {:class "divEditar"} "Producto no encontrado"])
+
+            "categoria"
+            (if @categoria
+              [:div.row {:class "divEditar"}
+               [:div.col-12 {:class "volverAtras"}
+                [:button
+                 {:on-click #(set! (.-hash js/location) "#/administracion")}
+                 "Volver al panel de Administración"]]
+               [:div.col-12.col-md-6 {:class "divDatos"}
+                [:h1 "Editar categoría:"]
+                [:p [:strong "ID: "] (:id @categoria)]
+                [:p [:strong "Nombre: "] (:nombre @categoria)]
+                [:p [:strong "Descripción: "] (:descripcion @categoria)]]
+               [:div.col-12.col-md-6 {:class "divActualizar"}
+                [render-edicion-categoria id categoria]]]
+              [:div {:class "divEditar"} "Producto no encontrado"])))))
+    [:div.alert.alert-danger
+     [:h4 "⚠️ Acceso denegado"]
+     [:p "Para acceder a esta seccion, debes logearte y acceder desde su boton determinado."]]))
 
 
 

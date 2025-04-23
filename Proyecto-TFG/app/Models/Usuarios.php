@@ -2,14 +2,11 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
-class Usuario extends Model implements JWTSubject
+class Usuarios extends Authenticatable implements JWTSubject
 {
-    use HasFactory;
-
     // Define la tabla si no es el nombre por defecto 'usuarios'
     protected $table = 'usuarios';
 
@@ -20,6 +17,8 @@ class Usuario extends Model implements JWTSubject
         'contrasenia',
         'rol',
     ];
+
+    public $timestamps = false;
 
     // Implementa los métodos de JWTSubject
     public function getJWTIdentifier()

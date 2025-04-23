@@ -8,6 +8,7 @@
             [administracion.core :as administracion]
             [administracion.editar :as editar]
             [administracion.imagenes :as imagenes]
+            [administracion.nuevo :as nuevo]
             [app.state :refer [current-route]]))  
 
 (def routes
@@ -17,6 +18,7 @@
    ["/privacidad" {:name :productos :view privacidad/page}]
    ["/administracion" {:name :administracion :view administracion/page}]
    ["/imagenes" {:name :imagenes :view imagenes/page}]
+   ["/nuevo/:tipo" {:name :nuevo :view nuevo/page}]
    ["/editar/:tipo/:id" {:name :editar :view editar/page}]])
 
 (def router (rf/router routes))

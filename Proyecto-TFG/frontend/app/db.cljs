@@ -44,12 +44,14 @@
                                               {:with-credentials? false
                                                :response-format (ajax/json-response-format {:keywords? true})}))]
       (if (= 200 status)
+        (let [productos-obtenidos (if (map? body) (:productos body) body)]
+          (reset! productos productos-obtenidos)
+          (js/console.log "Productos actualizados:" @productos))
         (do
-          ;; Extraer los productos si la respuesta tiene estructura inesperada
-          (let [productos-obtenidos (if (map? body) (:productos body) body)]
-            (reset! productos productos-obtenidos)
-            (js/console.log "Productos actualizados:" @productos)))
-        (js/console.error "Error al obtener productos")))))
+          ;; Si no hay productos, se vacía el estado
+          (reset! productos [])
+          (js/console.log "La categoría seleccionada no tiene productos asociados."))))))
+
 
 
 (defn fetch-list-productos []
@@ -76,3 +78,51 @@
                  (reset! imagenes (js->clj data :keywordize-keys true)))))
       (.catch (fn [error]
                 (js/console.error "Error cargando imágenes:" error)))))
+
+(defn insertar-producto [producto]
+  (js/console.log "Llamando a insertar-producto..." producto)
+  (go
+    (let [{:keys [status body]} (<! (http/post "/api/producto/nuevo"
+                                               {:with-credentials? false
+                                                :json-params producto
+                                                :response-format (ajax/json-response-format {:keywords? true})}))]
+      (if (= 201 status)
+        (do
+          (js/console.log "Producto insertado correctamente" body)
+          (js/alert "Producto creado correctamente"))
+        (js/console.error "Error al insertar producto" body)))))
+
+(defn insertar-categoria [producto]
+  (js/console.log "Llamando a insertar-categoria..." producto)
+  (go
+    (let [{:keys [status body]} (<! (http/post "/api/categoria/nuevo"
+                                               {:with-credentials? false
+                                                :json-params producto
+                                                :response-format (ajax/json-response-format {:keywords? true})}))]
+      (if (= 201 status)
+        (do
+          (js/console.log "Categoria insertada correctamente" body)
+          (js/alert "Categoria creada correctamente, recarga la lista de 'Mostrar categorias' dandole al boton, para verla y poder editarla."))
+        (js/console.error "Error al insertar categoria" body)))))
+
+(defn eliminar-producto [id]
+  (go
+    (let [{:keys [status body]} (<! (http/delete (str "/api/producto/eliminar/" id)
+                                                 {:with-credentials? false
+                                                  :response-format (ajax/json-response-format {:keywords? true})}))]
+      (if (= 200 status)
+        (do
+          (js/console.log "Producto eliminado" body)
+          (js/alert "Producto eliminado correctamente, dale a boton de 'Mostrar productos'."))
+        (js/console.error "Error al eliminar el producto" body)))))
+
+(defn eliminar-categoria [id]
+  (go
+    (let [{:keys [status body]} (<! (http/delete (str "/api/categoria/eliminar/" id)
+                                                 {:with-credentials? false
+                                                  :response-format (ajax/json-response-format {:keywords? true})}))]
+      (if (= 200 status)
+        (do
+          (js/console.log "Categoría eliminada" body)
+          (js/alert "Categoría eliminada correctamente, dale a boton de 'Mostrar categorias'."))
+        (js/console.error "Error al eliminar categoría" body)))))
