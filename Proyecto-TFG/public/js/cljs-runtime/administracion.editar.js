@@ -6,27 +6,27 @@ administracion.editar.campo_seleccionado = reagent.core.atom.cljs$core$IFn$_invo
 administracion.editar.nuevo_valor = reagent.core.atom.cljs$core$IFn$_invoke$arity$1("");
 administracion.editar.estado_actualizacion = reagent.core.atom.cljs$core$IFn$_invoke$arity$1(null);
 administracion.editar.get_producto_por_id = (function administracion$editar$get_producto_por_id(id){
-return cljs.core.some((function (p1__42338_SHARP_){
-if(cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2(new cljs.core.Keyword(null,"id","id",-1388402092).cljs$core$IFn$_invoke$arity$1(p1__42338_SHARP_),id)){
-return p1__42338_SHARP_;
+return cljs.core.some((function (p1__13238_SHARP_){
+if(cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2(new cljs.core.Keyword(null,"id","id",-1388402092).cljs$core$IFn$_invoke$arity$1(p1__13238_SHARP_),id)){
+return p1__13238_SHARP_;
 } else {
 return null;
 }
 }),cljs.core.deref(app.db.list_productos));
 });
 administracion.editar.get_categoria_por_id = (function administracion$editar$get_categoria_por_id(id){
-return cljs.core.some((function (p1__42339_SHARP_){
-if(cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2(new cljs.core.Keyword(null,"id","id",-1388402092).cljs$core$IFn$_invoke$arity$1(p1__42339_SHARP_),id)){
-return p1__42339_SHARP_;
+return cljs.core.some((function (p1__13239_SHARP_){
+if(cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2(new cljs.core.Keyword(null,"id","id",-1388402092).cljs$core$IFn$_invoke$arity$1(p1__13239_SHARP_),id)){
+return p1__13239_SHARP_;
 } else {
 return null;
 }
 }),cljs.core.deref(app.db.categorias));
 });
 administracion.editar.tiene_mas_de_dos_decimales_QMARK_ = (function administracion$editar$tiene_mas_de_dos_decimales_QMARK_(valor){
-var vec__42341 = clojure.string.split.cljs$core$IFn$_invoke$arity$2(valor,/\./);
-var _ = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__42341,(0),null);
-var decimales = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__42341,(1),null);
+var vec__13240 = clojure.string.split.cljs$core$IFn$_invoke$arity$2(valor,/\./);
+var _ = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__13240,(0),null);
+var decimales = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__13240,(1),null);
 var and__5000__auto__ = decimales;
 if(cljs.core.truth_(and__5000__auto__)){
 return (cljs.core.count(decimales) > (2));
@@ -37,8 +37,8 @@ return and__5000__auto__;
 administracion.editar.actualizar_producto = (function administracion$editar$actualizar_producto(producto,campo,valor,valor_num){
 var id = new cljs.core.Keyword(null,"id","id",-1388402092).cljs$core$IFn$_invoke$arity$1(cljs.core.deref(producto));
 var usuario_id = localStorage.getItem("id");
-var valor_parseado = (function (){var G__42351 = campo;
-switch (G__42351) {
+var valor_parseado = (function (){var G__13250 = campo;
+switch (G__13250) {
 case "es_vegetariano":
 case "es_vegano":
 case "es_sin_gluten":
@@ -101,65 +101,65 @@ return or__5002__auto__;
 } else {
 return "";
 }
-})(),new cljs.core.Keyword(null,"on-change","on-change",-732046149),(function (p1__42373_SHARP_){
-return cljs.core.reset_BANG_(administracion.editar.campo_seleccionado,p1__42373_SHARP_.target.value);
-})], null),new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"option","option",65132272),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"value","value",305978217),""], null),"-- Selecciona un campo --"], null),new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"option","option",65132272),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"value","value",305978217),"nombre"], null),"Nombre"], null),new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"option","option",65132272),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"value","value",305978217),"description"], null),"Descripci\u00F3n"], null),new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"option","option",65132272),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"value","value",305978217),"precio"], null),"Precio"], null),new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"option","option",65132272),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"value","value",305978217),"categoria_id"], null),"Categor\u00EDa"], null),new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"option","option",65132272),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"value","value",305978217),"tipo_plato"], null),"Tipo de plato"], null),new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"option","option",65132272),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"value","value",305978217),"tipo_porcion"], null),"Tipo de porci\u00F3n"], null),new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"option","option",65132272),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"value","value",305978217),"es_vegetariano"], null),"Vegetariano"], null),new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"option","option",65132272),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"value","value",305978217),"es_vegano"], null),"Vegano"], null),new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"option","option",65132272),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"value","value",305978217),"es_sin_gluten"], null),"Sin gluten"], null),new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"option","option",65132272),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"value","value",305978217),"es_sin_lactosa"], null),"Sin lactosa"], null)], null),((cljs.core.not_EQ_.cljs$core$IFn$_invoke$arity$2(cljs.core.deref(administracion.editar.campo_seleccionado),""))?new cljs.core.PersistentVector(null, 6, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"div","div",1057191632),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"style","style",-496642736),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"margin-top","margin-top",392161226),"15px"], null)], null),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"label","label",1718410804),"Nuevo valor para el campo seleccionado: "], null),(cljs.core.truth_((function (){var G__42387 = cljs.core.deref(administracion.editar.campo_seleccionado);
-var fexpr__42386 = new cljs.core.PersistentHashSet(null, new cljs.core.PersistentArrayMap(null, 4, ["es_sin_lactosa",null,"es_sin_gluten",null,"es_vegano",null,"es_vegetariano",null], null), null);
-return (fexpr__42386.cljs$core$IFn$_invoke$arity$1 ? fexpr__42386.cljs$core$IFn$_invoke$arity$1(G__42387) : fexpr__42386.call(null, G__42387));
+})(),new cljs.core.Keyword(null,"on-change","on-change",-732046149),(function (p1__13275_SHARP_){
+return cljs.core.reset_BANG_(administracion.editar.campo_seleccionado,p1__13275_SHARP_.target.value);
+})], null),new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"option","option",65132272),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"value","value",305978217),""], null),"-- Selecciona un campo --"], null),new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"option","option",65132272),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"value","value",305978217),"nombre"], null),"Nombre"], null),new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"option","option",65132272),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"value","value",305978217),"description"], null),"Descripci\u00F3n"], null),new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"option","option",65132272),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"value","value",305978217),"precio"], null),"Precio"], null),new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"option","option",65132272),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"value","value",305978217),"categoria_id"], null),"Categor\u00EDa"], null),new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"option","option",65132272),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"value","value",305978217),"tipo_plato"], null),"Tipo de plato"], null),new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"option","option",65132272),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"value","value",305978217),"tipo_porcion"], null),"Tipo de porci\u00F3n"], null),new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"option","option",65132272),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"value","value",305978217),"es_vegetariano"], null),"Vegetariano"], null),new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"option","option",65132272),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"value","value",305978217),"es_vegano"], null),"Vegano"], null),new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"option","option",65132272),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"value","value",305978217),"es_sin_gluten"], null),"Sin gluten"], null),new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"option","option",65132272),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"value","value",305978217),"es_sin_lactosa"], null),"Sin lactosa"], null)], null),((cljs.core.not_EQ_.cljs$core$IFn$_invoke$arity$2(cljs.core.deref(administracion.editar.campo_seleccionado),""))?new cljs.core.PersistentVector(null, 6, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"div","div",1057191632),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"style","style",-496642736),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"margin-top","margin-top",392161226),"15px"], null)], null),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"label","label",1718410804),"Nuevo valor para el campo seleccionado: "], null),(cljs.core.truth_((function (){var G__13290 = cljs.core.deref(administracion.editar.campo_seleccionado);
+var fexpr__13289 = new cljs.core.PersistentHashSet(null, new cljs.core.PersistentArrayMap(null, 4, ["es_sin_lactosa",null,"es_sin_gluten",null,"es_vegano",null,"es_vegetariano",null], null), null);
+return (fexpr__13289.cljs$core$IFn$_invoke$arity$1 ? fexpr__13289.cljs$core$IFn$_invoke$arity$1(G__13290) : fexpr__13289.call(null, G__13290));
 })())?new cljs.core.PersistentVector(null, 5, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"select","select",1147833503),new cljs.core.PersistentArrayMap(null, 2, [new cljs.core.Keyword(null,"value","value",305978217),(function (){var or__5002__auto__ = cljs.core.deref(administracion.editar.nuevo_valor);
 if(cljs.core.truth_(or__5002__auto__)){
 return or__5002__auto__;
 } else {
 return "";
 }
-})(),new cljs.core.Keyword(null,"on-change","on-change",-732046149),(function (p1__42374_SHARP_){
-return cljs.core.reset_BANG_(administracion.editar.nuevo_valor,p1__42374_SHARP_.target.value);
+})(),new cljs.core.Keyword(null,"on-change","on-change",-732046149),(function (p1__13276_SHARP_){
+return cljs.core.reset_BANG_(administracion.editar.nuevo_valor,p1__13276_SHARP_.target.value);
 })], null),new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"option","option",65132272),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"value","value",305978217),""], null),"-- Selecciona una opci\u00F3n --"], null),new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"option","option",65132272),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"value","value",305978217),"true"], null),"S\u00ED"], null),new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"option","option",65132272),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"value","value",305978217),"false"], null),"No"], null)], null):((cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2(cljs.core.deref(administracion.editar.campo_seleccionado),"tipo_porcion"))?new cljs.core.PersistentVector(null, 6, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"select","select",1147833503),new cljs.core.PersistentArrayMap(null, 2, [new cljs.core.Keyword(null,"value","value",305978217),(function (){var or__5002__auto__ = cljs.core.deref(administracion.editar.nuevo_valor);
 if(cljs.core.truth_(or__5002__auto__)){
 return or__5002__auto__;
 } else {
 return "";
 }
-})(),new cljs.core.Keyword(null,"on-change","on-change",-732046149),(function (p1__42375_SHARP_){
-return cljs.core.reset_BANG_(administracion.editar.nuevo_valor,p1__42375_SHARP_.target.value);
+})(),new cljs.core.Keyword(null,"on-change","on-change",-732046149),(function (p1__13277_SHARP_){
+return cljs.core.reset_BANG_(administracion.editar.nuevo_valor,p1__13277_SHARP_.target.value);
 })], null),new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"option","option",65132272),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"value","value",305978217),""], null),"-- Selecciona un tipo de porcion --"], null),new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"option","option",65132272),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"value","value",305978217),"Media raci\u00F3n"], null),"Media raci\u00F3n"], null),new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"option","option",65132272),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"value","value",305978217),"Raci\u00F3n completa"], null),"Raci\u00F3n completa"], null),new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"option","option",65132272),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"value","value",305978217),"Por unidad"], null),"Por unidad"], null)], null):((cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2(cljs.core.deref(administracion.editar.campo_seleccionado),"tipo_plato"))?new cljs.core.PersistentVector(null, 7, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"select","select",1147833503),new cljs.core.PersistentArrayMap(null, 2, [new cljs.core.Keyword(null,"value","value",305978217),(function (){var or__5002__auto__ = cljs.core.deref(administracion.editar.nuevo_valor);
 if(cljs.core.truth_(or__5002__auto__)){
 return or__5002__auto__;
 } else {
 return "";
 }
-})(),new cljs.core.Keyword(null,"on-change","on-change",-732046149),(function (p1__42376_SHARP_){
-return cljs.core.reset_BANG_(administracion.editar.nuevo_valor,p1__42376_SHARP_.target.value);
+})(),new cljs.core.Keyword(null,"on-change","on-change",-732046149),(function (p1__13278_SHARP_){
+return cljs.core.reset_BANG_(administracion.editar.nuevo_valor,p1__13278_SHARP_.target.value);
 })], null),new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"option","option",65132272),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"value","value",305978217),""], null),"-- Selecciona un tipo de plato --"], null),new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"option","option",65132272),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"value","value",305978217),"Tapa"], null),"Tapa"], null),new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"option","option",65132272),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"value","value",305978217),"Al centro"], null),"Al centro"], null),new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"option","option",65132272),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"value","value",305978217),"Principal"], null),"Principal"], null),new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"option","option",65132272),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"value","value",305978217),"Postres"], null),"Postres"], null)], null):((cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2(cljs.core.deref(administracion.editar.campo_seleccionado),"categoria_id"))?new cljs.core.PersistentVector(null, 4, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"select","select",1147833503),new cljs.core.PersistentArrayMap(null, 2, [new cljs.core.Keyword(null,"value","value",305978217),(function (){var or__5002__auto__ = cljs.core.deref(administracion.editar.nuevo_valor);
 if(cljs.core.truth_(or__5002__auto__)){
 return or__5002__auto__;
 } else {
 return "";
 }
-})(),new cljs.core.Keyword(null,"on-change","on-change",-732046149),(function (p1__42377_SHARP_){
-return cljs.core.reset_BANG_(administracion.editar.nuevo_valor,p1__42377_SHARP_.target.value);
-})], null),new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"option","option",65132272),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"value","value",305978217),""], null),"-- Selecciona una categor\u00EDa --"], null),(function (){var iter__5480__auto__ = (function administracion$editar$render_edicion_producto_$_iter__42390(s__42391){
+})(),new cljs.core.Keyword(null,"on-change","on-change",-732046149),(function (p1__13279_SHARP_){
+return cljs.core.reset_BANG_(administracion.editar.nuevo_valor,p1__13279_SHARP_.target.value);
+})], null),new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"option","option",65132272),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"value","value",305978217),""], null),"-- Selecciona una categor\u00EDa --"], null),(function (){var iter__5480__auto__ = (function administracion$editar$render_edicion_producto_$_iter__13298(s__13299){
 return (new cljs.core.LazySeq(null,(function (){
-var s__42391__$1 = s__42391;
+var s__13299__$1 = s__13299;
 while(true){
-var temp__5804__auto__ = cljs.core.seq(s__42391__$1);
+var temp__5804__auto__ = cljs.core.seq(s__13299__$1);
 if(temp__5804__auto__){
-var s__42391__$2 = temp__5804__auto__;
-if(cljs.core.chunked_seq_QMARK_(s__42391__$2)){
-var c__5478__auto__ = cljs.core.chunk_first(s__42391__$2);
+var s__13299__$2 = temp__5804__auto__;
+if(cljs.core.chunked_seq_QMARK_(s__13299__$2)){
+var c__5478__auto__ = cljs.core.chunk_first(s__13299__$2);
 var size__5479__auto__ = cljs.core.count(c__5478__auto__);
-var b__42393 = cljs.core.chunk_buffer(size__5479__auto__);
-if((function (){var i__42392 = (0);
+var b__13301 = cljs.core.chunk_buffer(size__5479__auto__);
+if((function (){var i__13300 = (0);
 while(true){
-if((i__42392 < size__5479__auto__)){
-var map__42397 = cljs.core._nth(c__5478__auto__,i__42392);
-var map__42397__$1 = cljs.core.__destructure_map(map__42397);
-var id = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__42397__$1,new cljs.core.Keyword(null,"id","id",-1388402092));
-var nombre = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__42397__$1,new cljs.core.Keyword(null,"nombre","nombre",1047347004));
-cljs.core.chunk_append(b__42393,cljs.core.with_meta(new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"option","option",65132272),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"value","value",305978217),id], null),[cljs.core.str.cljs$core$IFn$_invoke$arity$1(id)," - ",cljs.core.str.cljs$core$IFn$_invoke$arity$1(nombre)].join('')], null),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"key","key",-1516042587),id], null)));
+if((i__13300 < size__5479__auto__)){
+var map__13303 = cljs.core._nth(c__5478__auto__,i__13300);
+var map__13303__$1 = cljs.core.__destructure_map(map__13303);
+var id = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__13303__$1,new cljs.core.Keyword(null,"id","id",-1388402092));
+var nombre = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__13303__$1,new cljs.core.Keyword(null,"nombre","nombre",1047347004));
+cljs.core.chunk_append(b__13301,cljs.core.with_meta(new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"option","option",65132272),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"value","value",305978217),id], null),[cljs.core.str.cljs$core$IFn$_invoke$arity$1(id)," - ",cljs.core.str.cljs$core$IFn$_invoke$arity$1(nombre)].join('')], null),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"key","key",-1516042587),id], null)));
 
-var G__42422 = (i__42392 + (1));
-i__42392 = G__42422;
+var G__13324 = (i__13300 + (1));
+i__13300 = G__13324;
 continue;
 } else {
 return true;
@@ -167,16 +167,16 @@ return true;
 break;
 }
 })()){
-return cljs.core.chunk_cons(cljs.core.chunk(b__42393),administracion$editar$render_edicion_producto_$_iter__42390(cljs.core.chunk_rest(s__42391__$2)));
+return cljs.core.chunk_cons(cljs.core.chunk(b__13301),administracion$editar$render_edicion_producto_$_iter__13298(cljs.core.chunk_rest(s__13299__$2)));
 } else {
-return cljs.core.chunk_cons(cljs.core.chunk(b__42393),null);
+return cljs.core.chunk_cons(cljs.core.chunk(b__13301),null);
 }
 } else {
-var map__42398 = cljs.core.first(s__42391__$2);
-var map__42398__$1 = cljs.core.__destructure_map(map__42398);
-var id = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__42398__$1,new cljs.core.Keyword(null,"id","id",-1388402092));
-var nombre = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__42398__$1,new cljs.core.Keyword(null,"nombre","nombre",1047347004));
-return cljs.core.cons(cljs.core.with_meta(new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"option","option",65132272),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"value","value",305978217),id], null),[cljs.core.str.cljs$core$IFn$_invoke$arity$1(id)," - ",cljs.core.str.cljs$core$IFn$_invoke$arity$1(nombre)].join('')], null),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"key","key",-1516042587),id], null)),administracion$editar$render_edicion_producto_$_iter__42390(cljs.core.rest(s__42391__$2)));
+var map__13304 = cljs.core.first(s__13299__$2);
+var map__13304__$1 = cljs.core.__destructure_map(map__13304);
+var id = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__13304__$1,new cljs.core.Keyword(null,"id","id",-1388402092));
+var nombre = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__13304__$1,new cljs.core.Keyword(null,"nombre","nombre",1047347004));
+return cljs.core.cons(cljs.core.with_meta(new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"option","option",65132272),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"value","value",305978217),id], null),[cljs.core.str.cljs$core$IFn$_invoke$arity$1(id)," - ",cljs.core.str.cljs$core$IFn$_invoke$arity$1(nombre)].join('')], null),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"key","key",-1516042587),id], null)),administracion$editar$render_edicion_producto_$_iter__13298(cljs.core.rest(s__13299__$2)));
 }
 } else {
 return null;
@@ -186,10 +186,10 @@ break;
 }),null,null));
 });
 return iter__5480__auto__(cljs.core.deref(app.db.categorias));
-})()], null):((cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2(cljs.core.deref(administracion.editar.campo_seleccionado),"precio"))?new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"input","input",556931961),new cljs.core.PersistentArrayMap(null, 6, [new cljs.core.Keyword(null,"type","type",1174270348),"number",new cljs.core.Keyword(null,"step","step",1288888124),"0.01",new cljs.core.Keyword(null,"min","min",444991522),"0",new cljs.core.Keyword(null,"value","value",305978217),cljs.core.deref(administracion.editar.nuevo_valor),new cljs.core.Keyword(null,"placeholder","placeholder",-104873083),cljs.core.str.cljs$core$IFn$_invoke$arity$1(cljs.core.get.cljs$core$IFn$_invoke$arity$2(cljs.core.deref(producto),cljs.core.keyword.cljs$core$IFn$_invoke$arity$1(cljs.core.deref(administracion.editar.campo_seleccionado)))),new cljs.core.Keyword(null,"on-change","on-change",-732046149),(function (p1__42382_SHARP_){
-return cljs.core.reset_BANG_(administracion.editar.nuevo_valor,p1__42382_SHARP_.target.value);
-})], null)], null):new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"input","input",556931961),new cljs.core.PersistentArrayMap(null, 4, [new cljs.core.Keyword(null,"type","type",1174270348),"text",new cljs.core.Keyword(null,"value","value",305978217),cljs.core.deref(administracion.editar.nuevo_valor),new cljs.core.Keyword(null,"placeholder","placeholder",-104873083),cljs.core.str.cljs$core$IFn$_invoke$arity$1(cljs.core.get.cljs$core$IFn$_invoke$arity$2(cljs.core.deref(producto),cljs.core.keyword.cljs$core$IFn$_invoke$arity$1(cljs.core.deref(administracion.editar.campo_seleccionado)))),new cljs.core.Keyword(null,"on-change","on-change",-732046149),(function (p1__42383_SHARP_){
-return cljs.core.reset_BANG_(administracion.editar.nuevo_valor,p1__42383_SHARP_.target.value);
+})()], null):((cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2(cljs.core.deref(administracion.editar.campo_seleccionado),"precio"))?new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"input","input",556931961),new cljs.core.PersistentArrayMap(null, 6, [new cljs.core.Keyword(null,"type","type",1174270348),"number",new cljs.core.Keyword(null,"step","step",1288888124),"0.01",new cljs.core.Keyword(null,"min","min",444991522),"0",new cljs.core.Keyword(null,"value","value",305978217),cljs.core.deref(administracion.editar.nuevo_valor),new cljs.core.Keyword(null,"placeholder","placeholder",-104873083),cljs.core.str.cljs$core$IFn$_invoke$arity$1(cljs.core.get.cljs$core$IFn$_invoke$arity$2(cljs.core.deref(producto),cljs.core.keyword.cljs$core$IFn$_invoke$arity$1(cljs.core.deref(administracion.editar.campo_seleccionado)))),new cljs.core.Keyword(null,"on-change","on-change",-732046149),(function (p1__13280_SHARP_){
+return cljs.core.reset_BANG_(administracion.editar.nuevo_valor,p1__13280_SHARP_.target.value);
+})], null)], null):new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"input","input",556931961),new cljs.core.PersistentArrayMap(null, 4, [new cljs.core.Keyword(null,"type","type",1174270348),"text",new cljs.core.Keyword(null,"value","value",305978217),cljs.core.deref(administracion.editar.nuevo_valor),new cljs.core.Keyword(null,"placeholder","placeholder",-104873083),cljs.core.str.cljs$core$IFn$_invoke$arity$1(cljs.core.get.cljs$core$IFn$_invoke$arity$2(cljs.core.deref(producto),cljs.core.keyword.cljs$core$IFn$_invoke$arity$1(cljs.core.deref(administracion.editar.campo_seleccionado)))),new cljs.core.Keyword(null,"on-change","on-change",-732046149),(function (p1__13281_SHARP_){
+return cljs.core.reset_BANG_(administracion.editar.nuevo_valor,p1__13281_SHARP_.target.value);
 })], null)], null)
 ))))),new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"br","br",934104792)], null),new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"button","button",1456579943),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"on-click","on-click",1632826543),(function (){
 if(cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2(cljs.core.deref(administracion.editar.campo_seleccionado),"precio")){
@@ -233,10 +233,10 @@ return or__5002__auto__;
 } else {
 return "";
 }
-})(),new cljs.core.Keyword(null,"on-change","on-change",-732046149),(function (p1__42404_SHARP_){
-return cljs.core.reset_BANG_(administracion.editar.campo_seleccionado,p1__42404_SHARP_.target.value);
-})], null),new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"option","option",65132272),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"value","value",305978217),""], null),"-- Selecciona un campo --"], null),new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"option","option",65132272),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"value","value",305978217),"nombre"], null),"Nombre"], null),new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"option","option",65132272),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"value","value",305978217),"descripcion"], null),"Descripci\u00F3n"], null)], null),((cljs.core.not_EQ_.cljs$core$IFn$_invoke$arity$2(cljs.core.deref(administracion.editar.campo_seleccionado),""))?new cljs.core.PersistentVector(null, 6, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"div","div",1057191632),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"style","style",-496642736),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"margin-top","margin-top",392161226),"15px"], null)], null),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"label","label",1718410804),"Nuevo valor para el campo seleccionado: "], null),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"input","input",556931961),new cljs.core.PersistentArrayMap(null, 4, [new cljs.core.Keyword(null,"type","type",1174270348),"text",new cljs.core.Keyword(null,"value","value",305978217),cljs.core.deref(administracion.editar.nuevo_valor),new cljs.core.Keyword(null,"placeholder","placeholder",-104873083),cljs.core.str.cljs$core$IFn$_invoke$arity$1(cljs.core.get.cljs$core$IFn$_invoke$arity$2(cljs.core.deref(categoria),cljs.core.keyword.cljs$core$IFn$_invoke$arity$1(cljs.core.deref(administracion.editar.campo_seleccionado)))),new cljs.core.Keyword(null,"on-change","on-change",-732046149),(function (p1__42405_SHARP_){
-return cljs.core.reset_BANG_(administracion.editar.nuevo_valor,p1__42405_SHARP_.target.value);
+})(),new cljs.core.Keyword(null,"on-change","on-change",-732046149),(function (p1__13309_SHARP_){
+return cljs.core.reset_BANG_(administracion.editar.campo_seleccionado,p1__13309_SHARP_.target.value);
+})], null),new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"option","option",65132272),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"value","value",305978217),""], null),"-- Selecciona un campo --"], null),new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"option","option",65132272),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"value","value",305978217),"nombre"], null),"Nombre"], null),new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"option","option",65132272),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"value","value",305978217),"descripcion"], null),"Descripci\u00F3n"], null)], null),((cljs.core.not_EQ_.cljs$core$IFn$_invoke$arity$2(cljs.core.deref(administracion.editar.campo_seleccionado),""))?new cljs.core.PersistentVector(null, 6, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"div","div",1057191632),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"style","style",-496642736),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"margin-top","margin-top",392161226),"15px"], null)], null),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"label","label",1718410804),"Nuevo valor para el campo seleccionado: "], null),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"input","input",556931961),new cljs.core.PersistentArrayMap(null, 4, [new cljs.core.Keyword(null,"type","type",1174270348),"text",new cljs.core.Keyword(null,"value","value",305978217),cljs.core.deref(administracion.editar.nuevo_valor),new cljs.core.Keyword(null,"placeholder","placeholder",-104873083),cljs.core.str.cljs$core$IFn$_invoke$arity$1(cljs.core.get.cljs$core$IFn$_invoke$arity$2(cljs.core.deref(categoria),cljs.core.keyword.cljs$core$IFn$_invoke$arity$1(cljs.core.deref(administracion.editar.campo_seleccionado)))),new cljs.core.Keyword(null,"on-change","on-change",-732046149),(function (p1__13310_SHARP_){
+return cljs.core.reset_BANG_(administracion.editar.nuevo_valor,p1__13310_SHARP_.target.value);
 })], null)], null),new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"br","br",934104792)], null),new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"button","button",1456579943),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"on-click","on-click",1632826543),(function (){
 administracion.editar.actualizar_categoria(categoria,cljs.core.deref(administracion.editar.campo_seleccionado),cljs.core.deref(administracion.editar.nuevo_valor));
 
@@ -252,12 +252,12 @@ if(cljs.core.truth_(cljs.core.deref(app.state.acceso_editar_QMARK_))){
 var params = cljs.core.get_in.cljs$core$IFn$_invoke$arity$2(cljs.core.deref(app.state.current_route),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"parameters","parameters",-1229919748),new cljs.core.Keyword(null,"path","path",-188191168)], null));
 var tipo = new cljs.core.Keyword(null,"tipo","tipo",837631118).cljs$core$IFn$_invoke$arity$1(params);
 var id = parseInt(new cljs.core.Keyword(null,"id","id",-1388402092).cljs$core$IFn$_invoke$arity$1(params));
-var with_let42410 = reagent.ratom.with_let_values(new cljs.core.Keyword(null,"with-let42410","with-let42410",-25462683));
-var temp__5808__auto___42423 = reagent.ratom._STAR_ratom_context_STAR_;
-if((temp__5808__auto___42423 == null)){
+var with_let13312 = reagent.ratom.with_let_values(new cljs.core.Keyword(null,"with-let13312","with-let13312",-2136522999));
+var temp__5808__auto___13325 = reagent.ratom._STAR_ratom_context_STAR_;
+if((temp__5808__auto___13325 == null)){
 } else {
-var c__12240__auto___42424 = temp__5808__auto___42423;
-if((with_let42410.generation === c__12240__auto___42424.ratomGeneration)){
+var c__12240__auto___13326 = temp__5808__auto___13325;
+if((with_let13312.generation === c__12240__auto___13326.ratomGeneration)){
 if(reagent.debug.has_console){
 ((reagent.debug.tracking)?reagent.debug.track_console:console).error(["Warning: The same with-let is being used more ","than once in the same reactive context."].join(''));
 } else {
@@ -265,17 +265,17 @@ if(reagent.debug.has_console){
 } else {
 }
 
-(with_let42410.generation = c__12240__auto___42424.ratomGeneration);
+(with_let13312.generation = c__12240__auto___13326.ratomGeneration);
 }
 
-var init42411 = (with_let42410.length === (0));
-var _ = ((((init42411) || (cljs.core.not(with_let42410.hasOwnProperty((0))))))?(with_let42410[(0)] = cljs.core.reset_BANG_(administracion.editar.producto,administracion.editar.get_producto_por_id(id))):(with_let42410[(0)]));
-var res42412 = (function (){var with_let42414 = reagent.ratom.with_let_values(new cljs.core.Keyword(null,"with-let42414","with-let42414",1988259525));
-var temp__5808__auto___42426 = reagent.ratom._STAR_ratom_context_STAR_;
-if((temp__5808__auto___42426 == null)){
+var init13313 = (with_let13312.length === (0));
+var _ = ((((init13313) || (cljs.core.not(with_let13312.hasOwnProperty((0))))))?(with_let13312[(0)] = cljs.core.reset_BANG_(administracion.editar.producto,administracion.editar.get_producto_por_id(id))):(with_let13312[(0)]));
+var res13314 = (function (){var with_let13315 = reagent.ratom.with_let_values(new cljs.core.Keyword(null,"with-let13315","with-let13315",-790107971));
+var temp__5808__auto___13327 = reagent.ratom._STAR_ratom_context_STAR_;
+if((temp__5808__auto___13327 == null)){
 } else {
-var c__12240__auto___42427 = temp__5808__auto___42426;
-if((with_let42414.generation === c__12240__auto___42427.ratomGeneration)){
+var c__12240__auto___13328 = temp__5808__auto___13327;
+if((with_let13315.generation === c__12240__auto___13328.ratomGeneration)){
 if(reagent.debug.has_console){
 ((reagent.debug.tracking)?reagent.debug.track_console:console).error(["Warning: The same with-let is being used more ","than once in the same reactive context."].join(''));
 } else {
@@ -283,13 +283,13 @@ if(reagent.debug.has_console){
 } else {
 }
 
-(with_let42414.generation = c__12240__auto___42427.ratomGeneration);
+(with_let13315.generation = c__12240__auto___13328.ratomGeneration);
 }
 
-var init42415 = (with_let42414.length === (0));
-var ___$1 = ((((init42415) || (cljs.core.not(with_let42414.hasOwnProperty((0))))))?(with_let42414[(0)] = cljs.core.reset_BANG_(administracion.editar.categoria,administracion.editar.get_categoria_por_id(id))):(with_let42414[(0)]));
-var res42416 = (function (){var G__42419 = tipo;
-switch (G__42419) {
+var init13316 = (with_let13315.length === (0));
+var ___$1 = ((((init13316) || (cljs.core.not(with_let13315.hasOwnProperty((0))))))?(with_let13315[(0)] = cljs.core.reset_BANG_(administracion.editar.categoria,administracion.editar.get_categoria_por_id(id))):(with_let13315[(0)]));
+var res13317 = (function (){var G__13319 = tipo;
+switch (G__13319) {
 case "producto":
 if(cljs.core.truth_(cljs.core.deref(administracion.editar.producto))){
 return new cljs.core.PersistentVector(null, 5, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"div.row","div.row",133678515),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"class","class",-2030961996),"divEditar"], null),new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"div.col-12","div.col-12",361685154),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"class","class",-2030961996),"volverAtras"], null),new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"button","button",1456579943),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"on-click","on-click",1632826543),(function (){
@@ -311,13 +311,13 @@ return new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMP
 
 break;
 default:
-throw (new Error(["No matching clause: ",cljs.core.str.cljs$core$IFn$_invoke$arity$1(G__42419)].join('')));
+throw (new Error(["No matching clause: ",cljs.core.str.cljs$core$IFn$_invoke$arity$1(G__13319)].join('')));
 
 }
 })();
-return res42416;
+return res13317;
 })();
-return res42412;
+return res13314;
 } else {
 return new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"div.alert.alert-danger","div.alert.alert-danger",-890058301),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"h4","h4",2004862993),"\u26A0\uFE0F Acceso denegado"], null),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"p","p",151049309),"Para acceder a esta seccion, debes logearte y acceder desde su boton determinado."], null)], null);
 }

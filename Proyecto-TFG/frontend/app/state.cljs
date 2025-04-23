@@ -6,7 +6,7 @@
 (def current-route (r/atom nil))
 (def acceso-imagenes? (r/atom false))
 (def acceso-editar? (r/atom false))
-(def acceso-nuevo? (r/atom true))
+(def acceso-nuevo? (r/atom false))
 
 (defn getCookie [name]
   (let [cookies (clojure.string/split (or (.-cookie js/document) "") #"; ")]
