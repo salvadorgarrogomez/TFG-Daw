@@ -5,7 +5,6 @@
             [app.state :refer [current-route]]
             [app.db :refer [list-productos categorias]]))
 
-(def usuario-id (.getItem js/localStorage "id"))
 (def producto (r/atom {}))
 (def categoria (r/atom {}))
 (def campo-seleccionado (r/atom nil))
@@ -141,7 +140,6 @@
                  :value @nuevo-valor
                  :placeholder (str (get @producto (keyword @campo-seleccionado)))
                  :on-change #(reset! nuevo-valor (-> % .-target .-value))}])
-
       [:br]
       [:button
        {:on-click #(cond
@@ -159,10 +157,8 @@
                            (js/alert "Producto actualizado, dale al boton de 'Mostrar productos' para actualizar el listado."))))
                      :else
                      (do
-
                        (actualizar-producto producto @campo-seleccionado @nuevo-valor nil)
                        (reset! nuevo-valor "")
-                       (reset! app.state/acceso-editar? true)
                        (js/alert "Producto actualizado, dale al boton de 'Mostrar productos' para actualizar el listado.")))}
        "Actualizar campo"]])])
 
@@ -183,18 +179,16 @@
                :value @nuevo-valor
                :placeholder (str (get @categoria (keyword @campo-seleccionado)))
                :on-change #(reset! nuevo-valor (-> % .-target .-value))}]
-
       [:br]
       [:button {:on-click #(do
                              (actualizar-categoria categoria @campo-seleccionado @nuevo-valor)
                              (reset! nuevo-valor "")
-                             (reset! app.state/acceso-editar? true)
                              (js/alert "Categoria actualizado, dale al boton de 'Mostrar categorias' para actualizar el listado."))}
        "Actualizar campo"]])])
 
 
 (defn page []
-  (if @state/acceso-editar?
+  (if (state/rol-admin?)
     (let [params (get-in @current-route [:parameters :path])
           tipo (:tipo params)
           id (js/parseInt (:id params))]
@@ -255,7 +249,10 @@
               [:div {:class "divEditar"} "Producto no encontrado"])))))
     [:div.alert.alert-danger
      [:h4 "⚠️ Acceso denegado"]
-     [:p "Para acceder a esta seccion, debes logearte y acceder desde su boton determinado."]]))
+     [:p "Para acceder a esta seccion, debes logearte y acceder desde su boton determinado."]
+     [:button
+      {:on-click #(set! (.-hash js/location) "#/administracion")}
+      "LOGIN"]]))
 
 
 

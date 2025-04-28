@@ -1,8 +1,6 @@
 goog.provide('app.state');
 app.state.current_route = reagent.core.atom.cljs$core$IFn$_invoke$arity$1(null);
-app.state.acceso_imagenes_QMARK_ = reagent.core.atom.cljs$core$IFn$_invoke$arity$1(false);
-app.state.acceso_editar_QMARK_ = reagent.core.atom.cljs$core$IFn$_invoke$arity$1(false);
-app.state.acceso_nuevo_QMARK_ = reagent.core.atom.cljs$core$IFn$_invoke$arity$1(false);
+app.state.rol_usuario = reagent.core.atom.cljs$core$IFn$_invoke$arity$1(null);
 app.state.getCookie = (function app$state$getCookie(name){
 var cookies = clojure.string.split.cljs$core$IFn$_invoke$arity$2((function (){var or__5002__auto__ = document.cookie;
 if(cljs.core.truth_(or__5002__auto__)){
@@ -12,15 +10,21 @@ return "";
 }
 })(),/; /);
 return cljs.core.some((function (cookie){
-var vec__13235 = clojure.string.split.cljs$core$IFn$_invoke$arity$3(cookie,/=/,(2));
-var k = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__13235,(0),null);
-var v = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__13235,(1),null);
+var vec__15991 = clojure.string.split.cljs$core$IFn$_invoke$arity$3(cookie,/=/,(2));
+var k = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__15991,(0),null);
+var v = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__15991,(1),null);
 if(cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2(k,name)){
 return v;
 } else {
 return null;
 }
 }),cookies);
+});
+app.state.set_rol = (function app$state$set_rol(rol){
+return cljs.core.reset_BANG_(app.state.rol_usuario,rol);
+});
+app.state.rol_admin_QMARK_ = (function app$state$rol_admin_QMARK_(){
+return cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2(cljs.core.deref(app.state.rol_usuario),"admin");
 });
 
 //# sourceMappingURL=app.state.js.map

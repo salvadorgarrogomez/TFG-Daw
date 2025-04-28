@@ -15,16 +15,22 @@ header {
     padding-inline: 0px;
 }
 
+.carousel {
+    height: 500px;
+    margin-bottom: 20px;
+    justify-content: center;
+}
+
 .conjuntoImagenes {
-    padding-top: 25px;
+    margin-top: 25px;
     margin: 10px;
-    width: 100%;
-    height: auto;  /* Ajusta el alto del contenedor */
+    height: auto;
     object-fit: cover;  /* O usa 'contain' si prefieres mantener las proporciones */
     overflow: hidden;  /* Evita que la imagen se salga del contenedor */
     display: flex;
     justify-content: center;
     align-items: center;
+    border: 4px solid white;
 }
 
 .navBar {

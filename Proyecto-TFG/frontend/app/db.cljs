@@ -126,3 +126,4 @@
           (js/console.log "Categoría eliminada" body)
           (js/alert "Categoría eliminada correctamente, dale a boton de 'Mostrar categorias'."))
         (js/console.error "Error al eliminar categoría" body)))))
+

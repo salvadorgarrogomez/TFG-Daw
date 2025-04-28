@@ -15,44 +15,67 @@
 
 ;; Función para subir la imagen
 (defn subir-imagen []
-  (if (not (empty? @imagen))
-    (let [form-data (js/FormData.)]
-      (.append form-data "imagen" (first @imagen)) ;; Agrega la imagen al formulario
-      (http/post "/api/subir-imagen"
-                 {:body form-data
-                  :response-format :json
-                  :on-success (fn [response]
-                                (js/alert "Imagen subida con éxito")
+  (let [usuario-id (.getItem js/localStorage "id")]
+    (if (not (empty? @imagen))
+      (let [form-data (js/FormData.)]
+        (.append form-data "imagen" (first @imagen)) ;; Agrega la imagen al formulario
+        (.append form-data "usuario_id" usuario-id)
+        (http/post "/api/subir-imagen"
+                   {:body form-data
+                    :response-format :json
+                    :on-success (fn [response]
+                                  (js/alert "Imagen subida con éxito")
+                                  (db/cargar-imagenes))
+                    :on-failure (fn [response]
+                                  (js/alert "Error al subir la imagen"))})))))
+
+(defn eliminar-imagen [id]
+  (when (js/confirm "¿Estás seguro de que quieres eliminar esta imagen?")
+    (http/delete (str "/api/imagen/eliminar/" id)
+                 {:response-format :json
+                  :on-success (fn [_]
+                                (js/alert "Imagen eliminada")
                                 (db/cargar-imagenes))
-                  :on-failure (fn [response]
-                                (js/alert "Error al subir la imagen"))}))))
+                  :on-failure (fn [_]
+                                (js/alert "Error al eliminar la imagen"))})))
+
 
 (defn mostrar-imagenes-todas []
   (let [imagenes @db/imagenes   ;; Obtención de las imágenes desde el atom
         imagen-seleccionada (r/atom nil)] ;; Atom para la imagen seleccionada
     (if (empty? imagenes)
       [:div "No se encontraron imágenes."]
-      [:div
-       [:div.row
+       [:div.row {:class "adminImagenes"}
         (for [{:keys [id descripcion imagen_base64 mime_type]} imagenes]
           ^{:key id}
-          [:div.col-12.col-md-3 {:class "conjuntoImagenes"}
+          [:div.col-12.col-md-3 {:class "conjuntoImagenesAdmin"}
            [:img {:src (str "data:" mime_type ";base64," imagen_base64)
-                  :alt descripcion}]])]])))
+                  :alt descripcion
+                  :style {:cursor "pointer"}
+                  :on-click #(do
+                               (eliminar-imagen id)
+                               (.reload js/location true))}]])])))
 
 ;; Formulario para subir imagenes a la base de datos
 ;; En este caso, solo permite subir imagenes de 1 en 1
 (defn formulario-subida []
-  [:div
-   [:h2 "Subir Imagen"]
+  [:div {:class "formulario"}
+   [:h3 "Subir Imagen"
+    [:p "(solo se puede subir de 1 en 1)"]]
    [:input {:type "file"
-            :on-change handle-file-change}]
-   [:button {:on-click #(do
-                          (subir-imagen))} "Subir Imagen"]])
+            :on-change handle-file-change
+            :class "inputImagen"}]
+   [:button {:on-click #(if (empty? @imagen)
+                          (js/alert "Debes seleccionar una imagen.")
+                          (do
+                            (subir-imagen)
+                            (.reload js/location true)))}
+    "Subir Imagen"]])
+
 
 ;; Funcion page para estructurar la pagina
 (defn page []
-  (if @state/acceso-imagenes?
+  (if (state/rol-admin?)
     (r/create-class
      {:component-did-mount
       (fn []
@@ -60,15 +83,24 @@
         (db/cargar-imagenes))
       :reagent-render
       (fn []
-        [:div.row
-         [:div.col-12 {:class "adminImagenes"}
-          [:h3 "Directorio de imágenes:"]
-          [formulario-subida]
-          [mostrar-imagenes-todas]]])})
+        [:div.row {:class "divPanelImagenes"}
+         [:div.col-12 {:class "volverAtras"}
+          [:button
+           {:on-click #(set! (.-hash js/location) "#/administracion")}
+           "Volver al panel de Administración"]]
+         [:div.row {:class "adminImagenes"}
+          [:div.col.12
+           [:h1 "Directorio de imágenes:"]
+           [:div.col.12 {:class "formImagenes"}
+            [formulario-subida]
+            [mostrar-imagenes-todas]]]]])})
     ;; Mostrar mensaje si el acceso no está permitido
     [:div.alert.alert-danger
      [:h4 "⚠️ Acceso denegado"]
-     [:p "Para acceder a esta seccion, debes logearte y acceder desde su boton determinado."]]))
+     [:p "Para acceder a esta seccion, debes logearte y acceder desde su boton determinado."]
+     [:button
+      {:on-click #(set! (.-hash js/location) "#/administracion")}
+      "LOGIN"]]))
 
 
 ;; Inicializa la app

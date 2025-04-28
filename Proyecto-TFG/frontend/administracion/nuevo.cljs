@@ -27,7 +27,7 @@
     (and decimales (> (count decimales) 2))))
 
 (defn page []
-  (if @state/acceso-nuevo?
+  (if (state/rol-admin?)
     (let [params (get-in @current-route [:parameters :path])
           tipo (:tipo params)
           usuario-id (js/localStorage.getItem "id")]
@@ -40,25 +40,25 @@
            "Volver al panel de Administración"]]
          [:div.col-12.col-md-6 {:class "divDatosNuevos"}
           [:h1 "Inserta los datos del nuevo producto:"]
-          [:div {:class "campoProducto"}
+          [:div 
            [:p {:for "nombre"} "Nombre del producto: "
             [:input {:type "text"
                      :id "nombre"
                      :value @nombre-producto
                      :on-change #(reset! nombre-producto (-> % .-target .-value))}]]]
-          [:div {:class "campoProducto"}
+          [:div 
            [:p {:for "description"} "Descripción: "
             [:input {:type "text"
                      :id "description"
                      :value @descripcion-producto
                      :on-change #(reset! descripcion-producto (-> % .-target .-value))}]]]
-          [:div {:class "campoProducto"}
+          [:div 
            [:p {:for "precio"} "Precio:"
             [:input {:type "number"
                      :id "precio"
                      :value @precio-producto
                      :on-change #(reset! precio-producto (-> % .-target .-value))}]]]
-          [:div {:class "campoProducto"}
+          [:div 
            [:p {:for "categoria_id"} "Categoria:"
             [:select {:value (or @categoria-producto "")
                       :id "categoria_id"
@@ -66,7 +66,7 @@
              [:option {:value ""} "-- Selecciona una categoría --"]
              (for [{:keys [id nombre]} @categorias]
                ^{:key id} [:option {:value id} (str id " - " nombre)])]]]
-          [:div {:class "campoProducto"}
+          [:div 
            [:p {:for "tipo_plato"} "Tipo de plato:"
             [:select {:value (or @tipo_plato-producto "")
                       :id "tipo_plato"
@@ -76,7 +76,7 @@
              [:option {:value "Al centro"} "Al centro"]
              [:option {:value "Principal"} "Principal"]
              [:option {:value "Postres"} "Postres"]]]]
-          [:div {:class "campoProducto"}
+          [:div 
            [:p {:for "tipo_porcion"} "Tipo de porcion:"
             [:select {:value (or @tipo_porcion-producto "")
                       :id "tipo_porcion"
@@ -86,7 +86,7 @@
              [:option {:value "Media ración"} "Media ración"]
              [:option {:value "Ración completa"} "Ración completa"]]]]
           [:h3 [:strong "Restricciones alimentarias: "]]
-          [:div {:class "campoProducto"}
+          [:div 
            [:p {:for "es_vegetariano"} "El plato es vegetariano?"
             [:select {:value (or @es_vegetariano-producto "")
                       :id "es_vegetariano"
@@ -94,7 +94,7 @@
              [:option {:value ""} "-- Selecciona una opción --"]
              [:option {:value "true"} "Sí"]
              [:option {:value "false"} "No"]]]]
-          [:div {:class "campoProducto"}
+          [:div 
            [:p {:for "es_vegano"} "El plato es vegano?"
             [:select {:value (or @es_vegano-producto "")
                       :id "es_vegano"
@@ -102,7 +102,7 @@
              [:option {:value ""} "-- Selecciona una opción --"]
              [:option {:value "true"} "Sí"]
              [:option {:value "false"} "No"]]]]
-          [:div {:class "campoProducto"}
+          [:div 
            [:p {:for "es_sin_gluten"} "El plato es con gluten?"
             [:select {:value (or @es_sin_gluten-producto "")
                       :id "es_sin_gluten"
@@ -110,7 +110,7 @@
              [:option {:value ""} "-- Selecciona una opción --"]
              [:option {:value "true"} "Sí"]
              [:option {:value "false"} "No"]]]]
-          [:div {:class "campoProducto"}
+          [:div 
            [:p {:for "es_sin_lactosa"} "El plato es con lactosa?"
             [:select {:value (or @es_sin_lactosa-producto "")
                       :id "es_sin_lactosa"
@@ -160,13 +160,13 @@
            "Volver al panel de Administración"]]
          [:div.col-12.col-md-6 {:class "divDatosNuevos"}
           [:h1 "Inserta los datos de la nueva categoría:"]
-          [:div {:class "campoCategoria"}
+          [:div 
            [:p {:for "nombre"} "Nombre de la categoría:"
             [:input {:type "text"
                      :id "nombre"
                      :value @nombre-categoria
                      :on-change #(reset! nombre-categoria (-> % .-target .-value))}]]]
-          [:div {:class "campoCategoria"}
+          [:div 
            [:p {:for "descripcion"} "Descripción:"
             [:input {:type "text"
                      :id "descripcion"
@@ -182,4 +182,7 @@
             "Crear Categoría"]]]]))
     [:div.alert.alert-danger
      [:h4 "⚠️ Acceso denegado"]
-     [:p "Para acceder a esta seccion, debes logearte y acceder desde su boton determinado."]]))
+     [:p "Para acceder a esta seccion, debes logearte y acceder desde su boton determinado."]
+     [:button
+      {:on-click #(set! (.-hash js/location) "#/administracion")}
+      "LOGIN"]]))

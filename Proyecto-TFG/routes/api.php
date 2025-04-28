@@ -10,6 +10,7 @@ use App\Http\Controllers\InsertarProducto;
 use App\Http\Controllers\InsertarCategoria;
 use App\Http\Controllers\EliminarCategoria;
 use App\Http\Controllers\EliminarProducto;
+use App\Http\Controllers\EliminarImagen;
 
 // Rutas para poder utilizar las clases implementadas de la api en el Controladdor Principal
 Route::get('/productos', action: [Principal::class, 'productos']);
@@ -34,3 +35,4 @@ Route::post('/categoria/nuevo', [InsertarCategoria::class, 'insert']);
 
 Route::delete('/categoria/eliminar/{id}', [EliminarCategoria::class, 'delete']);
 Route::delete('/producto/eliminar/{id}', [EliminarProducto::class, 'delete']);
+Route::delete('/imagen/eliminar/{id}', [EliminarImagen::class, 'delete']);

@@ -1,15 +1,19 @@
 .divNuevo {
     background-color: white;
     margin-bottom: 100px;
-    padding: 25px;
     margin-inline: 75px;
     align-items: center;
     justify-content: center;
+
+    .volverAtras {
+        margin-left: -30px;
+    }
 
     .divDatosNuevos {
         text-align: left;
         display: flex;
         flex-direction: column;
+        padding-top: 20px;
 
         input,
         select {
@@ -32,5 +36,5 @@
             flex-direction: column;
         }
     }
-    
+
 }

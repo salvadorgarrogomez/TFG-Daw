@@ -57,6 +57,7 @@ class Imagenes extends Controller
         // Validar que se envíe una imagen válida y de tamaño máximo 2MB
         $request->validate([
             'imagen' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'usuario_id' => 'required|integer'
         ]);
         // Obtener el archivo del formulario
         $archivo = $request->file('imagen');
@@ -66,12 +67,14 @@ class Imagenes extends Controller
             $imagenBinaria = file_get_contents($archivo);
             // Obtener descripción opcional desde el formulario
             $descripcion = $request->input('descripcion', '');
+            $usuario_id = $request->input('usuario_id');
             // Preparar la conexión directa con PDO
             $pdo = DB::connection()->getPdo();
             // Insertar imagen binaria en la base de datos
-            $stmt = $pdo->prepare("INSERT INTO imagenes (descripcion, imagen) VALUES (:descripcion, :imagen)");
+            $stmt = $pdo->prepare("INSERT INTO imagenes (descripcion, imagen, usuario_id) VALUES (:descripcion, :imagen, :usuario_id)");
             $stmt->bindParam(':descripcion', $descripcion, \PDO::PARAM_STR);
             $stmt->bindParam(':imagen', $imagenBinaria, \PDO::PARAM_LOB); // Se indica que es un campo binario (LOB)
+            $stmt->bindParam(':usuario_id', $usuario_id, \PDO::PARAM_INT);
             // Ejecutar inserción
             $stmt->execute();
             // Devolver respuesta de éxito

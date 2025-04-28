@@ -4,29 +4,7 @@
             [cljs-http.client :as http]
             [app.db :as db]))
 
-(defonce imagen (r/atom nil)) ;; Átomo para almacenar la imagen seleccionada
-
-;; Función para manejar el cambio de archivo
-(defn handle-file-change [event]
-  (let [file (first (.-files (.-target event)))]
-    (when (and file (<= (.-size file) 2048000) (re-matches #".*\.(jpg|jpeg|png|gif|svg)$" (.-name file)))
-      (reset! imagen [file]))))
-
-;; Función para subir la imagen
-(defn subir-imagen []
-  (if (not (empty? @imagen))
-    (let [form-data (js/FormData.)]
-      (.append form-data "imagen" (first @imagen)) ;; Agrega la imagen al formulario
-      (http/post "/api/subir-imagen"
-                 {:body form-data
-                  :response-format :json
-                  :on-success (fn [response]
-                                (js/alert "Imagen subida con éxito")
-                                (db/cargar-imagenes))
-                  :on-failure (fn [response]
-                                (js/alert "Error al subir la imagen"))}))))
-
-(defn mostrar-imagenes []
+(defn imagenes-carrusel []
   (let [imagenes @db/imagenes]  ;; Obtencion de las imágenes desde el atom
     (if (empty? imagenes)
       [:div "No se encontraron imágenes."]
@@ -59,15 +37,6 @@
            [:img {:src (str "data:" mime_type ";base64," imagen_base64)
                   :alt descripcion}]])]])))
 
-;; Formulario para subir imagenes a la base de datos
-;; En este caso, solo permite subir imagenes de 1 en 1
-(defn formulario-subida []
-  [:div {:class "divImagenes"}
-   [:h2 "Subir Imagen"]
-   [:input {:type "file"
-            :on-change handle-file-change}]
-   [:button {:on-click subir-imagen} "Subir Imagen"]])
-
 ;; Funcion page para estructurar la pagina
 (defn page []
   (r/create-class
@@ -80,9 +49,8 @@
       [:div.row
        [:div.col-12 {:class "container"}
         [:h3 "Galería de Imágenes"]
-        [mostrar-imagenes]
+        [imagenes-carrusel]
         [mostrar-imagenes-todas]
-              ;;  [formulario-subida]
         ]])}))
 
 ;; Inicializa la app

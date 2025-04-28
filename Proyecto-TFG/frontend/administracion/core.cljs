@@ -22,10 +22,16 @@
 (defn verificar-sesion []
   (GET "/api/admin"
     {:with-credentials? true
+     :response-format :json
+     :keywords? true
      :handler (fn [response]
-                (reset! logged-in? true)
-                (reset! datos-usuario (:usuario response))
-                (reset! sesion-verificada? true))
+                ;; Devuelve {:usuario {:id xx :nombre "xxxx" :rol "xxxx"}}
+                (let [usuario (:usuario response)]
+                  (reset! logged-in? true)
+                  (reset! datos-usuario usuario)
+                  (js/localStorage.setItem "id" (:id usuario))
+                  (reset! sesion-verificada? true)
+                  (state/set-rol (:rol usuario))))
      :error-handler (fn [_]
                       (reset! logged-in? false)
                       (reset! datos-usuario nil)
@@ -57,7 +63,6 @@
           [:td {:class "tdButton"}
            [:button
             {:on-click #(do
-                          (reset! app.state/acceso-editar? true)
                           (set! (.-hash js/location) (str "/editar/categoria/" id)))}
             "Editar"]]
           [:td {:class "tdButton"} [:button
@@ -68,7 +73,6 @@
          [:button
           {:on-click
            #(do
-              (reset! app.state/acceso-nuevo? true)
               (set! (.-hash js/location) "/nuevo/categoria"))
            :class "nuevo"}
           "Añadir nueva categoria"]]]]]]))
@@ -101,7 +105,6 @@
           [:td {:class "tdButton"}
            [:button
             {:on-click #(do
-                          (reset! app.state/acceso-editar? true)
                           (set! (.-hash js/location) (str "/editar/producto/" id)))}
             "Editar"]]
           [:td {:class "tdButton"} [:button
@@ -112,7 +115,6 @@
          [:button
           {:on-click
            #(do
-              (reset! app.state/acceso-nuevo? true)
               (set! (.-hash js/location) "/nuevo/producto"))
            :class "nuevo"}
           "Añadir nuevo producto"]]]]]]))
@@ -124,15 +126,14 @@
      :format :json
      :response-format :json
      :keywords? true
-     :with-credentials? true ;; <-- también aquí para que Laravel devuelva la cookie
+     :with-credentials? true 
      :handler #(do
-                 ;; Limpia cualquier estado anterior
+                 ;; Se limpia cualquier estado anterior
                  (reset! auth-token nil)
                  (reset! logged-in? true)
                  (reset! datos-usuario {:nombre (:nombre %) :rol (:rol %)})
                  (js/localStorage.setItem "id" (:id %))
-
-                 ;; Y ahora verifica el rol desde el backend
+                 ;; Verifica el rol desde el backend
                  (GET "/api/admin"
                    {:with-credentials? true
                     :handler (fn [resp]
@@ -161,7 +162,9 @@
                :on-change #(reset! contrasenia (-> % .-target .-value))}]]]
     [:div.row {:class "rowButton"}
      [:div.col-12
-      [:button {:on-click login} "Entrar"]]]]])
+      [:button {:on-click #(do
+                             (login)
+                             (.reload js/location true))} "Entrar"]]]]])
 
 (defn logout []
   (POST "/api/logout"
@@ -175,56 +178,48 @@
 
 (defn admin-panel []
   (cond
-    (not @sesion-verificada?)
+    (not @sesion-verificada?) 
     [:div "Cargando sesión..."]
-
     (nil? @datos-usuario)
     [:div.row {:class "panel"}
      [:div.col-12 {:class "panelBotones"}
       [:h2 "Aviso importante!!!"]
-      [:p "No estas logeado, debes de cerrar sesion y logearte correctamente."]
+      [:p "No estás logeado, debes de cerrar sesión y logearte correctamente."]
       [:button {:on-click #(do
                              (logout)
-                             (.reload js/location true))}
-       "Cerrar sesión"]]]
-
-    (not @logged-in?)  ;; ya se verificó y no está logueado
+                             (.reload js/location true))} "Cerrar sesión"]]]
+    (not @logged-in?) 
     [:div "Acceso denegado."]
 
-    :else ;; ya está todo listo
-    [:div.row {:class "panel"}
-     [:div.col-12 {:class "panelBotones"}
-      [:h2 (str "Bienvenido/a, " (:nombre @datos-usuario) "!")]
-      [:p (str "Tienes permisos, " (:rol @datos-usuario))]
-      [:p "Tienes acceso al panel de administración."]
-      [:button {:on-click #(do
-                             (logout)
-                             (.reload js/location true))}
-       "Cerrar sesión"]
-      (when (= (:rol @datos-usuario) "admin")
-        [:div {:class "botonesAdmin"}
-         [:p "Eres administrador. Puedes editar el contenido."]
-         [:button {:on-click #(do
-                                (reset! mostrar-productos? true)
-                                (reset! mostrar-categorias? false)
-                                (fetch-list-productos))}
-          "Mostrar productos"]
-         [:button {:on-click #(do
-                                (reset! mostrar-categorias? true)
-                                (reset! mostrar-productos? false)
-                                (fetch-list-categorias))}
-          "Mostrar categorías"]
-         [:button
-          {:on-click #(do
-                        (reset! app.state/acceso-imagenes? true)
-                        (set! (.-hash js/location) "#/imagenes"))}
-          "Mostrar fotografías"]])]
-
-     (when @mostrar-productos?
-       [render-productos])
-     (when @mostrar-categorias?
-       [render-categorias])]))
-
+    :else 
+    (let [usuario (:rol @datos-usuario)]
+      (if (not= usuario "admin")
+        (do
+          (js/alert "Acceso denegado. Solo los administradores pueden acceder a este panel.")
+          [:div "Acceso denegado."])
+        ;; Si el usuario es admin, muestra el panel de administración
+        [:div.row {:class "panel"}
+         [:div.col-12 {:class "panelBotones"}
+          [:h2 (str "Bienvenido/a, " (:nombre @datos-usuario) "!")]
+          [:p (str "Tienes permisos, " usuario)]
+          [:p "Tienes acceso al panel de administración."]
+          [:button {:on-click #(do
+                                 (logout)
+                                 (.reload js/location true))} "Cerrar sesión"]
+          (when (= usuario "admin")
+            [:div {:class "botonesAdmin"}
+             [:p "Eres administrador. Puedes editar el contenido."]
+             [:button {:on-click #(do
+                                    (reset! mostrar-productos? true)
+                                    (reset! mostrar-categorias? false)
+                                    (fetch-list-productos))} "Mostrar productos"]
+             [:button {:on-click #(do
+                                    (reset! mostrar-categorias? true)
+                                    (reset! mostrar-productos? false)
+                                    (fetch-list-categorias))} "Mostrar categorías"]
+             [:button {:on-click #(set! (.-hash js/location) "#/imagenes")} "Mostrar fotografías"]])
+          (when @mostrar-productos? [render-productos])
+          (when @mostrar-categorias? [render-categorias])]]))))
 
 (defn page []
   (cond
