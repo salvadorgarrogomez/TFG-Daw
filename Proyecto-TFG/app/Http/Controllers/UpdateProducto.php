@@ -30,7 +30,8 @@ class UpdateProducto extends Controller
             'contiene_sulfitos',
             'contiene_moluscos',
             'contiene_altramuces',
-            'usuario_id'
+            'usuario_id',
+            'activo'
         ]);
 
         $producto = Producto::findOrFail($id);

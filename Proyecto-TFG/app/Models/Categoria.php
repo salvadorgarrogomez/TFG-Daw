@@ -10,7 +10,8 @@ class Categoria extends Model
     protected $fillable = [
         'nombre',
         'descripcion',
-        'usuario_id'
+        'usuario_id',
+        'activo'
     ];
 
 }

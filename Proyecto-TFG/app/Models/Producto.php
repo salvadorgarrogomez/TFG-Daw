@@ -28,7 +28,8 @@ class Producto extends Model
         'contiene_sulfitos',
         'contiene_moluscos',
         'contiene_altramuces',
-        'usuario_id'
+        'usuario_id',
+        'activo'
     ];
 
 }

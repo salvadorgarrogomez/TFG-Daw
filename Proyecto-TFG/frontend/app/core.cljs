@@ -3,7 +3,7 @@
             [reagent.dom :as dom]
             [app.routes :as routes]
             [app.state :refer [current-route]]
-            [app.views :refer [layout]]))  ;; Usa layout general
+            [app.views :refer [layout]]))  
 
 (defn app-view []
   [:div

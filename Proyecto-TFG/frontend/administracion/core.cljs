@@ -2,7 +2,7 @@
   (:require [reagent.core :as r]
             [app.state :as state]
             [ajax.core :refer [GET POST]]
-            [app.db :refer [list-productos fetch-list-productos categorias fetch-list-categorias eliminar-categoria eliminar-producto]]
+            [app.db :refer [list-productos fetch-list-productos categorias eliminar-categoria eliminar-producto fetch-list-categorias activo-producto activo-categoria]]
             [reagent.dom :as dom]
             [reitit.frontend.easy :as rfe]))
 
@@ -56,9 +56,9 @@
        [:tr
         [:th {:class "id"} "ID"] [:th "Nombre"] [:th.d-none.d-sm-table-cell "Descripcion"] [:th {:class "tdButton"} "Editar"] [:th {:class "tdButton"} "Eliminar"]]]
       [:tbody
-       (for [{:keys [id nombre descripcion]} categorias-filtradas]
+       (for [{:keys [id nombre descripcion activo]} categorias-filtradas]
          ^{:key id}
-         [:tr
+         [:tr {:class (if activo "table-success" "table-danger")}
           [:td {:class "tdButton"} id] [:td nombre] [:td.d-none.d-sm-table-cell descripcion]
           [:td {:class "tdButton"}
            [:button
@@ -66,8 +66,8 @@
                           (set! (.-hash js/location) (str "/editar/categoria/" id)))}
             "Editar"]]
           [:td {:class "tdButton"} [:button
-                                    {:on-click #(eliminar-categoria id)}
-                                    "Eliminar"]]])
+                                    {:on-click #(activo-categoria id)}
+                                    "Activar/Desactivar categoria"]]])
        [:tr
         [:td
          [:button
@@ -97,9 +97,9 @@
         [:th.d-none.d-lg-table-cell "Categoría"] [:th.d-none.d-lg-table-cell "Tipo de plato"] [:th "Tipo de porción"]
         [:th "Editar"] [:th "Eliminar"]]]
       [:tbody
-       (for [{:keys [id nombre description precio nombre_categoria tipo_plato tipo_porcion]} productos-filtradas]
+       (for [{:keys [id nombre description precio nombre_categoria tipo_plato tipo_porcion activo]} productos-filtradas]
          ^{:key id}
-         [:tr
+         [:tr {:class (if activo "table-success" "table-danger")}
           [:td {:class "id"} id] [:td nombre] [:td.d-none.d-lg-table-cell description] [:td.d-none.d-sm-table-cell (str precio " €")]
           [:td.d-none.d-lg-table-cell nombre_categoria] [:td.d-none.d-lg-table-cell tipo_plato] [:td tipo_porcion]
           [:td {:class "tdButton"}
@@ -108,8 +108,8 @@
                           (set! (.-hash js/location) (str "/editar/producto/" id)))}
             "Editar"]]
           [:td {:class "tdButton"} [:button
-                                    {:on-click #(eliminar-producto id)}
-                                    "Eliminar"]]])
+                                    {:on-click #(activo-producto id)}
+                                    "Activar/Desactivar Producto"]]])
        [:tr
         [:td
          [:button
@@ -126,7 +126,7 @@
      :format :json
      :response-format :json
      :keywords? true
-     :with-credentials? true 
+     :with-credentials? true
      :handler #(do
                  ;; Se limpia cualquier estado anterior
                  (reset! auth-token nil)
@@ -177,49 +177,51 @@
                       (js/console.log "Error cerrando sesión" e))}))
 
 (defn admin-panel []
-  (cond
-    (not @sesion-verificada?) 
-    [:div "Cargando sesión..."]
-    (nil? @datos-usuario)
-    [:div.row {:class "panel"}
-     [:div.col-12 {:class "panelBotones"}
-      [:h2 "Aviso importante!!!"]
-      [:p "No estás logeado, debes de cerrar sesión y logearte correctamente."]
-      [:button {:on-click #(do
-                             (logout)
-                             (.reload js/location true))} "Cerrar sesión"]]]
-    (not @logged-in?) 
-    [:div "Acceso denegado."]
-
-    :else 
-    (let [usuario (:rol @datos-usuario)]
-      (if (not= usuario "admin")
-        (do
-          (js/alert "Acceso denegado. Solo los administradores pueden acceder a este panel.")
-          [:div "Acceso denegado."])
-        ;; Si el usuario es admin, muestra el panel de administración
-        [:div.row {:class "panel"}
-         [:div.col-12 {:class "panelBotones"}
-          [:h2 (str "Bienvenido/a, " (:nombre @datos-usuario) "!")]
-          [:p (str "Tienes permisos, " usuario)]
-          [:p "Tienes acceso al panel de administración."]
-          [:button {:on-click #(do
-                                 (logout)
-                                 (.reload js/location true))} "Cerrar sesión"]
-          (when (= usuario "admin")
-            [:div {:class "botonesAdmin"}
-             [:p "Eres administrador. Puedes editar el contenido."]
-             [:button {:on-click #(do
-                                    (reset! mostrar-productos? true)
-                                    (reset! mostrar-categorias? false)
-                                    (fetch-list-productos))} "Mostrar productos"]
-             [:button {:on-click #(do
-                                    (reset! mostrar-categorias? true)
-                                    (reset! mostrar-productos? false)
-                                    (fetch-list-categorias))} "Mostrar categorías"]
-             [:button {:on-click #(set! (.-hash js/location) "#/imagenes")} "Mostrar fotografías"]])
-          (when @mostrar-productos? [render-productos])
-          (when @mostrar-categorias? [render-categorias])]]))))
+  (r/with-let [_ (do
+                   (reset! mostrar-productos? false)
+                   (reset! mostrar-categorias? false))]
+    (cond
+      (not @sesion-verificada?)
+      [:div "Cargando sesión..."]
+      (nil? @datos-usuario)
+      [:div.row {:class "panel"}
+       [:div.col-12 {:class "panelBotones"}
+        [:h2 "Aviso importante!!!"]
+        [:p "No estás logeado, debes de cerrar sesión y logearte correctamente."]
+        [:button {:on-click #(do
+                               (logout)
+                               (.reload js/location true))} "Cerrar sesión"]]]
+      (not @logged-in?)
+      [:div "Acceso denegado."]
+      :else
+      (let [usuario (:rol @datos-usuario)]
+        (if (not= usuario "admin")
+          (do
+            (js/alert "Acceso denegado. Solo los administradores pueden acceder a este panel.")
+            [:div "Acceso denegado."])
+          ;; Si el usuario es admin, muestra el panel de administración
+          [:div.row {:class "panel"}
+           [:div.col-12 {:class "panelBotones"}
+            [:h2 (str "Bienvenido/a, " (:nombre @datos-usuario) "!")]
+            [:p (str "Tienes permisos, " usuario)]
+            [:p "Tienes acceso al panel de administración."]
+            [:button {:on-click #(do
+                                   (logout)
+                                   (.reload js/location true))} "Cerrar sesión"]
+            (when (= usuario "admin")
+              [:div {:class "botonesAdmin"}
+               [:p "Eres administrador. Puedes editar el contenido."]
+               [:button {:on-click #(do
+                                      (reset! mostrar-productos? true)
+                                      (reset! mostrar-categorias? false)
+                                      (fetch-list-productos))} "Mostrar productos"]
+               [:button {:on-click #(do
+                                      (reset! mostrar-categorias? true)
+                                      (reset! mostrar-productos? false)
+                                      (fetch-list-categorias))} "Mostrar categorías"]
+               [:button {:on-click #(set! (.-hash js/location) "#/imagenes")} "Mostrar fotografías"]])
+            (when @mostrar-productos? [render-productos])
+            (when @mostrar-categorias? [render-categorias])]])))))
 
 (defn page []
   (cond

@@ -16,7 +16,7 @@
   (js/console.log "Llamando a fetch-categorias...")
   (go
     (let [{:keys [status body]} (<! (http/get "/api/categorias/"
-                                              {:with-credentials? false
+                                              {:with-credentials? true
                                                :response-format (ajax/json-response-format {:keywords? true})}))]
       (if (= 200 status)
         (do
@@ -27,8 +27,8 @@
 (defn fetch-list-categorias []
   (js/console.log "Llamando a fetch-categorias...")
   (go
-    (let [{:keys [status body]} (<! (http/get "/api/todas_categorias"
-                                              {:with-credentials? false
+    (let [{:keys [status body]} (<! (http/get "/api/categorias/todas"
+                                              {:with-credentials? true
                                                :response-format (ajax/json-response-format {:keywords? true})}))]
       (if (= 200 status)
         (do
@@ -41,7 +41,7 @@
   (js/console.log "Llamando a fetch-productos para categoría:" categoria-id)
   (go
     (let [{:keys [status body]} (<! (http/get (str "/api/productos/categoria/" categoria-id)
-                                              {:with-credentials? false
+                                              {:with-credentials? true
                                                :response-format (ajax/json-response-format {:keywords? true})}))]
       (if (= 200 status)
         (let [productos-obtenidos (if (map? body) (:productos body) body)]
@@ -58,7 +58,7 @@
   (js/console.log "Llamando a fetch-list-productos...")
   (go
     (let [{:keys [status body]} (<! (http/get "/api/productos/"
-                                              {:with-credentials? false
+                                              {:with-credentials? true
                                                :response-format (ajax/json-response-format {:keywords? true})}))]
       (if (= 200 status)
         (do
@@ -83,7 +83,7 @@
   (js/console.log "Llamando a insertar-producto..." producto)
   (go
     (let [{:keys [status body]} (<! (http/post "/api/producto/nuevo"
-                                               {:with-credentials? false
+                                               {:with-credentials? true
                                                 :json-params producto
                                                 :response-format (ajax/json-response-format {:keywords? true})}))]
       (if (= 201 status)
@@ -96,7 +96,7 @@
   (js/console.log "Llamando a insertar-categoria..." producto)
   (go
     (let [{:keys [status body]} (<! (http/post "/api/categoria/nuevo"
-                                               {:with-credentials? false
+                                               {:with-credentials? true
                                                 :json-params producto
                                                 :response-format (ajax/json-response-format {:keywords? true})}))]
       (if (= 201 status)
@@ -108,7 +108,7 @@
 (defn eliminar-producto [id]
   (go
     (let [{:keys [status body]} (<! (http/delete (str "/api/producto/eliminar/" id)
-                                                 {:with-credentials? false
+                                                 {:with-credentials? true
                                                   :response-format (ajax/json-response-format {:keywords? true})}))]
       (if (= 200 status)
         (do
@@ -116,14 +116,35 @@
           (js/alert "Producto eliminado correctamente, dale a boton de 'Mostrar productos'."))
         (js/console.error "Error al eliminar el producto" body)))))
 
+(defn activo-producto [id]
+  (go
+    (let [{:keys [status body]} (<! (http/put (str "/api/producto/activo/" id)
+                                              {:with-credentials? true
+                                               :response-format (ajax/json-response-format {:keywords? true})}))]
+      (if (= 200 status)
+        (do
+          (js/console.log "Estado actualizado" body)
+          (js/alert (str "Producto " (if (:activo body) "activado" "desactivado") " correctamente")))
+        (js/console.error "Error al actualizar estado del producto" body)))))
+
+(defn activo-categoria [id]
+  (go
+    (let [{:keys [status body]} (<! (http/put (str "/api/categoria/activo/" id)
+                                              {:with-credentials? true
+                                               :response-format (ajax/json-response-format {:keywords? true})}))]
+      (if (= 200 status)
+        (do
+          (js/console.log "Estado actualizado" body)
+          (js/alert (str "Categoria " (if (:activo body) "activada" "desactivada") " correctamente.")))
+        (js/console.error "Error al actualizar estado de la categoria" body)))))
+
 (defn eliminar-categoria [id]
   (go
     (let [{:keys [status body]} (<! (http/delete (str "/api/categoria/eliminar/" id)
-                                                 {:with-credentials? false
+                                                 {:with-credentials? true
                                                   :response-format (ajax/json-response-format {:keywords? true})}))]
       (if (= 200 status)
         (do
           (js/console.log "Categoría eliminada" body)
           (js/alert "Categoría eliminada correctamente, dale a boton de 'Mostrar categorias'."))
         (js/console.error "Error al eliminar categoría" body)))))
-
