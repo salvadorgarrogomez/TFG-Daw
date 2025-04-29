@@ -10,7 +10,9 @@ class Principal extends Controller
     public function productos()
     {
         $productos = DB::select('SELECT productos.id, productos.nombre, productos.description, productos.precio, categorias.nombre AS nombre_categoria, productos.tipo_plato, 
-            productos.tipo_porcion, productos.es_vegetariano, productos.es_vegano, productos.es_sin_gluten, productos.es_sin_lactosa 
+            productos.tipo_porcion, productos.contiene_gluten, productos.contiene_crustaceos, productos.contiene_huevos, productos.contiene_pescado, productos.contiene_cacahuetes, productos.contiene_soja, 
+            productos.contiene_lacteos, productos.contiene_frustos_de_cascara, productos.contiene_apio, productos.contiene_mostaza, productos.contiene_granos_de_sesamo, productos.contiene_sulfitos, 
+            productos.contiene_moluscos, productos.contiene_altramuces   
             FROM productos
             INNER JOIN categorias ON productos.categoria_id = categorias.id
             ORDER BY id;');

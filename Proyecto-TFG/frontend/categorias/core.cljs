@@ -14,7 +14,7 @@
               (update acc nombre conj producto)))
           {} productos))
 
-(def mensaje-categoria (r/atom "")) 
+(def mensaje-categoria (r/atom ""))
 
 (defn obtener-descripcion-categoria [categoria-id]
   (let [categoria (some #(when (= (:id %) categoria-id) %) @categorias)]
@@ -84,13 +84,38 @@
                 [:li.col-12 {:class "productosLI"}
                  [:div {:class "producto-info"}
                   [:div
-                   [:span {:class "negrita"} nombre] 
+                   [:span {:class "negrita"} nombre]
                    (let [primer-producto (first lista-productos)
-                         descripcion-limpia (str/trim (:description primer-producto))]
-                     [:p {:class "description"}
-                      (if (empty? descripcion-limpia)
-                        " "
-                        descripcion-limpia)])]
+                         descripcion-limpia (str/trim (:description primer-producto))
+                         alergenos {"contiene_gluten" "/imgs/alergenos/gluten.png"
+                                    "contiene_crustaceos" "/imgs/alergenos/crustaceos.png"
+                                    "contiene_huevos" "/imgs/alergenos/huevos.png"
+                                    "contiene_pescado" "/imgs/alergenos/pescado.png"
+                                    "contiene_cacahuetes" "/imgs/alergenos/cacahuetes.png"
+                                    "contiene_soja" "/imgs/alergenos/soja.png"
+                                    "contiene_lacteos" "/imgs/alergenos/lacteos.png"
+                                    "contiene_frustos_de_cascara" "/imgs/alergenos/cascaras.png"
+                                    "contiene_apio" "/imgs/alergenos/apio.png"
+                                    "contiene_mostaza" "/imgs/alergenos/mostaza.png"
+                                    "contiene_granos_de_sesamo" "/imgs/alergenos/sesamo.png"
+                                    "contiene_sulfitos" "/imgs/alergenos/sesamo.png"
+                                    "contiene_moluscos" "/imgs/alergenos/moluscos.png"
+                                    "contiene_altramuces" "/imgs/alergenos/altramuces.png"}
+                         alergenos-activos (filter #(true? (get primer-producto (keyword (first %)))) alergenos)] ;; Filtramos los alérgenos activos
+                     [:div
+                      [:p {:class "description"}
+                       (if (empty? descripcion-limpia)
+                         " "
+                         descripcion-limpia)]
+                      (when (seq alergenos-activos) ;; Solo mostramos los alérgenos si hay alguno activo
+                        [:div {:class "alergenos"}
+                         (for [[nombre-img src-img] alergenos-activos]
+                           ^{:key nombre-img}
+                           [:img {:src src-img
+                                  :alt nombre-img
+                                  :title (str (clojure.string/replace nombre-img "_" " "))
+                                  :class "alergeno-icono"}])])])]
+
                   (for [producto lista-productos]
                     ^{:key (:id producto)}
                     [:div {:class "producto-item"} ;; Div donde en su interior ira todo el contenido de cada producto

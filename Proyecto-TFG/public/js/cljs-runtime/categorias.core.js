@@ -12,9 +12,9 @@ return cljs.core.update.cljs$core$IFn$_invoke$arity$4(acc,nombre,cljs.core.conj,
 });
 categorias.core.mensaje_categoria = reagent.core.atom.cljs$core$IFn$_invoke$arity$1("");
 categorias.core.obtener_descripcion_categoria = (function categorias$core$obtener_descripcion_categoria(categoria_id){
-var categoria = cljs.core.some((function (p1__18931_SHARP_){
-if(cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2(new cljs.core.Keyword(null,"id","id",-1388402092).cljs$core$IFn$_invoke$arity$1(p1__18931_SHARP_),categoria_id)){
-return p1__18931_SHARP_;
+var categoria = cljs.core.some((function (p1__16940_SHARP_){
+if(cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2(new cljs.core.Keyword(null,"id","id",-1388402092).cljs$core$IFn$_invoke$arity$1(p1__16940_SHARP_),categoria_id)){
+return p1__16940_SHARP_;
 } else {
 return null;
 }
@@ -35,31 +35,31 @@ console.log("Componente montado. Llamando a fetch-categorias...");
 
 return app.db.fetch_categorias();
 }),new cljs.core.Keyword(null,"reagent-render","reagent-render",-985383853),(function (){
-return new cljs.core.PersistentVector(null, 6, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"div.row","div.row",133678515),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"class","class",-2030961996),"divProductosyCategorias"], null),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"div.col-12.d-block.d-sm-none","div.col-12.d-block.d-sm-none",941872078),new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"div.dropdown","div.dropdown",1029783296),new cljs.core.PersistentVector(null, 4, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"button.navbar-toggler.dropdown-toggle.desplegable","button.navbar-toggler.dropdown-toggle.desplegable",-1788941809),new cljs.core.PersistentArrayMap(null, 4, [new cljs.core.Keyword(null,"type","type",1174270348),"button",new cljs.core.Keyword(null,"data-toggle","data-toggle",436966687),"dropdown",new cljs.core.Keyword(null,"aria-expanded","aria-expanded",-1360942393),"false",new cljs.core.Keyword(null,"aria-controls","aria-controls",-1872379154),"dropdown-categorias"], null),new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"span.navbar-toggler-icon.me-2","span.navbar-toggler-icon.me-2",-2097084715)], null),"Selecciona una categoria de la carta"], null),new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"div.dropdown-menu","div.dropdown-menu",-1884774306),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"id","id",-1388402092),"dropdown-categorias"], null),(function (){var iter__5480__auto__ = (function categorias$core$page_$_iter__18962(s__18963){
+return new cljs.core.PersistentVector(null, 6, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"div.row","div.row",133678515),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"class","class",-2030961996),"divProductosyCategorias"], null),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"div.col-12.d-block.d-sm-none","div.col-12.d-block.d-sm-none",941872078),new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"div.dropdown","div.dropdown",1029783296),new cljs.core.PersistentVector(null, 4, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"button.navbar-toggler.dropdown-toggle.desplegable","button.navbar-toggler.dropdown-toggle.desplegable",-1788941809),new cljs.core.PersistentArrayMap(null, 4, [new cljs.core.Keyword(null,"type","type",1174270348),"button",new cljs.core.Keyword(null,"data-toggle","data-toggle",436966687),"dropdown",new cljs.core.Keyword(null,"aria-expanded","aria-expanded",-1360942393),"false",new cljs.core.Keyword(null,"aria-controls","aria-controls",-1872379154),"dropdown-categorias"], null),new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"span.navbar-toggler-icon.me-2","span.navbar-toggler-icon.me-2",-2097084715)], null),"Selecciona una categoria de la carta"], null),new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"div.dropdown-menu","div.dropdown-menu",-1884774306),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"id","id",-1388402092),"dropdown-categorias"], null),(function (){var iter__5480__auto__ = (function categorias$core$page_$_iter__16942(s__16943){
 return (new cljs.core.LazySeq(null,(function (){
-var s__18963__$1 = s__18963;
+var s__16943__$1 = s__16943;
 while(true){
-var temp__5804__auto__ = cljs.core.seq(s__18963__$1);
+var temp__5804__auto__ = cljs.core.seq(s__16943__$1);
 if(temp__5804__auto__){
-var s__18963__$2 = temp__5804__auto__;
-if(cljs.core.chunked_seq_QMARK_(s__18963__$2)){
-var c__5478__auto__ = cljs.core.chunk_first(s__18963__$2);
+var s__16943__$2 = temp__5804__auto__;
+if(cljs.core.chunked_seq_QMARK_(s__16943__$2)){
+var c__5478__auto__ = cljs.core.chunk_first(s__16943__$2);
 var size__5479__auto__ = cljs.core.count(c__5478__auto__);
-var b__18965 = cljs.core.chunk_buffer(size__5479__auto__);
-if((function (){var i__18964 = (0);
+var b__16945 = cljs.core.chunk_buffer(size__5479__auto__);
+if((function (){var i__16944 = (0);
 while(true){
-if((i__18964 < size__5479__auto__)){
-var categoria = cljs.core._nth(c__5478__auto__,i__18964);
-cljs.core.chunk_append(b__18965,cljs.core.with_meta(new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"a.dropdown-item","a.dropdown-item",2124140477),new cljs.core.PersistentArrayMap(null, 2, [new cljs.core.Keyword(null,"style","style",-496642736),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"cursor","cursor",1011937484),"pointer"], null),new cljs.core.Keyword(null,"on-click","on-click",1632826543),((function (i__18964,categoria,c__5478__auto__,size__5479__auto__,b__18965,s__18963__$2,temp__5804__auto__){
+if((i__16944 < size__5479__auto__)){
+var categoria = cljs.core._nth(c__5478__auto__,i__16944);
+cljs.core.chunk_append(b__16945,cljs.core.with_meta(new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"a.dropdown-item","a.dropdown-item",2124140477),new cljs.core.PersistentArrayMap(null, 2, [new cljs.core.Keyword(null,"style","style",-496642736),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"cursor","cursor",1011937484),"pointer"], null),new cljs.core.Keyword(null,"on-click","on-click",1632826543),((function (i__16944,categoria,c__5478__auto__,size__5479__auto__,b__16945,s__16943__$2,temp__5804__auto__){
 return (function (){
 categorias.core.obtener_productos(new cljs.core.Keyword(null,"id","id",-1388402092).cljs$core$IFn$_invoke$arity$1(categoria));
 
 return cljs.core.reset_BANG_(categorias.core.mensaje_categoria,categorias.core.obtener_mensaje_categoria(new cljs.core.Keyword(null,"id","id",-1388402092).cljs$core$IFn$_invoke$arity$1(categoria)));
-});})(i__18964,categoria,c__5478__auto__,size__5479__auto__,b__18965,s__18963__$2,temp__5804__auto__))
+});})(i__16944,categoria,c__5478__auto__,size__5479__auto__,b__16945,s__16943__$2,temp__5804__auto__))
 ], null),new cljs.core.Keyword(null,"nombre","nombre",1047347004).cljs$core$IFn$_invoke$arity$1(categoria)], null),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"key","key",-1516042587),new cljs.core.Keyword(null,"id","id",-1388402092).cljs$core$IFn$_invoke$arity$1(categoria)], null)));
 
-var G__19090 = (i__18964 + (1));
-i__18964 = G__19090;
+var G__16988 = (i__16944 + (1));
+i__16944 = G__16988;
 continue;
 } else {
 return true;
@@ -67,19 +67,19 @@ return true;
 break;
 }
 })()){
-return cljs.core.chunk_cons(cljs.core.chunk(b__18965),categorias$core$page_$_iter__18962(cljs.core.chunk_rest(s__18963__$2)));
+return cljs.core.chunk_cons(cljs.core.chunk(b__16945),categorias$core$page_$_iter__16942(cljs.core.chunk_rest(s__16943__$2)));
 } else {
-return cljs.core.chunk_cons(cljs.core.chunk(b__18965),null);
+return cljs.core.chunk_cons(cljs.core.chunk(b__16945),null);
 }
 } else {
-var categoria = cljs.core.first(s__18963__$2);
-return cljs.core.cons(cljs.core.with_meta(new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"a.dropdown-item","a.dropdown-item",2124140477),new cljs.core.PersistentArrayMap(null, 2, [new cljs.core.Keyword(null,"style","style",-496642736),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"cursor","cursor",1011937484),"pointer"], null),new cljs.core.Keyword(null,"on-click","on-click",1632826543),((function (categoria,s__18963__$2,temp__5804__auto__){
+var categoria = cljs.core.first(s__16943__$2);
+return cljs.core.cons(cljs.core.with_meta(new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"a.dropdown-item","a.dropdown-item",2124140477),new cljs.core.PersistentArrayMap(null, 2, [new cljs.core.Keyword(null,"style","style",-496642736),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"cursor","cursor",1011937484),"pointer"], null),new cljs.core.Keyword(null,"on-click","on-click",1632826543),((function (categoria,s__16943__$2,temp__5804__auto__){
 return (function (){
 categorias.core.obtener_productos(new cljs.core.Keyword(null,"id","id",-1388402092).cljs$core$IFn$_invoke$arity$1(categoria));
 
 return cljs.core.reset_BANG_(categorias.core.mensaje_categoria,categorias.core.obtener_mensaje_categoria(new cljs.core.Keyword(null,"id","id",-1388402092).cljs$core$IFn$_invoke$arity$1(categoria)));
-});})(categoria,s__18963__$2,temp__5804__auto__))
-], null),new cljs.core.Keyword(null,"nombre","nombre",1047347004).cljs$core$IFn$_invoke$arity$1(categoria)], null),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"key","key",-1516042587),new cljs.core.Keyword(null,"id","id",-1388402092).cljs$core$IFn$_invoke$arity$1(categoria)], null)),categorias$core$page_$_iter__18962(cljs.core.rest(s__18963__$2)));
+});})(categoria,s__16943__$2,temp__5804__auto__))
+], null),new cljs.core.Keyword(null,"nombre","nombre",1047347004).cljs$core$IFn$_invoke$arity$1(categoria)], null),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"key","key",-1516042587),new cljs.core.Keyword(null,"id","id",-1388402092).cljs$core$IFn$_invoke$arity$1(categoria)], null)),categorias$core$page_$_iter__16942(cljs.core.rest(s__16943__$2)));
 }
 } else {
 return null;
@@ -89,31 +89,31 @@ break;
 }),null,null));
 });
 return iter__5480__auto__(cljs.core.deref(app.db.categorias));
-})()], null)], null)], null),new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"div.col-12.d-none.d-sm-block","div.col-12.d-none.d-sm-block",1179687194),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"class","class",-2030961996),"divButtons"], null),((cljs.core.empty_QMARK_(cljs.core.deref(app.db.categorias)))?new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"p","p",151049309),"Cargando categor\u00EDas..."], null):new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"div","div",1057191632),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"class","class",-2030961996),"buttonCategoria"], null),(function (){var iter__5480__auto__ = (function categorias$core$page_$_iter__19003(s__19004){
+})()], null)], null)], null),new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"div.col-12.d-none.d-sm-block","div.col-12.d-none.d-sm-block",1179687194),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"class","class",-2030961996),"divButtons"], null),((cljs.core.empty_QMARK_(cljs.core.deref(app.db.categorias)))?new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"p","p",151049309),"Cargando categor\u00EDas..."], null):new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"div","div",1057191632),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"class","class",-2030961996),"buttonCategoria"], null),(function (){var iter__5480__auto__ = (function categorias$core$page_$_iter__16946(s__16947){
 return (new cljs.core.LazySeq(null,(function (){
-var s__19004__$1 = s__19004;
+var s__16947__$1 = s__16947;
 while(true){
-var temp__5804__auto__ = cljs.core.seq(s__19004__$1);
+var temp__5804__auto__ = cljs.core.seq(s__16947__$1);
 if(temp__5804__auto__){
-var s__19004__$2 = temp__5804__auto__;
-if(cljs.core.chunked_seq_QMARK_(s__19004__$2)){
-var c__5478__auto__ = cljs.core.chunk_first(s__19004__$2);
+var s__16947__$2 = temp__5804__auto__;
+if(cljs.core.chunked_seq_QMARK_(s__16947__$2)){
+var c__5478__auto__ = cljs.core.chunk_first(s__16947__$2);
 var size__5479__auto__ = cljs.core.count(c__5478__auto__);
-var b__19006 = cljs.core.chunk_buffer(size__5479__auto__);
-if((function (){var i__19005 = (0);
+var b__16949 = cljs.core.chunk_buffer(size__5479__auto__);
+if((function (){var i__16948 = (0);
 while(true){
-if((i__19005 < size__5479__auto__)){
-var categoria = cljs.core._nth(c__5478__auto__,i__19005);
-cljs.core.chunk_append(b__19006,cljs.core.with_meta(new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"button","button",1456579943),new cljs.core.PersistentArrayMap(null, 2, [new cljs.core.Keyword(null,"on-click","on-click",1632826543),((function (i__19005,categoria,c__5478__auto__,size__5479__auto__,b__19006,s__19004__$2,temp__5804__auto__){
+if((i__16948 < size__5479__auto__)){
+var categoria = cljs.core._nth(c__5478__auto__,i__16948);
+cljs.core.chunk_append(b__16949,cljs.core.with_meta(new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"button","button",1456579943),new cljs.core.PersistentArrayMap(null, 2, [new cljs.core.Keyword(null,"on-click","on-click",1632826543),((function (i__16948,categoria,c__5478__auto__,size__5479__auto__,b__16949,s__16947__$2,temp__5804__auto__){
 return (function (){
 categorias.core.obtener_productos(new cljs.core.Keyword(null,"id","id",-1388402092).cljs$core$IFn$_invoke$arity$1(categoria));
 
 return cljs.core.reset_BANG_(categorias.core.mensaje_categoria,categorias.core.obtener_mensaje_categoria(new cljs.core.Keyword(null,"id","id",-1388402092).cljs$core$IFn$_invoke$arity$1(categoria)));
-});})(i__19005,categoria,c__5478__auto__,size__5479__auto__,b__19006,s__19004__$2,temp__5804__auto__))
+});})(i__16948,categoria,c__5478__auto__,size__5479__auto__,b__16949,s__16947__$2,temp__5804__auto__))
 ,new cljs.core.Keyword(null,"class","class",-2030961996),"buttons"], null),new cljs.core.Keyword(null,"nombre","nombre",1047347004).cljs$core$IFn$_invoke$arity$1(categoria)], null),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"key","key",-1516042587),new cljs.core.Keyword(null,"id","id",-1388402092).cljs$core$IFn$_invoke$arity$1(categoria)], null)));
 
-var G__19091 = (i__19005 + (1));
-i__19005 = G__19091;
+var G__16989 = (i__16948 + (1));
+i__16948 = G__16989;
 continue;
 } else {
 return true;
@@ -121,19 +121,19 @@ return true;
 break;
 }
 })()){
-return cljs.core.chunk_cons(cljs.core.chunk(b__19006),categorias$core$page_$_iter__19003(cljs.core.chunk_rest(s__19004__$2)));
+return cljs.core.chunk_cons(cljs.core.chunk(b__16949),categorias$core$page_$_iter__16946(cljs.core.chunk_rest(s__16947__$2)));
 } else {
-return cljs.core.chunk_cons(cljs.core.chunk(b__19006),null);
+return cljs.core.chunk_cons(cljs.core.chunk(b__16949),null);
 }
 } else {
-var categoria = cljs.core.first(s__19004__$2);
-return cljs.core.cons(cljs.core.with_meta(new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"button","button",1456579943),new cljs.core.PersistentArrayMap(null, 2, [new cljs.core.Keyword(null,"on-click","on-click",1632826543),((function (categoria,s__19004__$2,temp__5804__auto__){
+var categoria = cljs.core.first(s__16947__$2);
+return cljs.core.cons(cljs.core.with_meta(new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"button","button",1456579943),new cljs.core.PersistentArrayMap(null, 2, [new cljs.core.Keyword(null,"on-click","on-click",1632826543),((function (categoria,s__16947__$2,temp__5804__auto__){
 return (function (){
 categorias.core.obtener_productos(new cljs.core.Keyword(null,"id","id",-1388402092).cljs$core$IFn$_invoke$arity$1(categoria));
 
 return cljs.core.reset_BANG_(categorias.core.mensaje_categoria,categorias.core.obtener_mensaje_categoria(new cljs.core.Keyword(null,"id","id",-1388402092).cljs$core$IFn$_invoke$arity$1(categoria)));
-});})(categoria,s__19004__$2,temp__5804__auto__))
-,new cljs.core.Keyword(null,"class","class",-2030961996),"buttons"], null),new cljs.core.Keyword(null,"nombre","nombre",1047347004).cljs$core$IFn$_invoke$arity$1(categoria)], null),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"key","key",-1516042587),new cljs.core.Keyword(null,"id","id",-1388402092).cljs$core$IFn$_invoke$arity$1(categoria)], null)),categorias$core$page_$_iter__19003(cljs.core.rest(s__19004__$2)));
+});})(categoria,s__16947__$2,temp__5804__auto__))
+,new cljs.core.Keyword(null,"class","class",-2030961996),"buttons"], null),new cljs.core.Keyword(null,"nombre","nombre",1047347004).cljs$core$IFn$_invoke$arity$1(categoria)], null),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"key","key",-1516042587),new cljs.core.Keyword(null,"id","id",-1388402092).cljs$core$IFn$_invoke$arity$1(categoria)], null)),categorias$core$page_$_iter__16946(cljs.core.rest(s__16947__$2)));
 }
 } else {
 return null;
@@ -144,83 +144,54 @@ break;
 });
 return iter__5480__auto__(cljs.core.deref(app.db.categorias));
 })()], null))], null),new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"div.col-12","div.col-12",361685154),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"class","class",-2030961996),"mensaje-categoria"], null),(cljs.core.truth_(cljs.core.not_empty(cljs.core.deref(categorias.core.mensaje_categoria)))?new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"p","p",151049309),cljs.core.deref(categorias.core.mensaje_categoria)], null):"Selecciona uno de los elementos de nuestra carta.")], null),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"div.row","div.row",133678515),new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"div.col-12","div.col-12",361685154),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"class","class",-2030961996),"divProductos"], null),((cljs.core.empty_QMARK_(cljs.core.deref(app.db.productos)))?new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"p.col-12","p.col-12",2128585148)], null):new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"ul.row","ul.row",1750305524),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"class","class",-2030961996),"productosUL"], null),(function (){var productos_agrupados = categorias.core.agrupar_productos(cljs.core.deref(app.db.productos));
-var iter__5480__auto__ = (function categorias$core$page_$_iter__19029(s__19030){
+var iter__5480__auto__ = (function categorias$core$page_$_iter__16950(s__16951){
 return (new cljs.core.LazySeq(null,(function (){
-var s__19030__$1 = s__19030;
+var s__16951__$1 = s__16951;
 while(true){
-var temp__5804__auto__ = cljs.core.seq(s__19030__$1);
+var temp__5804__auto__ = cljs.core.seq(s__16951__$1);
 if(temp__5804__auto__){
-var s__19030__$2 = temp__5804__auto__;
-if(cljs.core.chunked_seq_QMARK_(s__19030__$2)){
-var c__5478__auto__ = cljs.core.chunk_first(s__19030__$2);
+var s__16951__$2 = temp__5804__auto__;
+if(cljs.core.chunked_seq_QMARK_(s__16951__$2)){
+var c__5478__auto__ = cljs.core.chunk_first(s__16951__$2);
 var size__5479__auto__ = cljs.core.count(c__5478__auto__);
-var b__19032 = cljs.core.chunk_buffer(size__5479__auto__);
-if((function (){var i__19031 = (0);
+var b__16953 = cljs.core.chunk_buffer(size__5479__auto__);
+if((function (){var i__16952 = (0);
 while(true){
-if((i__19031 < size__5479__auto__)){
-var vec__19040 = cljs.core._nth(c__5478__auto__,i__19031);
-var nombre = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__19040,(0),null);
-var lista_productos = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__19040,(1),null);
-cljs.core.chunk_append(b__19032,cljs.core.with_meta(new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"li.col-12","li.col-12",690592411),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"class","class",-2030961996),"productosLI"], null),new cljs.core.PersistentVector(null, 4, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"div","div",1057191632),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"class","class",-2030961996),"producto-info"], null),new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"div","div",1057191632),new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"span","span",1394872991),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"class","class",-2030961996),"negrita"], null),nombre], null),(function (){var primer_producto = cljs.core.first(lista_productos);
+if((i__16952 < size__5479__auto__)){
+var vec__16954 = cljs.core._nth(c__5478__auto__,i__16952);
+var nombre = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__16954,(0),null);
+var lista_productos = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__16954,(1),null);
+cljs.core.chunk_append(b__16953,cljs.core.with_meta(new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"li.col-12","li.col-12",690592411),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"class","class",-2030961996),"productosLI"], null),new cljs.core.PersistentVector(null, 4, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"div","div",1057191632),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"class","class",-2030961996),"producto-info"], null),new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"div","div",1057191632),new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"span","span",1394872991),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"class","class",-2030961996),"negrita"], null),nombre], null),(function (){var primer_producto = cljs.core.first(lista_productos);
 var descripcion_limpia = clojure.string.trim(new cljs.core.Keyword(null,"description","description",-1428560544).cljs$core$IFn$_invoke$arity$1(primer_producto));
-return new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"p","p",151049309),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"class","class",-2030961996),"description"], null),((cljs.core.empty_QMARK_(descripcion_limpia))?" ":descripcion_limpia)], null);
-})()], null),(function (){var iter__5480__auto__ = ((function (i__19031,vec__19040,nombre,lista_productos,c__5478__auto__,size__5479__auto__,b__19032,s__19030__$2,temp__5804__auto__,productos_agrupados){
-return (function categorias$core$page_$_iter__19029_$_iter__19050(s__19051){
-return (new cljs.core.LazySeq(null,((function (i__19031,vec__19040,nombre,lista_productos,c__5478__auto__,size__5479__auto__,b__19032,s__19030__$2,temp__5804__auto__,productos_agrupados){
+var alergenos = cljs.core.PersistentHashMap.fromArrays(["contiene_mostaza","contiene_crustaceos","contiene_altramuces","contiene_soja","contiene_sulfitos","contiene_pescado","contiene_lacteos","contiene_granos_de_sesamo","contiene_frustos_de_cascara","contiene_moluscos","contiene_gluten","contiene_cacahuetes","contiene_huevos","contiene_apio"],["/imgs/alergenos/mostaza.png","/imgs/alergenos/crustaceos.png","/imgs/alergenos/altramuces.png","/imgs/alergenos/soja.png","/imgs/alergenos/sesamo.png","/imgs/alergenos/pescado.png","/imgs/alergenos/lacteos.png","/imgs/alergenos/sesamo.png","/imgs/alergenos/cascaras.png","/imgs/alergenos/moluscos.png","/imgs/alergenos/gluten.png","/imgs/alergenos/cacahuetes.png","/imgs/alergenos/huevos.png","/imgs/alergenos/apio.png"]);
+var alergenos_activos = cljs.core.filter.cljs$core$IFn$_invoke$arity$2(((function (i__16952,primer_producto,descripcion_limpia,alergenos,vec__16954,nombre,lista_productos,c__5478__auto__,size__5479__auto__,b__16953,s__16951__$2,temp__5804__auto__,productos_agrupados){
+return (function (p1__16941_SHARP_){
+return cljs.core.get.cljs$core$IFn$_invoke$arity$2(primer_producto,cljs.core.keyword.cljs$core$IFn$_invoke$arity$1(cljs.core.first(p1__16941_SHARP_))) === true;
+});})(i__16952,primer_producto,descripcion_limpia,alergenos,vec__16954,nombre,lista_productos,c__5478__auto__,size__5479__auto__,b__16953,s__16951__$2,temp__5804__auto__,productos_agrupados))
+,alergenos);
+return new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"div","div",1057191632),new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"p","p",151049309),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"class","class",-2030961996),"description"], null),((cljs.core.empty_QMARK_(descripcion_limpia))?" ":descripcion_limpia)], null),((cljs.core.seq(alergenos_activos))?new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"div","div",1057191632),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"class","class",-2030961996),"alergenos"], null),(function (){var iter__5480__auto__ = ((function (i__16952,primer_producto,descripcion_limpia,alergenos,alergenos_activos,vec__16954,nombre,lista_productos,c__5478__auto__,size__5479__auto__,b__16953,s__16951__$2,temp__5804__auto__,productos_agrupados){
+return (function categorias$core$page_$_iter__16950_$_iter__16957(s__16958){
+return (new cljs.core.LazySeq(null,((function (i__16952,primer_producto,descripcion_limpia,alergenos,alergenos_activos,vec__16954,nombre,lista_productos,c__5478__auto__,size__5479__auto__,b__16953,s__16951__$2,temp__5804__auto__,productos_agrupados){
 return (function (){
-var s__19051__$1 = s__19051;
+var s__16958__$1 = s__16958;
 while(true){
-var temp__5804__auto____$1 = cljs.core.seq(s__19051__$1);
+var temp__5804__auto____$1 = cljs.core.seq(s__16958__$1);
 if(temp__5804__auto____$1){
-var s__19051__$2 = temp__5804__auto____$1;
-if(cljs.core.chunked_seq_QMARK_(s__19051__$2)){
-var c__5478__auto____$1 = cljs.core.chunk_first(s__19051__$2);
+var s__16958__$2 = temp__5804__auto____$1;
+if(cljs.core.chunked_seq_QMARK_(s__16958__$2)){
+var c__5478__auto____$1 = cljs.core.chunk_first(s__16958__$2);
 var size__5479__auto____$1 = cljs.core.count(c__5478__auto____$1);
-var b__19053 = cljs.core.chunk_buffer(size__5479__auto____$1);
-if((function (){var i__19052 = (0);
+var b__16960 = cljs.core.chunk_buffer(size__5479__auto____$1);
+if((function (){var i__16959 = (0);
 while(true){
-if((i__19052 < size__5479__auto____$1)){
-var producto = cljs.core._nth(c__5478__auto____$1,i__19052);
-cljs.core.chunk_append(b__19053,cljs.core.with_meta(new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"div","div",1057191632),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"class","class",-2030961996),"producto-item"], null),new cljs.core.PersistentVector(null, 4, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"div","div",1057191632),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"class","class",-2030961996),"precio-racion"], null),new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"span","span",1394872991),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"class","class",-2030961996),"precio"], null),[cljs.core.str.cljs$core$IFn$_invoke$arity$1(new cljs.core.Keyword(null,"precio","precio",-1246474385).cljs$core$IFn$_invoke$arity$1(producto)),"\u20AC "].join('')], null),(function (){var tipo_porcion = new cljs.core.Keyword(null,"tipo_porcion","tipo_porcion",1174589739).cljs$core$IFn$_invoke$arity$1(producto);
-var producto_id = new cljs.core.Keyword(null,"id","id",-1388402092).cljs$core$IFn$_invoke$arity$1(producto);
-if(cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2(tipo_porcion,"Media raci\u00F3n")){
-return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"img","img",1442687358),new cljs.core.PersistentArrayMap(null, 5, [new cljs.core.Keyword(null,"class","class",-2030961996),"racion",new cljs.core.Keyword(null,"src","src",-1651076051),"/imgs/medio-circulo.png",new cljs.core.Keyword(null,"alt","alt",-3214426),"Raci\u00F3n completa",new cljs.core.Keyword(null,"style","style",-496642736),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"cursor","cursor",1011937484),"pointer"], null),new cljs.core.Keyword(null,"on-click","on-click",1632826543),((function (i__19052,i__19031,tipo_porcion,producto_id,producto,c__5478__auto____$1,size__5479__auto____$1,b__19053,s__19051__$2,temp__5804__auto____$1,vec__19040,nombre,lista_productos,c__5478__auto__,size__5479__auto__,b__19032,s__19030__$2,temp__5804__auto__,productos_agrupados){
-return (function (){
-return alert(["ID del producto: ",cljs.core.str.cljs$core$IFn$_invoke$arity$1(producto_id)].join(''));
-});})(i__19052,i__19031,tipo_porcion,producto_id,producto,c__5478__auto____$1,size__5479__auto____$1,b__19053,s__19051__$2,temp__5804__auto____$1,vec__19040,nombre,lista_productos,c__5478__auto__,size__5479__auto__,b__19032,s__19030__$2,temp__5804__auto__,productos_agrupados))
-], null)], null);
-} else {
-if(cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2(tipo_porcion,"Raci\u00F3n completa")){
-return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"img","img",1442687358),new cljs.core.PersistentArrayMap(null, 5, [new cljs.core.Keyword(null,"class","class",-2030961996),"racion",new cljs.core.Keyword(null,"src","src",-1651076051),"/imgs/completo-circulo.png",new cljs.core.Keyword(null,"alt","alt",-3214426),"Raci\u00F3n completa",new cljs.core.Keyword(null,"style","style",-496642736),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"cursor","cursor",1011937484),"pointer"], null),new cljs.core.Keyword(null,"on-click","on-click",1632826543),((function (i__19052,i__19031,tipo_porcion,producto_id,producto,c__5478__auto____$1,size__5479__auto____$1,b__19053,s__19051__$2,temp__5804__auto____$1,vec__19040,nombre,lista_productos,c__5478__auto__,size__5479__auto__,b__19032,s__19030__$2,temp__5804__auto__,productos_agrupados){
-return (function (){
-return alert(["ID del producto: ",cljs.core.str.cljs$core$IFn$_invoke$arity$1(producto_id)].join(''));
-});})(i__19052,i__19031,tipo_porcion,producto_id,producto,c__5478__auto____$1,size__5479__auto____$1,b__19053,s__19051__$2,temp__5804__auto____$1,vec__19040,nombre,lista_productos,c__5478__auto__,size__5479__auto__,b__19032,s__19030__$2,temp__5804__auto__,productos_agrupados))
-], null)], null);
-} else {
-if(cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2(tipo_porcion,"Por unidad")){
-return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"img","img",1442687358),new cljs.core.PersistentArrayMap(null, 5, [new cljs.core.Keyword(null,"class","class",-2030961996),"racion",new cljs.core.Keyword(null,"src","src",-1651076051),"/imgs/unidad.png",new cljs.core.Keyword(null,"alt","alt",-3214426),"/Unidad",new cljs.core.Keyword(null,"style","style",-496642736),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"cursor","cursor",1011937484),"pointer"], null),new cljs.core.Keyword(null,"on-click","on-click",1632826543),((function (i__19052,i__19031,tipo_porcion,producto_id,producto,c__5478__auto____$1,size__5479__auto____$1,b__19053,s__19051__$2,temp__5804__auto____$1,vec__19040,nombre,lista_productos,c__5478__auto__,size__5479__auto__,b__19032,s__19030__$2,temp__5804__auto__,productos_agrupados){
-return (function (){
-return alert(["ID del producto: ",cljs.core.str.cljs$core$IFn$_invoke$arity$1(new cljs.core.Keyword(null,"id","id",-1388402092).cljs$core$IFn$_invoke$arity$1(producto))].join(''));
-});})(i__19052,i__19031,tipo_porcion,producto_id,producto,c__5478__auto____$1,size__5479__auto____$1,b__19053,s__19051__$2,temp__5804__auto____$1,vec__19040,nombre,lista_productos,c__5478__auto__,size__5479__auto__,b__19032,s__19030__$2,temp__5804__auto__,productos_agrupados))
-], null)], null);
-} else {
-if(cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2(tipo_porcion,"")){
-return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"img","img",1442687358),new cljs.core.PersistentArrayMap(null, 5, [new cljs.core.Keyword(null,"class","class",-2030961996),"racion",new cljs.core.Keyword(null,"src","src",-1651076051),"/imgs/unidad.png",new cljs.core.Keyword(null,"alt","alt",-3214426),"",new cljs.core.Keyword(null,"style","style",-496642736),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"cursor","cursor",1011937484),"pointer"], null),new cljs.core.Keyword(null,"on-click","on-click",1632826543),((function (i__19052,i__19031,tipo_porcion,producto_id,producto,c__5478__auto____$1,size__5479__auto____$1,b__19053,s__19051__$2,temp__5804__auto____$1,vec__19040,nombre,lista_productos,c__5478__auto__,size__5479__auto__,b__19032,s__19030__$2,temp__5804__auto__,productos_agrupados){
-return (function (){
-return alert(["ID del producto: ",cljs.core.str.cljs$core$IFn$_invoke$arity$1(producto_id)].join(''));
-});})(i__19052,i__19031,tipo_porcion,producto_id,producto,c__5478__auto____$1,size__5479__auto____$1,b__19053,s__19051__$2,temp__5804__auto____$1,vec__19040,nombre,lista_productos,c__5478__auto__,size__5479__auto__,b__19032,s__19030__$2,temp__5804__auto__,productos_agrupados))
-], null)], null);
-} else {
-return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"span","span",1394872991),["Tipo: ",cljs.core.str.cljs$core$IFn$_invoke$arity$1(tipo_porcion)].join('')], null);
+if((i__16959 < size__5479__auto____$1)){
+var vec__16961 = cljs.core._nth(c__5478__auto____$1,i__16959);
+var nombre_img = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__16961,(0),null);
+var src_img = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__16961,(1),null);
+cljs.core.chunk_append(b__16960,cljs.core.with_meta(new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"img","img",1442687358),new cljs.core.PersistentArrayMap(null, 4, [new cljs.core.Keyword(null,"src","src",-1651076051),src_img,new cljs.core.Keyword(null,"alt","alt",-3214426),nombre_img,new cljs.core.Keyword(null,"title","title",636505583),clojure.string.replace(nombre_img,"_"," "),new cljs.core.Keyword(null,"class","class",-2030961996),"alergeno-icono"], null)], null),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"key","key",-1516042587),nombre_img], null)));
 
-}
-}
-}
-}
-})()], null)], null),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"key","key",-1516042587),new cljs.core.Keyword(null,"id","id",-1388402092).cljs$core$IFn$_invoke$arity$1(producto)], null)));
-
-var G__19093 = (i__19052 + (1));
-i__19052 = G__19093;
+var G__16991 = (i__16959 + (1));
+i__16959 = G__16991;
 continue;
 } else {
 return true;
@@ -228,126 +199,72 @@ return true;
 break;
 }
 })()){
-return cljs.core.chunk_cons(cljs.core.chunk(b__19053),categorias$core$page_$_iter__19029_$_iter__19050(cljs.core.chunk_rest(s__19051__$2)));
+return cljs.core.chunk_cons(cljs.core.chunk(b__16960),categorias$core$page_$_iter__16950_$_iter__16957(cljs.core.chunk_rest(s__16958__$2)));
 } else {
-return cljs.core.chunk_cons(cljs.core.chunk(b__19053),null);
+return cljs.core.chunk_cons(cljs.core.chunk(b__16960),null);
 }
 } else {
-var producto = cljs.core.first(s__19051__$2);
-return cljs.core.cons(cljs.core.with_meta(new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"div","div",1057191632),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"class","class",-2030961996),"producto-item"], null),new cljs.core.PersistentVector(null, 4, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"div","div",1057191632),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"class","class",-2030961996),"precio-racion"], null),new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"span","span",1394872991),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"class","class",-2030961996),"precio"], null),[cljs.core.str.cljs$core$IFn$_invoke$arity$1(new cljs.core.Keyword(null,"precio","precio",-1246474385).cljs$core$IFn$_invoke$arity$1(producto)),"\u20AC "].join('')], null),(function (){var tipo_porcion = new cljs.core.Keyword(null,"tipo_porcion","tipo_porcion",1174589739).cljs$core$IFn$_invoke$arity$1(producto);
-var producto_id = new cljs.core.Keyword(null,"id","id",-1388402092).cljs$core$IFn$_invoke$arity$1(producto);
-if(cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2(tipo_porcion,"Media raci\u00F3n")){
-return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"img","img",1442687358),new cljs.core.PersistentArrayMap(null, 5, [new cljs.core.Keyword(null,"class","class",-2030961996),"racion",new cljs.core.Keyword(null,"src","src",-1651076051),"/imgs/medio-circulo.png",new cljs.core.Keyword(null,"alt","alt",-3214426),"Raci\u00F3n completa",new cljs.core.Keyword(null,"style","style",-496642736),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"cursor","cursor",1011937484),"pointer"], null),new cljs.core.Keyword(null,"on-click","on-click",1632826543),((function (i__19031,tipo_porcion,producto_id,producto,s__19051__$2,temp__5804__auto____$1,vec__19040,nombre,lista_productos,c__5478__auto__,size__5479__auto__,b__19032,s__19030__$2,temp__5804__auto__,productos_agrupados){
-return (function (){
-return alert(["ID del producto: ",cljs.core.str.cljs$core$IFn$_invoke$arity$1(producto_id)].join(''));
-});})(i__19031,tipo_porcion,producto_id,producto,s__19051__$2,temp__5804__auto____$1,vec__19040,nombre,lista_productos,c__5478__auto__,size__5479__auto__,b__19032,s__19030__$2,temp__5804__auto__,productos_agrupados))
-], null)], null);
-} else {
-if(cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2(tipo_porcion,"Raci\u00F3n completa")){
-return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"img","img",1442687358),new cljs.core.PersistentArrayMap(null, 5, [new cljs.core.Keyword(null,"class","class",-2030961996),"racion",new cljs.core.Keyword(null,"src","src",-1651076051),"/imgs/completo-circulo.png",new cljs.core.Keyword(null,"alt","alt",-3214426),"Raci\u00F3n completa",new cljs.core.Keyword(null,"style","style",-496642736),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"cursor","cursor",1011937484),"pointer"], null),new cljs.core.Keyword(null,"on-click","on-click",1632826543),((function (i__19031,tipo_porcion,producto_id,producto,s__19051__$2,temp__5804__auto____$1,vec__19040,nombre,lista_productos,c__5478__auto__,size__5479__auto__,b__19032,s__19030__$2,temp__5804__auto__,productos_agrupados){
-return (function (){
-return alert(["ID del producto: ",cljs.core.str.cljs$core$IFn$_invoke$arity$1(producto_id)].join(''));
-});})(i__19031,tipo_porcion,producto_id,producto,s__19051__$2,temp__5804__auto____$1,vec__19040,nombre,lista_productos,c__5478__auto__,size__5479__auto__,b__19032,s__19030__$2,temp__5804__auto__,productos_agrupados))
-], null)], null);
-} else {
-if(cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2(tipo_porcion,"Por unidad")){
-return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"img","img",1442687358),new cljs.core.PersistentArrayMap(null, 5, [new cljs.core.Keyword(null,"class","class",-2030961996),"racion",new cljs.core.Keyword(null,"src","src",-1651076051),"/imgs/unidad.png",new cljs.core.Keyword(null,"alt","alt",-3214426),"/Unidad",new cljs.core.Keyword(null,"style","style",-496642736),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"cursor","cursor",1011937484),"pointer"], null),new cljs.core.Keyword(null,"on-click","on-click",1632826543),((function (i__19031,tipo_porcion,producto_id,producto,s__19051__$2,temp__5804__auto____$1,vec__19040,nombre,lista_productos,c__5478__auto__,size__5479__auto__,b__19032,s__19030__$2,temp__5804__auto__,productos_agrupados){
-return (function (){
-return alert(["ID del producto: ",cljs.core.str.cljs$core$IFn$_invoke$arity$1(new cljs.core.Keyword(null,"id","id",-1388402092).cljs$core$IFn$_invoke$arity$1(producto))].join(''));
-});})(i__19031,tipo_porcion,producto_id,producto,s__19051__$2,temp__5804__auto____$1,vec__19040,nombre,lista_productos,c__5478__auto__,size__5479__auto__,b__19032,s__19030__$2,temp__5804__auto__,productos_agrupados))
-], null)], null);
-} else {
-if(cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2(tipo_porcion,"")){
-return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"img","img",1442687358),new cljs.core.PersistentArrayMap(null, 5, [new cljs.core.Keyword(null,"class","class",-2030961996),"racion",new cljs.core.Keyword(null,"src","src",-1651076051),"/imgs/unidad.png",new cljs.core.Keyword(null,"alt","alt",-3214426),"",new cljs.core.Keyword(null,"style","style",-496642736),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"cursor","cursor",1011937484),"pointer"], null),new cljs.core.Keyword(null,"on-click","on-click",1632826543),((function (i__19031,tipo_porcion,producto_id,producto,s__19051__$2,temp__5804__auto____$1,vec__19040,nombre,lista_productos,c__5478__auto__,size__5479__auto__,b__19032,s__19030__$2,temp__5804__auto__,productos_agrupados){
-return (function (){
-return alert(["ID del producto: ",cljs.core.str.cljs$core$IFn$_invoke$arity$1(producto_id)].join(''));
-});})(i__19031,tipo_porcion,producto_id,producto,s__19051__$2,temp__5804__auto____$1,vec__19040,nombre,lista_productos,c__5478__auto__,size__5479__auto__,b__19032,s__19030__$2,temp__5804__auto__,productos_agrupados))
-], null)], null);
-} else {
-return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"span","span",1394872991),["Tipo: ",cljs.core.str.cljs$core$IFn$_invoke$arity$1(tipo_porcion)].join('')], null);
-
-}
-}
-}
-}
-})()], null)], null),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"key","key",-1516042587),new cljs.core.Keyword(null,"id","id",-1388402092).cljs$core$IFn$_invoke$arity$1(producto)], null)),categorias$core$page_$_iter__19029_$_iter__19050(cljs.core.rest(s__19051__$2)));
+var vec__16964 = cljs.core.first(s__16958__$2);
+var nombre_img = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__16964,(0),null);
+var src_img = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__16964,(1),null);
+return cljs.core.cons(cljs.core.with_meta(new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"img","img",1442687358),new cljs.core.PersistentArrayMap(null, 4, [new cljs.core.Keyword(null,"src","src",-1651076051),src_img,new cljs.core.Keyword(null,"alt","alt",-3214426),nombre_img,new cljs.core.Keyword(null,"title","title",636505583),clojure.string.replace(nombre_img,"_"," "),new cljs.core.Keyword(null,"class","class",-2030961996),"alergeno-icono"], null)], null),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"key","key",-1516042587),nombre_img], null)),categorias$core$page_$_iter__16950_$_iter__16957(cljs.core.rest(s__16958__$2)));
 }
 } else {
 return null;
 }
 break;
 }
-});})(i__19031,vec__19040,nombre,lista_productos,c__5478__auto__,size__5479__auto__,b__19032,s__19030__$2,temp__5804__auto__,productos_agrupados))
+});})(i__16952,primer_producto,descripcion_limpia,alergenos,alergenos_activos,vec__16954,nombre,lista_productos,c__5478__auto__,size__5479__auto__,b__16953,s__16951__$2,temp__5804__auto__,productos_agrupados))
 ,null,null));
-});})(i__19031,vec__19040,nombre,lista_productos,c__5478__auto__,size__5479__auto__,b__19032,s__19030__$2,temp__5804__auto__,productos_agrupados))
+});})(i__16952,primer_producto,descripcion_limpia,alergenos,alergenos_activos,vec__16954,nombre,lista_productos,c__5478__auto__,size__5479__auto__,b__16953,s__16951__$2,temp__5804__auto__,productos_agrupados))
 ;
-return iter__5480__auto__(lista_productos);
-})()], null)], null),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"key","key",-1516042587),nombre], null)));
-
-var G__19095 = (i__19031 + (1));
-i__19031 = G__19095;
-continue;
-} else {
-return true;
-}
-break;
-}
-})()){
-return cljs.core.chunk_cons(cljs.core.chunk(b__19032),categorias$core$page_$_iter__19029(cljs.core.chunk_rest(s__19030__$2)));
-} else {
-return cljs.core.chunk_cons(cljs.core.chunk(b__19032),null);
-}
-} else {
-var vec__19070 = cljs.core.first(s__19030__$2);
-var nombre = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__19070,(0),null);
-var lista_productos = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__19070,(1),null);
-return cljs.core.cons(cljs.core.with_meta(new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"li.col-12","li.col-12",690592411),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"class","class",-2030961996),"productosLI"], null),new cljs.core.PersistentVector(null, 4, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"div","div",1057191632),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"class","class",-2030961996),"producto-info"], null),new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"div","div",1057191632),new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"span","span",1394872991),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"class","class",-2030961996),"negrita"], null),nombre], null),(function (){var primer_producto = cljs.core.first(lista_productos);
-var descripcion_limpia = clojure.string.trim(new cljs.core.Keyword(null,"description","description",-1428560544).cljs$core$IFn$_invoke$arity$1(primer_producto));
-return new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"p","p",151049309),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"class","class",-2030961996),"description"], null),((cljs.core.empty_QMARK_(descripcion_limpia))?" ":descripcion_limpia)], null);
-})()], null),(function (){var iter__5480__auto__ = ((function (vec__19070,nombre,lista_productos,s__19030__$2,temp__5804__auto__,productos_agrupados){
-return (function categorias$core$page_$_iter__19029_$_iter__19075(s__19076){
-return (new cljs.core.LazySeq(null,(function (){
-var s__19076__$1 = s__19076;
+return iter__5480__auto__(alergenos_activos);
+})()], null):null)], null);
+})()], null),(function (){var iter__5480__auto__ = ((function (i__16952,vec__16954,nombre,lista_productos,c__5478__auto__,size__5479__auto__,b__16953,s__16951__$2,temp__5804__auto__,productos_agrupados){
+return (function categorias$core$page_$_iter__16950_$_iter__16967(s__16968){
+return (new cljs.core.LazySeq(null,((function (i__16952,vec__16954,nombre,lista_productos,c__5478__auto__,size__5479__auto__,b__16953,s__16951__$2,temp__5804__auto__,productos_agrupados){
+return (function (){
+var s__16968__$1 = s__16968;
 while(true){
-var temp__5804__auto____$1 = cljs.core.seq(s__19076__$1);
+var temp__5804__auto____$1 = cljs.core.seq(s__16968__$1);
 if(temp__5804__auto____$1){
-var s__19076__$2 = temp__5804__auto____$1;
-if(cljs.core.chunked_seq_QMARK_(s__19076__$2)){
-var c__5478__auto__ = cljs.core.chunk_first(s__19076__$2);
-var size__5479__auto__ = cljs.core.count(c__5478__auto__);
-var b__19078 = cljs.core.chunk_buffer(size__5479__auto__);
-if((function (){var i__19077 = (0);
+var s__16968__$2 = temp__5804__auto____$1;
+if(cljs.core.chunked_seq_QMARK_(s__16968__$2)){
+var c__5478__auto____$1 = cljs.core.chunk_first(s__16968__$2);
+var size__5479__auto____$1 = cljs.core.count(c__5478__auto____$1);
+var b__16970 = cljs.core.chunk_buffer(size__5479__auto____$1);
+if((function (){var i__16969 = (0);
 while(true){
-if((i__19077 < size__5479__auto__)){
-var producto = cljs.core._nth(c__5478__auto__,i__19077);
-cljs.core.chunk_append(b__19078,cljs.core.with_meta(new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"div","div",1057191632),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"class","class",-2030961996),"producto-item"], null),new cljs.core.PersistentVector(null, 4, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"div","div",1057191632),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"class","class",-2030961996),"precio-racion"], null),new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"span","span",1394872991),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"class","class",-2030961996),"precio"], null),[cljs.core.str.cljs$core$IFn$_invoke$arity$1(new cljs.core.Keyword(null,"precio","precio",-1246474385).cljs$core$IFn$_invoke$arity$1(producto)),"\u20AC "].join('')], null),(function (){var tipo_porcion = new cljs.core.Keyword(null,"tipo_porcion","tipo_porcion",1174589739).cljs$core$IFn$_invoke$arity$1(producto);
+if((i__16969 < size__5479__auto____$1)){
+var producto = cljs.core._nth(c__5478__auto____$1,i__16969);
+cljs.core.chunk_append(b__16970,cljs.core.with_meta(new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"div","div",1057191632),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"class","class",-2030961996),"producto-item"], null),new cljs.core.PersistentVector(null, 4, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"div","div",1057191632),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"class","class",-2030961996),"precio-racion"], null),new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"span","span",1394872991),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"class","class",-2030961996),"precio"], null),[cljs.core.str.cljs$core$IFn$_invoke$arity$1(new cljs.core.Keyword(null,"precio","precio",-1246474385).cljs$core$IFn$_invoke$arity$1(producto)),"\u20AC "].join('')], null),(function (){var tipo_porcion = new cljs.core.Keyword(null,"tipo_porcion","tipo_porcion",1174589739).cljs$core$IFn$_invoke$arity$1(producto);
 var producto_id = new cljs.core.Keyword(null,"id","id",-1388402092).cljs$core$IFn$_invoke$arity$1(producto);
 if(cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2(tipo_porcion,"Media raci\u00F3n")){
-return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"img","img",1442687358),new cljs.core.PersistentArrayMap(null, 5, [new cljs.core.Keyword(null,"class","class",-2030961996),"racion",new cljs.core.Keyword(null,"src","src",-1651076051),"/imgs/medio-circulo.png",new cljs.core.Keyword(null,"alt","alt",-3214426),"Raci\u00F3n completa",new cljs.core.Keyword(null,"style","style",-496642736),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"cursor","cursor",1011937484),"pointer"], null),new cljs.core.Keyword(null,"on-click","on-click",1632826543),((function (i__19077,tipo_porcion,producto_id,producto,c__5478__auto__,size__5479__auto__,b__19078,s__19076__$2,temp__5804__auto____$1,vec__19070,nombre,lista_productos,s__19030__$2,temp__5804__auto__,productos_agrupados){
+return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"img","img",1442687358),new cljs.core.PersistentArrayMap(null, 5, [new cljs.core.Keyword(null,"class","class",-2030961996),"racion",new cljs.core.Keyword(null,"src","src",-1651076051),"/imgs/medio-circulo.png",new cljs.core.Keyword(null,"alt","alt",-3214426),"Raci\u00F3n completa",new cljs.core.Keyword(null,"style","style",-496642736),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"cursor","cursor",1011937484),"pointer"], null),new cljs.core.Keyword(null,"on-click","on-click",1632826543),((function (i__16969,i__16952,tipo_porcion,producto_id,producto,c__5478__auto____$1,size__5479__auto____$1,b__16970,s__16968__$2,temp__5804__auto____$1,vec__16954,nombre,lista_productos,c__5478__auto__,size__5479__auto__,b__16953,s__16951__$2,temp__5804__auto__,productos_agrupados){
 return (function (){
 return alert(["ID del producto: ",cljs.core.str.cljs$core$IFn$_invoke$arity$1(producto_id)].join(''));
-});})(i__19077,tipo_porcion,producto_id,producto,c__5478__auto__,size__5479__auto__,b__19078,s__19076__$2,temp__5804__auto____$1,vec__19070,nombre,lista_productos,s__19030__$2,temp__5804__auto__,productos_agrupados))
+});})(i__16969,i__16952,tipo_porcion,producto_id,producto,c__5478__auto____$1,size__5479__auto____$1,b__16970,s__16968__$2,temp__5804__auto____$1,vec__16954,nombre,lista_productos,c__5478__auto__,size__5479__auto__,b__16953,s__16951__$2,temp__5804__auto__,productos_agrupados))
 ], null)], null);
 } else {
 if(cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2(tipo_porcion,"Raci\u00F3n completa")){
-return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"img","img",1442687358),new cljs.core.PersistentArrayMap(null, 5, [new cljs.core.Keyword(null,"class","class",-2030961996),"racion",new cljs.core.Keyword(null,"src","src",-1651076051),"/imgs/completo-circulo.png",new cljs.core.Keyword(null,"alt","alt",-3214426),"Raci\u00F3n completa",new cljs.core.Keyword(null,"style","style",-496642736),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"cursor","cursor",1011937484),"pointer"], null),new cljs.core.Keyword(null,"on-click","on-click",1632826543),((function (i__19077,tipo_porcion,producto_id,producto,c__5478__auto__,size__5479__auto__,b__19078,s__19076__$2,temp__5804__auto____$1,vec__19070,nombre,lista_productos,s__19030__$2,temp__5804__auto__,productos_agrupados){
+return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"img","img",1442687358),new cljs.core.PersistentArrayMap(null, 5, [new cljs.core.Keyword(null,"class","class",-2030961996),"racion",new cljs.core.Keyword(null,"src","src",-1651076051),"/imgs/completo-circulo.png",new cljs.core.Keyword(null,"alt","alt",-3214426),"Raci\u00F3n completa",new cljs.core.Keyword(null,"style","style",-496642736),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"cursor","cursor",1011937484),"pointer"], null),new cljs.core.Keyword(null,"on-click","on-click",1632826543),((function (i__16969,i__16952,tipo_porcion,producto_id,producto,c__5478__auto____$1,size__5479__auto____$1,b__16970,s__16968__$2,temp__5804__auto____$1,vec__16954,nombre,lista_productos,c__5478__auto__,size__5479__auto__,b__16953,s__16951__$2,temp__5804__auto__,productos_agrupados){
 return (function (){
 return alert(["ID del producto: ",cljs.core.str.cljs$core$IFn$_invoke$arity$1(producto_id)].join(''));
-});})(i__19077,tipo_porcion,producto_id,producto,c__5478__auto__,size__5479__auto__,b__19078,s__19076__$2,temp__5804__auto____$1,vec__19070,nombre,lista_productos,s__19030__$2,temp__5804__auto__,productos_agrupados))
+});})(i__16969,i__16952,tipo_porcion,producto_id,producto,c__5478__auto____$1,size__5479__auto____$1,b__16970,s__16968__$2,temp__5804__auto____$1,vec__16954,nombre,lista_productos,c__5478__auto__,size__5479__auto__,b__16953,s__16951__$2,temp__5804__auto__,productos_agrupados))
 ], null)], null);
 } else {
 if(cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2(tipo_porcion,"Por unidad")){
-return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"img","img",1442687358),new cljs.core.PersistentArrayMap(null, 5, [new cljs.core.Keyword(null,"class","class",-2030961996),"racion",new cljs.core.Keyword(null,"src","src",-1651076051),"/imgs/unidad.png",new cljs.core.Keyword(null,"alt","alt",-3214426),"/Unidad",new cljs.core.Keyword(null,"style","style",-496642736),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"cursor","cursor",1011937484),"pointer"], null),new cljs.core.Keyword(null,"on-click","on-click",1632826543),((function (i__19077,tipo_porcion,producto_id,producto,c__5478__auto__,size__5479__auto__,b__19078,s__19076__$2,temp__5804__auto____$1,vec__19070,nombre,lista_productos,s__19030__$2,temp__5804__auto__,productos_agrupados){
+return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"img","img",1442687358),new cljs.core.PersistentArrayMap(null, 5, [new cljs.core.Keyword(null,"class","class",-2030961996),"racion",new cljs.core.Keyword(null,"src","src",-1651076051),"/imgs/unidad.png",new cljs.core.Keyword(null,"alt","alt",-3214426),"/Unidad",new cljs.core.Keyword(null,"style","style",-496642736),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"cursor","cursor",1011937484),"pointer"], null),new cljs.core.Keyword(null,"on-click","on-click",1632826543),((function (i__16969,i__16952,tipo_porcion,producto_id,producto,c__5478__auto____$1,size__5479__auto____$1,b__16970,s__16968__$2,temp__5804__auto____$1,vec__16954,nombre,lista_productos,c__5478__auto__,size__5479__auto__,b__16953,s__16951__$2,temp__5804__auto__,productos_agrupados){
 return (function (){
 return alert(["ID del producto: ",cljs.core.str.cljs$core$IFn$_invoke$arity$1(new cljs.core.Keyword(null,"id","id",-1388402092).cljs$core$IFn$_invoke$arity$1(producto))].join(''));
-});})(i__19077,tipo_porcion,producto_id,producto,c__5478__auto__,size__5479__auto__,b__19078,s__19076__$2,temp__5804__auto____$1,vec__19070,nombre,lista_productos,s__19030__$2,temp__5804__auto__,productos_agrupados))
+});})(i__16969,i__16952,tipo_porcion,producto_id,producto,c__5478__auto____$1,size__5479__auto____$1,b__16970,s__16968__$2,temp__5804__auto____$1,vec__16954,nombre,lista_productos,c__5478__auto__,size__5479__auto__,b__16953,s__16951__$2,temp__5804__auto__,productos_agrupados))
 ], null)], null);
 } else {
 if(cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2(tipo_porcion,"")){
-return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"img","img",1442687358),new cljs.core.PersistentArrayMap(null, 5, [new cljs.core.Keyword(null,"class","class",-2030961996),"racion",new cljs.core.Keyword(null,"src","src",-1651076051),"/imgs/unidad.png",new cljs.core.Keyword(null,"alt","alt",-3214426),"",new cljs.core.Keyword(null,"style","style",-496642736),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"cursor","cursor",1011937484),"pointer"], null),new cljs.core.Keyword(null,"on-click","on-click",1632826543),((function (i__19077,tipo_porcion,producto_id,producto,c__5478__auto__,size__5479__auto__,b__19078,s__19076__$2,temp__5804__auto____$1,vec__19070,nombre,lista_productos,s__19030__$2,temp__5804__auto__,productos_agrupados){
+return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"img","img",1442687358),new cljs.core.PersistentArrayMap(null, 5, [new cljs.core.Keyword(null,"class","class",-2030961996),"racion",new cljs.core.Keyword(null,"src","src",-1651076051),"/imgs/unidad.png",new cljs.core.Keyword(null,"alt","alt",-3214426),"",new cljs.core.Keyword(null,"style","style",-496642736),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"cursor","cursor",1011937484),"pointer"], null),new cljs.core.Keyword(null,"on-click","on-click",1632826543),((function (i__16969,i__16952,tipo_porcion,producto_id,producto,c__5478__auto____$1,size__5479__auto____$1,b__16970,s__16968__$2,temp__5804__auto____$1,vec__16954,nombre,lista_productos,c__5478__auto__,size__5479__auto__,b__16953,s__16951__$2,temp__5804__auto__,productos_agrupados){
 return (function (){
 return alert(["ID del producto: ",cljs.core.str.cljs$core$IFn$_invoke$arity$1(producto_id)].join(''));
-});})(i__19077,tipo_porcion,producto_id,producto,c__5478__auto__,size__5479__auto__,b__19078,s__19076__$2,temp__5804__auto____$1,vec__19070,nombre,lista_productos,s__19030__$2,temp__5804__auto__,productos_agrupados))
+});})(i__16969,i__16952,tipo_porcion,producto_id,producto,c__5478__auto____$1,size__5479__auto____$1,b__16970,s__16968__$2,temp__5804__auto____$1,vec__16954,nombre,lista_productos,c__5478__auto__,size__5479__auto__,b__16953,s__16951__$2,temp__5804__auto__,productos_agrupados))
 ], null)], null);
 } else {
 return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"span","span",1394872991),["Tipo: ",cljs.core.str.cljs$core$IFn$_invoke$arity$1(tipo_porcion)].join('')], null);
@@ -358,8 +275,8 @@ return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMP
 }
 })()], null)], null),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"key","key",-1516042587),new cljs.core.Keyword(null,"id","id",-1388402092).cljs$core$IFn$_invoke$arity$1(producto)], null)));
 
-var G__19100 = (i__19077 + (1));
-i__19077 = G__19100;
+var G__16992 = (i__16969 + (1));
+i__16969 = G__16992;
 continue;
 } else {
 return true;
@@ -367,40 +284,40 @@ return true;
 break;
 }
 })()){
-return cljs.core.chunk_cons(cljs.core.chunk(b__19078),categorias$core$page_$_iter__19029_$_iter__19075(cljs.core.chunk_rest(s__19076__$2)));
+return cljs.core.chunk_cons(cljs.core.chunk(b__16970),categorias$core$page_$_iter__16950_$_iter__16967(cljs.core.chunk_rest(s__16968__$2)));
 } else {
-return cljs.core.chunk_cons(cljs.core.chunk(b__19078),null);
+return cljs.core.chunk_cons(cljs.core.chunk(b__16970),null);
 }
 } else {
-var producto = cljs.core.first(s__19076__$2);
+var producto = cljs.core.first(s__16968__$2);
 return cljs.core.cons(cljs.core.with_meta(new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"div","div",1057191632),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"class","class",-2030961996),"producto-item"], null),new cljs.core.PersistentVector(null, 4, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"div","div",1057191632),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"class","class",-2030961996),"precio-racion"], null),new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"span","span",1394872991),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"class","class",-2030961996),"precio"], null),[cljs.core.str.cljs$core$IFn$_invoke$arity$1(new cljs.core.Keyword(null,"precio","precio",-1246474385).cljs$core$IFn$_invoke$arity$1(producto)),"\u20AC "].join('')], null),(function (){var tipo_porcion = new cljs.core.Keyword(null,"tipo_porcion","tipo_porcion",1174589739).cljs$core$IFn$_invoke$arity$1(producto);
 var producto_id = new cljs.core.Keyword(null,"id","id",-1388402092).cljs$core$IFn$_invoke$arity$1(producto);
 if(cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2(tipo_porcion,"Media raci\u00F3n")){
-return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"img","img",1442687358),new cljs.core.PersistentArrayMap(null, 5, [new cljs.core.Keyword(null,"class","class",-2030961996),"racion",new cljs.core.Keyword(null,"src","src",-1651076051),"/imgs/medio-circulo.png",new cljs.core.Keyword(null,"alt","alt",-3214426),"Raci\u00F3n completa",new cljs.core.Keyword(null,"style","style",-496642736),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"cursor","cursor",1011937484),"pointer"], null),new cljs.core.Keyword(null,"on-click","on-click",1632826543),((function (tipo_porcion,producto_id,producto,s__19076__$2,temp__5804__auto____$1,vec__19070,nombre,lista_productos,s__19030__$2,temp__5804__auto__,productos_agrupados){
+return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"img","img",1442687358),new cljs.core.PersistentArrayMap(null, 5, [new cljs.core.Keyword(null,"class","class",-2030961996),"racion",new cljs.core.Keyword(null,"src","src",-1651076051),"/imgs/medio-circulo.png",new cljs.core.Keyword(null,"alt","alt",-3214426),"Raci\u00F3n completa",new cljs.core.Keyword(null,"style","style",-496642736),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"cursor","cursor",1011937484),"pointer"], null),new cljs.core.Keyword(null,"on-click","on-click",1632826543),((function (i__16952,tipo_porcion,producto_id,producto,s__16968__$2,temp__5804__auto____$1,vec__16954,nombre,lista_productos,c__5478__auto__,size__5479__auto__,b__16953,s__16951__$2,temp__5804__auto__,productos_agrupados){
 return (function (){
 return alert(["ID del producto: ",cljs.core.str.cljs$core$IFn$_invoke$arity$1(producto_id)].join(''));
-});})(tipo_porcion,producto_id,producto,s__19076__$2,temp__5804__auto____$1,vec__19070,nombre,lista_productos,s__19030__$2,temp__5804__auto__,productos_agrupados))
+});})(i__16952,tipo_porcion,producto_id,producto,s__16968__$2,temp__5804__auto____$1,vec__16954,nombre,lista_productos,c__5478__auto__,size__5479__auto__,b__16953,s__16951__$2,temp__5804__auto__,productos_agrupados))
 ], null)], null);
 } else {
 if(cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2(tipo_porcion,"Raci\u00F3n completa")){
-return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"img","img",1442687358),new cljs.core.PersistentArrayMap(null, 5, [new cljs.core.Keyword(null,"class","class",-2030961996),"racion",new cljs.core.Keyword(null,"src","src",-1651076051),"/imgs/completo-circulo.png",new cljs.core.Keyword(null,"alt","alt",-3214426),"Raci\u00F3n completa",new cljs.core.Keyword(null,"style","style",-496642736),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"cursor","cursor",1011937484),"pointer"], null),new cljs.core.Keyword(null,"on-click","on-click",1632826543),((function (tipo_porcion,producto_id,producto,s__19076__$2,temp__5804__auto____$1,vec__19070,nombre,lista_productos,s__19030__$2,temp__5804__auto__,productos_agrupados){
+return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"img","img",1442687358),new cljs.core.PersistentArrayMap(null, 5, [new cljs.core.Keyword(null,"class","class",-2030961996),"racion",new cljs.core.Keyword(null,"src","src",-1651076051),"/imgs/completo-circulo.png",new cljs.core.Keyword(null,"alt","alt",-3214426),"Raci\u00F3n completa",new cljs.core.Keyword(null,"style","style",-496642736),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"cursor","cursor",1011937484),"pointer"], null),new cljs.core.Keyword(null,"on-click","on-click",1632826543),((function (i__16952,tipo_porcion,producto_id,producto,s__16968__$2,temp__5804__auto____$1,vec__16954,nombre,lista_productos,c__5478__auto__,size__5479__auto__,b__16953,s__16951__$2,temp__5804__auto__,productos_agrupados){
 return (function (){
 return alert(["ID del producto: ",cljs.core.str.cljs$core$IFn$_invoke$arity$1(producto_id)].join(''));
-});})(tipo_porcion,producto_id,producto,s__19076__$2,temp__5804__auto____$1,vec__19070,nombre,lista_productos,s__19030__$2,temp__5804__auto__,productos_agrupados))
+});})(i__16952,tipo_porcion,producto_id,producto,s__16968__$2,temp__5804__auto____$1,vec__16954,nombre,lista_productos,c__5478__auto__,size__5479__auto__,b__16953,s__16951__$2,temp__5804__auto__,productos_agrupados))
 ], null)], null);
 } else {
 if(cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2(tipo_porcion,"Por unidad")){
-return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"img","img",1442687358),new cljs.core.PersistentArrayMap(null, 5, [new cljs.core.Keyword(null,"class","class",-2030961996),"racion",new cljs.core.Keyword(null,"src","src",-1651076051),"/imgs/unidad.png",new cljs.core.Keyword(null,"alt","alt",-3214426),"/Unidad",new cljs.core.Keyword(null,"style","style",-496642736),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"cursor","cursor",1011937484),"pointer"], null),new cljs.core.Keyword(null,"on-click","on-click",1632826543),((function (tipo_porcion,producto_id,producto,s__19076__$2,temp__5804__auto____$1,vec__19070,nombre,lista_productos,s__19030__$2,temp__5804__auto__,productos_agrupados){
+return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"img","img",1442687358),new cljs.core.PersistentArrayMap(null, 5, [new cljs.core.Keyword(null,"class","class",-2030961996),"racion",new cljs.core.Keyword(null,"src","src",-1651076051),"/imgs/unidad.png",new cljs.core.Keyword(null,"alt","alt",-3214426),"/Unidad",new cljs.core.Keyword(null,"style","style",-496642736),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"cursor","cursor",1011937484),"pointer"], null),new cljs.core.Keyword(null,"on-click","on-click",1632826543),((function (i__16952,tipo_porcion,producto_id,producto,s__16968__$2,temp__5804__auto____$1,vec__16954,nombre,lista_productos,c__5478__auto__,size__5479__auto__,b__16953,s__16951__$2,temp__5804__auto__,productos_agrupados){
 return (function (){
 return alert(["ID del producto: ",cljs.core.str.cljs$core$IFn$_invoke$arity$1(new cljs.core.Keyword(null,"id","id",-1388402092).cljs$core$IFn$_invoke$arity$1(producto))].join(''));
-});})(tipo_porcion,producto_id,producto,s__19076__$2,temp__5804__auto____$1,vec__19070,nombre,lista_productos,s__19030__$2,temp__5804__auto__,productos_agrupados))
+});})(i__16952,tipo_porcion,producto_id,producto,s__16968__$2,temp__5804__auto____$1,vec__16954,nombre,lista_productos,c__5478__auto__,size__5479__auto__,b__16953,s__16951__$2,temp__5804__auto__,productos_agrupados))
 ], null)], null);
 } else {
 if(cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2(tipo_porcion,"")){
-return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"img","img",1442687358),new cljs.core.PersistentArrayMap(null, 5, [new cljs.core.Keyword(null,"class","class",-2030961996),"racion",new cljs.core.Keyword(null,"src","src",-1651076051),"/imgs/unidad.png",new cljs.core.Keyword(null,"alt","alt",-3214426),"",new cljs.core.Keyword(null,"style","style",-496642736),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"cursor","cursor",1011937484),"pointer"], null),new cljs.core.Keyword(null,"on-click","on-click",1632826543),((function (tipo_porcion,producto_id,producto,s__19076__$2,temp__5804__auto____$1,vec__19070,nombre,lista_productos,s__19030__$2,temp__5804__auto__,productos_agrupados){
+return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"img","img",1442687358),new cljs.core.PersistentArrayMap(null, 5, [new cljs.core.Keyword(null,"class","class",-2030961996),"racion",new cljs.core.Keyword(null,"src","src",-1651076051),"/imgs/unidad.png",new cljs.core.Keyword(null,"alt","alt",-3214426),"",new cljs.core.Keyword(null,"style","style",-496642736),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"cursor","cursor",1011937484),"pointer"], null),new cljs.core.Keyword(null,"on-click","on-click",1632826543),((function (i__16952,tipo_porcion,producto_id,producto,s__16968__$2,temp__5804__auto____$1,vec__16954,nombre,lista_productos,c__5478__auto__,size__5479__auto__,b__16953,s__16951__$2,temp__5804__auto__,productos_agrupados){
 return (function (){
 return alert(["ID del producto: ",cljs.core.str.cljs$core$IFn$_invoke$arity$1(producto_id)].join(''));
-});})(tipo_porcion,producto_id,producto,s__19076__$2,temp__5804__auto____$1,vec__19070,nombre,lista_productos,s__19030__$2,temp__5804__auto__,productos_agrupados))
+});})(i__16952,tipo_porcion,producto_id,producto,s__16968__$2,temp__5804__auto____$1,vec__16954,nombre,lista_productos,c__5478__auto__,size__5479__auto__,b__16953,s__16951__$2,temp__5804__auto__,productos_agrupados))
 ], null)], null);
 } else {
 return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"span","span",1394872991),["Tipo: ",cljs.core.str.cljs$core$IFn$_invoke$arity$1(tipo_porcion)].join('')], null);
@@ -409,7 +326,83 @@ return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMP
 }
 }
 }
-})()], null)], null),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"key","key",-1516042587),new cljs.core.Keyword(null,"id","id",-1388402092).cljs$core$IFn$_invoke$arity$1(producto)], null)),categorias$core$page_$_iter__19029_$_iter__19075(cljs.core.rest(s__19076__$2)));
+})()], null)], null),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"key","key",-1516042587),new cljs.core.Keyword(null,"id","id",-1388402092).cljs$core$IFn$_invoke$arity$1(producto)], null)),categorias$core$page_$_iter__16950_$_iter__16967(cljs.core.rest(s__16968__$2)));
+}
+} else {
+return null;
+}
+break;
+}
+});})(i__16952,vec__16954,nombre,lista_productos,c__5478__auto__,size__5479__auto__,b__16953,s__16951__$2,temp__5804__auto__,productos_agrupados))
+,null,null));
+});})(i__16952,vec__16954,nombre,lista_productos,c__5478__auto__,size__5479__auto__,b__16953,s__16951__$2,temp__5804__auto__,productos_agrupados))
+;
+return iter__5480__auto__(lista_productos);
+})()], null)], null),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"key","key",-1516042587),nombre], null)));
+
+var G__16993 = (i__16952 + (1));
+i__16952 = G__16993;
+continue;
+} else {
+return true;
+}
+break;
+}
+})()){
+return cljs.core.chunk_cons(cljs.core.chunk(b__16953),categorias$core$page_$_iter__16950(cljs.core.chunk_rest(s__16951__$2)));
+} else {
+return cljs.core.chunk_cons(cljs.core.chunk(b__16953),null);
+}
+} else {
+var vec__16971 = cljs.core.first(s__16951__$2);
+var nombre = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__16971,(0),null);
+var lista_productos = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__16971,(1),null);
+return cljs.core.cons(cljs.core.with_meta(new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"li.col-12","li.col-12",690592411),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"class","class",-2030961996),"productosLI"], null),new cljs.core.PersistentVector(null, 4, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"div","div",1057191632),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"class","class",-2030961996),"producto-info"], null),new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"div","div",1057191632),new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"span","span",1394872991),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"class","class",-2030961996),"negrita"], null),nombre], null),(function (){var primer_producto = cljs.core.first(lista_productos);
+var descripcion_limpia = clojure.string.trim(new cljs.core.Keyword(null,"description","description",-1428560544).cljs$core$IFn$_invoke$arity$1(primer_producto));
+var alergenos = cljs.core.PersistentHashMap.fromArrays(["contiene_mostaza","contiene_crustaceos","contiene_altramuces","contiene_soja","contiene_sulfitos","contiene_pescado","contiene_lacteos","contiene_granos_de_sesamo","contiene_frustos_de_cascara","contiene_moluscos","contiene_gluten","contiene_cacahuetes","contiene_huevos","contiene_apio"],["/imgs/alergenos/mostaza.png","/imgs/alergenos/crustaceos.png","/imgs/alergenos/altramuces.png","/imgs/alergenos/soja.png","/imgs/alergenos/sesamo.png","/imgs/alergenos/pescado.png","/imgs/alergenos/lacteos.png","/imgs/alergenos/sesamo.png","/imgs/alergenos/cascaras.png","/imgs/alergenos/moluscos.png","/imgs/alergenos/gluten.png","/imgs/alergenos/cacahuetes.png","/imgs/alergenos/huevos.png","/imgs/alergenos/apio.png"]);
+var alergenos_activos = cljs.core.filter.cljs$core$IFn$_invoke$arity$2(((function (primer_producto,descripcion_limpia,alergenos,vec__16971,nombre,lista_productos,s__16951__$2,temp__5804__auto__,productos_agrupados){
+return (function (p1__16941_SHARP_){
+return cljs.core.get.cljs$core$IFn$_invoke$arity$2(primer_producto,cljs.core.keyword.cljs$core$IFn$_invoke$arity$1(cljs.core.first(p1__16941_SHARP_))) === true;
+});})(primer_producto,descripcion_limpia,alergenos,vec__16971,nombre,lista_productos,s__16951__$2,temp__5804__auto__,productos_agrupados))
+,alergenos);
+return new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"div","div",1057191632),new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"p","p",151049309),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"class","class",-2030961996),"description"], null),((cljs.core.empty_QMARK_(descripcion_limpia))?" ":descripcion_limpia)], null),((cljs.core.seq(alergenos_activos))?new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"div","div",1057191632),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"class","class",-2030961996),"alergenos"], null),(function (){var iter__5480__auto__ = ((function (primer_producto,descripcion_limpia,alergenos,alergenos_activos,vec__16971,nombre,lista_productos,s__16951__$2,temp__5804__auto__,productos_agrupados){
+return (function categorias$core$page_$_iter__16950_$_iter__16974(s__16975){
+return (new cljs.core.LazySeq(null,(function (){
+var s__16975__$1 = s__16975;
+while(true){
+var temp__5804__auto____$1 = cljs.core.seq(s__16975__$1);
+if(temp__5804__auto____$1){
+var s__16975__$2 = temp__5804__auto____$1;
+if(cljs.core.chunked_seq_QMARK_(s__16975__$2)){
+var c__5478__auto__ = cljs.core.chunk_first(s__16975__$2);
+var size__5479__auto__ = cljs.core.count(c__5478__auto__);
+var b__16977 = cljs.core.chunk_buffer(size__5479__auto__);
+if((function (){var i__16976 = (0);
+while(true){
+if((i__16976 < size__5479__auto__)){
+var vec__16978 = cljs.core._nth(c__5478__auto__,i__16976);
+var nombre_img = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__16978,(0),null);
+var src_img = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__16978,(1),null);
+cljs.core.chunk_append(b__16977,cljs.core.with_meta(new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"img","img",1442687358),new cljs.core.PersistentArrayMap(null, 4, [new cljs.core.Keyword(null,"src","src",-1651076051),src_img,new cljs.core.Keyword(null,"alt","alt",-3214426),nombre_img,new cljs.core.Keyword(null,"title","title",636505583),clojure.string.replace(nombre_img,"_"," "),new cljs.core.Keyword(null,"class","class",-2030961996),"alergeno-icono"], null)], null),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"key","key",-1516042587),nombre_img], null)));
+
+var G__16994 = (i__16976 + (1));
+i__16976 = G__16994;
+continue;
+} else {
+return true;
+}
+break;
+}
+})()){
+return cljs.core.chunk_cons(cljs.core.chunk(b__16977),categorias$core$page_$_iter__16950_$_iter__16974(cljs.core.chunk_rest(s__16975__$2)));
+} else {
+return cljs.core.chunk_cons(cljs.core.chunk(b__16977),null);
+}
+} else {
+var vec__16981 = cljs.core.first(s__16975__$2);
+var nombre_img = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__16981,(0),null);
+var src_img = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__16981,(1),null);
+return cljs.core.cons(cljs.core.with_meta(new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"img","img",1442687358),new cljs.core.PersistentArrayMap(null, 4, [new cljs.core.Keyword(null,"src","src",-1651076051),src_img,new cljs.core.Keyword(null,"alt","alt",-3214426),nombre_img,new cljs.core.Keyword(null,"title","title",636505583),clojure.string.replace(nombre_img,"_"," "),new cljs.core.Keyword(null,"class","class",-2030961996),"alergeno-icono"], null)], null),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"key","key",-1516042587),nombre_img], null)),categorias$core$page_$_iter__16950_$_iter__16974(cljs.core.rest(s__16975__$2)));
 }
 } else {
 return null;
@@ -417,10 +410,127 @@ return null;
 break;
 }
 }),null,null));
-});})(vec__19070,nombre,lista_productos,s__19030__$2,temp__5804__auto__,productos_agrupados))
+});})(primer_producto,descripcion_limpia,alergenos,alergenos_activos,vec__16971,nombre,lista_productos,s__16951__$2,temp__5804__auto__,productos_agrupados))
+;
+return iter__5480__auto__(alergenos_activos);
+})()], null):null)], null);
+})()], null),(function (){var iter__5480__auto__ = ((function (vec__16971,nombre,lista_productos,s__16951__$2,temp__5804__auto__,productos_agrupados){
+return (function categorias$core$page_$_iter__16950_$_iter__16984(s__16985){
+return (new cljs.core.LazySeq(null,(function (){
+var s__16985__$1 = s__16985;
+while(true){
+var temp__5804__auto____$1 = cljs.core.seq(s__16985__$1);
+if(temp__5804__auto____$1){
+var s__16985__$2 = temp__5804__auto____$1;
+if(cljs.core.chunked_seq_QMARK_(s__16985__$2)){
+var c__5478__auto__ = cljs.core.chunk_first(s__16985__$2);
+var size__5479__auto__ = cljs.core.count(c__5478__auto__);
+var b__16987 = cljs.core.chunk_buffer(size__5479__auto__);
+if((function (){var i__16986 = (0);
+while(true){
+if((i__16986 < size__5479__auto__)){
+var producto = cljs.core._nth(c__5478__auto__,i__16986);
+cljs.core.chunk_append(b__16987,cljs.core.with_meta(new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"div","div",1057191632),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"class","class",-2030961996),"producto-item"], null),new cljs.core.PersistentVector(null, 4, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"div","div",1057191632),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"class","class",-2030961996),"precio-racion"], null),new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"span","span",1394872991),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"class","class",-2030961996),"precio"], null),[cljs.core.str.cljs$core$IFn$_invoke$arity$1(new cljs.core.Keyword(null,"precio","precio",-1246474385).cljs$core$IFn$_invoke$arity$1(producto)),"\u20AC "].join('')], null),(function (){var tipo_porcion = new cljs.core.Keyword(null,"tipo_porcion","tipo_porcion",1174589739).cljs$core$IFn$_invoke$arity$1(producto);
+var producto_id = new cljs.core.Keyword(null,"id","id",-1388402092).cljs$core$IFn$_invoke$arity$1(producto);
+if(cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2(tipo_porcion,"Media raci\u00F3n")){
+return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"img","img",1442687358),new cljs.core.PersistentArrayMap(null, 5, [new cljs.core.Keyword(null,"class","class",-2030961996),"racion",new cljs.core.Keyword(null,"src","src",-1651076051),"/imgs/medio-circulo.png",new cljs.core.Keyword(null,"alt","alt",-3214426),"Raci\u00F3n completa",new cljs.core.Keyword(null,"style","style",-496642736),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"cursor","cursor",1011937484),"pointer"], null),new cljs.core.Keyword(null,"on-click","on-click",1632826543),((function (i__16986,tipo_porcion,producto_id,producto,c__5478__auto__,size__5479__auto__,b__16987,s__16985__$2,temp__5804__auto____$1,vec__16971,nombre,lista_productos,s__16951__$2,temp__5804__auto__,productos_agrupados){
+return (function (){
+return alert(["ID del producto: ",cljs.core.str.cljs$core$IFn$_invoke$arity$1(producto_id)].join(''));
+});})(i__16986,tipo_porcion,producto_id,producto,c__5478__auto__,size__5479__auto__,b__16987,s__16985__$2,temp__5804__auto____$1,vec__16971,nombre,lista_productos,s__16951__$2,temp__5804__auto__,productos_agrupados))
+], null)], null);
+} else {
+if(cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2(tipo_porcion,"Raci\u00F3n completa")){
+return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"img","img",1442687358),new cljs.core.PersistentArrayMap(null, 5, [new cljs.core.Keyword(null,"class","class",-2030961996),"racion",new cljs.core.Keyword(null,"src","src",-1651076051),"/imgs/completo-circulo.png",new cljs.core.Keyword(null,"alt","alt",-3214426),"Raci\u00F3n completa",new cljs.core.Keyword(null,"style","style",-496642736),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"cursor","cursor",1011937484),"pointer"], null),new cljs.core.Keyword(null,"on-click","on-click",1632826543),((function (i__16986,tipo_porcion,producto_id,producto,c__5478__auto__,size__5479__auto__,b__16987,s__16985__$2,temp__5804__auto____$1,vec__16971,nombre,lista_productos,s__16951__$2,temp__5804__auto__,productos_agrupados){
+return (function (){
+return alert(["ID del producto: ",cljs.core.str.cljs$core$IFn$_invoke$arity$1(producto_id)].join(''));
+});})(i__16986,tipo_porcion,producto_id,producto,c__5478__auto__,size__5479__auto__,b__16987,s__16985__$2,temp__5804__auto____$1,vec__16971,nombre,lista_productos,s__16951__$2,temp__5804__auto__,productos_agrupados))
+], null)], null);
+} else {
+if(cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2(tipo_porcion,"Por unidad")){
+return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"img","img",1442687358),new cljs.core.PersistentArrayMap(null, 5, [new cljs.core.Keyword(null,"class","class",-2030961996),"racion",new cljs.core.Keyword(null,"src","src",-1651076051),"/imgs/unidad.png",new cljs.core.Keyword(null,"alt","alt",-3214426),"/Unidad",new cljs.core.Keyword(null,"style","style",-496642736),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"cursor","cursor",1011937484),"pointer"], null),new cljs.core.Keyword(null,"on-click","on-click",1632826543),((function (i__16986,tipo_porcion,producto_id,producto,c__5478__auto__,size__5479__auto__,b__16987,s__16985__$2,temp__5804__auto____$1,vec__16971,nombre,lista_productos,s__16951__$2,temp__5804__auto__,productos_agrupados){
+return (function (){
+return alert(["ID del producto: ",cljs.core.str.cljs$core$IFn$_invoke$arity$1(new cljs.core.Keyword(null,"id","id",-1388402092).cljs$core$IFn$_invoke$arity$1(producto))].join(''));
+});})(i__16986,tipo_porcion,producto_id,producto,c__5478__auto__,size__5479__auto__,b__16987,s__16985__$2,temp__5804__auto____$1,vec__16971,nombre,lista_productos,s__16951__$2,temp__5804__auto__,productos_agrupados))
+], null)], null);
+} else {
+if(cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2(tipo_porcion,"")){
+return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"img","img",1442687358),new cljs.core.PersistentArrayMap(null, 5, [new cljs.core.Keyword(null,"class","class",-2030961996),"racion",new cljs.core.Keyword(null,"src","src",-1651076051),"/imgs/unidad.png",new cljs.core.Keyword(null,"alt","alt",-3214426),"",new cljs.core.Keyword(null,"style","style",-496642736),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"cursor","cursor",1011937484),"pointer"], null),new cljs.core.Keyword(null,"on-click","on-click",1632826543),((function (i__16986,tipo_porcion,producto_id,producto,c__5478__auto__,size__5479__auto__,b__16987,s__16985__$2,temp__5804__auto____$1,vec__16971,nombre,lista_productos,s__16951__$2,temp__5804__auto__,productos_agrupados){
+return (function (){
+return alert(["ID del producto: ",cljs.core.str.cljs$core$IFn$_invoke$arity$1(producto_id)].join(''));
+});})(i__16986,tipo_porcion,producto_id,producto,c__5478__auto__,size__5479__auto__,b__16987,s__16985__$2,temp__5804__auto____$1,vec__16971,nombre,lista_productos,s__16951__$2,temp__5804__auto__,productos_agrupados))
+], null)], null);
+} else {
+return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"span","span",1394872991),["Tipo: ",cljs.core.str.cljs$core$IFn$_invoke$arity$1(tipo_porcion)].join('')], null);
+
+}
+}
+}
+}
+})()], null)], null),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"key","key",-1516042587),new cljs.core.Keyword(null,"id","id",-1388402092).cljs$core$IFn$_invoke$arity$1(producto)], null)));
+
+var G__16995 = (i__16986 + (1));
+i__16986 = G__16995;
+continue;
+} else {
+return true;
+}
+break;
+}
+})()){
+return cljs.core.chunk_cons(cljs.core.chunk(b__16987),categorias$core$page_$_iter__16950_$_iter__16984(cljs.core.chunk_rest(s__16985__$2)));
+} else {
+return cljs.core.chunk_cons(cljs.core.chunk(b__16987),null);
+}
+} else {
+var producto = cljs.core.first(s__16985__$2);
+return cljs.core.cons(cljs.core.with_meta(new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"div","div",1057191632),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"class","class",-2030961996),"producto-item"], null),new cljs.core.PersistentVector(null, 4, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"div","div",1057191632),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"class","class",-2030961996),"precio-racion"], null),new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"span","span",1394872991),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"class","class",-2030961996),"precio"], null),[cljs.core.str.cljs$core$IFn$_invoke$arity$1(new cljs.core.Keyword(null,"precio","precio",-1246474385).cljs$core$IFn$_invoke$arity$1(producto)),"\u20AC "].join('')], null),(function (){var tipo_porcion = new cljs.core.Keyword(null,"tipo_porcion","tipo_porcion",1174589739).cljs$core$IFn$_invoke$arity$1(producto);
+var producto_id = new cljs.core.Keyword(null,"id","id",-1388402092).cljs$core$IFn$_invoke$arity$1(producto);
+if(cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2(tipo_porcion,"Media raci\u00F3n")){
+return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"img","img",1442687358),new cljs.core.PersistentArrayMap(null, 5, [new cljs.core.Keyword(null,"class","class",-2030961996),"racion",new cljs.core.Keyword(null,"src","src",-1651076051),"/imgs/medio-circulo.png",new cljs.core.Keyword(null,"alt","alt",-3214426),"Raci\u00F3n completa",new cljs.core.Keyword(null,"style","style",-496642736),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"cursor","cursor",1011937484),"pointer"], null),new cljs.core.Keyword(null,"on-click","on-click",1632826543),((function (tipo_porcion,producto_id,producto,s__16985__$2,temp__5804__auto____$1,vec__16971,nombre,lista_productos,s__16951__$2,temp__5804__auto__,productos_agrupados){
+return (function (){
+return alert(["ID del producto: ",cljs.core.str.cljs$core$IFn$_invoke$arity$1(producto_id)].join(''));
+});})(tipo_porcion,producto_id,producto,s__16985__$2,temp__5804__auto____$1,vec__16971,nombre,lista_productos,s__16951__$2,temp__5804__auto__,productos_agrupados))
+], null)], null);
+} else {
+if(cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2(tipo_porcion,"Raci\u00F3n completa")){
+return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"img","img",1442687358),new cljs.core.PersistentArrayMap(null, 5, [new cljs.core.Keyword(null,"class","class",-2030961996),"racion",new cljs.core.Keyword(null,"src","src",-1651076051),"/imgs/completo-circulo.png",new cljs.core.Keyword(null,"alt","alt",-3214426),"Raci\u00F3n completa",new cljs.core.Keyword(null,"style","style",-496642736),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"cursor","cursor",1011937484),"pointer"], null),new cljs.core.Keyword(null,"on-click","on-click",1632826543),((function (tipo_porcion,producto_id,producto,s__16985__$2,temp__5804__auto____$1,vec__16971,nombre,lista_productos,s__16951__$2,temp__5804__auto__,productos_agrupados){
+return (function (){
+return alert(["ID del producto: ",cljs.core.str.cljs$core$IFn$_invoke$arity$1(producto_id)].join(''));
+});})(tipo_porcion,producto_id,producto,s__16985__$2,temp__5804__auto____$1,vec__16971,nombre,lista_productos,s__16951__$2,temp__5804__auto__,productos_agrupados))
+], null)], null);
+} else {
+if(cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2(tipo_porcion,"Por unidad")){
+return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"img","img",1442687358),new cljs.core.PersistentArrayMap(null, 5, [new cljs.core.Keyword(null,"class","class",-2030961996),"racion",new cljs.core.Keyword(null,"src","src",-1651076051),"/imgs/unidad.png",new cljs.core.Keyword(null,"alt","alt",-3214426),"/Unidad",new cljs.core.Keyword(null,"style","style",-496642736),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"cursor","cursor",1011937484),"pointer"], null),new cljs.core.Keyword(null,"on-click","on-click",1632826543),((function (tipo_porcion,producto_id,producto,s__16985__$2,temp__5804__auto____$1,vec__16971,nombre,lista_productos,s__16951__$2,temp__5804__auto__,productos_agrupados){
+return (function (){
+return alert(["ID del producto: ",cljs.core.str.cljs$core$IFn$_invoke$arity$1(new cljs.core.Keyword(null,"id","id",-1388402092).cljs$core$IFn$_invoke$arity$1(producto))].join(''));
+});})(tipo_porcion,producto_id,producto,s__16985__$2,temp__5804__auto____$1,vec__16971,nombre,lista_productos,s__16951__$2,temp__5804__auto__,productos_agrupados))
+], null)], null);
+} else {
+if(cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2(tipo_porcion,"")){
+return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"img","img",1442687358),new cljs.core.PersistentArrayMap(null, 5, [new cljs.core.Keyword(null,"class","class",-2030961996),"racion",new cljs.core.Keyword(null,"src","src",-1651076051),"/imgs/unidad.png",new cljs.core.Keyword(null,"alt","alt",-3214426),"",new cljs.core.Keyword(null,"style","style",-496642736),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"cursor","cursor",1011937484),"pointer"], null),new cljs.core.Keyword(null,"on-click","on-click",1632826543),((function (tipo_porcion,producto_id,producto,s__16985__$2,temp__5804__auto____$1,vec__16971,nombre,lista_productos,s__16951__$2,temp__5804__auto__,productos_agrupados){
+return (function (){
+return alert(["ID del producto: ",cljs.core.str.cljs$core$IFn$_invoke$arity$1(producto_id)].join(''));
+});})(tipo_porcion,producto_id,producto,s__16985__$2,temp__5804__auto____$1,vec__16971,nombre,lista_productos,s__16951__$2,temp__5804__auto__,productos_agrupados))
+], null)], null);
+} else {
+return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"span","span",1394872991),["Tipo: ",cljs.core.str.cljs$core$IFn$_invoke$arity$1(tipo_porcion)].join('')], null);
+
+}
+}
+}
+}
+})()], null)], null),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"key","key",-1516042587),new cljs.core.Keyword(null,"id","id",-1388402092).cljs$core$IFn$_invoke$arity$1(producto)], null)),categorias$core$page_$_iter__16950_$_iter__16984(cljs.core.rest(s__16985__$2)));
+}
+} else {
+return null;
+}
+break;
+}
+}),null,null));
+});})(vec__16971,nombre,lista_productos,s__16951__$2,temp__5804__auto__,productos_agrupados))
 ;
 return iter__5480__auto__(lista_productos);
-})()], null)], null),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"key","key",-1516042587),nombre], null)),categorias$core$page_$_iter__19029(cljs.core.rest(s__19030__$2)));
+})()], null)], null),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"key","key",-1516042587),nombre], null)),categorias$core$page_$_iter__16950(cljs.core.rest(s__16951__$2)));
 }
 } else {
 return null;

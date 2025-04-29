@@ -26,7 +26,9 @@
   (let [id (:id @producto)
         usuario-id (js/localStorage.getItem "id")
         valor-parseado (case campo
-                         ("es_vegetariano" "es_vegano" "es_sin_gluten" "es_sin_lactosa") (= valor "true")
+                         ("contiene_gluten" "contiene_crustaceos" "contiene_huevos" "contiene_pescado"
+                          "contiene_cacahuetes" "contiene_soja" "contiene_lacteos" "contiene_frustos_de_cascara"
+                          "contiene_apio" "contiene_mostaza" "contiene_granos_de_sesamo" "contiene_sulfitos" "contiene_moluscos" "contiene_altramuces") (= valor "true")
                          ("precio" "categoria_id") (js/parseFloat valor)
                          valor)
         body-extendido (clj->js (assoc {} campo valor-parseado "_method" "PUT" "usuario_id" usuario-id))
@@ -83,17 +85,29 @@
     [:option {:value "categoria_id"} "Categoría"]
     [:option {:value "tipo_plato"} "Tipo de plato"]
     [:option {:value "tipo_porcion"} "Tipo de porción"]
-    [:option {:value "es_vegetariano"} "Vegetariano"]
-    [:option {:value "es_vegano"} "Vegano"]
-    [:option {:value "es_sin_gluten"} "Sin gluten"]
-    [:option {:value "es_sin_lactosa"} "Sin lactosa"]]
+    [:option {:value ""} "-- Alergenos --"]
+    [:option {:value "contiene_gluten"} "Contiene Gluten"]
+    [:option {:value "contiene_crustaceos"} "Crustaceos"]
+    [:option {:value "contiene_huevos"} "Huevos"]
+    [:option {:value "contiene_pescado"} "Pescados"]
+    [:option {:value "contiene_cacahuetes"} "Cacahuetes"]
+    [:option {:value "contiene_soja"} "Soja"]
+    [:option {:value "contiene_lacteos"} "Lácteos"]
+    [:option {:value "contiene_frustos_de_cascara"} "Frutos de cascara"]
+    [:option {:value "contiene_apio"} "Apio"]
+    [:option {:value "contiene_mostaza"} "Mostaza"]
+    [:option {:value "contiene_granos_de_sesamo"} "Granos de sesamo"]
+    [:option {:value "contiene_sulfitos"} "Dióxido de azufre y sulfitos"]
+    [:option {:value "contiene_moluscos"} "Moluscos"]
+    [:option {:value "contiene_altramuces"} "Altramuces"]]
 
    (when (not= @campo-seleccionado "")
      [:div {:style {:margin-top "15px"}}
       [:label (str "Nuevo valor para el campo seleccionado: ")]
       (cond
         ;; Booleans
-        (#{"es_vegetariano" "es_vegano" "es_sin_gluten" "es_sin_lactosa"} @campo-seleccionado)
+        (#{"contiene_gluten" "contiene_crustaceos" "contiene_huevos" "contiene_pescado" "contiene_cacahuetes" "contiene_soja" "contiene_lacteos" "contiene_frustos_de_cascara"
+           "contiene_apio" "contiene_mostaza" "contiene_granos_de_sesamo" "contiene_sulfitos" "contiene_moluscos" "contiene_altramuces"} @campo-seleccionado)
         [:select {:value (or @nuevo-valor "")
                   :on-change #(reset! nuevo-valor (-> % .-target .-value))}
          [:option {:value ""} "-- Selecciona una opción --"]
@@ -211,21 +225,61 @@
                 [:p [:strong "Categoría: "] (:nombre_categoria @producto)]
                 [:p [:strong "Tipo de plato: "] (:tipo_plato @producto)]
                 [:p [:strong "Tipo de porción: "] (:tipo_porcion @producto)]
-                [:h3 [:strong "Restricciones alimentarias: "]]
-                [:p [:strong "Vegetariano: "]
-                 (if (:es_vegetariano @producto)
+                [:h3 [:strong "Alérgenos informativos: "]]
+                [:p [:strong "Contiene gluten: "]
+                 (if (:contiene_gluten @producto)
                    [:span {:style {:color "green"}} "✔️"]
                    [:span {:style {:color "red"}} "❌"])]
-                [:p [:strong "Vegano: "]
-                 (if (:es_vegano @producto)
+                [:p [:strong "Crustáceos: "]
+                 (if (:contiene_crustaceos @producto)
                    [:span {:style {:color "green"}} "✔️"]
                    [:span {:style {:color "red"}} "❌"])]
-                [:p [:strong "Gluten: "]
-                 (if (:es_sin_gluten @producto)
+                [:p [:strong "Huevos: "]
+                 (if (:contiene_huevos @producto)
                    [:span {:style {:color "green"}} "✔️"]
                    [:span {:style {:color "red"}} "❌"])]
-                [:p [:strong "Lactosa: "]
-                 (if (:es_sin_lactosa @producto)
+                [:p [:strong "Pescado: "]
+                 (if (:contiene_pescado @producto)
+                   [:span {:style {:color "green"}} "✔️"]
+                   [:span {:style {:color "red"}} "❌"])]
+                [:p [:strong "Cacahuetes: "]
+                 (if (:contiene_cacahuetes @producto)
+                   [:span {:style {:color "green"}} "✔️"]
+                   [:span {:style {:color "red"}} "❌"])]
+                [:p [:strong "Soja: "]
+                 (if (:contiene_soja @producto)
+                   [:span {:style {:color "green"}} "✔️"]
+                   [:span {:style {:color "red"}} "❌"])]
+                [:p [:strong "Lácteos: "]
+                 (if (:contiene_lacteos @producto)
+                   [:span {:style {:color "green"}} "✔️"]
+                   [:span {:style {:color "red"}} "❌"])]
+                [:p [:strong "Frutos de cascara: "]
+                 (if (:contiene_frustos_de_cascara @producto)
+                   [:span {:style {:color "green"}} "✔️"]
+                   [:span {:style {:color "red"}} "❌"])]
+                [:p [:strong "Apio: "]
+                 (if (:contiene_apio @producto)
+                   [:span {:style {:color "green"}} "✔️"]
+                   [:span {:style {:color "red"}} "❌"])]
+                [:p [:strong "Mostaza: "]
+                 (if (:contiene_mostaza @producto)
+                   [:span {:style {:color "green"}} "✔️"]
+                   [:span {:style {:color "red"}} "❌"])]
+                [:p [:strong "Granos de sésamo: "]
+                 (if (:contiene_granos_de_sesamo @producto)
+                   [:span {:style {:color "green"}} "✔️"]
+                   [:span {:style {:color "red"}} "❌"])]
+                [:p [:strong "Dióxido de azufre y sulfitos: "]
+                 (if (:contiene_sulfitos @producto)
+                   [:span {:style {:color "green"}} "✔️"]
+                   [:span {:style {:color "red"}} "❌"])]
+                [:p [:strong "Moluscos: "]
+                 (if (:contiene_moluscos @producto)
+                   [:span {:style {:color "green"}} "✔️"]
+                   [:span {:style {:color "red"}} "❌"])]
+                [:p [:strong "Altramuces: "]
+                 (if (:contiene_altramuces @producto)
                    [:span {:style {:color "green"}} "✔️"]
                    [:span {:style {:color "red"}} "❌"])]]
                [:div.col-12.col-md-6 {:class "divActualizar"}
