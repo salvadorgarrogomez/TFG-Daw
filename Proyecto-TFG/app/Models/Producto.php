@@ -32,5 +32,15 @@ class Producto extends Model
         'activo'
     ];
 
+    // Hook para actualizar automáticamente la fecha, y saber asi cuando se le realizo el ultimo cambio
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::saving(function ($model) {
+            $model->fecha_hora = now();
+        });
+    }
+
 }
 

@@ -18,7 +18,7 @@ class InsertarCategoria extends Controller
 
         $producto = new Categoria();
         $producto->fill($data);
-        $producto->save(); // Aquí se ejecutará tu hook de `updating` y pondrá usuario_id automáticamente
+        $producto->save(); 
 
         return response()->json(['message' => 'Categoria añadida'], 201);
     }

@@ -16,6 +16,7 @@
 (defonce mostrar-productos? (r/atom false))
 (defonce mostrar-categorias? (r/atom false))
 
+(def categoria-seleccionada (r/atom "todas"))
 (defonce categoria-busqueda (r/atom ""))
 (defonce producto-busqueda (r/atom ""))
 
@@ -79,11 +80,25 @@
 
 (defn render-productos []
   (let [texto (clojure.string/lower-case @producto-busqueda)
-        productos-filtradas (filter #(clojure.string/includes?
-                                      (clojure.string/lower-case (:nombre %))
-                                      texto)
-                                    @list-productos)]
+        categoria (clojure.string/lower-case @categoria-seleccionada)
+        productos-filtradas (->> @list-productos
+                                 (filter #(clojure.string/includes?
+                                           (clojure.string/lower-case (:nombre %))
+                                           texto))
+                                 (filter #(or (= categoria "todas")
+                                              (= (clojure.string/lower-case (:nombre_categoria %))
+                                                 categoria))))]
     [:div.col-12
+     [:div.form-group.mb-3
+      [:h3 {:for "filtro-categoria"} "Filtrar por categoría:"]
+      [:select.form-control
+       {:id "filtro-categoria"
+        :value @categoria-seleccionada
+        :on-change #(reset! categoria-seleccionada (-> % .-target .-value))}
+       [:option {:value "todas"} "Todas las categorías"]
+       (for [{:keys [id nombre]} @categorias]
+         ^{:key id}
+         [:option {:value nombre} nombre])]]
      [:h3 "Lista de productos"]
      [:input.form-control.mb-3
       {:type "text"

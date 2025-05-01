@@ -21,7 +21,7 @@ class Login extends Controller
             if ($user && $user->contrasenia == $contrasena) {
                 $token = JWTAuth::fromUser($user);
 
-                // Crear una cookie segura con el token
+                // Se crea una cookie segura con el token, para asi validar la entrada de datos a la BBDD, tiempo de expiracion 60 min.
                 $cookie = cookie('token', $token, 60, null, null, true, true, false, 'Strict');
 
                 return response()->json([
@@ -84,16 +84,5 @@ class Login extends Controller
     {
         return response()->json(['message' => 'Sesión cerrada'])
             ->withCookie(cookie()->forget('token'));
-    }
-
-
-
-    public function usuarios()
-    {
-        $usuarios = DB::select('SELECT * FROM usuarios');
-        $usuarios = array_map(function ($usuario) {
-            return $usuario;
-        }, $usuarios);
-        return response()->json($usuarios);
     }
 }
