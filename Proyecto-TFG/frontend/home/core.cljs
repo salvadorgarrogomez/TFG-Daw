@@ -4,6 +4,8 @@
             [cljs-http.client :as http]
             [app.db :as db]))
 
+(def selected-image (r/atom nil))
+
 (defn imagenes-carrusel []
   (let [imagenes @db/imagenes]  ;; Obtencion de las imágenes desde el atom
     (if (empty? imagenes)
@@ -25,17 +27,26 @@
         [:span.sr-only "Next"]]])))
 
 (defn mostrar-imagenes-todas []
-  (let [imagenes @db/imagenes   ;; Obtención de las imágenes desde el atom
-        imagen-seleccionada (r/atom nil)] ;; Atom para la imagen seleccionada
+  (let [imagenes @db/imagenes]
     (if (empty? imagenes)
       [:div "No se encontraron imágenes."]
       [:div
-       [:div.row
+       ;; Galería de imágenes
+       [:div.row {:class "containerImg"}
         (for [{:keys [id descripcion imagen_base64 mime_type]} imagenes]
           ^{:key id}
-          [:div.col-12.col-md-3 {:class "conjuntoImagenes"}
-           [:img {:src (str "data:" mime_type ";base64," imagen_base64)
-                  :alt descripcion}]])]])))
+          (let [base64-src (str "data:" mime_type ";base64," imagen_base64)]
+            [:div.col-12.col-md-5.conjuntoImagenes
+             {:on-click #(reset! selected-image {:src base64-src :alt descripcion})}
+             [:img {:src base64-src :alt descripcion}]]))]
+
+       ;; Modal
+       (when @selected-image
+         [:div.modal-container.active
+          [:div.modal-content
+           [:img {:src (:src @selected-image)
+                  :alt (:alt @selected-image)}]
+           [:button.close-btn {:on-click #(reset! selected-image nil)} "Cerrar"]]])])))
 
 ;; Funcion page para estructurar la pagina
 (defn page []
@@ -50,8 +61,7 @@
        [:div.col-12 {:class "container"}
         [:h3 "Galería de Imágenes"]
         [imagenes-carrusel]
-        [mostrar-imagenes-todas]
-        ]])}))
+        [mostrar-imagenes-todas]]])}))
 
 ;; Inicializa la app
 (defn init []
