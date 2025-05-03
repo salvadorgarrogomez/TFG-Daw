@@ -27,8 +27,8 @@
         usuario-id (js/localStorage.getItem "id")
         valor-parseado (case campo
                          ("contiene_gluten" "contiene_crustaceos" "contiene_huevos" "contiene_pescado"
-                          "contiene_cacahuetes" "contiene_soja" "contiene_lacteos" "contiene_frustos_de_cascara"
-                          "contiene_apio" "contiene_mostaza" "contiene_granos_de_sesamo" "contiene_sulfitos" "contiene_moluscos" "contiene_altramuces") (= valor "true")
+                                            "contiene_cacahuetes" "contiene_soja" "contiene_lacteos" "contiene_frustos_de_cascara"
+                                            "contiene_apio" "contiene_mostaza" "contiene_granos_de_sesamo" "contiene_sulfitos" "contiene_moluscos" "contiene_altramuces") (= valor "true")
                          ("precio" "categoria_id") (js/parseFloat valor)
                          valor)
         body-extendido (clj->js (assoc {} campo valor-parseado "_method" "PUT" "usuario_id" usuario-id))
@@ -200,6 +200,44 @@
                              (js/alert "Categoria actualizado, dale al boton de 'Mostrar categorias' para actualizar el listado."))}
        "Actualizar campo"]])])
 
+(def alergenos
+  [[:contiene_gluten               "Gluten"]
+   [:contiene_crustaceos           "Crustáceos"]
+   [:contiene_huevos               "Huevos"]
+   [:contiene_pescado              "Pescado"]
+   [:contiene_cacahuetes           "Cacahuetes"]
+   [:contiene_soja                 "Soja"]
+   [:contiene_lacteos              "Lácteos"]
+   [:contiene_frustos_de_cascara   "Frutos de cáscara"]
+   [:contiene_apio                 "Apio"]
+   [:contiene_mostaza              "Mostaza"]
+   [:contiene_granos_de_sesamo     "Sésamo"]
+   [:contiene_sulfitos             "Sulfitos"]
+   [:contiene_moluscos             "Moluscos"]
+   [:contiene_altramuces           "Altramuces"]])
+
+(defn columnas-alergenos [producto]
+  (let [vals       @producto
+        mitad      (quot (count alergenos) 2)
+        [col1 col2] (split-at mitad alergenos)]
+    [:div.row
+     [:div.col-6
+      (for [[k label] col1]
+        ^{:key k}
+        [:p
+         [:strong (str label ": ")]
+         (if (get vals k)
+           [:span.text-success "✔️"]
+           [:span.text-danger  "❌"])])]
+     [:div.col-6
+      (for [[k label] col2]
+        ^{:key k}
+        [:p
+         [:strong (str label ": ")]
+         (if (get vals k)
+           [:span.text-success "✔️"]
+           [:span.text-danger  "❌"])])]]))
+
 
 (defn page []
   (if (state/rol-admin?)
@@ -226,62 +264,7 @@
                 [:p [:strong "Tipo de plato: "] (:tipo_plato @producto)]
                 [:p [:strong "Tipo de porción: "] (:tipo_porcion @producto)]
                 [:h3 [:strong "Alérgenos informativos: "]]
-                [:p [:strong "Contiene gluten: "]
-                 (if (:contiene_gluten @producto)
-                   [:span {:style {:color "green"}} "✔️"]
-                   [:span {:style {:color "red"}} "❌"])]
-                [:p [:strong "Crustáceos: "]
-                 (if (:contiene_crustaceos @producto)
-                   [:span {:style {:color "green"}} "✔️"]
-                   [:span {:style {:color "red"}} "❌"])]
-                [:p [:strong "Huevos: "]
-                 (if (:contiene_huevos @producto)
-                   [:span {:style {:color "green"}} "✔️"]
-                   [:span {:style {:color "red"}} "❌"])]
-                [:p [:strong "Pescado: "]
-                 (if (:contiene_pescado @producto)
-                   [:span {:style {:color "green"}} "✔️"]
-                   [:span {:style {:color "red"}} "❌"])]
-                [:p [:strong "Cacahuetes: "]
-                 (if (:contiene_cacahuetes @producto)
-                   [:span {:style {:color "green"}} "✔️"]
-                   [:span {:style {:color "red"}} "❌"])]
-                [:p [:strong "Soja: "]
-                 (if (:contiene_soja @producto)
-                   [:span {:style {:color "green"}} "✔️"]
-                   [:span {:style {:color "red"}} "❌"])]
-                [:p [:strong "Lácteos: "]
-                 (if (:contiene_lacteos @producto)
-                   [:span {:style {:color "green"}} "✔️"]
-                   [:span {:style {:color "red"}} "❌"])]
-                [:p [:strong "Frutos de cascara: "]
-                 (if (:contiene_frustos_de_cascara @producto)
-                   [:span {:style {:color "green"}} "✔️"]
-                   [:span {:style {:color "red"}} "❌"])]
-                [:p [:strong "Apio: "]
-                 (if (:contiene_apio @producto)
-                   [:span {:style {:color "green"}} "✔️"]
-                   [:span {:style {:color "red"}} "❌"])]
-                [:p [:strong "Mostaza: "]
-                 (if (:contiene_mostaza @producto)
-                   [:span {:style {:color "green"}} "✔️"]
-                   [:span {:style {:color "red"}} "❌"])]
-                [:p [:strong "Granos de sésamo: "]
-                 (if (:contiene_granos_de_sesamo @producto)
-                   [:span {:style {:color "green"}} "✔️"]
-                   [:span {:style {:color "red"}} "❌"])]
-                [:p [:strong "Dióxido de azufre y sulfitos: "]
-                 (if (:contiene_sulfitos @producto)
-                   [:span {:style {:color "green"}} "✔️"]
-                   [:span {:style {:color "red"}} "❌"])]
-                [:p [:strong "Moluscos: "]
-                 (if (:contiene_moluscos @producto)
-                   [:span {:style {:color "green"}} "✔️"]
-                   [:span {:style {:color "red"}} "❌"])]
-                [:p [:strong "Altramuces: "]
-                 (if (:contiene_altramuces @producto)
-                   [:span {:style {:color "green"}} "✔️"]
-                   [:span {:style {:color "red"}} "❌"])]]
+                [columnas-alergenos producto]]
                [:div.col-12.col-md-6 {:class "divActualizar"}
                 [render-edicion-producto producto]]]
               [:div {:class "divEditar"} "Producto no encontrado"])

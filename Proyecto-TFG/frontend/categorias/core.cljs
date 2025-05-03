@@ -98,7 +98,7 @@
                                     "contiene_apio" "/imgs/alergenos/apio.png"
                                     "contiene_mostaza" "/imgs/alergenos/mostaza.png"
                                     "contiene_granos_de_sesamo" "/imgs/alergenos/sesamo.png"
-                                    "contiene_sulfitos" "/imgs/alergenos/sesamo.png"
+                                    "contiene_sulfitos" "/imgs/alergenos/sulfitos.png"
                                     "contiene_moluscos" "/imgs/alergenos/moluscos.png"
                                     "contiene_altramuces" "/imgs/alergenos/altramuces.png"}
                          alergenos-activos (filter #(true? (get primer-producto (keyword (first %)))) alergenos)] ;; Filtramos los alérgenos activos

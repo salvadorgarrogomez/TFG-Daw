@@ -46,7 +46,7 @@
           [:div.modal-content
            [:img {:src (:src @selected-image)
                   :alt (:alt @selected-image)}]
-           [:button.close-btn {:on-click #(reset! selected-image nil)} "Cerrar"]]])])))
+           [:button.close-btn {:on-click #(reset! selected-image nil)} "X"]]])])))
 
 ;; Funcion page para estructurar la pagina
 (defn page []

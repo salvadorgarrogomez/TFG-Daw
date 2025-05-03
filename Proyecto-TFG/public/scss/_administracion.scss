@@ -100,17 +100,21 @@ table {
 
     .panel {
         margin-inline: 0px;
-        padding: 15px;
+        width: 100%;
+        justify-content: center;
+        align-content: center;
+        align-items: center;
     }
 
     .entrada {
         margin: 0px;
     }
 
-    table {
+    .tableCategorias {
         table-layout: fixed;
         width: 100%;
-        margin-left: -25px;
+        margin-left: -20px;
+        height: auto;
 
         th,
         td {
@@ -125,7 +129,32 @@ table {
 
         th.tdButton,
         td.tdButton {
-            width: 40px;
+            width: 120px;
+            font-weight: bold;
+        }
+
+    }
+
+    table {
+        table-layout: fixed;
+        width: 100%;
+        margin-left: -42px;
+        height: auto;
+
+        th,
+        td {
+            width: 100px;
+        }
+
+        th.id,
+        td.id {
+            width: 10px;
+            font-weight: bold;
+        }
+
+        th.tdButton,
+        td.tdButton {
+            width: 100px;
             font-weight: bold;
         }
 

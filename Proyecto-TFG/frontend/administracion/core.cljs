@@ -52,10 +52,10 @@
        :placeholder "Buscar categoría por nombre..."
        :value @categoria-busqueda
        :on-change #(reset! categoria-busqueda (-> % .-target .-value))}]
-     [:table {:class "table table-striped"}
+     [:table {:class "table table-striped tableCategorias"}
       [:thead
        [:tr
-        [:th {:class "id"} "ID"] [:th "Nombre"] [:th.d-none.d-sm-table-cell "Descripcion"] [:th {:class "tdButton"} "Editar"] [:th {:class "tdButton"} "Eliminar"]]]
+        [:th {:class "id"} "ID"] [:th "Nombre"] [:th.d-none.d-sm-table-cell "Descripcion"] [:th {:class "tdButton"} "Editar"] [:th {:class "tdButton"} "Activar/Desactivar"]]]
       [:tbody
        (for [{:keys [id nombre descripcion activo]} categorias-filtradas]
          ^{:key id}
@@ -68,7 +68,7 @@
             "Editar"]]
           [:td {:class "tdButton"} [:button
                                     {:on-click #(activo-categoria id)}
-                                    "Activar/Desactivar categoria"]]])
+                                    "✔️/❌"]]])
        [:tr
         [:td
          [:button
@@ -110,7 +110,7 @@
        [:tr
         [:th {:class "id"} "ID"] [:th "Nombre"] [:th.d-none.d-lg-table-cell "Descripcion"] [:th.d-none.d-sm-table-cell "Precio"]
         [:th.d-none.d-lg-table-cell "Categoría"] [:th.d-none.d-lg-table-cell "Tipo de plato"] [:th "Tipo de porción"]
-        [:th "Editar"] [:th "Eliminar"]]]
+        [:th "Editar"] [:th "Activar/Desactivar"]]]
       [:tbody
        (for [{:keys [id nombre description precio nombre_categoria tipo_plato tipo_porcion activo]} productos-filtradas]
          ^{:key id}
@@ -124,7 +124,7 @@
             "Editar"]]
           [:td {:class "tdButton"} [:button
                                     {:on-click #(activo-producto id)}
-                                    "Activar/Desactivar Producto"]]])
+                                    "✔️/❌"]]])
        [:tr
         [:td
          [:button

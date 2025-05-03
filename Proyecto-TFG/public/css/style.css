@@ -306,7 +306,7 @@ header {
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.55);
+  background-color: rgba(0, 0, 0, 0.9);
   justify-content: center;
   align-items: center;
   overflow: hidden;
@@ -325,16 +325,17 @@ header {
 .modal-content img {
   display: block;
   margin: auto;
-  max-width: 100%;
-  max-height: 100%;
+  width: 120%;
+  height: 120%;
 }
 
 .close-btn {
   position: absolute;
   top: 10px;
-  right: 10px;
+  right: -75px;
   padding: 10px;
-  background-color: rgba(0, 0, 0, 0.55);
+  color: #ffffff;
+  background-color: rgba(0, 0, 0, 0.35);
   border: none;
   font-size: 16px;
   cursor: pointer;
@@ -397,6 +398,24 @@ header {
     position: relative;
     max-width: 90%;
     max-height: auto;
+  }
+  .modal-content img {
+    display: block;
+    margin: auto;
+    max-width: 100%;
+    max-height: 100%;
+  }
+  .close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    padding: 10px;
+    color: #ffffff;
+    background-color: rgba(0, 0, 0, 0.35);
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    z-index: 1;
   }
 }
 .nosotros {
@@ -634,15 +653,39 @@ table button.nuevo {
   }
   .panel {
     margin-inline: 0px;
-    padding: 15px;
+    width: 100%;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
   }
   .entrada {
     margin: 0px;
   }
+  .tableCategorias {
+    table-layout: fixed;
+    width: 100%;
+    margin-left: -20px;
+    height: auto;
+  }
+  .tableCategorias th,
+  .tableCategorias td {
+    width: 100px;
+  }
+  .tableCategorias th.id,
+  .tableCategorias td.id {
+    width: 10px;
+    font-weight: bold;
+  }
+  .tableCategorias th.tdButton,
+  .tableCategorias td.tdButton {
+    width: 120px;
+    font-weight: bold;
+  }
   table {
     table-layout: fixed;
     width: 100%;
-    margin-left: -25px;
+    margin-left: -42px;
+    height: auto;
   }
   table th,
   table td {
@@ -655,7 +698,7 @@ table button.nuevo {
   }
   table th.tdButton,
   table td.tdButton {
-    width: 40px;
+    width: 100px;
     font-weight: bold;
   }
 }
@@ -683,6 +726,7 @@ table button.nuevo {
 @media (min-width: 480px) and (max-width: 1024px) {
   .divEditar {
     margin: 0;
+    margin-bottom: 100px;
   }
   .divEditar .divActualizar {
     margin-top: 15px;
@@ -775,6 +819,7 @@ table button.nuevo {
 @media (min-width: 480px) and (max-width: 1686px) {
   .divNuevo {
     margin-inline: 0px;
+    margin-bottom: 100px;
   }
   .divNuevo .divDatosNuevos {
     margin: 0 auto;
