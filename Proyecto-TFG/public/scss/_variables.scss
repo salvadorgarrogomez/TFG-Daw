@@ -1,54 +1,78 @@
 @import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Nerko+One&display=swap');
 
+$fuente-titulo: 'Lora', bold;
 $fuente-principal: 'Lora', serif;
 $fuente-secundaria: 'Montserrat', sans-serif;
 $fuente-decorativa: 'Nerko One', cursive;
 
 body {
   font-family: $fuente-principal;
-  color: #333;
+  color: #333333;
   top: 0px !important;
 }
 
-.goog-te-banner-frame.skiptranslate, .goog-logo-link,  .goog-te-gadget {
+.goog-te-banner-frame.skiptranslate,
+.goog-logo-link,
+.goog-te-gadget {
   display: none !important;
 }
 
 h1 {
-    font-family: $fuente-secundaria;
-    font-size: 1.8rem;
-  }
+  font-family: $fuente-titulo;
+  font-size: 2rem;
+  color: #800020;
+}
 
-h2, h3 {
+h2 {
   font-family: $fuente-secundaria;
+  font-size: 1.5rem;
+  color: #800020;
+}
+
+h3 {
   font-size: 1.2rem;
+  color: #ffffff;
+  font-family: $fuente-secundaria;
 }
 
 h4 {
   font-family: $fuente-principal;
-  font-size: 1.1rem;
+  font-size: 1.2rem;
+  color: #343a40;
+  font-weight: bold;
+}
+
+.barraInicio {
+  font-family: $fuente-secundaria;
+  font-size: 1.2rem;
 }
 
 p {
-    font-size: 0.9rem;
+  font-family: $fuente-principal;
+  font-size: 1rem;
+  color: #343a40;
 }
 
 .mensaje-categoria {
-    font-size: 1.2rem;
-    font-family: $fuente-decorativa;
+  font-size: 1rem;
+  font-family: $fuente-decorativa;
+  color: #343a40;
 }
 
-.mensaje-categoria p{
-    font-size: 1.2rem;
-    font-family: $fuente-decorativa;
+.mensaje-categoria p {
+  font-size: 1rem;
+  font-family: $fuente-decorativa;
+  color: #343a40;
 }
 
 .producto-info {
-    font-size: 1.2rem;
+  font-size: 1rem;
+  color: #343a40;
+  font-family: $fuente-principal;
 }
 
 button:hover {
   background-color: #800020;
-  color: white;
+  color: #ffffff;
+  font-family: $fuente-principal;
 }
-

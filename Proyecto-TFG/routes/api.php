@@ -27,7 +27,7 @@ Route::post('/subir-imagen', action: [Imagenes::class, 'subirImagen']);
 // Rutas para que los usuarios se puedan logear en la web, accediendo al backend y editar ciertos registros.
 Route::post('/login', [Login::class, 'login']);
 Route::post('/logout', [Login::class, 'logout']);
-Route::get('/admin', [Login::class, 'adminOnly']);
+Route::get('/admin', [Login::class, 'admin']);
 
 // Aplicacion de seguridad middleware, para evitar conexiones ajenas, como desde Postman o url, permitiendo solo acceso a traves de Clojure con el Token JWT, adquirido al hacer Login
 Route::middleware(['jwt.auth'])->put('/producto/activo/{id}', [ActivoProducto::class, 'activo']);

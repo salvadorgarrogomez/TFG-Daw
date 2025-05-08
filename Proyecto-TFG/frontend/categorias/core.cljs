@@ -84,7 +84,7 @@
                 [:li.col-12 {:class "productosLI"}
                  [:div {:class "producto-info"}
                   [:div
-                   [:h4 {:class "negrita"} nombre]
+                   [:h4 nombre]
                    (let [primer-producto (first lista-productos)
                          descripcion-limpia (str/trim (:description primer-producto))
                          alergenos {"contiene_gluten" "/imgs/alergenos/gluten.png"

@@ -8,7 +8,7 @@
                  :src "imgs/logoBar2.1.svg"
                  :alt "Logo Bar El Escobar"}]
    [:nav.row {:class "navBar"}
-    [:ul.col-12
+    [:ul.col-12 {:class "barraInicio"}
      [:li.col-4 [:a {:href "#/"} "Inicio"]]
      [:li.col-4 [:a {:href "#/categorias"} "Carta"]]
      [:li.col-4 [:a {:href "#/nosotros"} "Nosotros"]]]]])
@@ -17,7 +17,7 @@
   [:footer.container-fluid
    [:div.row
     [:div.col-12 {:class "botonesFooter"}
-     [:p "Teléfonos de contacto (reservas):"]
+     [:h3 "Teléfonos de contacto (reservas):"]
      [:a {:href "tel:+34623191754"}
       [:button [:span.ml-2 "623191754"]]]
      [:a {:href "tel:+34683572682"}

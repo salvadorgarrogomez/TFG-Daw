@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use Symfony\Component\HttpFoundation\Cookie;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class Login extends Controller
 {
@@ -15,27 +16,22 @@ class Login extends Controller
         try {
             $usuario = $request->input('nombre');
             $contrasena = $request->input('contrasenia');
-
             $user = Usuarios::where('nombre', $usuario)->first();
-
-            if ($user && $user->contrasenia == $contrasena) {
+    
+            if ($user && Hash::check($contrasena, $user->contrasenia)) {
                 $token = JWTAuth::fromUser($user);
-
-                // Se crea una cookie segura con el token, para asi validar la entrada de datos a la BBDD, tiempo de expiracion 60 min.
                 $cookie = cookie('token', $token, 60, null, null, true, true, false, 'Strict');
-
+    
                 return response()->json([
                     'nombre' => $user->nombre,
                     'rol' => $user->rol,
                     'id' => $user->id
                 ])->withCookie($cookie);
             }
-
             return response()->json([
                 'status' => 'error',
                 'message' => 'Usuario o contraseña incorrectos.'
             ], 401);
-
         } catch (\Exception $e) {
             return response()->json([
                 'status' => 'error',
@@ -44,25 +40,20 @@ class Login extends Controller
         }
     }
 
-    public function adminOnly(Request $request)
+    public function admin(Request $request)
     {
         try {
             $token = $request->cookie('token');
-
             if (!$token) {
                 return response()->json(['message' => 'Token no encontrado'], 401);
             }
-
             $user = JWTAuth::setToken($token)->authenticate();
-
             if (!$user) {
                 return response()->json(['message' => 'Usuario no encontrado'], 404);
             }
-
             if ($user->rol !== 'admin') {
                 return response()->json(['message' => 'Acceso denegado'], 403);
             }
-
             return response()->json([
                 'message' => 'Acceso permitido',
                 'usuario' => [
@@ -71,7 +62,6 @@ class Login extends Controller
                     'rol' => $user->rol,
                 ]
             ]);
-
         } catch (\Exception $e) {
             return response()->json([
                 'message' => 'Error al autenticar',
