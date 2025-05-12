@@ -123,21 +123,21 @@
                           (= tipo-porcion "Media ración")
                           [:img {:class "racion"
                                  :src "/imgs/medio-circulo.png"
-                                 :alt "Ración completa"
+                                 :alt "Media ración"
                                  :style {:cursor "pointer"}
-                                 :on-click #(js/alert (str "ID del producto: " producto-id))}]
+                                 :on-click #(js/alert (str "ID del producto: " producto-id " , Media ración"))}]
                           (= tipo-porcion "Ración completa")
                           [:img {:class "racion"
                                  :src "/imgs/completo-circulo.png"
                                  :alt "Ración completa"
                                  :style {:cursor "pointer"}
-                                 :on-click #(js/alert (str "ID del producto: " producto-id))}]
+                                 :on-click #(js/alert (str "ID del producto: " producto-id " , Ración completa"))}]
                           (= tipo-porcion "Por unidad")
                           [:img {:class "racion"
                                  :src "/imgs/unidad.png"
                                  :alt "/Unidad"
                                  :style {:cursor "pointer"}
-                                 :on-click #(js/alert (str "ID del producto: " (:id producto)))}]
+                                 :on-click #(js/alert (str "ID del producto: " (:id producto) " , Por unidad"))}]
                           (= tipo-porcion "")
                           [:img {:class "racion"
                                  :src "/imgs/unidad.png"

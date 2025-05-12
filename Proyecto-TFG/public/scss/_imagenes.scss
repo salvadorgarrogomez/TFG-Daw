@@ -9,43 +9,20 @@
         margin-left: -30px;
     }
 
-    .adminImagenes {
-        background-color: #ffffff;
+    .formImagenes {
         padding-top: 20px;
 
-        .formImagenes {
-            padding-top: 20px;
-
-            .inputImagen {
-                margin-inline: 10px;
-            }
+        .inputImagen {
+            margin-inline: 10px;
         }
     }
-}
 
-.conjuntoImagenesAdmin {
-    padding-top: 25px;
-    margin: 10px;
-    width: 100%;
-    height: auto;
-    /* Ajusta el alto del contenedor */
-    object-fit: cover;
-    /* O usa 'contain' si prefieres mantener las proporciones */
-    overflow: hidden;
-    /* Evita que la imagen se salga del contenedor */
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 
 @media (min-width: 480px) and (max-width: 1024px) {
     .divPanelImagenes {
         margin: 0;
         margin-bottom: 100px;
-    }
-
-    .conjuntoImagenesAdmin {
-        margin: 0;
     }
 
     .formulario {

@@ -45,23 +45,24 @@
         imagen-seleccionada (r/atom nil)] ;; Atom para la imagen seleccionada
     (if (empty? imagenes)
       [:div "No se encontraron imágenes."]
-       [:div.row {:class "adminImagenes"}
-        (for [{:keys [id descripcion imagen_base64 mime_type]} imagenes]
-          ^{:key id}
-          [:div.col-12.col-md-3 {:class "conjuntoImagenesAdmin"}
-           [:img {:src (str "data:" mime_type ";base64," imagen_base64)
-                  :alt descripcion
-                  :style {:cursor "pointer"}
-                  :on-click #(do
-                               (eliminar-imagen id)
-                               (.reload js/location true))}]])])))
+      [:div.row {:class "containerImg"}
+       (for [{:keys [id descripcion imagen_base64 mime_type]} imagenes]
+         ^{:key id}
+         [:div.col-12.col-md-5 {:class "conjuntoImagenes"}
+          [:img {:src (str "data:" mime_type ";base64," imagen_base64)
+                 :alt descripcion
+                 :style {:cursor "pointer"}
+                 :on-click #(do
+                              (eliminar-imagen id)
+                              (.reload js/location true))}]])])))
 
 ;; Formulario para subir imagenes a la base de datos
 ;; En este caso, solo permite subir imagenes de 1 en 1
 (defn formulario-subida []
   [:div {:class "formulario"}
-   [:h3 "Subir Imagen"
-    [:p "(solo se puede subir de 1 en 1)"]]
+   [:h3 "Subir Imagen"]
+   [:p "(solo se puede subir de 1 en 1)"]
+   [:p "Para eliminar una imagen, clicka sobre ella y confirma."]
    [:input {:type "file"
             :on-change handle-file-change
             :class "inputImagen"}]

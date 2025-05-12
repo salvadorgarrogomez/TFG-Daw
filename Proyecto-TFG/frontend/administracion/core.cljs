@@ -170,7 +170,7 @@
 
      :error-handler #(do
                        (println "Error en la solicitud: " %)
-                       (js/alert "Credenciales incorrectas.")
+                       (js/alert "Credenciales incorrectas. Prueba de nuevo o ponte en contacto con el Administrador del sistema.")
                        (reset! loading? false))}))
 
 (defn login-form []
@@ -189,6 +189,11 @@
                :on-change #(reset! contrasenia (-> % .-target .-value))}]]]
     [:div.row {:class "rowButton"}
      [:div.col-12
+      {:on-key-down (fn [e]
+                      (when (= (.-keyCode e) 13)  ;; 13 es el código de la tecla Enter
+                        (do
+                          (login)
+                          (.reload js/location true))))}
       [:button {:on-click #(do
                              (login)
                              (.reload js/location true))} "Entrar"]]]]])
