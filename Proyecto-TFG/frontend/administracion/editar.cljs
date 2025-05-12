@@ -27,7 +27,7 @@
         usuario-id (js/localStorage.getItem "id")
         valor-parseado (case campo
                          ("contiene_gluten" "contiene_crustaceos" "contiene_huevos" "contiene_pescado"
-                                            "contiene_cacahuetes" "contiene_soja" "contiene_lacteos" "contiene_frustos_de_cascara"
+                                            "contiene_cacahuetes" "contiene_soja" "contiene_lacteos" "contiene_frutos_de_cascara"
                                             "contiene_apio" "contiene_mostaza" "contiene_granos_de_sesamo" "contiene_sulfitos" "contiene_moluscos" "contiene_altramuces") (= valor "true")
                          ("precio" "categoria_id") (js/parseFloat valor)
                          valor)
@@ -93,7 +93,7 @@
     [:option {:value "contiene_cacahuetes"} "Cacahuetes"]
     [:option {:value "contiene_soja"} "Soja"]
     [:option {:value "contiene_lacteos"} "Lácteos"]
-    [:option {:value "contiene_frustos_de_cascara"} "Frutos de cascara"]
+    [:option {:value "contiene_frutos_de_cascara"} "Frutos de cascara"]
     [:option {:value "contiene_apio"} "Apio"]
     [:option {:value "contiene_mostaza"} "Mostaza"]
     [:option {:value "contiene_granos_de_sesamo"} "Granos de sesamo"]
@@ -106,7 +106,7 @@
       [:label (str "Nuevo valor para el campo seleccionado: ")]
       (cond
         ;; Booleans
-        (#{"contiene_gluten" "contiene_crustaceos" "contiene_huevos" "contiene_pescado" "contiene_cacahuetes" "contiene_soja" "contiene_lacteos" "contiene_frustos_de_cascara"
+        (#{"contiene_gluten" "contiene_crustaceos" "contiene_huevos" "contiene_pescado" "contiene_cacahuetes" "contiene_soja" "contiene_lacteos" "contiene_frutos_de_cascara"
            "contiene_apio" "contiene_mostaza" "contiene_granos_de_sesamo" "contiene_sulfitos" "contiene_moluscos" "contiene_altramuces"} @campo-seleccionado)
         [:select {:value (or @nuevo-valor "")
                   :on-change #(reset! nuevo-valor (-> % .-target .-value))}
@@ -208,7 +208,7 @@
    [:contiene_cacahuetes           "Cacahuetes"]
    [:contiene_soja                 "Soja"]
    [:contiene_lacteos              "Lácteos"]
-   [:contiene_frustos_de_cascara   "Frutos de cáscara"]
+   [:contiene_frutos_de_cascara    "Frutos de cáscara"]
    [:contiene_apio                 "Apio"]
    [:contiene_mostaza              "Mostaza"]
    [:contiene_granos_de_sesamo     "Sésamo"]

@@ -20,7 +20,7 @@ return new class extends Migration {
             $table->boolean('contiene_cacahuetes')->default(false);
             $table->boolean('contiene_soja')->default(false);
             $table->boolean('contiene_lacteos')->default(false);
-            $table->boolean('contiene_frustos_de_cascara')->default(false);
+            $table->boolean('contiene_frutos_de_cascara')->default(false);
             $table->boolean('contiene_apio')->default(false);
             $table->boolean('contiene_mostaza')->default(false);
             $table->boolean('contiene_granos_de_sesamo')->default(false);
@@ -45,7 +45,7 @@ return new class extends Migration {
                 'contiene_cacahuetes',
                 'contiene_soja',
                 'contiene_lacteos',
-                'contiene_frustos_de_cascara',
+                'contiene_frutos_de_cascara',
                 'contiene_apio',
                 'contiene_mostaza',
                 'contiene_granos_de_sesamo',

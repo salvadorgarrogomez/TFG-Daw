@@ -34,39 +34,35 @@
     :reagent-render
     (fn []
       [:div.row {:class "divProductosyCategorias"}
+
+       ;; Visible solo en móviles (dropdown)
        [:div.col-12.d-block.d-sm-none
         [:div.dropdown
-         [:button.navbar-toggler.dropdown-toggle.desplegable
+         [:button.btn.dropdown-toggle.select
           {:type "button"
-           :data-toggle "dropdown"
-           :aria-expanded "false"
-           :aria-controls "dropdown-categorias"}
-          [:span.navbar-toggler-icon.me-2]
-          "Selecciona una categoria de la carta"]
-
-         [:div.dropdown-menu {:id "dropdown-categorias"}
+           :data-bs-toggle "dropdown"
+           :aria-expanded "false"}
+          "Selecciona una categoría de la carta"]
+         [:ul.dropdown-menu
           (for [categoria @categorias]
             ^{:key (:id categoria)}
-            [:a.dropdown-item
-             {:style {:cursor "pointer"}
-              :on-click #(do
-                           (obtener-productos (:id categoria))
-                           (reset! mensaje-categoria (obtener-mensaje-categoria (:id categoria))))}
-             (:nombre categoria)])]]]
+            [:li
+             [:a.dropdown-item
+              {:style {:cursor "pointer"}
+               :on-click #(do
+                            (obtener-productos (:id categoria))
+                            (reset! mensaje-categoria (obtener-mensaje-categoria (:id categoria))))}
+              (:nombre categoria)]])]]]
 
-
-       ;; Contenedor de botones (Categorías)
-       [:div.col-12.d-none.d-sm-block {:class "divButtons"}
-        (if (empty? @categorias)
-          [:p "Cargando categorías..."]
-          [:div {:class "buttonCategoria"}
-           (for [categoria @categorias]
-             ^{:key (:id categoria)}
-             [:button {:on-click #(do
-                                    (obtener-productos (:id categoria))
-                                    (reset! mensaje-categoria (obtener-mensaje-categoria (:id categoria))))
-                       :class "buttons"}
-              (:nombre categoria)])])]
+       ;; Visible solo en pantallas ≥ sm (botones horizontales)
+       [:div.col-12.d-none.d-sm-flex.justify-content-center.flex-wrap.gap-2.mt-3.divButtons
+        (for [categoria @categorias]
+          ^{:key (:id categoria)}
+          [:button.buttons
+           {:on-click #(do
+                         (obtener-productos (:id categoria))
+                         (reset! mensaje-categoria (obtener-mensaje-categoria (:id categoria))))}
+           (:nombre categoria)])]
 
        [:div.col-12 {:class "mensaje-categoria"}
         (if (not-empty @mensaje-categoria)
@@ -94,7 +90,7 @@
                                     "contiene_cacahuetes" "/imgs/alergenos/cacahuetes.png"
                                     "contiene_soja" "/imgs/alergenos/soja.png"
                                     "contiene_lacteos" "/imgs/alergenos/lacteos.png"
-                                    "contiene_frustos_de_cascara" "/imgs/alergenos/cascaras.png"
+                                    "contiene_frutos_de_cascara" "/imgs/alergenos/cascaras.png"
                                     "contiene_apio" "/imgs/alergenos/apio.png"
                                     "contiene_mostaza" "/imgs/alergenos/mostaza.png"
                                     "contiene_granos_de_sesamo" "/imgs/alergenos/sesamo.png"

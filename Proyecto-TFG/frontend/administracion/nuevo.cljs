@@ -18,7 +18,7 @@
 (defonce contiene_cacahuetes-producto (r/atom ""))
 (defonce contiene_soja-producto (r/atom ""))
 (defonce contiene_lacteos-producto (r/atom ""))
-(defonce contiene_frustos_de_cascara-producto (r/atom ""))
+(defonce contiene_frutos_de_cascara-producto (r/atom ""))
 (defonce contiene_apio-producto (r/atom ""))
 (defonce contiene_mostaza-producto (r/atom ""))
 (defonce contiene_granos_de_sesamo-producto (r/atom ""))
@@ -153,10 +153,10 @@
              [:option {:value "true"} "Sí"]
              [:option {:value "false"} "No"]]]]
           [:div
-           [:p {:for "contiene_frustos_de_cascara"} "El plato contiene frustos de cascara?"
-            [:select {:value (or @contiene_frustos_de_cascara-producto "")
-                      :id "contiene_frustos_de_cascara"
-                      :on-change #(reset! contiene_frustos_de_cascara-producto (-> % .-target .-value))}
+           [:p {:for "contiene_frutos_de_cascara"} "El plato contiene frustos de cascara?"
+            [:select {:value (or @contiene_frutos_de_cascara-producto "")
+                      :id "contiene_frutos_de_cascara"
+                      :on-change #(reset! contiene_frutos_de_cascara-producto (-> % .-target .-value))}
              [:option {:value ""} "-- Selecciona una opción --"]
              [:option {:value "true"} "Sí"]
              [:option {:value "false"} "No"]]]]
@@ -231,7 +231,7 @@
                                                           :contiene_cacahuetes @contiene_cacahuetes-producto
                                                           :contiene_soja @contiene_soja-producto
                                                           :contiene_lacteos @contiene_lacteos-producto
-                                                          :contiene_frustos_de_cascara @contiene_frustos_de_cascara-producto
+                                                          :contiene_frutos_de_cascara @contiene_frutos_de_cascara-producto
                                                           :contiene_apio @contiene_apio-producto
                                                           :contiene_mostaza @contiene_mostaza-producto
                                                           :contiene_granos_de_sesamo @contiene_granos_de_sesamo-producto
@@ -252,7 +252,7 @@
                                       (reset! contiene_cacahuetes-producto "")
                                       (reset! contiene_soja-producto "")
                                       (reset! contiene_lacteos-producto "")
-                                      (reset! contiene_frustos_de_cascara-producto "")
+                                      (reset! contiene_frutos_de_cascara-producto "")
                                       (reset! contiene_apio-producto "")
                                       (reset! contiene_mostaza-producto "")
                                       (reset! contiene_granos_de_sesamo-producto "")

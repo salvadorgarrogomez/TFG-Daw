@@ -23,7 +23,7 @@ class InsertarProducto extends Controller
             'contiene_cacahuetes',
             'contiene_soja',
             'contiene_lacteos',
-            'contiene_frustos_de_cascara',
+            'contiene_frutos_de_cascara',
             'contiene_apio',
             'contiene_mostaza',
             'contiene_granos_de_sesamo',

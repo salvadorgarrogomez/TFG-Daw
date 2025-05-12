@@ -7,24 +7,53 @@
 (def selected-image (r/atom nil))
 
 (defn imagenes-carrusel []
-  (let [imagenes @db/imagenes]  ;; Obtencion de las imágenes desde el atom
+  (let [imagenes @db/imagenes]
     (if (empty? imagenes)
       [:div "No se encontraron imágenes."]
-      [:div.carousel {:id "carouselExampleControls" :class "carousel slide" :data-ride "carousel"}
-       [:div.carousel-inner
-        (for [{:keys [id descripcion imagen_base64 mime_type]} imagenes]
-          ^{:key id}
-          [:div.carousel-item {:class (if (= id (first (map :id imagenes))) "active" "")}
-           [:div {:class "d-flex justify-content-center"}  ;; Asegura que la imagen esté centrada en el carrusel
-            [:img {:src (str "data:" mime_type ";base64," imagen_base64)
-                   :alt descripcion}]]])]
-       ;; Botones laterales del carrusel, para navegar entre las imágenes
-       [:button.carousel-control-prev {:href "#carouselExampleControls" :role "button" :data-slide "prev"}
-        [:span.carousel-control-prev-icon {:aria-hidden "true"}]
-        [:span.sr-only "Previous"]]
-       [:button.carousel-control-next {:href "#carouselExampleControls" :role "button" :data-slide "next"}
-        [:span.carousel-control-next-icon {:aria-hidden "true"}]
-        [:span.sr-only "Next"]]])))
+      (let [carousel-id "carouselExampleIndicators"]
+        [:div.carousel.slide.container  {:id carousel-id}
+         ;; Indicadores de slide (los puntos)
+         [:div.carousel-indicators
+          (doall
+           (map-indexed
+            (fn [i {:keys [id]}]
+              [:button {:key (str "indicador-" (or id i)) 
+                        :type "button"
+                        :data-bs-target (str "#" carousel-id)
+                        :data-bs-slide-to i
+                        :class (when (= i 0) "active")
+                        :aria-current (when (= i 0) "true")
+                        :aria-label (str "Slide " (inc i))}])
+            imagenes))]
+         ;; Contenido del carrusel
+         [:div.carousel-inner
+          (doall
+           (map-indexed
+            (fn [i {:keys [id descripcion imagen_base64 mime_type]}]
+              [:div.carousel-item {:key (str "item-" (or id i))
+                                   :class (when (= i 0) "active")}
+               [:img {:src (str "data:" mime_type ";base64," imagen_base64)
+                      :alt descripcion
+                      :class "d-block mx-auto"}]])
+            imagenes))]
+
+         ;; Botón "Anterior"
+         [:button.carousel-control-prev
+          {:type "button"
+           :class "button"
+           :data-bs-target (str "#" carousel-id)
+           :data-bs-slide "prev"}
+          [:span.carousel-control-prev-icon {:aria-hidden "true"}]
+          [:span.visually-hidden "Previous"]]
+         ;; Botón "Siguiente"
+         [:button.carousel-control-next
+          {:type "button"
+           :class "button"
+           :data-bs-target (str "#" carousel-id)
+           :data-bs-slide "next"}
+          [:span.carousel-control-next-icon {:aria-hidden "true"}]
+          [:span.visually-hidden "Next"]]]))))
+
 
 (defn mostrar-imagenes-todas []
   (let [imagenes @db/imagenes]
@@ -33,9 +62,10 @@
       [:div
        ;; Galería de imágenes
        [:div.row {:class "containerImg"}
-        (for [{:keys [id descripcion imagen_base64 mime_type]} imagenes]
-          ^{:key id}
-          (let [base64-src (str "data:" mime_type ";base64," imagen_base64)]
+        (for [idx (range (count imagenes))]
+          (let [{:keys [id descripcion imagen_base64 mime_type]} (nth imagenes idx)
+                base64-src (str "data:" mime_type ";base64," imagen_base64)]
+            ^{:key (str id "-" idx)}  ;; Usa id + índice para asegurar unicidad
             [:div.col-12.col-md-5.conjuntoImagenes
              {:on-click #(reset! selected-image {:src base64-src :alt descripcion})}
              [:img {:src base64-src :alt descripcion}]]))]

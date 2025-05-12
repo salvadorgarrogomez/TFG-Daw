@@ -13,6 +13,7 @@ use App\Http\Controllers\InsertarCategoria;
 use App\Http\Controllers\EliminarCategoria;
 use App\Http\Controllers\EliminarProducto;
 use App\Http\Controllers\EliminarImagen;
+use App\Http\Controllers\GeneracionPDF;
 
 // Rutas para poder utilizar las clases implementadas de la api en el Controladdor Principal
 Route::get('/productos', action: [Principal::class, 'productos']);
@@ -42,4 +43,7 @@ Route::middleware(['jwt.auth'])->post('/categoria/nuevo', [InsertarCategoria::cl
 Route::middleware(['jwt.auth'])->delete('/categoria/eliminar/{id}', [EliminarCategoria::class, 'delete']);
 Route::middleware(['jwt.auth'])->delete('/producto/eliminar/{id}', [EliminarProducto::class, 'delete']);
 Route::middleware(['jwt.auth'])->delete('/imagen/eliminar/{id}', [EliminarImagen::class, 'delete']);
+
+Route::middleware(['jwt.auth'])->post('/generar-pdf', [GeneracionPDF::class, 'generarPDF']);
+
 

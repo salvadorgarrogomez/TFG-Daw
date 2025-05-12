@@ -1,7 +1,9 @@
 <?php
 
 namespace App\Models;
+
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Categoria;
 
 class Producto extends Model
 {
@@ -21,7 +23,7 @@ class Producto extends Model
         'contiene_cacahuetes',
         'contiene_soja',
         'contiene_lacteos',
-        'contiene_frustos_de_cascara',
+        'contiene_frutos_de_cascara',
         'contiene_apio',
         'contiene_mostaza',
         'contiene_granos_de_sesamo',
@@ -32,7 +34,13 @@ class Producto extends Model
         'activo'
     ];
 
-    // Hook para actualizar automáticamente la fecha, y saber asi cuando se le realizo el ultimo cambio
+    // Relación con la categoría
+    public function categoria()
+    {
+        return $this->belongsTo(Categoria::class, 'categoria_id');
+    }
+
+    // Hook para actualizar automáticamente la fecha
     protected static function boot()
     {
         parent::boot();
@@ -41,6 +49,5 @@ class Producto extends Model
             $model->fecha_hora = now();
         });
     }
-
 }
 

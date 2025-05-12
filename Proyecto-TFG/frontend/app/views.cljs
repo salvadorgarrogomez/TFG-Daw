@@ -6,12 +6,13 @@
   [:header.row
    [:img.col-12 {:class "logo"
                  :src "imgs/logoBar2.1.svg"
-                 :alt "Logo Bar El Escobar"}]
-   [:nav.row {:class "navBar"}
+                 :alt "Logo Bar ElEscobar"}]
+   [:nav.row {:class "navBar"} ; <- Clase personalizada
     [:ul.col-12 {:class "barraInicio"}
      [:li.col-4 [:a {:href "#/"} "Inicio"]]
      [:li.col-4 [:a {:href "#/categorias"} "Carta"]]
      [:li.col-4 [:a {:href "#/nosotros"} "Nosotros"]]]]])
+
 
 (defn footer []
   [:footer.container-fluid

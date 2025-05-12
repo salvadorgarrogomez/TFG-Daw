@@ -2,7 +2,8 @@
   (:require [reagent.core :as r]
             [app.state :as state]
             [ajax.core :refer [GET POST]]
-            [app.db :refer [list-productos fetch-list-productos categorias eliminar-categoria eliminar-producto fetch-list-categorias activo-producto activo-categoria]]
+            [app.db :refer [list-productos fetch-list-productos categorias eliminar-categoria
+                            eliminar-producto fetch-list-categorias activo-producto activo-categoria descargar-pdf]]
             [reagent.dom :as dom]
             [reitit.frontend.easy :as rfe]))
 
@@ -19,6 +20,8 @@
 (def categoria-seleccionada (r/atom "todas"))
 (defonce categoria-busqueda (r/atom ""))
 (defonce producto-busqueda (r/atom ""))
+(defonce productos (r/atom []))
+
 
 (defn verificar-sesion []
   (GET "/api/admin"
@@ -38,13 +41,14 @@
                       (reset! datos-usuario nil)
                       (reset! sesion-verificada? true))}))
 
+
 (defn render-categorias []
   (let [texto (clojure.string/lower-case @categoria-busqueda)
         categorias-filtradas (filter #(clojure.string/includes?
                                        (clojure.string/lower-case (:nombre %))
                                        texto)
                                      @categorias)]
-    [:div.col-12
+    [:div.col-12.table-responsive
      [:h3 "Lista de categorias"]
      ;; Caja de búsqueda
      [:input.form-control.mb-3
@@ -52,7 +56,7 @@
        :placeholder "Buscar categoría por nombre..."
        :value @categoria-busqueda
        :on-change #(reset! categoria-busqueda (-> % .-target .-value))}]
-     [:table {:class "table table-striped tableCategorias"}
+     [:table {:class "table table-striped"}
       [:thead
        [:tr
         [:th {:class "id"} "ID"] [:th "Nombre"] [:th.d-none.d-sm-table-cell "Descripcion"] [:th {:class "tdButton"} "Editar"] [:th {:class "tdButton"} "Activar/Desactivar"]]]
@@ -81,58 +85,66 @@
 (defn render-productos []
   (let [texto (clojure.string/lower-case @producto-busqueda)
         categoria (clojure.string/lower-case @categoria-seleccionada)
-        productos-filtradas (->> @list-productos
+        productos-filtrados (->> @list-productos
                                  (filter #(clojure.string/includes?
                                            (clojure.string/lower-case (:nombre %))
                                            texto))
                                  (filter #(or (= categoria "todas")
                                               (= (clojure.string/lower-case (:nombre_categoria %))
                                                  categoria))))]
-    [:div.col-12
-     [:div.form-group.mb-3
-      [:h3 {:for "filtro-categoria"} "Filtrar por categoría:"]
-      [:select.form-control
-       {:id "filtro-categoria"
-        :value @categoria-seleccionada
-        :on-change #(reset! categoria-seleccionada (-> % .-target .-value))}
-       [:option {:value "todas"} "Todas las categorías"]
-       (for [{:keys [id nombre]} @categorias]
-         ^{:key id}
-         [:option {:value nombre} nombre])]]
-     [:h3 "Lista de productos"]
-     [:input.form-control.mb-3
-      {:type "text"
-       :placeholder "Buscar producto por nombre..."
-       :value @producto-busqueda
-       :on-change #(reset! producto-busqueda (-> % .-target .-value))}]
-     [:table {:class "table table-striped"}
-      [:thead
-       [:tr
-        [:th {:class "id"} "ID"] [:th "Nombre"] [:th.d-none.d-lg-table-cell "Descripcion"] [:th.d-none.d-sm-table-cell "Precio"]
-        [:th.d-none.d-lg-table-cell "Categoría"] [:th.d-none.d-lg-table-cell "Tipo de plato"] [:th "Tipo de porción"]
-        [:th "Editar"] [:th "Activar/Desactivar"]]]
-      [:tbody
-       (for [{:keys [id nombre description precio nombre_categoria tipo_plato tipo_porcion activo]} productos-filtradas]
-         ^{:key id}
-         [:tr {:class (if activo "table-success" "table-danger")}
-          [:td {:class "id"} id] [:td nombre] [:td.d-none.d-lg-table-cell description] [:td.d-none.d-sm-table-cell (str precio " €")]
-          [:td.d-none.d-lg-table-cell nombre_categoria] [:td.d-none.d-lg-table-cell tipo_plato] [:td tipo_porcion]
-          [:td {:class "tdButton"}
+    (let [productos-ids (map :id productos-filtrados)]
+      [:div.col-12.table-responsive
+       [:div.form-group.mb-3
+        [:h4 {:for "filtro-categoria"} "Filtrar por categoría:"]
+        [:select.form-control
+         {:id "filtro-categoria"
+          :value @categoria-seleccionada
+          :on-change #(reset! categoria-seleccionada (-> % .-target .-value))}
+         [:option {:value "todas"} "Todas las categorías"]
+         (for [{:keys [id nombre]} @categorias]
+           ^{:key id}
+           [:option {:value nombre} nombre])]]
+       [:button
+        {:on-click
+         #(if (empty? productos-ids)
+            (js/alert "No hay productos seleccionados para generar el PDF")
+            (descargar-pdf productos-ids @categoria-seleccionada))}
+        "Generar PDF de productos filtrados"]
+       [:h4 "Lista de productos"]
+       [:input.form-control.mb-3
+        {:type "text"
+         :placeholder "Buscar producto por nombre..."
+         :value @producto-busqueda
+         :on-change #(reset! producto-busqueda (-> % .-target .-value))}]
+       [:table {:class "table table-striped"}
+        [:thead
+         [:tr
+          [:th {:class "id"} "ID"] [:th "Nombre"] [:th.d-none.d-lg-table-cell "Descripcion"] [:th.d-none.d-sm-table-cell "Precio"]
+          [:th.d-none.d-lg-table-cell "Categoría"] [:th.d-none.d-lg-table-cell "Tipo de plato"] [:th "Tipo de porción"]
+          [:th "Editar"] [:th "Activar/Desactivar"]]]
+        [:tbody
+         (for [{:keys [id nombre description precio nombre_categoria tipo_plato tipo_porcion activo]} productos-filtrados]
+           ^{:key id}
+           [:tr {:class (if activo "table-success" "table-danger")}
+            [:td {:class "id"} id] [:td nombre] [:td.d-none.d-lg-table-cell description] [:td.d-none.d-sm-table-cell (str precio " €")]
+            [:td.d-none.d-lg-table-cell nombre_categoria] [:td.d-none.d-lg-table-cell tipo_plato] [:td tipo_porcion]
+            [:td {:class "tdButton"}
+             [:button
+              {:on-click #(do
+                            (set! (.-hash js/location) (str "/editar/producto/" id)))}
+              "Editar"]]
+            [:td {:class "tdButton"} [:button
+                                      {:on-click #(activo-producto id)}
+                                      "✔️/❌"]]])
+         [:tr
+          [:td
            [:button
-            {:on-click #(do
-                          (set! (.-hash js/location) (str "/editar/producto/" id)))}
-            "Editar"]]
-          [:td {:class "tdButton"} [:button
-                                    {:on-click #(activo-producto id)}
-                                    "✔️/❌"]]])
-       [:tr
-        [:td
-         [:button
-          {:on-click
-           #(do
-              (set! (.-hash js/location) "/nuevo/producto"))
-           :class "nuevo"}
-          "Añadir nuevo producto"]]]]]]))
+            {:on-click
+             #(do
+                (set! (.-hash js/location) "/nuevo/producto"))
+             :class "nuevo"}
+            "Añadir nuevo producto"]]]]]])))
+
 
 (defn login []
   (POST "/api/login"

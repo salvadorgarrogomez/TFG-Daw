@@ -148,3 +148,24 @@
           (js/console.log "Categoría eliminada" body)
           (js/alert "Categoría eliminada correctamente, dale a boton de 'Mostrar categorias'."))
         (js/console.error "Error al eliminar categoría" body)))))
+
+(defn descargar-pdf [productos-ids categoria-seleccionada]
+  (let [body-json (.stringify js/JSON (clj->js {:productos productos-ids
+                                                :categoria categoria-seleccionada}))]
+    (-> (js/fetch "/api/generar-pdf"
+                  (clj->js {:with-credentials? true
+                            :method "POST"
+                            :headers #js {"Content-Type" "application/json"}
+                            :body body-json}))
+        (.then (fn [response]
+                 (if (.-ok response)
+                   (.blob response)
+                   (throw (js/Error. "Respuesta fallida del servidor")))))
+        (.then (fn [blob]
+                 (let [url (.createObjectURL js/URL blob)
+                       link (.createElement js/document "a")]
+                   (set! (.-href link) url)
+                   (set! (.-download link) "productos_filtrados.pdf")
+                   (.click link)
+                   (.revokeObjectURL js/URL url))))
+        (.catch #(js/alert (str "Error al generar el PDF: " %))))))

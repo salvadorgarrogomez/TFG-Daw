@@ -35,6 +35,11 @@ body {
   align-items: center;
   padding-bottom: 10px;
 }
+.divProductosyCategorias .select {
+  background-color: #800020;
+  color: #ffffff;
+  width: 100%;
+}
 .divProductosyCategorias .buttons {
   padding: 5px;
   width: 125px;
@@ -275,6 +280,11 @@ header {
   margin-bottom: 20px;
   justify-content: center;
 }
+.carousel .carousel-control-prev,
+.carousel .carousel-control-next {
+  background-color: rgba(0, 0, 0, 0.1) !important;
+  color: inherit;
+}
 
 .containerImg {
   justify-content: center;
@@ -343,25 +353,22 @@ header {
   list-style-type: none;
   justify-content: center;
   background-color: #ffffff;
-  justify-content: center;
   align-items: center;
   height: 35px;
-  padding-inline: 0px;
+  padding-inline: 0;
+  margin: 0;
 }
 .navBar li {
-  width: 100%;
-  height: 100%;
   text-align: center;
-  list-style: none;
 }
 .navBar a {
-  align-content: center;
   display: block;
   width: 100%;
   height: 100%;
   text-decoration: none;
   color: #800020;
   font-weight: bold;
+  padding: 5px 0;
 }
 .navBar li:hover {
   background-color: #800020;
@@ -374,6 +381,7 @@ header {
   position: relative;
   overflow: hidden;
   margin-bottom: 100px;
+  padding-top: 15px;
 }
 .container h3 {
   text-align: left;
@@ -678,30 +686,9 @@ table button.nuevo {
   .entrada {
     margin: 0px;
   }
-  .tableCategorias {
-    table-layout: fixed;
-    width: 100%;
-    margin-left: -20px;
-    height: auto;
-  }
-  .tableCategorias th,
-  .tableCategorias td {
-    width: 100px;
-  }
-  .tableCategorias th.id,
-  .tableCategorias td.id {
-    width: 10px;
-    font-weight: bold;
-  }
-  .tableCategorias th.tdButton,
-  .tableCategorias td.tdButton {
-    width: 120px;
-    font-weight: bold;
-  }
   table {
     table-layout: fixed;
     width: 100%;
-    margin-left: -42px;
     height: auto;
   }
   table th,
@@ -844,4 +831,48 @@ table button.nuevo {
     display: flex;
     flex-direction: column;
   }
+}
+.headerPDF .logo {
+  margin-top: 0;
+  margin-left: 85px;
+  margin-right: 100px;
+}
+
+.h1 {
+  color: black;
+}
+
+.tablaPDF {
+  align-items: center;
+  justify-content: center;
+  align-content: center;
+  width: 100%;
+  margin-left: 2px;
+}
+.tablaPDF th,
+.tablaPDF td {
+  padding: 15px;
+}
+.tablaPDF tr:nth-child(odd) {
+  background-color: #f2f2f2;
+}
+.tablaPDF tr:nth-child(even) {
+  background-color: #ffffff;
+}
+.tablaPDF th {
+  background-color: #800020;
+  color: #ffffff;
+}
+.tablaPDF .tablaPDF .celdaID {
+  width: 10px !important;
+  padding: 15px;
+}
+.tablaPDF img {
+  width: 20px;
+  height: 20px;
+  margin-right: 3px;
+}
+.tablaPDF .imagen_racion {
+  width: 50px;
+  height: 50px;
 }/*# sourceMappingURL=style.css.map */
