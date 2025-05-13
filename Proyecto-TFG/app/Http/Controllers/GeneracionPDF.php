@@ -52,7 +52,6 @@ class GeneracionPDF extends Controller
         foreach ($productos as $producto) {
             $tipo = $producto->tipo_porcion;
             $archivo = $mapaImagenes[$tipo] ?? 'default.png';
-
             $path = public_path("imgs/$archivo");
             if (file_exists($path)) {
                 $base64 = base64_encode(file_get_contents($path));
@@ -74,15 +73,28 @@ class GeneracionPDF extends Controller
                     }
                 }
             }
-
             $alergenosPorProducto[$producto->id] = $alergenos;
         }
+
+        $alergenosDisponibles = [];
+        foreach ($mapaAlergeneos as $campo => $rutaImagen) {
+            $path = public_path("imgs/$rutaImagen");
+            if (file_exists($path)) {
+                $base64 = base64_encode(file_get_contents($path));
+                $alergenosDisponibles[] = [
+                    'nombre' => ucfirst(str_replace('contiene_', '', $campo)),
+                    'imagen' => 'data:image/png;base64,' . $base64
+                ];
+            }
+        }
+
 
         $pdf = Pdf::loadView('productos-pdf', [
             'productos' => $productos,
             'categoriaNombre' => $categoriaNombre,
             'imagenesPorcion' => $imagenesPorcion,
             'alergenosPorProducto' => $alergenosPorProducto,
+            'alergenosDisponibles' => $alergenosDisponibles,
             'logo' => $logoSrc
         ]);
 

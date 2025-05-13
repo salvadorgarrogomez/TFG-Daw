@@ -649,6 +649,24 @@ button:hover {
   height: auto;
 }
 
+.botonesUser {
+  margin-top: 15px;
+  margin-bottom: 15px;
+  margin-inline: 0px;
+}
+.botonesUser button {
+  margin: 5px;
+  width: 170px;
+  height: auto;
+}
+
+.pdf {
+  margin-bottom: 15px;
+  align-items: center;
+  justify-content: center;
+  align-content: center;
+}
+
 table {
   table-layout: fixed;
   width: 100%;
@@ -821,12 +839,35 @@ table button.nuevo {
   color: black;
 }
 
+.alergenoUL {
+  display: flex;
+  margin-top: 15px;
+}
+
+.alergenoLI {
+  display: inline-block;
+  margin-right: 10px;
+  text-align: center;
+}
+
+.imgALERGENO {
+  width: 40px;
+  height: 40px;
+}
+
+.alergenoNombre {
+  font-size: 10px;
+  font-family: "Nerko One", cursive;
+}
+
 .tablaPDF {
   align-items: center;
   justify-content: center;
   align-content: center;
   width: 100%;
   margin-left: 2px;
+  border-bottom: 0.5px dotted black;
+  margin-bottom: 15px;
 }
 .tablaPDF th,
 .tablaPDF td {

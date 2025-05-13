@@ -60,7 +60,7 @@
 ;; En este caso, solo permite subir imagenes de 1 en 1
 (defn formulario-subida []
   [:div {:class "formulario"}
-   [:h3 "Subir Imagen"]
+   [:h4 "Subir Imagen"]
    [:p "(solo se puede subir de 1 en 1)"]
    [:p "Para eliminar una imagen, clicka sobre ella y confirma."]
    [:input {:type "file"

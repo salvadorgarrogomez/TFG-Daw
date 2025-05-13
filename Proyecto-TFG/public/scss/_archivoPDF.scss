@@ -10,12 +10,36 @@
     color: black;
 }
 
+.alergenoUL {
+    display: flex;
+    margin-top: 15px;
+}
+
+.alergenoLI {
+    display: inline-block;
+    margin-right: 10px;
+    text-align: center;
+}
+
+.imgALERGENO {
+    width: 40px;
+    height: 40px;
+}
+
+.alergenoNombre {
+    font-size: 10px;
+    font-family: $fuente-decorativa;
+}
+
+
 .tablaPDF {
     align-items: center;
     justify-content: center;
     align-content: center;
     width: 100%;
     margin-left: 2px;
+    border-bottom: 0.5px dotted black;
+    margin-bottom: 15px;
 
     th,
     td {
@@ -39,7 +63,7 @@
         width: 10px !important;
         padding: 15px;
     }
-    
+
 
     img {
         width: 20px;

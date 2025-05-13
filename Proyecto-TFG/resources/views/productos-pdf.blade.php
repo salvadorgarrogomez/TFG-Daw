@@ -9,10 +9,10 @@
 
 <body>
     <header class="headerPDF">
-    <img src="{{ $logo }}" class="logo">
-    <h1 class="h1">{{ $categoriaNombre }}</h1>
+        <img src="{{ $logo }}" class="logo">
+        <h1 class="h1">{{ $categoriaNombre }}</h1>
     </header>
-    
+
     <table class="tablaPDF">
         <thead>
             <tr>
@@ -42,6 +42,14 @@
             @endforeach
         </tbody>
     </table>
+    <ul class="alergenoUL">
+        @foreach($alergenosDisponibles as $alergeno)
+            <li class="alergenoLI">
+                <img src="{{ $alergeno['imagen'] }}" alt="{{ $alergeno['nombre'] }}" class="imgALERGENO">
+                <div class="alergenoNombre">{{ $alergeno['nombre'] }}</div>
+            </li>
+        @endforeach
+    </ul>
 </body>
 
 </html>

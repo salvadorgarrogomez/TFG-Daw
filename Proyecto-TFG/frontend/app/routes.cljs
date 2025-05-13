@@ -9,13 +9,14 @@
             [administracion.editar :as editar]
             [administracion.imagenes :as imagenes]
             [administracion.nuevo :as nuevo]
-            [app.state :refer [current-route]]))  
+            [comandas.core :as comandas]
+            [app.state :refer [current-route]]))
 
-(defn requiere-admin [context]
+(defn requiere-permisos [context]
   (if (app.state/rol-admin?)
     context
     (do
-      (js/alert "Acceso restringido solo para administradores.")
+      (js/alert "Acceso restringido solo para usuarios identificados.")
       (rfe/push-state "/")
       nil)))
 
@@ -28,19 +29,23 @@
    ["/administracion"
     {:name :administracion
      :view administracion/page
-     :controllers [{:start requiere-admin}]}]
+     :controllers [{:start requiere-permisos}]}]
    ["/imagenes"
     {:name :imagenes
      :view imagenes/page
-     :controllers [{:start requiere-admin}]}]
+     :controllers [{:start requiere-permisos}]}]
+   ["/comandas"
+    {:name :comandas
+     :view comandas/page
+     :controllers [{:start requiere-permisos}]}]
    ["/nuevo/:tipo"
     {:name :nuevo
      :view nuevo/page
-     :controllers [{:start requiere-admin}]}]
+     :controllers [{:start requiere-permisos}]}]
    ["/editar/:tipo/:id"
     {:name :editar
      :view editar/page
-     :controllers [{:start requiere-admin}]}]])
+     :controllers [{:start requiere-permisos}]}]])
 
 (def router (rf/router routes))
 

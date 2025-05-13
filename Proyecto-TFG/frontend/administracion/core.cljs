@@ -24,7 +24,7 @@
 
 
 (defn verificar-sesion []
-  (GET "/api/admin"
+  (GET "/api/usuario"
     {:with-credentials? true
      :response-format :json
      :keywords? true
@@ -49,7 +49,7 @@
                                        texto)
                                      @categorias)]
     [:div.col-12.table-responsive
-     [:h3 "Lista de categorias"]
+     [:h4 "Lista de categorias"]
      ;; Caja de búsqueda
      [:input.form-control.mb-3
       {:type "text"
@@ -108,8 +108,9 @@
         {:on-click
          #(if (empty? productos-ids)
             (js/alert "No hay productos seleccionados para generar el PDF")
-            (descargar-pdf productos-ids @categoria-seleccionada))}
-        "Generar PDF de productos filtrados"]
+            (descargar-pdf productos-ids @categoria-seleccionada))
+         :class "pdf"}
+        "Generar PDF de la categoria seleccionada"]
        [:h4 "Lista de productos"]
        [:input.form-control.mb-3
         {:type "text"
@@ -155,23 +156,19 @@
      :keywords? true
      :with-credentials? true
      :handler #(do
-                 ;; Se limpia cualquier estado anterior
                  (reset! auth-token nil)
                  (reset! logged-in? true)
                  (reset! datos-usuario {:nombre (:nombre %) :rol (:rol %)})
                  (js/localStorage.setItem "id" (:id %))
-                 ;; Verifica el rol desde el backend
-                 (GET "/api/admin"
-                   {:with-credentials? true
-                    :handler (fn [resp]
-                               (js/console.log "Verificado como admin" resp))
-                    :error-handler (fn [err]
-                                     (js/console.log "No eres admin" err))}))
+                 (reset! sesion-verificada? true)
+                 (when (= (:rol %) "admin")
+                   (js/console.log "Es admin")))
 
      :error-handler #(do
                        (println "Error en la solicitud: " %)
                        (js/alert "Credenciales incorrectas. Prueba de nuevo o ponte en contacto con el Administrador del sistema.")
                        (reset! loading? false))}))
+
 
 (defn login-form []
   [:div.row {:class "administracion"}
@@ -215,6 +212,7 @@
     (cond
       (not @sesion-verificada?)
       [:div "Cargando sesión..."]
+
       (nil? @datos-usuario)
       [:div.row {:class "panel"}
        [:div.col-12 {:class "panelBotones"}
@@ -223,37 +221,43 @@
         [:button {:on-click #(do
                                (logout)
                                (.reload js/location true))} "Cerrar sesión"]]]
+
       (not @logged-in?)
       [:div "Acceso denegado."]
+
       :else
       (let [usuario (:rol @datos-usuario)]
-        (if (not= usuario "admin")
-          (do
-            (js/alert "Acceso denegado. Solo los administradores pueden acceder a este panel.")
-            [:div "Acceso denegado."])
-          ;; Si el usuario es admin, muestra el panel de administración
-          [:div.row {:class "panel"}
-           [:div.col-12 {:class "panelBotones"}
-            [:h2 (str "Bienvenido/a, " (:nombre @datos-usuario) "!")]
-            [:p (str "Tienes permisos, " usuario)]
-            [:p "Tienes acceso al panel de administración."]
-            [:button {:on-click #(do
-                                   (logout)
-                                   (.reload js/location true))} "Cerrar sesión"]
-            (when (= usuario "admin")
-              [:div {:class "botonesAdmin"}
-               [:p "Eres administrador. Puedes editar el contenido."]
-               [:button {:on-click #(do
-                                      (reset! mostrar-productos? true)
-                                      (reset! mostrar-categorias? false)
-                                      (fetch-list-productos))} "Mostrar productos"]
-               [:button {:on-click #(do
-                                      (reset! mostrar-categorias? true)
-                                      (reset! mostrar-productos? false)
-                                      (fetch-list-categorias))} "Mostrar categorías"]
-               [:button {:on-click #(set! (.-hash js/location) "#/imagenes")} "Mostrar fotografías"]])
-            (when @mostrar-productos? [render-productos])
-            (when @mostrar-categorias? [render-categorias])]])))))
+        [:div.row {:class "panel"}
+         [:div.col-12 {:class "panelBotones"}
+          [:h2 (str "Bienvenido/a, " (:nombre @datos-usuario) "!")]
+          [:p (str "Tienes permisos, " usuario)]
+          [:button {:on-click #(do
+                                 (logout)
+                                 (.reload js/location true))} "Cerrar sesión"]
+
+          ;; Mostrar panel según el rol
+          (if (= usuario "admin")
+            [:div {:class "botonesAdmin"}
+             [:p "Eres administrador. Puedes editar el contenido."]
+             [:button {:on-click #(do
+                                    (reset! mostrar-productos? true)
+                                    (reset! mostrar-categorias? false)
+                                    (fetch-list-productos))} "Mostrar productos"]
+             [:button {:on-click #(do
+                                    (reset! mostrar-categorias? true)
+                                    (reset! mostrar-productos? false)
+                                    (fetch-list-categorias))} "Mostrar categorías"]
+             [:button {:on-click #(set! (.-hash js/location) "#/imagenes")} "Mostrar fotografías"]
+             [:button {:on-click #(set! (.-hash js/location) "#/comandas")} "Comandas"]]
+            ;; Si no es admin, solo mostramos botón de comandas
+            [:div {:class "botonesUser"}
+             [:p "Tienes acceso, puedes apuntar las comandas de los clientes."]
+             [:button {:on-click #(set! (.-hash js/location) "#/comandas")} "Comandas"]])]
+
+         ;; Panel dinámico
+         (when @mostrar-productos? [render-productos])
+         (when @mostrar-categorias? [render-categorias])]))))
+
 
 (defn page []
   (cond

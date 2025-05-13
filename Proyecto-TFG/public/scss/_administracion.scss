@@ -63,6 +63,25 @@
 
 }
 
+.botonesUser {
+    margin-top: 15px;
+    margin-bottom: 15px;
+    margin-inline: 0px;
+
+    button {
+        margin: 5px;
+        width: 170px;
+        height: auto;
+    }
+}
+
+.pdf {
+    margin-bottom: 15px;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+}
+
 table {
     table-layout: fixed;
     width: 100%;

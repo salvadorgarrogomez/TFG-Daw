@@ -17,4 +17,5 @@
   (reset! rol-usuario rol))
 
 (defn rol-admin? []
-  (= @rol-usuario "admin"))
+  (or (= @rol-usuario "admin")
+      (= @rol-usuario "estandar")))
