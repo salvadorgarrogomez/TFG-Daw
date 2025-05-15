@@ -7,17 +7,21 @@ use App\Models\Producto;
 
 class ActivoProducto extends Controller
 {
-    public function activo($id)
+    public function activo(Request $request, $id)
     {
         $producto = Producto::findOrFail($id);
-        $producto->activo = !$producto->activo; // Cambia true a false o viceversa
+        // Actualiza el usuario_id y el estado activo
+        $producto->fill([
+            'usuario_id' => $request->input('usuario_id'),
+            'activo' => !$producto->activo,
+        ]);
         $producto->save();
-    
+
         return response()->json([
             'message' => 'Estado de producto actualizado',
             'activo' => $producto->activo
         ]);
     }
-    
+
 }
 

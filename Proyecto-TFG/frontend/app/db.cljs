@@ -117,26 +117,32 @@
         (js/console.error "Error al eliminar el producto" body)))))
 
 (defn activo-producto [id]
-  (go
-    (let [{:keys [status body]} (<! (http/put (str "/api/producto/activo/" id)
-                                              {:with-credentials? true
-                                               :response-format (ajax/json-response-format {:keywords? true})}))]
-      (if (= 200 status)
-        (do
-          (js/console.log "Estado actualizado" body)
-          (js/alert (str "Producto " (if (:activo body) "activado" "desactivado") " correctamente")))
-        (js/console.error "Error al actualizar estado del producto" body)))))
+  (let [usuario-id (js/localStorage.getItem "id")]
+    (go
+      (let [{:keys [status body]} (<! (http/put (str "/api/producto/activo/" id)
+                                                {:with-credentials? true
+                                                 :headers {"Content-Type" "application/json"}
+                                                 :body (js/JSON.stringify #js {:usuario_id usuario-id})
+                                                 :response-format (ajax/json-response-format {:keywords? true})}))]
+        (if (= 200 status)
+          (do
+            (js/console.log "Estado actualizado" body)
+            (js/alert (str "Producto " (if (:activo body) "activado" "desactivado") " correctamente")))
+          (js/console.error "Error al actualizar estado del producto" body))))))
 
 (defn activo-categoria [id]
-  (go
-    (let [{:keys [status body]} (<! (http/put (str "/api/categoria/activo/" id)
-                                              {:with-credentials? true
-                                               :response-format (ajax/json-response-format {:keywords? true})}))]
-      (if (= 200 status)
-        (do
-          (js/console.log "Estado actualizado" body)
-          (js/alert (str "Categoria " (if (:activo body) "activada" "desactivada") " correctamente.")))
-        (js/console.error "Error al actualizar estado de la categoria" body)))))
+  (let [usuario-id (js/localStorage.getItem "id")]
+    (go
+      (let [{:keys [status body]} (<! (http/put (str "/api/categoria/activo/" id)
+                                                {:with-credentials? true
+                                                 :headers {"Content-Type" "application/json"}
+                                                 :body (js/JSON.stringify #js {:usuario_id usuario-id})
+                                                 :response-format (ajax/json-response-format {:keywords? true})}))]
+        (if (= 200 status)
+          (do
+            (js/console.log "Estado actualizado" body)
+            (js/alert (str "Categoria " (if (:activo body) "activada" "desactivada") " correctamente.")))
+          (js/console.error "Error al actualizar estado de la categoria" body))))))
 
 (defn eliminar-categoria [id]
   (go

@@ -7,16 +7,19 @@ use App\Models\Categoria;
 
 class ActivoCategoria extends Controller
 {
-    public function activo($id)
+    public function activo(Request $request, $id)
     {
-        $producto = Categoria::findOrFail($id);
-        $producto->activo = !$producto->activo; // Cambia true a false o viceversa
-        $producto->save();
-    
+        $categoria = Categoria::findOrFail($id);
+        // Actualiza el usuario_id y el estado activo
+        $categoria->fill([
+            'usuario_id' => $request->input('usuario_id'),
+            'activo' => !$categoria->activo,
+        ]);
+        $categoria->save();
+
         return response()->json([
-            'message' => 'Estado de producto actualizado',
-            'activo' => $producto->activo
+            'message' => 'Estado de categoría actualizado',
+            'activo' => $categoria->activo
         ]);
     }
-    
 }
