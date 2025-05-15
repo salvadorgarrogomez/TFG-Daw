@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\DB;
 class Principal extends Controller
 {
 
-    // Consulta para mostrar todos los productos al llamar a la api
+    // Consulta preparada, para obtener todos los productos de la base de datos, a esta se le llama desde su Endpoint, para servir los datos.
     public function productos()
     {
         $productos = DB::select('SELECT productos.id, productos.nombre, productos.description, productos.precio, categorias.nombre AS nombre_categoria, productos.tipo_plato, 
@@ -22,7 +22,7 @@ class Principal extends Controller
         return response()->json($productos);
     }
 
-    // Consulta para mostrar todas las categorias, menos 2 id especificados, para que no aparezcan en la consulta, en orden de id
+    // Consulta preparada para mostrar todas las categorias en orden de id asc por defecto.
     public function categoriasTodas()
     {
         $categorias = DB::select('SELECT * FROM categorias ORDER BY id');
@@ -32,6 +32,7 @@ class Principal extends Controller
         return response()->json($categorias);
     }
 
+    // Consulta SQL para mostrar solo las categorias con el activo=true, que sera utilizada en partes muy especificas de la web.
     public function categorias()
     {
         $categorias = DB::select('SELECT * FROM categorias WHERE activo = TRUE ORDER BY id');
@@ -42,11 +43,10 @@ class Principal extends Controller
     }
 
 
-    // Consulta preparada, para mostrar todos lo productos en base al id de la categoria requerida
+    // Consulta preparada, para mostrar los productos en base a su categoria, obteniendo solo los que tengan la columna activo=true
     public function productosPorCategoria($categoria_id)
     {
         $productos = DB::select('SELECT * FROM productos WHERE categoria_id = ? AND activo = TRUE ORDER BY id', [$categoria_id]);
-
         if (empty($productos)) {
             return response()->json(['message' => 'No hay productos activos en esta categoría'], 404);
         }
