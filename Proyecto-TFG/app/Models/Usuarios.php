@@ -7,7 +7,7 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
 
 class Usuarios extends Authenticatable implements JWTSubject
 {
-    // Define la tabla si no es el nombre por defecto 'usuarios'
+    // Define la tabla 'usuarios'
     protected $table = 'usuarios';
 
     // Define los campos que pueden ser asignados masivamente
