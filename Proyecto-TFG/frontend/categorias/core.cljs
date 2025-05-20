@@ -116,7 +116,7 @@
                     ^{:key (:id producto)}
                     [:div {:class "producto-item"} ;; Div donde en su interior ira todo el contenido de cada producto
                      [:div {:class "precio-racion"} ;; Contenedor que agrupa precio y ración
-                      [:span {:class "precio"} (str (:precio producto) "€ ")]
+                      [:h2 {:class "precio"} (str (:precio producto) "€ ")]
                       (let [tipo-porcion (:tipo_porcion producto)
                             producto-id (:id producto)]  ;; Se guarda el ID de producto, al dar en las imagenes, saldra un alert en el navegador para ver el id
                         (cond

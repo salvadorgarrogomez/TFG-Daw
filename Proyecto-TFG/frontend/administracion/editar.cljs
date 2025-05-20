@@ -31,9 +31,10 @@
                                             "contiene_apio" "contiene_mostaza" "contiene_granos_de_sesamo" "contiene_sulfitos" "contiene_moluscos" "contiene_altramuces") (= valor "true")
                          ("precio" "categoria_id") (js/parseFloat valor)
                          valor)
-        body-extendido (clj->js (assoc {} campo valor-parseado "_method" "PUT" "usuario_id" usuario-id))
+        body-extendido (clj->js (assoc {} campo valor-parseado "usuario_id" usuario-id))
         url (str "/api/productos/" id)
-        opciones #js {:method "POST"
+        opciones #js {:method "PUT"
+                      :with-credentials? true
                       :headers #js {"Content-Type" "application/json"}
                       :body (js/JSON.stringify body-extendido)}]
     (-> (js/fetch url opciones)
@@ -58,6 +59,7 @@
                        campo valor})
         url (str "/api/categoria/" id)
         opciones #js {:method "PUT"
+                      :with-credentials? true
                       :headers #js {"Content-Type" "application/json"}
                       :body (js/JSON.stringify body)}]
     (-> (js/fetch url opciones)
