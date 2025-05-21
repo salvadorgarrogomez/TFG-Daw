@@ -20,9 +20,9 @@
     [:div.col-12 {:class "botonesFooter"}
      [:h3 "Teléfonos de contacto (reservas):"]
      [:a {:href "tel:+34623191754"}
-      [:button [:span.ml-2 "623191754"]]]
+      [:button [:span.ml-2 "📞" "623191754"]]]
      [:a {:href "tel:+34683572682"}
-      [:button [:span.ml-2 "683572682"]]]]]
+      [:button [:span.ml-2 "📞" "683572682"]]]]]
    [:div.row {:class "privacidad"}
     [:div.col-12
      [:a {:href "#/privacidad"} "Privacidad"]
