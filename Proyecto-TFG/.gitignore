@@ -21,6 +21,6 @@ yarn-error.log
 /.nova
 /.vscode
 /.zed
-.shadow-cljs
+/.shadow-cljs
 /public/css
 /public/js
