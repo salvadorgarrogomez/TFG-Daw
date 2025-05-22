@@ -1,7 +1,6 @@
 (ns home.core
   (:require [reagent.core :as r]
             [reagent.dom :as dom]
-            [cljs-http.client :as http]
             [app.db :as db]))
 
 (def selected-image (r/atom nil))

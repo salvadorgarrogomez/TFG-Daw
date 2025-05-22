@@ -60,36 +60,36 @@ var imagen_seleccionada = reagent.core.atom.cljs$core$IFn$_invoke$arity$1(null);
 if(cljs.core.empty_QMARK_(imagenes)){
 return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"div","div",1057191632),"No se encontraron im\u00E1genes."], null);
 } else {
-return new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"div.row","div.row",133678515),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"class","class",-2030961996),"containerImg"], null),(function (){var iter__5480__auto__ = (function administracion$imagenes$mostrar_imagenes_todas_$_iter__13337(s__13338){
+return new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"div.row","div.row",133678515),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"class","class",-2030961996),"containerImg"], null),(function (){var iter__5480__auto__ = (function administracion$imagenes$mostrar_imagenes_todas_$_iter__26895(s__26896){
 return (new cljs.core.LazySeq(null,(function (){
-var s__13338__$1 = s__13338;
+var s__26896__$1 = s__26896;
 while(true){
-var temp__5804__auto__ = cljs.core.seq(s__13338__$1);
+var temp__5804__auto__ = cljs.core.seq(s__26896__$1);
 if(temp__5804__auto__){
-var s__13338__$2 = temp__5804__auto__;
-if(cljs.core.chunked_seq_QMARK_(s__13338__$2)){
-var c__5478__auto__ = cljs.core.chunk_first(s__13338__$2);
+var s__26896__$2 = temp__5804__auto__;
+if(cljs.core.chunked_seq_QMARK_(s__26896__$2)){
+var c__5478__auto__ = cljs.core.chunk_first(s__26896__$2);
 var size__5479__auto__ = cljs.core.count(c__5478__auto__);
-var b__13340 = cljs.core.chunk_buffer(size__5479__auto__);
-if((function (){var i__13339 = (0);
+var b__26898 = cljs.core.chunk_buffer(size__5479__auto__);
+if((function (){var i__26897 = (0);
 while(true){
-if((i__13339 < size__5479__auto__)){
-var map__13346 = cljs.core._nth(c__5478__auto__,i__13339);
-var map__13346__$1 = cljs.core.__destructure_map(map__13346);
-var id = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__13346__$1,new cljs.core.Keyword(null,"id","id",-1388402092));
-var descripcion = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__13346__$1,new cljs.core.Keyword(null,"descripcion","descripcion",-1196002063));
-var imagen_base64 = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__13346__$1,new cljs.core.Keyword(null,"imagen_base64","imagen_base64",-2118761036));
-var mime_type = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__13346__$1,new cljs.core.Keyword(null,"mime_type","mime_type",1613436611));
-cljs.core.chunk_append(b__13340,cljs.core.with_meta(new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"div.col-12.col-md-5","div.col-12.col-md-5",61932470),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"class","class",-2030961996),"conjuntoImagenes"], null),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"img","img",1442687358),new cljs.core.PersistentArrayMap(null, 4, [new cljs.core.Keyword(null,"src","src",-1651076051),["data:",cljs.core.str.cljs$core$IFn$_invoke$arity$1(mime_type),";base64,",cljs.core.str.cljs$core$IFn$_invoke$arity$1(imagen_base64)].join(''),new cljs.core.Keyword(null,"alt","alt",-3214426),descripcion,new cljs.core.Keyword(null,"style","style",-496642736),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"cursor","cursor",1011937484),"pointer"], null),new cljs.core.Keyword(null,"on-click","on-click",1632826543),((function (i__13339,map__13346,map__13346__$1,id,descripcion,imagen_base64,mime_type,c__5478__auto__,size__5479__auto__,b__13340,s__13338__$2,temp__5804__auto__,imagenes,imagen_seleccionada){
+if((i__26897 < size__5479__auto__)){
+var map__26912 = cljs.core._nth(c__5478__auto__,i__26897);
+var map__26912__$1 = cljs.core.__destructure_map(map__26912);
+var id = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__26912__$1,new cljs.core.Keyword(null,"id","id",-1388402092));
+var descripcion = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__26912__$1,new cljs.core.Keyword(null,"descripcion","descripcion",-1196002063));
+var imagen_base64 = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__26912__$1,new cljs.core.Keyword(null,"imagen_base64","imagen_base64",-2118761036));
+var mime_type = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__26912__$1,new cljs.core.Keyword(null,"mime_type","mime_type",1613436611));
+cljs.core.chunk_append(b__26898,cljs.core.with_meta(new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"div.col-12.col-md-5","div.col-12.col-md-5",61932470),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"class","class",-2030961996),"conjuntoImagenes"], null),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"img","img",1442687358),new cljs.core.PersistentArrayMap(null, 4, [new cljs.core.Keyword(null,"src","src",-1651076051),["data:",cljs.core.str.cljs$core$IFn$_invoke$arity$1(mime_type),";base64,",cljs.core.str.cljs$core$IFn$_invoke$arity$1(imagen_base64)].join(''),new cljs.core.Keyword(null,"alt","alt",-3214426),descripcion,new cljs.core.Keyword(null,"style","style",-496642736),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"cursor","cursor",1011937484),"pointer"], null),new cljs.core.Keyword(null,"on-click","on-click",1632826543),((function (i__26897,map__26912,map__26912__$1,id,descripcion,imagen_base64,mime_type,c__5478__auto__,size__5479__auto__,b__26898,s__26896__$2,temp__5804__auto__,imagenes,imagen_seleccionada){
 return (function (){
 administracion.imagenes.eliminar_imagen(id);
 
 return location.reload(true);
-});})(i__13339,map__13346,map__13346__$1,id,descripcion,imagen_base64,mime_type,c__5478__auto__,size__5479__auto__,b__13340,s__13338__$2,temp__5804__auto__,imagenes,imagen_seleccionada))
+});})(i__26897,map__26912,map__26912__$1,id,descripcion,imagen_base64,mime_type,c__5478__auto__,size__5479__auto__,b__26898,s__26896__$2,temp__5804__auto__,imagenes,imagen_seleccionada))
 ], null)], null)], null),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"key","key",-1516042587),id], null)));
 
-var G__13395 = (i__13339 + (1));
-i__13339 = G__13395;
+var G__27017 = (i__26897 + (1));
+i__26897 = G__27017;
 continue;
 } else {
 return true;
@@ -97,24 +97,24 @@ return true;
 break;
 }
 })()){
-return cljs.core.chunk_cons(cljs.core.chunk(b__13340),administracion$imagenes$mostrar_imagenes_todas_$_iter__13337(cljs.core.chunk_rest(s__13338__$2)));
+return cljs.core.chunk_cons(cljs.core.chunk(b__26898),administracion$imagenes$mostrar_imagenes_todas_$_iter__26895(cljs.core.chunk_rest(s__26896__$2)));
 } else {
-return cljs.core.chunk_cons(cljs.core.chunk(b__13340),null);
+return cljs.core.chunk_cons(cljs.core.chunk(b__26898),null);
 }
 } else {
-var map__13364 = cljs.core.first(s__13338__$2);
-var map__13364__$1 = cljs.core.__destructure_map(map__13364);
-var id = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__13364__$1,new cljs.core.Keyword(null,"id","id",-1388402092));
-var descripcion = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__13364__$1,new cljs.core.Keyword(null,"descripcion","descripcion",-1196002063));
-var imagen_base64 = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__13364__$1,new cljs.core.Keyword(null,"imagen_base64","imagen_base64",-2118761036));
-var mime_type = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__13364__$1,new cljs.core.Keyword(null,"mime_type","mime_type",1613436611));
-return cljs.core.cons(cljs.core.with_meta(new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"div.col-12.col-md-5","div.col-12.col-md-5",61932470),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"class","class",-2030961996),"conjuntoImagenes"], null),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"img","img",1442687358),new cljs.core.PersistentArrayMap(null, 4, [new cljs.core.Keyword(null,"src","src",-1651076051),["data:",cljs.core.str.cljs$core$IFn$_invoke$arity$1(mime_type),";base64,",cljs.core.str.cljs$core$IFn$_invoke$arity$1(imagen_base64)].join(''),new cljs.core.Keyword(null,"alt","alt",-3214426),descripcion,new cljs.core.Keyword(null,"style","style",-496642736),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"cursor","cursor",1011937484),"pointer"], null),new cljs.core.Keyword(null,"on-click","on-click",1632826543),((function (map__13364,map__13364__$1,id,descripcion,imagen_base64,mime_type,s__13338__$2,temp__5804__auto__,imagenes,imagen_seleccionada){
+var map__26934 = cljs.core.first(s__26896__$2);
+var map__26934__$1 = cljs.core.__destructure_map(map__26934);
+var id = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__26934__$1,new cljs.core.Keyword(null,"id","id",-1388402092));
+var descripcion = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__26934__$1,new cljs.core.Keyword(null,"descripcion","descripcion",-1196002063));
+var imagen_base64 = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__26934__$1,new cljs.core.Keyword(null,"imagen_base64","imagen_base64",-2118761036));
+var mime_type = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__26934__$1,new cljs.core.Keyword(null,"mime_type","mime_type",1613436611));
+return cljs.core.cons(cljs.core.with_meta(new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"div.col-12.col-md-5","div.col-12.col-md-5",61932470),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"class","class",-2030961996),"conjuntoImagenes"], null),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"img","img",1442687358),new cljs.core.PersistentArrayMap(null, 4, [new cljs.core.Keyword(null,"src","src",-1651076051),["data:",cljs.core.str.cljs$core$IFn$_invoke$arity$1(mime_type),";base64,",cljs.core.str.cljs$core$IFn$_invoke$arity$1(imagen_base64)].join(''),new cljs.core.Keyword(null,"alt","alt",-3214426),descripcion,new cljs.core.Keyword(null,"style","style",-496642736),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"cursor","cursor",1011937484),"pointer"], null),new cljs.core.Keyword(null,"on-click","on-click",1632826543),((function (map__26934,map__26934__$1,id,descripcion,imagen_base64,mime_type,s__26896__$2,temp__5804__auto__,imagenes,imagen_seleccionada){
 return (function (){
 administracion.imagenes.eliminar_imagen(id);
 
 return location.reload(true);
-});})(map__13364,map__13364__$1,id,descripcion,imagen_base64,mime_type,s__13338__$2,temp__5804__auto__,imagenes,imagen_seleccionada))
-], null)], null)], null),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"key","key",-1516042587),id], null)),administracion$imagenes$mostrar_imagenes_todas_$_iter__13337(cljs.core.rest(s__13338__$2)));
+});})(map__26934,map__26934__$1,id,descripcion,imagen_base64,mime_type,s__26896__$2,temp__5804__auto__,imagenes,imagen_seleccionada))
+], null)], null)], null),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"key","key",-1516042587),id], null)),administracion$imagenes$mostrar_imagenes_todas_$_iter__26895(cljs.core.rest(s__26896__$2)));
 }
 } else {
 return null;

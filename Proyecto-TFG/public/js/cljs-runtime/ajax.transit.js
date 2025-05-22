@@ -1,8 +1,8 @@
 goog.provide('ajax.transit');
-ajax.transit.transit_type = (function ajax$transit$transit_type(p__13500){
-var map__13501 = p__13500;
-var map__13501__$1 = cljs.core.__destructure_map(map__13501);
-var type = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__13501__$1,new cljs.core.Keyword(null,"type","type",1174270348));
+ajax.transit.transit_type = (function ajax$transit$transit_type(p__25776){
+var map__25777 = p__25776;
+var map__25777__$1 = cljs.core.__destructure_map(map__25777);
+var type = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__25777__$1,new cljs.core.Keyword(null,"type","type",1174270348));
 var or__5002__auto__ = type;
 if(cljs.core.truth_(or__5002__auto__)){
 return or__5002__auto__;
@@ -32,8 +32,8 @@ return cognitect.transit.write(writer,params);
  * :handlers Custom Transit handlers (refer to Transit documentation)
  */
 ajax.transit.transit_request_format = (function ajax$transit$transit_request_format(var_args){
-var G__13506 = arguments.length;
-switch (G__13506) {
+var G__25781 = arguments.length;
+switch (G__25781) {
 case 0:
 return ajax.transit.transit_request_format.cljs$core$IFn$_invoke$arity$0();
 
@@ -73,15 +73,15 @@ return cognitect.transit.read(reader,ajax.protocols._body(response));
 });
 });
 /**
- * Returns a Transit request format.
+ * Returns a Transit response format.
  * 
  * Options include:
  * :reader (CLJS only) Explicit Transit reader. If not supplied one will be created using the other options.
  * :handlers Custom Transit handlers (refer to Transit documentation)
  */
 ajax.transit.transit_response_format = (function ajax$transit$transit_response_format(var_args){
-var G__13518 = arguments.length;
-switch (G__13518) {
+var G__25797 = arguments.length;
+switch (G__25797) {
 case 0:
 return ajax.transit.transit_response_format.cljs$core$IFn$_invoke$arity$0();
 

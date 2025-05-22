@@ -7,30 +7,30 @@ goog.provide('clojure.walk');
  */
 clojure.walk.walk = (function clojure$walk$walk(inner,outer,form){
 if(cljs.core.list_QMARK_(form)){
-var G__12385 = cljs.core.apply.cljs$core$IFn$_invoke$arity$2(cljs.core.list,cljs.core.map.cljs$core$IFn$_invoke$arity$2(inner,form));
-return (outer.cljs$core$IFn$_invoke$arity$1 ? outer.cljs$core$IFn$_invoke$arity$1(G__12385) : outer.call(null, G__12385));
+var G__15279 = cljs.core.apply.cljs$core$IFn$_invoke$arity$2(cljs.core.list,cljs.core.map.cljs$core$IFn$_invoke$arity$2(inner,form));
+return (outer.cljs$core$IFn$_invoke$arity$1 ? outer.cljs$core$IFn$_invoke$arity$1(G__15279) : outer.call(null, G__15279));
 } else {
 if(cljs.core.map_entry_QMARK_(form)){
-var G__12386 = (new cljs.core.MapEntry((function (){var G__12387 = cljs.core.key(form);
-return (inner.cljs$core$IFn$_invoke$arity$1 ? inner.cljs$core$IFn$_invoke$arity$1(G__12387) : inner.call(null, G__12387));
-})(),(function (){var G__12390 = cljs.core.val(form);
-return (inner.cljs$core$IFn$_invoke$arity$1 ? inner.cljs$core$IFn$_invoke$arity$1(G__12390) : inner.call(null, G__12390));
+var G__15281 = (new cljs.core.MapEntry((function (){var G__15283 = cljs.core.key(form);
+return (inner.cljs$core$IFn$_invoke$arity$1 ? inner.cljs$core$IFn$_invoke$arity$1(G__15283) : inner.call(null, G__15283));
+})(),(function (){var G__15285 = cljs.core.val(form);
+return (inner.cljs$core$IFn$_invoke$arity$1 ? inner.cljs$core$IFn$_invoke$arity$1(G__15285) : inner.call(null, G__15285));
 })(),null));
-return (outer.cljs$core$IFn$_invoke$arity$1 ? outer.cljs$core$IFn$_invoke$arity$1(G__12386) : outer.call(null, G__12386));
+return (outer.cljs$core$IFn$_invoke$arity$1 ? outer.cljs$core$IFn$_invoke$arity$1(G__15281) : outer.call(null, G__15281));
 } else {
 if(cljs.core.seq_QMARK_(form)){
-var G__12392 = cljs.core.doall.cljs$core$IFn$_invoke$arity$1(cljs.core.map.cljs$core$IFn$_invoke$arity$2(inner,form));
-return (outer.cljs$core$IFn$_invoke$arity$1 ? outer.cljs$core$IFn$_invoke$arity$1(G__12392) : outer.call(null, G__12392));
+var G__15292 = cljs.core.doall.cljs$core$IFn$_invoke$arity$1(cljs.core.map.cljs$core$IFn$_invoke$arity$2(inner,form));
+return (outer.cljs$core$IFn$_invoke$arity$1 ? outer.cljs$core$IFn$_invoke$arity$1(G__15292) : outer.call(null, G__15292));
 } else {
 if(cljs.core.record_QMARK_(form)){
-var G__12395 = cljs.core.reduce.cljs$core$IFn$_invoke$arity$3((function (r,x){
+var G__15294 = cljs.core.reduce.cljs$core$IFn$_invoke$arity$3((function (r,x){
 return cljs.core.conj.cljs$core$IFn$_invoke$arity$2(r,(inner.cljs$core$IFn$_invoke$arity$1 ? inner.cljs$core$IFn$_invoke$arity$1(x) : inner.call(null, x)));
 }),form,form);
-return (outer.cljs$core$IFn$_invoke$arity$1 ? outer.cljs$core$IFn$_invoke$arity$1(G__12395) : outer.call(null, G__12395));
+return (outer.cljs$core$IFn$_invoke$arity$1 ? outer.cljs$core$IFn$_invoke$arity$1(G__15294) : outer.call(null, G__15294));
 } else {
 if(cljs.core.coll_QMARK_(form)){
-var G__12396 = cljs.core.into.cljs$core$IFn$_invoke$arity$2(cljs.core.empty(form),cljs.core.map.cljs$core$IFn$_invoke$arity$2(inner,form));
-return (outer.cljs$core$IFn$_invoke$arity$1 ? outer.cljs$core$IFn$_invoke$arity$1(G__12396) : outer.call(null, G__12396));
+var G__15305 = cljs.core.into.cljs$core$IFn$_invoke$arity$2(cljs.core.empty(form),cljs.core.map.cljs$core$IFn$_invoke$arity$2(inner,form));
+return (outer.cljs$core$IFn$_invoke$arity$1 ? outer.cljs$core$IFn$_invoke$arity$1(G__15305) : outer.call(null, G__15305));
 } else {
 return (outer.cljs$core$IFn$_invoke$arity$1 ? outer.cljs$core$IFn$_invoke$arity$1(form) : outer.call(null, form));
 
@@ -58,10 +58,10 @@ return clojure.walk.walk(cljs.core.partial.cljs$core$IFn$_invoke$arity$2(clojure
  * Recursively transforms all map keys from strings to keywords.
  */
 clojure.walk.keywordize_keys = (function clojure$walk$keywordize_keys(m){
-var f = (function (p__12406){
-var vec__12407 = p__12406;
-var k = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__12407,(0),null);
-var v = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__12407,(1),null);
+var f = (function (p__15335){
+var vec__15336 = p__15335;
+var k = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__15336,(0),null);
+var v = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__15336,(1),null);
 if(typeof k === 'string'){
 return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.keyword.cljs$core$IFn$_invoke$arity$1(k),v], null);
 } else {
@@ -80,10 +80,10 @@ return x;
  * Recursively transforms all map keys from keywords to strings.
  */
 clojure.walk.stringify_keys = (function clojure$walk$stringify_keys(m){
-var f = (function (p__12431){
-var vec__12434 = p__12431;
-var k = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__12434,(0),null);
-var v = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__12434,(1),null);
+var f = (function (p__15356){
+var vec__15358 = p__15356;
+var k = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__15358,(0),null);
+var v = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__15358,(1),null);
 if((k instanceof cljs.core.Keyword)){
 return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.name(k),v], null);
 } else {

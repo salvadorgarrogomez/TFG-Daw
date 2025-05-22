@@ -10,9 +10,9 @@ return "";
 }
 })(),/; /);
 return cljs.core.some((function (cookie){
-var vec__13318 = clojure.string.split.cljs$core$IFn$_invoke$arity$3(cookie,/=/,(2));
-var k = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__13318,(0),null);
-var v = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__13318,(1),null);
+var vec__26039 = clojure.string.split.cljs$core$IFn$_invoke$arity$3(cookie,/=/,(2));
+var k = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__26039,(0),null);
+var v = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__26039,(1),null);
 if(cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2(k,name)){
 return v;
 } else {

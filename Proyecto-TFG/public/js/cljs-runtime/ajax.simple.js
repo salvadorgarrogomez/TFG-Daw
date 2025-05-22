@@ -9,54 +9,18 @@ return method;
 ajax.simple.process_response = (function ajax$simple$process_response(response,interceptor){
 return ajax.protocols._process_response(interceptor,response);
 });
-ajax.simple.js_handler = (function ajax$simple$js_handler(var_args){
-var G__13555 = arguments.length;
-switch (G__13555) {
-case 3:
-return ajax.simple.js_handler.cljs$core$IFn$_invoke$arity$3((arguments[(0)]),(arguments[(1)]),(arguments[(2)]));
-
-break;
-case 2:
-return ajax.simple.js_handler.cljs$core$IFn$_invoke$arity$2((arguments[(0)]),(arguments[(1)]));
-
-break;
-case 1:
-return ajax.simple.js_handler.cljs$core$IFn$_invoke$arity$1((arguments[(0)]));
-
-break;
-default:
-throw (new Error(["Invalid arity: ",cljs.core.str.cljs$core$IFn$_invoke$arity$1(arguments.length)].join('')));
-
-}
-});
-
-(ajax.simple.js_handler.cljs$core$IFn$_invoke$arity$3 = (function (handler,interceptors,response){
-var processed = cljs.core.reduce.cljs$core$IFn$_invoke$arity$3(ajax.simple.process_response,response,interceptors);
-return (handler.cljs$core$IFn$_invoke$arity$1 ? handler.cljs$core$IFn$_invoke$arity$1(processed) : handler.call(null, processed));
-}));
-
-(ajax.simple.js_handler.cljs$core$IFn$_invoke$arity$2 = (function (handler,interceptors){
-return (function (response){
+ajax.simple.make_js_handler = (function ajax$simple$make_js_handler(handler,interceptors){
+return (function ajax$simple$make_js_handler_$_js_handler(response){
 var processed = cljs.core.reduce.cljs$core$IFn$_invoke$arity$3(ajax.simple.process_response,response,interceptors);
 return (handler.cljs$core$IFn$_invoke$arity$1 ? handler.cljs$core$IFn$_invoke$arity$1(processed) : handler.call(null, processed));
 });
-}));
-
-(ajax.simple.js_handler.cljs$core$IFn$_invoke$arity$1 = (function (handler){
-return (function (interceptors,response){
-var processed = cljs.core.reduce.cljs$core$IFn$_invoke$arity$3(ajax.simple.process_response,response,interceptors);
-return (handler.cljs$core$IFn$_invoke$arity$1 ? handler.cljs$core$IFn$_invoke$arity$1(processed) : handler.call(null, processed));
 });
-}));
-
-(ajax.simple.js_handler.cljs$lang$maxFixedArity = 3);
-
-ajax.simple.base_handler = (function ajax$simple$base_handler(interceptors,p__13556){
-var map__13557 = p__13556;
-var map__13557__$1 = cljs.core.__destructure_map(map__13557);
-var handler = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__13557__$1,new cljs.core.Keyword(null,"handler","handler",-195596612));
+ajax.simple.base_handler = (function ajax$simple$base_handler(interceptors,p__25846){
+var map__25847 = p__25846;
+var map__25847__$1 = cljs.core.__destructure_map(map__25847);
+var handler = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__25847__$1,new cljs.core.Keyword(null,"handler","handler",-195596612));
 if(cljs.core.truth_(handler)){
-return ajax.simple.js_handler.cljs$core$IFn$_invoke$arity$2(handler,interceptors);
+return ajax.simple.make_js_handler(handler,interceptors);
 } else {
 return ajax.util.throw_error("No ajax handler provided.");
 }
@@ -64,8 +28,8 @@ return ajax.util.throw_error("No ajax handler provided.");
 ajax.simple.default_interceptors = cljs.core.atom.cljs$core$IFn$_invoke$arity$1(cljs.core.PersistentVector.EMPTY);
 ajax.simple.normalize_request = (function ajax$simple$normalize_request(request){
 var response_format = ajax.interceptors.get_response_format(ajax.formats.detect_response_format,request);
-return cljs.core.update.cljs$core$IFn$_invoke$arity$3(cljs.core.update.cljs$core$IFn$_invoke$arity$3(request,new cljs.core.Keyword(null,"method","method",55703592),ajax.simple.normalize_method),new cljs.core.Keyword(null,"interceptors","interceptors",-1546782951),(function (p1__13558_SHARP_){
-return cljs.core.concat.cljs$core$IFn$_invoke$arity$variadic(new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [response_format], null),(function (){var or__5002__auto__ = p1__13558_SHARP_;
+return cljs.core.update.cljs$core$IFn$_invoke$arity$3(cljs.core.update.cljs$core$IFn$_invoke$arity$3(request,new cljs.core.Keyword(null,"method","method",55703592),ajax.simple.normalize_method),new cljs.core.Keyword(null,"interceptors","interceptors",-1546782951),(function (p1__25852_SHARP_){
+return cljs.core.concat.cljs$core$IFn$_invoke$arity$variadic(new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [response_format], null),(function (){var or__5002__auto__ = p1__25852_SHARP_;
 if(cljs.core.truth_(or__5002__auto__)){
 return or__5002__auto__;
 } else {
@@ -77,16 +41,20 @@ return cljs.core.deref(ajax.simple.default_interceptors);
 ajax.simple.new_default_api = (function ajax$simple$new_default_api(){
 return (new goog.net.XhrIo());
 });
+/**
+ * -process-request with the arguments flipped for use in reduce
+ */
 ajax.simple.process_request = (function ajax$simple$process_request(request,interceptor){
-
 return ajax.protocols._process_request(interceptor,request);
 });
-ajax.simple.raw_ajax_request = (function ajax$simple$raw_ajax_request(p__13559){
-var map__13560 = p__13559;
-var map__13560__$1 = cljs.core.__destructure_map(map__13560);
-var request = map__13560__$1;
-var interceptors = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__13560__$1,new cljs.core.Keyword(null,"interceptors","interceptors",-1546782951));
-
+/**
+ * The main request function.
+ */
+ajax.simple.raw_ajax_request = (function ajax$simple$raw_ajax_request(p__25863){
+var map__25867 = p__25863;
+var map__25867__$1 = cljs.core.__destructure_map(map__25867);
+var request = map__25867__$1;
+var interceptors = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__25867__$1,new cljs.core.Keyword(null,"interceptors","interceptors",-1546782951));
 var request__$1 = cljs.core.reduce.cljs$core$IFn$_invoke$arity$3(ajax.simple.process_request,request,interceptors);
 var handler = ajax.simple.base_handler(cljs.core.reverse(interceptors),request__$1);
 var api = (function (){var or__5002__auto__ = new cljs.core.Keyword(null,"api","api",-899839580).cljs$core$IFn$_invoke$arity$1(request__$1);
