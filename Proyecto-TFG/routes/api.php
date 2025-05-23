@@ -23,7 +23,7 @@ Route::get('/productos/categoria/{categoria_id}', [Principal::class, 'productosP
 
 // Rutas para poder utilizar las clases implementadas de la api en el Controladdor de imagenes
 Route::get('/imagenes', action: [Imagenes::class, 'galeriaImagenes']);
-Route::post('/subir-imagen', action: [Imagenes::class, 'subirImagen']);
+Route::middleware(['jwt.auth'])->post('/subir-imagen', action: [Imagenes::class, 'subirImagen']);
 
 // Rutas para que los usuarios se puedan logear en la web, accediendo al backend y editar ciertos registros.
 Route::post('/login', [Login::class, 'login']);

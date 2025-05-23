@@ -22,6 +22,7 @@
         (.append form-data "usuario_id" usuario-id)
         (http/post "/api/subir-imagen"
                    {:body form-data
+                    :with-credentials? true
                     :response-format :json
                     :on-success (fn [response]
                                   (js/alert "Imagen subida con éxito")
