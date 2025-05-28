@@ -1,7 +1,7 @@
 (ns administracion.imagenes
   (:require [reagent.core :as r]
             [reagent.dom :as dom]
-            [cljs-http.client :as http]
+            [cljs-http.client :as https]
             [app.state :as state]
             [app.db :as db]))
 
@@ -20,7 +20,7 @@
       (let [form-data (js/FormData.)]
         (.append form-data "imagen" (first @imagen)) ;; Agrega la imagen al formulario
         (.append form-data "usuario_id" usuario-id)
-        (http/post "/api/subir-imagen"
+        (https/post "/api/subir-imagen"
                    {:body form-data
                     :with-credentials? true
                     :response-format :json
@@ -32,7 +32,7 @@
 
 (defn eliminar-imagen [id]
   (when (js/confirm "¿Estás seguro de que quieres eliminar esta imagen?")
-    (http/delete (str "/api/imagen/eliminar/" id)
+    (https/delete (str "/api/imagen/eliminar/" id)
                  {:response-format :json
                   :on-success (fn [_]
                                 (js/alert "Imagen eliminada")

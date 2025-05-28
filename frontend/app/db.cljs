@@ -1,6 +1,6 @@
 (ns app.db
   (:require [reagent.core :as r]
-            [cljs-http.client :as http]
+            [cljs-http.client :as https]
             [cljs.core.async :refer [<! go]]
             [ajax.core :as ajax]))
 
@@ -15,7 +15,7 @@
 (defn fetch-categorias []
   (js/console.log "Llamando a fetch-categorias...")
   (go
-    (let [{:keys [status body]} (<! (http/get "/api/categorias/"
+    (let [{:keys [status body]} (<! (https/get "/api/categorias/"
                                               {:with-credentials? true
                                                :response-format (ajax/json-response-format {:keywords? true})}))]
       (if (= 200 status)
@@ -27,7 +27,7 @@
 (defn fetch-list-categorias []
   (js/console.log "Llamando a fetch-categorias...")
   (go
-    (let [{:keys [status body]} (<! (http/get "/api/categorias/todas"
+    (let [{:keys [status body]} (<! (https/get "/api/categorias/todas"
                                               {:with-credentials? true
                                                :response-format (ajax/json-response-format {:keywords? true})}))]
       (if (= 200 status)
@@ -40,7 +40,7 @@
 (defn fetch-productos [categoria-id]
   (js/console.log "Llamando a fetch-productos para categoría:" categoria-id)
   (go
-    (let [{:keys [status body]} (<! (http/get (str "/api/productos/categoria/" categoria-id)
+    (let [{:keys [status body]} (<! (https/get (str "/api/productos/categoria/" categoria-id)
                                               {:with-credentials? true
                                                :response-format (ajax/json-response-format {:keywords? true})}))]
       (if (= 200 status)
@@ -57,7 +57,7 @@
 (defn fetch-list-productos []
   (js/console.log "Llamando a fetch-list-productos...")
   (go
-    (let [{:keys [status body]} (<! (http/get "/api/productos/"
+    (let [{:keys [status body]} (<! (https/get "/api/productos/"
                                               {:with-credentials? true
                                                :response-format (ajax/json-response-format {:keywords? true})}))]
       (if (= 200 status)
@@ -82,7 +82,7 @@
 (defn insertar-producto [producto]
   (js/console.log "Llamando a insertar-producto..." producto)
   (go
-    (let [{:keys [status body]} (<! (http/post "/api/producto/nuevo"
+    (let [{:keys [status body]} (<! (https/post "/api/producto/nuevo"
                                                {:with-credentials? true
                                                 :json-params producto
                                                 :response-format (ajax/json-response-format {:keywords? true})}))]
@@ -95,7 +95,7 @@
 (defn insertar-categoria [categoria]
   (js/console.log "Llamando a insertar-categoria..." categoria)
   (go
-    (let [{:keys [status body]} (<! (http/post "/api/categoria/nuevo"
+    (let [{:keys [status body]} (<! (https/post "/api/categoria/nuevo"
                                                {:with-credentials? true
                                                 :json-params categoria
                                                 :response-format (ajax/json-response-format {:keywords? true})}))]
@@ -107,7 +107,7 @@
 
 (defn eliminar-producto [id]
   (go
-    (let [{:keys [status body]} (<! (http/delete (str "/api/producto/eliminar/" id)
+    (let [{:keys [status body]} (<! (https/delete (str "/api/producto/eliminar/" id)
                                                  {:with-credentials? true
                                                   :response-format (ajax/json-response-format {:keywords? true})}))]
       (if (= 200 status)
@@ -119,7 +119,7 @@
 (defn activo-producto [id]
   (let [usuario-id (js/localStorage.getItem "id")]
     (go
-      (let [{:keys [status body]} (<! (http/put (str "/api/producto/activo/" id)
+      (let [{:keys [status body]} (<! (https/put (str "/api/producto/activo/" id)
                                                 {:with-credentials? true
                                                  :headers {"Content-Type" "application/json"}
                                                  :body (js/JSON.stringify #js {:usuario_id usuario-id})
@@ -133,7 +133,7 @@
 (defn activo-categoria [id]
   (let [usuario-id (js/localStorage.getItem "id")]
     (go
-      (let [{:keys [status body]} (<! (http/put (str "/api/categoria/activo/" id)
+      (let [{:keys [status body]} (<! (https/put (str "/api/categoria/activo/" id)
                                                 {:with-credentials? true
                                                  :headers {"Content-Type" "application/json"}
                                                  :body (js/JSON.stringify #js {:usuario_id usuario-id})
@@ -146,7 +146,7 @@
 
 (defn eliminar-categoria [id]
   (go
-    (let [{:keys [status body]} (<! (http/delete (str "/api/categoria/eliminar/" id)
+    (let [{:keys [status body]} (<! (https/delete (str "/api/categoria/eliminar/" id)
                                                  {:with-credentials? true
                                                   :response-format (ajax/json-response-format {:keywords? true})}))]
       (if (= 200 status)
