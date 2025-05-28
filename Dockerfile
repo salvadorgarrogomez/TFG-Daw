@@ -14,7 +14,6 @@ COPY resources ./resources
 
 RUN npm install
 RUN npx shadow-cljs release app
-RUN npm run build
 
 ### Etapa 2: App Laravel
 FROM php:8.2-apache
