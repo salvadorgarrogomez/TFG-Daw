@@ -92,12 +92,12 @@
           (js/alert "Producto creado correctamente"))
         (js/console.error "Error al insertar producto" body)))))
 
-(defn insertar-categoria [producto]
-  (js/console.log "Llamando a insertar-categoria..." producto)
+(defn insertar-categoria [categoria]
+  (js/console.log "Llamando a insertar-categoria..." categoria)
   (go
     (let [{:keys [status body]} (<! (http/post "/api/categoria/nuevo"
                                                {:with-credentials? true
-                                                :json-params producto
+                                                :json-params categoria
                                                 :response-format (ajax/json-response-format {:keywords? true})}))]
       (if (= 201 status)
         (do
