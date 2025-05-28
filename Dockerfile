@@ -13,7 +13,14 @@ COPY frontend ./frontend
 COPY resources ./resources
 
 RUN npm install
+
+# Crea el directorio donde se generará el CSS
+RUN mkdir -p public/css
+# Compila CSS desde SCSS
+RUN npm run build:css
+# Compila JS desde CLJS
 RUN npx shadow-cljs release app
+
 
 ### Etapa 2: App Laravel
 FROM php:8.2-apache
