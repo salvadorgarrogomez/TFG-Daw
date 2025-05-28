@@ -17,7 +17,6 @@ RUN mkdir -p public/css
 RUN npm run build:css
 RUN npx shadow-cljs release app
 
-
 ### Etapa 2: Laravel + Apache
 FROM php:8.2-apache
 
@@ -36,24 +35,17 @@ COPY . /var/www/html
 COPY --from=frontend /app/public/js ./public/js
 COPY --from=frontend /app/public/css ./public/css
 
-RUN composer install --no-dev --optimize-autoloader
-
-# Genera la clave de Laravel (esencial)
-RUN php artisan key:generate
-
-# Cachea configs, rutas y vistas
-RUN php artisan config:cache \
+RUN composer install --no-dev --optimize-autoloader \
+    && php artisan config:cache \
     && php artisan route:cache \
     && php artisan view:cache
 
-# Crea carpeta de logs si no existe y ajusta permisos
-RUN mkdir -p /var/www/html/storage/logs \
-    && chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache \
+# Permisos para storage y cache
+RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache \
     && chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache
 
 COPY ./vhost.conf /etc/apache2/sites-available/000-default.conf
 
 EXPOSE 80
 
-# Muestra logs si existen y luego arranca Apache en primer plano
-CMD bash -c "touch /var/www/html/storage/logs/laravel.log && ls -la /var/www/html/storage/logs && cat /var/www/html/storage/logs/laravel.log || echo 'No log file yet'; apache2-foreground"
+CMD bash -c "cat /var/www/html/storage/logs/laravel.log || echo 'No log file yet'; apache2-foreground"
