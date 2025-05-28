@@ -7,7 +7,8 @@ RUN apt-get update && apt-get install -y \
     libzip-dev zip \
     libpng-dev libonig-dev libxml2-dev \
     libpq-dev \
-    nodejs npm
+    nodejs npm \
+    openjdk-17-jdk
 
 # Instala Composer
 RUN curl -sS https://getcomposer.org/installer | php && \
