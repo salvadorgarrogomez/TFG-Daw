@@ -1,7 +1,10 @@
 ### Etapa 1: Construcción de frontend (cljs + tailwind)
-FROM node:18 AS frontend
+FROM node:18-bullseye AS frontend
 
 WORKDIR /app
+
+# Instala Java (mínimo Java 11 para shadow-cljs)
+RUN apt-get update && apt-get install -y openjdk-17-jdk
 
 COPY package.json package-lock.json* ./
 COPY shadow-cljs.edn ./
@@ -10,10 +13,8 @@ COPY frontend ./frontend
 COPY resources ./resources
 
 RUN npm install
-
-# ⚠️ Asegúrate de que shadow-cljs y vite están configurados correctamente
 RUN npx shadow-cljs release app
-RUN npm run build  # Esto ejecutará "vite build", para Tailwind, SCSS o Vite React
+RUN npm run build
 
 ### Etapa 2: App Laravel
 FROM php:8.2-apache
