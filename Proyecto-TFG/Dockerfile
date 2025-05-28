@@ -1,7 +1,6 @@
 # Etapa base con PHP, Composer y Node.js
 FROM php:8.2-cli
 
-
 # Instala dependencias del sistema
 RUN apt-get update && apt-get install -y \
     git curl unzip zip gnupg \
