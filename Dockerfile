@@ -43,5 +43,5 @@ RUN chmod -R 777 storage bootstrap/cache
 EXPOSE 8000
 
 # Comando de inicio
-CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=${PORT}"]
+CMD sh -c "php artisan serve --host=0.0.0.0 --port=\$PORT"
 
