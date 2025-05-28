@@ -1,47 +1,51 @@
-# Etapa base con PHP, Composer y Node.js
-FROM php:8.2-cli
+### Etapa 1: Construcción de frontend (cljs + tailwind)
+FROM node:18 AS frontend
 
-# Instala dependencias del sistema
-RUN apt-get update && apt-get install -y \
-    git curl unzip zip gnupg \
-    libzip-dev zip \
-    libpng-dev libonig-dev libxml2-dev \
-    libpq-dev \
-    nodejs npm \
-    openjdk-17-jdk
-
-# Instala Composer
-RUN curl -sS https://getcomposer.org/installer | php && \
-    mv composer.phar /usr/local/bin/composer
-
-# Instala Bun (si usas Bun en lugar de npm para parte del frontend)
-RUN curl -fsSL https://bun.sh/install | bash && \
-    mv /root/.bun/bin/bun /usr/local/bin/bun
-
-# Instala Shadow-CLJS globalmente
-RUN npm install -g shadow-cljs
-
-# Define carpeta de trabajo
 WORKDIR /app
 
-# Copia todo el proyecto
-COPY . .
+COPY package.json package-lock.json* ./
+COPY shadow-cljs.edn ./
+COPY vite.config.js ./
+COPY frontend ./frontend
+COPY resources ./resources
 
-# Instala dependencias PHP
-RUN composer install --no-dev --optimize-autoloader
-
-# Instala dependencias Node
 RUN npm install
 
-# Compila frontend
+# ⚠️ Asegúrate de que shadow-cljs y vite están configurados correctamente
 RUN npx shadow-cljs release app
+RUN npm run build  # Esto ejecutará "vite build", para Tailwind, SCSS o Vite React
 
-# Da permisos al almacenamiento
-RUN chmod -R 777 storage bootstrap/cache
+### Etapa 2: App Laravel
+FROM php:8.2-apache
 
-# Expone el puerto de Laravel
+# Instala extensiones necesarias
+RUN apt-get update && apt-get install -y \
+    libzip-dev zip unzip git curl libpng-dev libonig-dev libxml2-dev \
+    && docker-php-ext-install pdo pdo_mysql zip
+
+# Habilita mod_rewrite
+RUN a2enmod rewrite
+
+# Instala Composer
+COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
+
+WORKDIR /var/www/html
+
+# Copia todo el backend Laravel
+COPY . .
+
+# Copia JS y CSS ya compilados
+COPY --from=frontend /app/public/js ./public/js
+COPY --from=frontend /app/public/css ./public/css
+
+# Instala dependencias PHP
+RUN composer install --no-dev --optimize-autoloader \
+    && php artisan config:cache \
+    && php artisan route:cache \
+    && php artisan view:cache
+
+# Configura Apache
+COPY ./vhost.conf /etc/apache2/sites-available/000-default.conf
+
 EXPOSE 8000
-
-# Comando de inicio
-CMD sh -c "php artisan serve --host=0.0.0.0 --port=\$PORT"
-
+CMD ["apache2-foreground"]
