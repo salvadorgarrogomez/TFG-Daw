@@ -36,8 +36,8 @@ WORKDIR /var/www/html
 COPY . .
 
 # Copia JS y CSS ya compilados
-COPY --from=frontend /app/public/js ./public/js
-COPY --from=frontend /app/public/css ./public/css
+COPY --from=frontend /public/js ./public/js
+COPY --from=frontend /public/css ./public/css
 
 # Instala dependencias PHP
 RUN composer install --no-dev --optimize-autoloader \
