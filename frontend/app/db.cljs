@@ -14,7 +14,10 @@
 ;; Todos los js/console.log los utilizo como mensajes de depuracion para ver en el navegador, y ver si algo falla
 (defn fetch-categorias []
   (js/console.log "Llamando a fetch-categorias...")
-  (-> (js/fetch "/api/categorias/")
+  (-> (js/fetch "/api/categorias/"
+                (clj->js {:method "GET"
+                          :credentials "include"
+                          :headers {"Accept" "application/json"}}))
       (.then #(.json %))
       (.then (fn [data]
                (reset! categorias (js->clj data :keywordize-keys true))
