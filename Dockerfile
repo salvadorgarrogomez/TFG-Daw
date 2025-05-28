@@ -14,10 +14,15 @@ COPY resources ./resources
 
 RUN npm install
 
+# ⬅️ Instala el compilador SASS (necesario para "npm run build:css")
+RUN npm install --save-dev sass
+
 # Crea el directorio donde se generará el CSS
 RUN mkdir -p public/css
+
 # Compila CSS desde SCSS
 RUN npm run build:css
+
 # Compila JS desde CLJS
 RUN npx shadow-cljs release app
 
