@@ -60,4 +60,5 @@ RUN composer install --no-dev --optimize-autoloader \
 COPY ./vhost.conf /etc/apache2/sites-available/000-default.conf
 
 EXPOSE 8000
-CMD ["apache2-foreground"]
+CMD bash -c "cat /var/www/html/storage/logs/laravel.log || echo 'No log file yet'; apache2-foreground"
+# CMD ["apache2-foreground"]
