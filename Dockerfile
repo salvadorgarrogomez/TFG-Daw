@@ -41,10 +41,10 @@ RUN a2enmod rewrite
 # Instala Composer
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
-WORKDIR /var/www/html
+WORKDIR /var/www/laravel
 
 # Copia todo el backend Laravel
-COPY . .
+COPY . /var/www/laravel
 
 # Copia JS y CSS ya compilados
 COPY --from=frontend /app/public/js ./public/js
