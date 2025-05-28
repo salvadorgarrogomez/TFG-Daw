@@ -16,7 +16,6 @@
   (js/console.log "Llamando a fetch-categorias...")
   (-> (js/fetch "/api/categorias/"
                 (clj->js {:method "GET"
-                          :credentials "include"
                           :headers {"Accept" "application/json"}}))
       (.then #(.json %))
       (.then (fn [data]
