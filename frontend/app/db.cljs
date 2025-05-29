@@ -14,15 +14,15 @@
 ;; Todos los js/console.log los utilizo como mensajes de depuracion para ver en el navegador, y ver si algo falla
 (defn fetch-categorias []
   (js/console.log "Llamando a fetch-categorias...")
-  (-> (js/fetch "/api/categorias/"
-                (clj->js {:method "GET"
-                          :headers {"Accept" "application/json"}}))
-      (.then #(.json %))
-      (.then (fn [data]
-               (reset! categorias (js->clj data :keywordize-keys true))
-               (js/console.log "Categorías actualizadas:" (clj->js @categorias))))
-      (.catch (fn [error]
-                (js/console.error "Error cargando categorías:" error)))))
+  (go
+    (let [{:keys [status body]} (<! (https/get "/api/categorias/"
+                                              {:with-credentials? true
+                                               :response-format (ajax/json-response-format {:keywords? true})}))]
+      (if (= 200 status)
+        (do
+          (reset! categorias body)
+          (js/console.log "Categorías actualizadas:" @categorias))
+        (js/console.error "Error al obtener categorías")))))
 
 (defn fetch-list-categorias []
   (js/console.log "Llamando a fetch-categorias...")
