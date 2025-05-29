@@ -18,7 +18,7 @@ class Login extends Controller
 
             if ($user && Hash::check($contrasena, $user->contrasenia)) {
                 $token = JWTAuth::fromUser($user);
-                $cookie = cookie('token', $token, 60, null, null, true, true, false, 'Strict');
+                $cookie = cookie('token', $token, 60, null, null, true, true, false, 'Lax');
 
                 return response()->json([
                     'nombre' => $user->nombre,
