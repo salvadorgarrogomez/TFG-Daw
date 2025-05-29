@@ -50,19 +50,15 @@
           (reset! productos [])
           (js/console.log "La categoría seleccionada no tiene productos asociados."))))))
 
-
-
 (defn fetch-list-productos []
   (js/console.log "Llamando a fetch-list-productos...")
-  (go
-    (let [{:keys [status body]} (<! (https/get "/api/productos/"
-                                              {:with-credentials? true
-                                               :response-format (ajax/json-response-format {:keywords? true})}))]
-      (if (= 200 status)
-        (do
-          (reset! list-productos body)
-          (js/console.log "Productos actualizados:" @categorias))
-        (js/console.error "Error al obtener productos")))))
+  (-> (js/fetch "/api/productos/")
+      (.then #(.json %))
+      (.then (fn [data]
+               (reset! list-productos (js->clj data :keywordize-keys true))
+               (js/console.log "Productos actualizados:" @productos)))
+      (.catch (fn [err]
+                (js/console.error "Error al obtener productos:" err)))))
 
 (defn cargar-imagenes []
   (js/console.log "Llamando a cargar-imagenes...")

@@ -2,8 +2,8 @@
   (:require [reagent.core :as r]
             [app.state :as state]
             [ajax.core :refer [GET POST]]
-            [app.db :refer [list-productos fetch-list-productos categorias eliminar-categoria
-                            eliminar-producto fetch-list-categorias activo-producto activo-categoria descargar-pdf]]
+            [app.db :refer [list-productos fetch-list-productos categorias 
+                              fetch-list-categorias activo-producto activo-categoria descargar-pdf]]
             [reagent.dom :as dom]
             [reitit.frontend.easy :as rfe]))
 
@@ -161,9 +161,7 @@
                  (reset! datos-usuario {:nombre (:nombre %) :rol (:rol %)})
                  (js/localStorage.setItem "id" (:id %))
                  (reset! sesion-verificada? true)
-                 (verificar-sesion) 
-                 (when (= (:rol %) "admin")
-                   (js/console.log "Es admin")))
+                 (verificar-sesion))
 
      :error-handler #(do
                        (println "Error en la solicitud: " %)
