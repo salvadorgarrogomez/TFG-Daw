@@ -148,26 +148,27 @@
 
 
 (defn login []
-  (POST "/api/login"
-    {:params {:nombre @usuario
-              :contrasenia @contrasenia}
-     :format :json
-     :response-format :json
-     :keywords? true
-     :with-credentials? true
-     :handler #(do
-                 (reset! auth-token nil)
-                 (reset! logged-in? true)
-                 (reset! datos-usuario {:nombre (:nombre %) :rol (:rol %)})
-                 (js/localStorage.setItem "id" (:id %))
-                 (reset! sesion-verificada? true)
-                 (when (= (:rol %) "admin")
-                   (js/console.log "Es admin")))
+  (js/console.log "Enviando login con:" @usuario @contrasenia)
+    (POST "/api/login"
+      {:params {:nombre @usuario
+                :contrasenia @contrasenia}
+      :format :json
+      :response-format :json
+      :keywords? true
+      :with-credentials? true
+      :handler #(do
+                  (reset! auth-token nil)
+                  (reset! logged-in? true)
+                  (reset! datos-usuario {:nombre (:nombre %) :rol (:rol %)})
+                  (js/localStorage.setItem "id" (:id %))
+                  (reset! sesion-verificada? true)
+                  (when (= (:rol %) "admin")
+                    (js/console.log "Es admin")))
 
-     :error-handler #(do
-                       (println "Error en la solicitud: " %)
-                       (js/alert "Credenciales incorrectas. Prueba de nuevo o ponte en contacto con el Administrador del sistema.")
-                       (reset! loading? false))}))
+      :error-handler #(do
+                        (println "Error en la solicitud: " %)
+                        (js/alert "Credenciales incorrectas. Prueba de nuevo o ponte en contacto con el Administrador del sistema.")
+                        (reset! loading? false))}))
 
 
 (defn login-form []
@@ -192,8 +193,7 @@
                           (login)
                           (.reload js/location true))))}
       [:button {:on-click #(do
-                             (login)
-                             (.reload js/location true))} "Entrar"]]]]])
+                             (login))} "Entrar"]]]]])
 
 (defn logout []
   (POST "/api/logout"
