@@ -19,10 +19,31 @@
 
 }
 
+.img {
+    width: 100%;
+    aspect-ratio: 1/1;
+    object-fit: contain;
+}
+
+.actualizado {
+    margin: 25px;
+    text-align: center;
+    justify-content: center;
+
+    .butactua {
+        width: 200px;
+    }
+}
+
+
 @media (max-width: 1024px) {
     .divPanelImagenes {
         margin: 0;
         margin-bottom: 100px;
+    }
+
+    .butactua {
+        width: 200px;
     }
 
     .formulario {

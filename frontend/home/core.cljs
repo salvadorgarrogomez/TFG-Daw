@@ -10,13 +10,13 @@
     (if (empty? imagenes)
       [:div "No se encontraron imágenes."]
       (let [carousel-id "carouselExampleIndicators"]
-        [:div.carousel.slide.container  {:id carousel-id}
+        [:div.carousel.slide.container {:id carousel-id}
          ;; Indicadores de slide (los puntos)
          [:div.carousel-indicators
           (doall
            (map-indexed
             (fn [i {:keys [id]}]
-              [:button {:key (str "indicador-" (or id i)) 
+              [:button {:key (str "indicador-" (or id i))
                         :type "button"
                         :data-bs-target (str "#" carousel-id)
                         :data-bs-slide-to i
@@ -33,7 +33,7 @@
                                    :class (when (= i 0) "active")}
                [:img {:src (str "data:" mime_type ";base64," imagen_base64)
                       :alt descripcion
-                      :class "d-block mx-auto"}]])
+                      :class "d-block mx-auto carousel-image"}]])
             imagenes))]
 
          ;; Botón "Anterior"
@@ -67,15 +67,21 @@
             ^{:key (str id "-" idx)}  ;; Usa id + índice para asegurar unicidad
             [:div.col-12.col-md-5.conjuntoImagenes
              {:on-click #(reset! selected-image {:src base64-src :alt descripcion})}
-             [:img {:src base64-src :alt descripcion}]]))]
+             [:img {:src base64-src
+                    :class "img"
+                    :alt descripcion}]]))]
 
        ;; Modal
        (when @selected-image
          [:div.modal-container.active
+          {:on-click (fn [e]
+                       ;; Cierra solo si se hace clic directamente en el fondo (contenedor)
+                       (when (= (.-target e) (.-currentTarget e))
+                         (reset! selected-image nil)))}
           [:div.modal-content
            [:img {:src (:src @selected-image)
-                  :alt (:alt @selected-image)}]
-           [:button.close-btn {:on-click #(reset! selected-image nil)} "X"]]])])))
+                  :class "img"
+                  :alt (:alt @selected-image)}]]])])))
 
 ;; Funcion page para estructurar la pagina
 (defn page []

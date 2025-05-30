@@ -6,6 +6,7 @@
             [app.db :as db]))
 
 (defonce imagen (r/atom nil)) ;; Átomo para almacenar la imagen seleccionada
+(defonce input-key (r/atom (random-uuid)))
 
 ;; Función para manejar el cambio de archivo
 (defn handle-file-change [event]
@@ -14,51 +15,55 @@
       (reset! imagen [file]))))
 
 ;; Función para subir la imagen
-(defn subir-imagen []
+(defn subir-imagen [on-success]
   (let [usuario-id (.getItem js/localStorage "id")]
-    (if (not (empty? @imagen))
+    (when (not (empty? @imagen))
       (let [form-data (js/FormData.)]
-        (.append form-data "imagen" (first @imagen)) ;; Agrega la imagen al formulario
+        (.append form-data "imagen" (first @imagen))
         (.append form-data "usuario_id" usuario-id)
         (https/post "/api/subir-imagen"
-                   {:body form-data
-                    :with-credentials? true
-                    :response-format :json
-                    :on-success (fn [response]
-                                  (js/alert "Imagen subida con éxito")
-                                  (db/cargar-imagenes))
-                    :on-failure (fn [response]
-                                  (js/alert "Error al subir la imagen"))})))))
+                    {:body form-data
+                     :with-credentials? true
+                     :response-format :json
+                     :on-success (fn [_response]
+                                   (on-success)) ;; solo callback
+                     :on-failure (fn [_]
+                                   (js/alert "Error al subir la imagen"))})))))
 
 (defn eliminar-imagen [id]
   (when (js/confirm "¿Estás seguro de que quieres eliminar esta imagen?")
     (https/delete (str "/api/imagen/eliminar/" id)
-                 {:response-format :json
-                  :on-success (fn [_]
-                                (js/alert "Imagen eliminada")
-                                (db/cargar-imagenes))
-                  :on-failure (fn [_]
-                                (js/alert "Error al eliminar la imagen"))})))
+                  {:response-format :json
+                   :on-success (fn [_]
+                                 (js/alert "Imagen eliminada")
+                                 (db/cargar-imagenes))
+                   :on-failure (fn [_]
+                                 (js/alert "Error al eliminar la imagen"))})))
 
 
 (defn mostrar-imagenes-todas []
-  (let [imagenes @db/imagenes   ;; Obtención de las imágenes desde el atom
-        imagen-seleccionada (r/atom nil)] ;; Atom para la imagen seleccionada
-    (if (empty? imagenes)
-      [:div "No se encontraron imágenes."]
-      [:div.row {:class "containerImg"}
-       (for [{:keys [id descripcion imagen_base64 mime_type]} imagenes]
-         ^{:key id}
-         [:div.col-12.col-md-5 {:class "conjuntoImagenes"}
-          [:img {:src (str "data:" mime_type ";base64," imagen_base64)
-                 :alt descripcion
-                 :style {:cursor "pointer"}
-                 :on-click #(do
-                              (eliminar-imagen id)
-                              (.reload js/location true))}]])])))
+  (let [imagenes db/imagenes] ;; reactivo
+    (fn []
+      (if (empty? @imagenes)
+        [:div "No se encontraron imágenes."]
+        [:div.row {:class "containerImg"}
+         (for [{:keys [id descripcion imagen_base64 mime_type]} @imagenes]
+           ^{:key id}
+           [:div.col-12.col-md-5 {:class "conjuntoImagenes"}
+            [:img {:src (str "data:" mime_type ";base64," imagen_base64)
+                   :alt descripcion
+                   :class "img"
+                   :style {:cursor "pointer"}
+                   :on-click #(do
+                                (eliminar-imagen id)
+                                (db/cargar-imagenes))}]])]))))
 
-;; Formulario para subir imagenes a la base de datos
-;; En este caso, solo permite subir imagenes de 1 en 1
+
+(defn actualizar-listado []
+  (db/cargar-imagenes)
+  (reset! input-key (random-uuid))
+  (reset! imagen nil))
+
 (defn formulario-subida []
   [:div {:class "formulario"}
    [:h4 "Subir Imagen"]
@@ -66,13 +71,26 @@
    [:p "Para eliminar una imagen, clicka sobre ella y confirma."]
    [:input {:type "file"
             :on-change handle-file-change
-            :class "inputImagen"}]
-   [:button {:on-click #(if (empty? @imagen)
-                          (js/alert "Debes seleccionar una imagen.")
-                          (do
-                            (subir-imagen)
-                            (.reload js/location true)))}
-    "Subir Imagen"]])
+            :class "inputImagen"
+            :key @input-key}]
+
+   [:button
+    {:on-click
+     (fn []
+       (cond
+         (empty? @imagen)
+         (js/alert "Debes seleccionar una imagen.")
+
+         (js/confirm "¿Estás seguro de que quieres subir esta imagen?")
+         (subir-imagen
+          (fn []
+            actualizar-listado))))}
+    "Subir Imagen"]
+   [:div.row.actualizado
+    [:p.col-12 "Para ver el listado actualizado con las nuevas imagenes, selecciona el siguiente botón:"]
+    [:button.col-12.col-sm-2.butactua
+     {:on-click actualizar-listado}
+     "Actualizar listado"]]])
 
 
 ;; Funcion page para estructurar la pagina
