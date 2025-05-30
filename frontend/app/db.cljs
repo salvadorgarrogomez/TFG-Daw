@@ -12,6 +12,8 @@
 
 ;; Obtener categorías
 ;; Todos los js/console.log los utilizo como mensajes de depuracion para ver en el navegador, y ver si algo falla
+
+;; Pagina principal
 (defn fetch-categorias []
   (js/console.log "Llamando a fetch-categorias...")
   (-> (js/fetch "/api/categorias")
@@ -21,18 +23,6 @@
                (js/console.log "Categorías actualizadas:" @categorias)))
       (.catch (fn [err]
                 (js/console.error "Error al obtener categorías:" err)))))
-
-(defn fetch-list-categorias []
-  (js/console.log "Llamando a fetch-categorias...")
-  (go
-    (let [{:keys [status body]} (<! (https/get "/api/categorias/todas"
-                                              {:with-credentials? true
-                                               :response-format (ajax/json-response-format {:keywords? true})}))]
-      (if (= 200 status)
-        (do
-          (reset! categorias body)
-          (js/console.log "Categorías actualizadas:" @categorias))
-        (js/console.error "Error al obtener categorías")))))
 
 ;; Obtener productos por categoría
 (defn fetch-productos [categoria-id]
@@ -50,16 +40,33 @@
           (reset! productos [])
           (js/console.log "La categoría seleccionada no tiene productos asociados."))))))
 
+
+;; Panel de administracion
+(defn fetch-list-categorias []
+  (js/console.log "Llamando a fetch-list-categorias...")
+  (go
+    (let [{:keys [status body]} (<! (https/get "/api/categorias/todas"
+                                              {:with-credentials? true
+                                               :response-format (ajax/json-response-format {:keywords? true})}))]
+      (if (= 200 status)
+        (do
+          (reset! categorias body)
+          (js/console.log "Categorías actualizadas:" @categorias))
+        (js/console.error "Error al obtener categorías")))))
+
 (defn fetch-list-productos []
   (js/console.log "Llamando a fetch-list-productos...")
-  (-> (js/fetch "/api/productos/")
-      (.then #(.json %))
-      (.then (fn [data]
-               (reset! list-productos (js->clj data :keywordize-keys true))
-               (js/console.log "Productos actualizados:" @productos)))
-      (.catch (fn [err]
-                (js/console.error "Error al obtener productos:" err)))))
+  (go
+    (let [{:keys [status body]} (<! (https/get "/api/productos"
+                                               {:with-credentials? true
+                                                :response-format (ajax/json-response-format {:keywords? true})}))]
+      (if (= 200 status)
+        (do
+          (reset! list-productos body)
+          (js/console.log "Productos actualizadas:" @productos))
+        (js/console.error "Error al obtener productos")))))
 
+;; Panel administracion, subir imagenes
 (defn cargar-imagenes []
   (js/console.log "Llamando a cargar-imagenes...")
   (-> (js/fetch "/api/imagenes")
