@@ -22,7 +22,8 @@ FROM php:8.2-apache
 
 RUN apt-get update && apt-get install -y \
     libzip-dev zip unzip git curl libpng-dev libonig-dev libxml2-dev libpq-dev \
-    && docker-php-ext-install pdo pdo_pgsql pdo_pgsql zip
+    libfreetype6-dev libjpeg62-turbo-dev libxpm-dev libwebp-dev \
+    && docker-php-ext-install pdo pdo_pgsql zip gd
 
 RUN a2enmod rewrite
 
