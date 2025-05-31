@@ -208,11 +208,11 @@
    [:button {:on-click #(do
                           (reset! mostrar-productos? true)
                           (reset! mostrar-categorias? false)
-                          (fetch-list-productos))} "Mostrar productos"]
+                          (fetch-list-productos))} "Mostrar Productos"]
    [:button {:on-click #(do
                           (reset! mostrar-categorias? true)
                           (reset! mostrar-productos? false)
-                          (fetch-list-categorias))} "Mostrar categorías"]
+                          (fetch-list-categorias))} "Mostrar Categorías"]
    [:button {:on-click #(set! (.-hash js/location) "#/imagenes")} "Mostrar fotografías"]
    [:button {:on-click #(set! (.-hash js/location) "#/comandas")} "Comandas"]])
 
@@ -227,14 +227,12 @@
                    (reset! mostrar-categorias? false))]
     (cond
       (not @sesion-verificada?) [:div "Cargando sesión..."]
-
       (nil? @datos-usuario)
       [:div.row.panel
        [:div.col-12.panelBotones
         [:h2 "Aviso importante!!!"]
         [:p "No estás logeado, debes de cerrar sesión y logearte correctamente."]
         [:button {:on-click #(do (logout) (.reload js/location true))} "Cerrar sesión"]]]
-
       (not @logged-in?) [:div "Acceso denegado."]
 
       :else
@@ -244,24 +242,20 @@
           [:h2 (str "Bienvenido/a, " (:nombre @datos-usuario) "!")]
           [:p (str "Tienes permisos, " usuario)]
           [:button {:on-click #(do (logout) (.reload js/location true))} "Cerrar sesión"]
-
-          ;; Aquí usas las funciones de rol
+          ;; Funciones de rol, para mostrar unos botones u otros
           (cond
             (state/rol-admin?) [botones-admin]
             (state/rol-estandar?) [botones-user]
             :else [:div [:p "Rol no reconocido."]])]
-
          ;; Panel dinámico
          (when @mostrar-productos? [render-productos])
          (when @mostrar-categorias? [render-categorias])]))))
-
 
 (defn page []
   (cond
     (not @sesion-verificada?) [:p {:class "administracion"} "Verificando sesión..."]
     @logged-in? [admin-panel]
     :else [login-form]))
-
 
 ;; Monta la aplicación en el DOM
 (defn init []

@@ -29,8 +29,8 @@
   (js/console.log "Llamando a fetch-productos para categoría:" categoria-id)
   (go
     (let [{:keys [status body]} (<! (https/get (str "/api/productos/categoria/" categoria-id)
-                                              {:with-credentials? true
-                                               :response-format (ajax/json-response-format {:keywords? true})}))]
+                                               {:with-credentials? true
+                                                :response-format (ajax/json-response-format {:keywords? true})}))]
       (if (= 200 status)
         (let [productos-obtenidos (if (map? body) (:productos body) body)]
           (reset! productos productos-obtenidos)
@@ -46,8 +46,8 @@
   (js/console.log "Llamando a fetch-list-categorias...")
   (go
     (let [{:keys [status body]} (<! (https/get "/api/categorias/todas"
-                                              {:with-credentials? true
-                                               :response-format (ajax/json-response-format {:keywords? true})}))]
+                                               {:with-credentials? true
+                                                :response-format (ajax/json-response-format {:keywords? true})}))]
       (if (= 200 status)
         (do
           (reset! categorias body)
@@ -84,9 +84,9 @@
   (js/console.log "Llamando a insertar-producto..." producto)
   (go
     (let [{:keys [status body]} (<! (https/post "/api/producto/nuevo"
-                                               {:with-credentials? true
-                                                :json-params producto
-                                                :response-format (ajax/json-response-format {:keywords? true})}))]
+                                                {:with-credentials? true
+                                                 :json-params producto
+                                                 :response-format (ajax/json-response-format {:keywords? true})}))]
       (if (= 201 status)
         (do
           (js/console.log "Producto insertado correctamente" body)
@@ -97,9 +97,9 @@
   (js/console.log "Llamando a insertar-categoria..." categoria)
   (go
     (let [{:keys [status body]} (<! (https/post "/api/categoria/nuevo"
-                                               {:with-credentials? true
-                                                :json-params categoria
-                                                :response-format (ajax/json-response-format {:keywords? true})}))]
+                                                {:with-credentials? true
+                                                 :json-params categoria
+                                                 :response-format (ajax/json-response-format {:keywords? true})}))]
       (if (= 201 status)
         (do
           (js/console.log "Categoria insertada correctamente" body)
@@ -109,8 +109,8 @@
 (defn eliminar-producto [id]
   (go
     (let [{:keys [status body]} (<! (https/delete (str "/api/producto/eliminar/" id)
-                                                 {:with-credentials? true
-                                                  :response-format (ajax/json-response-format {:keywords? true})}))]
+                                                  {:with-credentials? true
+                                                   :response-format (ajax/json-response-format {:keywords? true})}))]
       (if (= 200 status)
         (do
           (js/console.log "Producto eliminado" body)
@@ -121,35 +121,35 @@
   (let [usuario-id (js/localStorage.getItem "id")]
     (go
       (let [{:keys [status body]} (<! (https/put (str "/api/producto/activo/" id)
-                                                {:with-credentials? true
-                                                 :headers {"Content-Type" "application/json"}
-                                                 :body (js/JSON.stringify #js {:usuario_id usuario-id})
-                                                 :response-format (ajax/json-response-format {:keywords? true})}))]
+                                                 {:with-credentials? true
+                                                  :headers {"Content-Type" "application/json"}
+                                                  :body (js/JSON.stringify #js {:usuario_id usuario-id})
+                                                  :response-format (ajax/json-response-format {:keywords? true})}))]
         (if (= 200 status)
           (do
             (js/console.log "Estado actualizado" body)
-            (js/alert (str "Producto " (if (:activo body) "activado" "desactivado") " correctamente")))
+            (js/alert (str "Producto " (if (:activo body) "activado" "desactivado") " correctamente, para actualizar el listado vuelve seleccionar 'Mostrar Productos'")))
           (js/console.error "Error al actualizar estado del producto" body))))))
 
 (defn activo-categoria [id]
   (let [usuario-id (js/localStorage.getItem "id")]
     (go
       (let [{:keys [status body]} (<! (https/put (str "/api/categoria/activo/" id)
-                                                {:with-credentials? true
-                                                 :headers {"Content-Type" "application/json"}
-                                                 :body (js/JSON.stringify #js {:usuario_id usuario-id})
-                                                 :response-format (ajax/json-response-format {:keywords? true})}))]
+                                                 {:with-credentials? true
+                                                  :headers {"Content-Type" "application/json"}
+                                                  :body (js/JSON.stringify #js {:usuario_id usuario-id})
+                                                  :response-format (ajax/json-response-format {:keywords? true})}))]
         (if (= 200 status)
           (do
             (js/console.log "Estado actualizado" body)
-            (js/alert (str "Categoria " (if (:activo body) "activada" "desactivada") " correctamente.")))
+            (js/alert (str "Categoria " (if (:activo body) "activada" "desactivada") " correctamente, para actualizar el listado vuelve seleccionar 'Mostrar Categorías'")))
           (js/console.error "Error al actualizar estado de la categoria" body))))))
 
 (defn eliminar-categoria [id]
   (go
     (let [{:keys [status body]} (<! (https/delete (str "/api/categoria/eliminar/" id)
-                                                 {:with-credentials? true
-                                                  :response-format (ajax/json-response-format {:keywords? true})}))]
+                                                  {:with-credentials? true
+                                                   :response-format (ajax/json-response-format {:keywords? true})}))]
       (if (= 200 status)
         (do
           (js/console.log "Categoría eliminada" body)
@@ -160,19 +160,22 @@
   (let [body-json (.stringify js/JSON (clj->js {:productos productos-ids
                                                 :categoria categoria-seleccionada}))]
     (-> (js/fetch "/api/generar-pdf"
-                  (clj->js {:with-credentials? true
-                            :method "POST"
+                  (clj->js {:method "POST"
+                            :credentials "include" ;; importante si usas cookies/sesiones
                             :headers #js {"Content-Type" "application/json"}
                             :body body-json}))
         (.then (fn [response]
                  (if (.-ok response)
                    (.blob response)
-                   (throw (js/Error. "Respuesta fallida del servidor")))))
-        (.then (fn [blob]
-                 (let [url (.createObjectURL js/URL blob)
-                       link (.createElement js/document "a")]
-                   (set! (.-href link) url)
-                   (set! (.-download link) "productos_filtrados.pdf")
-                   (.click link)
-                   (.revokeObjectURL js/URL url))))
+                   (.text response) ;; para leer texto de error y depurar
+                   )))
+        (.then (fn [blob-or-text]
+                 (if (instance? js/Blob blob-or-text)
+                   (let [url (.createObjectURL js/URL blob-or-text)
+                         link (.createElement js/document "a")]
+                     (set! (.-href link) url)
+                     (set! (.-download link) "productos_filtrados.pdf")
+                     (.click link)
+                     (.revokeObjectURL js/URL url))
+                   (js/alert (str "Error del servidor: " blob-or-text)))))
         (.catch #(js/alert (str "Error al generar el PDF: " %))))))
