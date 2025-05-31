@@ -2,8 +2,8 @@
   (:require [reagent.core :as r]
             [app.state :as state]
             [ajax.core :refer [GET POST]]
-            [app.db :refer [list-productos fetch-list-productos categorias 
-                              fetch-list-categorias activo-producto activo-categoria descargar-pdf]]
+            [app.db :refer [list-productos fetch-list-productos categorias
+                            fetch-list-categorias activo-producto activo-categoria descargar-pdf]]
             [reagent.dom :as dom]
             [reitit.frontend.easy :as rfe]))
 
@@ -202,54 +202,54 @@
      :error-handler (fn [e]
                       (js/console.log "Error cerrando sesión" e))}))
 
+(defn botones-admin []
+  [:div {:class "botonesAdmin"}
+   [:p "Eres administrador. Puedes editar el contenido."]
+   [:button {:on-click #(do
+                          (reset! mostrar-productos? true)
+                          (reset! mostrar-categorias? false)
+                          (fetch-list-productos))} "Mostrar productos"]
+   [:button {:on-click #(do
+                          (reset! mostrar-categorias? true)
+                          (reset! mostrar-productos? false)
+                          (fetch-list-categorias))} "Mostrar categorías"]
+   [:button {:on-click #(set! (.-hash js/location) "#/imagenes")} "Mostrar fotografías"]
+   [:button {:on-click #(set! (.-hash js/location) "#/comandas")} "Comandas"]])
+
+(defn botones-user []
+  [:div {:class "botonesUser"}
+   [:p "Tienes acceso, puedes apuntar las comandas de los clientes."]
+   [:button {:on-click #(set! (.-hash js/location) "#/comandas")} "Comandas"]])
+
 (defn admin-panel []
   (r/with-let [_ (do
                    (reset! mostrar-productos? false)
                    (reset! mostrar-categorias? false))]
     (cond
-      (not @sesion-verificada?)
-      [:div "Cargando sesión..."]
+      (not @sesion-verificada?) [:div "Cargando sesión..."]
 
       (nil? @datos-usuario)
-      [:div.row {:class "panel"}
-       [:div.col-12 {:class "panelBotones"}
+      [:div.row.panel
+       [:div.col-12.panelBotones
         [:h2 "Aviso importante!!!"]
         [:p "No estás logeado, debes de cerrar sesión y logearte correctamente."]
-        [:button {:on-click #(do
-                               (logout)
-                               (.reload js/location true))} "Cerrar sesión"]]]
+        [:button {:on-click #(do (logout) (.reload js/location true))} "Cerrar sesión"]]]
 
-      (not @logged-in?)
-      [:div "Acceso denegado."]
+      (not @logged-in?) [:div "Acceso denegado."]
 
       :else
       (let [usuario (:rol @datos-usuario)]
-        [:div.row {:class "panel"}
-         [:div.col-12 {:class "panelBotones"}
+        [:div.row.panel
+         [:div.col-12.panelBotones
           [:h2 (str "Bienvenido/a, " (:nombre @datos-usuario) "!")]
           [:p (str "Tienes permisos, " usuario)]
-          [:button {:on-click #(do
-                                 (logout)
-                                 (.reload js/location true))} "Cerrar sesión"]
+          [:button {:on-click #(do (logout) (.reload js/location true))} "Cerrar sesión"]
 
-          ;; Mostrar panel según el rol
-          (if (= usuario "admin")
-            [:div {:class "botonesAdmin"}
-             [:p "Eres administrador. Puedes editar el contenido."]
-             [:button {:on-click #(do
-                                    (reset! mostrar-productos? true)
-                                    (reset! mostrar-categorias? false)
-                                    (fetch-list-productos))} "Mostrar productos"]
-             [:button {:on-click #(do
-                                    (reset! mostrar-categorias? true)
-                                    (reset! mostrar-productos? false)
-                                    (fetch-list-categorias))} "Mostrar categorías"]
-             [:button {:on-click #(set! (.-hash js/location) "#/imagenes")} "Mostrar fotografías"]
-             [:button {:on-click #(set! (.-hash js/location) "#/comandas")} "Comandas"]]
-            ;; Si no es admin, solo mostramos botón de comandas
-            [:div {:class "botonesUser"}
-             [:p "Tienes acceso, puedes apuntar las comandas de los clientes."]
-             [:button {:on-click #(set! (.-hash js/location) "#/comandas")} "Comandas"]])]
+          ;; Aquí usas las funciones de rol
+          (cond
+            (state/rol-admin?) [botones-admin]
+            (state/rol-estandar?) [botones-user]
+            :else [:div [:p "Rol no reconocido."]])]
 
          ;; Panel dinámico
          (when @mostrar-productos? [render-productos])

@@ -3,7 +3,8 @@
             [reagent.dom :as dom]
             [app.state :as state]
             [app.state :refer [current-route]]
-            [app.db :refer [list-productos categorias]]))
+            [app.db :refer [list-productos categorias]]
+            [administracion.core :as core]))
 
 (def producto (r/atom {}))
 (def categoria (r/atom {}))
@@ -242,56 +243,69 @@
 
 
 (defn page []
-  (if (state/rol-admin?)
-    (let [params (get-in @current-route [:parameters :path])
-          tipo (:tipo params)
-          id (js/parseInt (:id params))]
-      (r/with-let [_ (reset! producto (get-producto-por-id id))]
-        (r/with-let [_ (reset! categoria (get-categoria-por-id id))]
-          (case tipo
-            "producto"
-            (if @producto
-              [:div.row {:class "divEditar"}
-               [:div.col-12 {:class "volverAtras"}
-                [:button
-                 {:on-click #(set! (.-hash js/location) "#/administracion")}
-                 "Volver al panel de Administración"]]
-               [:div.col-12.col-md-6 {:class "divDatos"}
-                [:h1 "Datos del producto seleccionado:"]
-                [:p [:strong "ID: "] (:id @producto)]
-                [:p [:strong "Nombre: "] (:nombre @producto)]
-                [:p [:strong "Descripción: "] (:description @producto)]
-                [:p [:strong "Precio: "] (str (:precio @producto) " €")]
-                [:p [:strong "Categoría: "] (:nombre_categoria @producto)]
-                [:p [:strong "Tipo de plato: "] (:tipo_plato @producto)]
-                [:p [:strong "Tipo de porción: "] (:tipo_porcion @producto)]
-                [:h3 [:strong "Alérgenos informativos: "]]
-                [columnas-alergenos producto]]
-               [:div.col-12.col-md-6 {:class "divActualizar"}
-                [render-edicion-producto producto]]]
-              [:div {:class "divEditar"} "Producto no encontrado"])
+  (fn []
+    (cond
+      ;; Aún no se ha verificado la sesión (espera sin hacer nada)
+      (not @core/sesion-verificada?)
+      [:div "Cargando..."] ;; o nil
+      ;; No hay rol definido después de la verificación → redirige
+      (nil? @state/rol-usuario)
+      (do
+        (set! (.-hash js/location) "#/administracion")
+        nil)
+      ;; No tiene permisos → redirige
+      (not (state/rol-admin?))
+      (do
+        (set! (.-hash js/location) "#/administracion")
+        nil)
+      ;; Si todo está bien, muestra el contenido
+      :else
+      (let [params (get-in @current-route [:parameters :path])
+            tipo (:tipo params)
+            id (js/parseInt (:id params))]
+        (r/with-let [_ (reset! producto (get-producto-por-id id))]
+          (r/with-let [_ (reset! categoria (get-categoria-por-id id))]
+            (case tipo
+              "producto"
+              (if @producto
+                [:div.row {:class "divEditar"}
+                 [:div.col-12 {:class "volverAtras"}
+                  [:button
+                   {:on-click #(set! (.-hash js/location) "#/administracion")}
+                   "Volver al panel de Administración"]]
+                 [:div.col-12.col-md-6 {:class "divDatos"}
+                  [:h1 "Datos del producto seleccionado:"]
+                  [:p [:strong "ID: "] (:id @producto)]
+                  [:p [:strong "Nombre: "] (:nombre @producto)]
+                  [:p [:strong "Descripción: "] (:description @producto)]
+                  [:p [:strong "Precio: "] (str (:precio @producto) " €")]
+                  [:p [:strong "Categoría: "] (:nombre_categoria @producto)]
+                  [:p [:strong "Tipo de plato: "] (:tipo_plato @producto)]
+                  [:p [:strong "Tipo de porción: "] (:tipo_porcion @producto)]
+                  [:h3 [:strong "Alérgenos informativos: "]]
+                  [columnas-alergenos producto]]
+                 [:div.col-12.col-md-6 {:class "divActualizar"}
+                  [render-edicion-producto producto]]]
+                [:div {:class "divEditar"} "Producto no encontrado"])
 
-            "categoria"
-            (if @categoria
-              [:div.row {:class "divEditar"}
-               [:div.col-12 {:class "volverAtras"}
-                [:button
-                 {:on-click #(set! (.-hash js/location) "#/administracion")}
-                 "Volver al panel de Administración"]]
-               [:div.col-12.col-md-6 {:class "divDatos"}
-                [:h1 "Editar categoría:"]
-                [:p [:strong "ID: "] (:id @categoria)]
-                [:p [:strong "Nombre: "] (:nombre @categoria)]
-                [:p [:strong "Descripción: "] (:descripcion @categoria)]]
-               [:div.col-12.col-md-6 {:class "divActualizar"}
-                [render-edicion-categoria id categoria]]]
-              [:div {:class "divEditar"} "Producto no encontrado"])))))
-    [:div.alert.alert-danger
-     [:h4 "⚠️ Acceso denegado"]
-     [:p "Para acceder a esta seccion, debes logearte y acceder desde su boton determinado."]
-     [:button
-      {:on-click #(set! (.-hash js/location) "#/administracion")}
-      "LOGIN"]]))
+              "categoria"
+              (if @categoria
+                [:div.row {:class "divEditar"}
+                 [:div.col-12 {:class "volverAtras"}
+                  [:button
+                   {:on-click #(set! (.-hash js/location) "#/administracion")}
+                   "Volver al panel de Administración"]]
+                 [:div.col-12.col-md-6 {:class "divDatos"}
+                  [:h1 "Editar categoría:"]
+                  [:p [:strong "ID: "] (:id @categoria)]
+                  [:p [:strong "Nombre: "] (:nombre @categoria)]
+                  [:p [:strong "Descripción: "] (:descripcion @categoria)]]
+                 [:div.col-12.col-md-6 {:class "divActualizar"}
+                  [render-edicion-categoria id categoria]]]
+                [:div {:class "divEditar"} "Producto no encontrado"]))))))))
 
-
+(defn init []
+  (core/verificar-sesion)
+  (dom/render [page] (.getElementById js/document "app")))
+(init)
 

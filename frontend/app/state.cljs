@@ -17,5 +17,12 @@
   (reset! rol-usuario rol))
 
 (defn rol-admin? []
-  (or (= @rol-usuario "admin")
-      (= @rol-usuario "estandar")))
+  (= @rol-usuario "admin"))
+
+(defn rol-estandar? []
+  (= @rol-usuario "estandar"))
+
+(defn init-rol []
+  (let [rol (getCookie "rol")]
+    (when rol
+      (set-rol rol))))

@@ -3,7 +3,8 @@
             [reagent.dom :as dom]
             [cljs-http.client :as https]
             [app.state :as state]
-            [app.db :as db]))
+            [app.db :as db]
+            [administracion.core :as core]))
 
 (defonce imagen (r/atom nil)) ;; Átomo para almacenar la imagen seleccionada
 (defonce input-key (r/atom (random-uuid)))
@@ -95,35 +96,44 @@
 
 ;; Funcion page para estructurar la pagina
 (defn page []
-  (if (state/rol-admin?)
-    (r/create-class
-     {:component-did-mount
-      (fn []
-        (js/console.log "Componente montado. Llamando a cargar-imagenes...")
-        (db/cargar-imagenes))
-      :reagent-render
-      (fn []
-        [:div.row {:class "divPanelImagenes"}
-         [:div.col-12 {:class "volverAtras"}
-          [:button
-           {:on-click #(set! (.-hash js/location) "#/administracion")}
-           "Volver al panel de Administración"]]
-         [:div.row {:class "adminImagenes"}
-          [:div.col.12
-           [:h1 "Directorio de imágenes:"]
-           [:div.col.12 {:class "formImagenes"}
-            [formulario-subida]
-            [mostrar-imagenes-todas]]]]])})
-    ;; Mostrar mensaje si el acceso no está permitido
-    [:div.alert.alert-danger
-     [:h4 "⚠️ Acceso denegado"]
-     [:p "Para acceder a esta seccion, debes logearte y acceder desde su boton determinado."]
-     [:button
-      {:on-click #(set! (.-hash js/location) "#/administracion")}
-      "LOGIN"]]))
-
+  (fn []
+    (cond
+      ;; Aún no se ha verificado la sesión (espera sin hacer nada)
+      (not @core/sesion-verificada?)
+      [:div "Cargando..."] ;; o nil
+      ;; No hay rol definido después de la verificación → redirige
+      (nil? @state/rol-usuario)
+      (do
+        (set! (.-hash js/location) "#/administracion")
+        nil)
+      ;; No tiene permisos → redirige
+      (not (state/rol-admin?))
+      (do
+        (set! (.-hash js/location) "#/administracion")
+        nil)
+      ;; Si todo está bien, muestra el contenido
+      :else
+      (r/create-class
+       {:component-did-mount
+        (fn []
+          (js/console.log "Componente montado. Llamando a cargar-imagenes...")
+          (db/cargar-imagenes))
+        :reagent-render
+        (fn []
+          [:div.row {:class "divPanelImagenes"}
+           [:div.col-12 {:class "volverAtras"}
+            [:button
+             {:on-click #(set! (.-hash js/location) "#/administracion")}
+             "Volver al panel de Administración"]]
+           [:div.row {:class "adminImagenes"}
+            [:div.col.12
+             [:h1 "Directorio de imágenes:"]
+             [:div.col.12 {:class "formImagenes"}
+              [formulario-subida]
+              [mostrar-imagenes-todas]]]]])}))))
 
 ;; Inicializa la app
 (defn init []
+  (core/verificar-sesion)
   (dom/render [page] (.getElementById js/document "app")))
 (init)
