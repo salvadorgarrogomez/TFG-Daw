@@ -74,7 +74,6 @@
             :on-change handle-file-change
             :class "inputImagen"
             :key @input-key}]
-
    [:button
     {:on-click
      (fn []
