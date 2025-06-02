@@ -34,6 +34,7 @@ COPY . /var/www/html
 
 COPY --from=frontend /app/public/js ./public/js
 COPY --from=frontend /app/public/css ./public/css
+COPY public/imgs ./public/imgs
 
 RUN composer install --no-dev --optimize-autoloader \
     && php artisan config:cache \
