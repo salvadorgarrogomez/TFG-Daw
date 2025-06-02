@@ -1,4 +1,4 @@
-<!-- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 
 <head>
@@ -50,24 +50,6 @@
             </li>
         @endforeach
     </ul>
-</body>
-
-</html> -->
-
-<!DOCTYPE html>
-<html lang="es">
-
-<head>
-    <meta charset="UTF-8">
-    <title>Listado de productos</title>
-    <link rel="stylesheet" href="css/style.css" />
-</head>
-
-<body>
-    <header class="headerPDF">
-        <h1 class="h1">Producto</h1>
-    </header>
-
 </body>
 
 </html>

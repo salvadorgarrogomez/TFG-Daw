@@ -112,6 +112,7 @@ class GeneracionPDF extends Controller
                 ->header('Content-Disposition', 'attachment; filename="productos.pdf"');
         } catch (\Throwable $e) {
             Log::error("Error generando PDF: " . $e->getMessage());
+            Log::error($e->getTraceAsString());
             return response()->json(['error' => 'Error interno al generar el PDF'], 500);
         }
     }
