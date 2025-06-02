@@ -62,11 +62,14 @@ class GeneracionPDF extends Controller
                 $archivo = $mapaImagenes[$tipo] ?? 'default.png';
                 $path = public_path("imgs/$archivo");
                 if (file_exists($path)) {
+                    $mime = mime_content_type($path);
                     $base64 = base64_encode(file_get_contents($path));
-                    $imagenesPorcion[$tipo] = 'data:image/png;base64,' . $base64;
+                    $imagenesPorcion[$tipo] = "data:$mime;base64,$base64";
                 } else {
+                    Log::warning("Imagen no encontrada para porción: $tipo en $path");
                     $imagenesPorcion[$tipo] = null;
                 }
+
 
             }
 

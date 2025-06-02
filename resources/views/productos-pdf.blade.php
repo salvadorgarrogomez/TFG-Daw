@@ -9,7 +9,9 @@
 
 <body>
     <header class="headerPDF">
-        <img src="{{ $logo }}" class="logo">
+        @if($logo)
+            <img src="{{ $logo }}" class="logo">
+        @endif
         <h1 class="h1">{{ $categoriaNombre }}</h1>
     </header>
 
@@ -35,8 +37,10 @@
                     </td>
                     <td>{{ $producto->precio }}€</td>
                     <td>
-                        <img class="imagen_racion" src="{{ $imagenesPorcion[$producto->tipo_porcion] ?? '' }}"
-                            alt="{{ $producto->tipo_porcion }}">
+                        @if(!empty($imagenesPorcion[$producto->tipo_porcion]))
+                            <img class="imagen_racion" src="{{ $imagenesPorcion[$producto->tipo_porcion] }}"
+                                alt="{{ $producto->tipo_porcion }}">
+                        @endif
                     </td>
                 </tr>
             @endforeach
