@@ -133,6 +133,7 @@
          [:option {:value "Tapa"} "Tapa"]
          [:option {:value "Al centro"} "Al centro"]
          [:option {:value "Principal"} "Principal"]
+         [:option {:value "Bebida"} "Bebida"]
          [:option {:value "Postres"} "Postres"]]
 
         ;; Categoría (muestra ID y nombre)
