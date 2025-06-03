@@ -169,28 +169,40 @@
                        (reset! loading? false))}))
 
 (defn login-form []
-  [:div.row {:class "administracion"}
-   [:div {:class "entrada"}
-    [:div.col-12
-     [:p "Nombre de usuario: "
-      [:input {:type "text"
-               :placeholder "Ingrese su nombre de usuario"
-               :value @usuario
-               :on-change #(reset! usuario (-> % .-target .-value))}]]
-     [:p "Contraseña: "
-      [:input {:type "password"
-               :placeholder "Ingrese su contraseña"
-               :value @contrasenia
-               :on-change #(reset! contrasenia (-> % .-target .-value))}]]]
-    [:div.row {:class "rowButton"}
-     [:div.col-12
-      {:on-key-down (fn [e]
-                      (when (= (.-keyCode e) 13)  ;; 13 es el código de la tecla Enter
-                        (do
-                          (login)
-                          (.reload js/location true))))}
-      [:button {:on-click #(do
-                             (login))} "Entrar"]]]]])
+  (r/create-class
+   {:component-did-mount
+    (fn []
+      ;; Al clickar en el Enter del teclado, se ejecuta el boton de Login
+      (let [handler (fn [e]
+                      (when (and (= (.-key e) "Enter"))
+                        (login)))]
+        (aset js/window "enterKeyHandler" handler)
+        (.addEventListener js/document "keydown" handler)))
+    :component-will-unmount
+    (fn []
+      ;; Limpiamos el event listener al desmontar
+      (when-let [handler (aget js/window "enterKeyHandler")]
+        (.removeEventListener js/document "keydown" handler)
+        (aset js/window "enterKeyHandler" nil)))
+    :reagent-render
+    (fn []
+      [:div.row {:class "administracion"}
+       [:div {:class "entrada"}
+        [:div.col-12
+         [:p "Nombre de usuario: "
+          [:input {:type "text"
+                   :placeholder "Ingrese su nombre de usuario"
+                   :value @usuario
+                   :on-change #(reset! usuario (-> % .-target .-value))}]]
+         [:p "Contraseña: "
+          [:input {:type "password"
+                   :placeholder "Ingrese su contraseña"
+                   :value @contrasenia
+                   :on-change #(reset! contrasenia (-> % .-target .-value))}]]]
+        [:div.row {:class "rowButton"}
+         [:div.col-12
+          [:button {:on-click #(login)} "Entrar"]]]]])}))
+
 
 (defn logout []
   (POST "/api/logout"

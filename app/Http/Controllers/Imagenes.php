@@ -66,7 +66,7 @@ class Imagenes extends Controller
             // Leer el contenido binario del archivo
             $imagenBinaria = file_get_contents($archivo);
             // Obtener descripción opcional desde el formulario
-            $descripcion = $request->input('descripcion', '');
+            $descripcion = trim($request->input('descripcion') ?? '');
             $usuario_id = $request->input('usuario_id');
             // Preparar la conexión directa con PDO
             $pdo = DB::connection()->getPdo();

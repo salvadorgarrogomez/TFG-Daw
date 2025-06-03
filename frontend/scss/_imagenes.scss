@@ -35,15 +35,18 @@
     }
 }
 
+textarea {
+    margin: 0;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: -10px;
+}
+
 
 @media (max-width: 1024px) {
     .divPanelImagenes {
         margin: 0;
         margin-bottom: 100px;
-    }
-
-    .butactua {
-        width: 200px;
     }
 
     .formulario {
@@ -58,8 +61,13 @@
         }
 
         button {
-            margin-top: 10px;
-            margin-left: 10px;
+            width: 200px;
+            margin-top: 20px;
         }
+    }
+
+    textarea {
+        margin-top: 15px;
+        margin-bottom: -10px;
     }
 }

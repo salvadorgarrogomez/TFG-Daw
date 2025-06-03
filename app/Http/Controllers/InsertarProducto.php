@@ -33,10 +33,26 @@ class InsertarProducto extends Controller
             'usuario_id'
         ]);
 
+        if (!isset($data['description']) || $data['description'] === null) {
+            $data['description'] = '';
+        }
+
+        // VALIDACIÓN de duplicado:
+        $existe = Producto::where('nombre', $data['nombre'])
+            ->where('tipo_porcion', $data['tipo_porcion'])
+            ->exists();
+
+        if ($existe) {
+            return response()->json([
+                'message' => 'Ya existe un producto con ese nombre y tipo de porción.'
+            ], 409); // 409 Conflict
+        }
+
         $producto = new Producto();
         $producto->fill($data);
-        $producto->save(); 
+        $producto->save();
 
         return response()->json(['message' => 'Producto insertado'], 201);
     }
+
 }

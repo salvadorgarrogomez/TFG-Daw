@@ -10,6 +10,27 @@
 (def list-productos (r/atom []))
 (defonce imagenes (r/atom []))
 
+(defonce nombre-producto (r/atom ""))
+(defonce descripcion-producto (r/atom ""))
+(defonce precio-producto (r/atom ""))
+(defonce categoria-producto (r/atom ""))
+(defonce tipo_plato-producto (r/atom ""))
+(defonce tipo_porcion-producto (r/atom ""))
+(defonce contiene_gluten-producto (r/atom ""))
+(defonce contiene_crustaceos-producto (r/atom ""))
+(defonce contiene_huevos-producto (r/atom ""))
+(defonce contiene_pescado-producto (r/atom ""))
+(defonce contiene_cacahuetes-producto (r/atom ""))
+(defonce contiene_soja-producto (r/atom ""))
+(defonce contiene_lacteos-producto (r/atom ""))
+(defonce contiene_frutos_de_cascara-producto (r/atom ""))
+(defonce contiene_apio-producto (r/atom ""))
+(defonce contiene_mostaza-producto (r/atom ""))
+(defonce contiene_granos_de_sesamo-producto (r/atom ""))
+(defonce contiene_sulfitos-producto (r/atom ""))
+(defonce contiene_moluscos-producto (r/atom ""))
+(defonce contiene_altramuces-producto (r/atom ""))
+
 ;; Obtener categorías
 ;; Todos los js/console.log los utilizo como mensajes de depuracion para ver en el navegador, y ver si algo falla
 
@@ -87,11 +108,44 @@
                                                 {:with-credentials? true
                                                  :json-params producto
                                                  :response-format (ajax/json-response-format {:keywords? true})}))]
-      (if (= 201 status)
+      (cond
+        (= 201 status)
         (do
           (js/console.log "Producto insertado correctamente" body)
-          (js/alert "Producto creado correctamente"))
-        (js/console.error "Error al insertar producto" body)))))
+          (js/alert "Producto creado correctamente.")
+          ;; SOLO si la inserción es correcta, reseteamos campos:
+          (reset! nombre-producto "")
+          (reset! descripcion-producto "")
+          (reset! precio-producto "")
+          (reset! categoria-producto "")
+          (reset! tipo_plato-producto "")
+          (reset! tipo_porcion-producto "")
+          (reset! contiene_gluten-producto "")
+          (reset! contiene_crustaceos-producto "")
+          (reset! contiene_huevos-producto "")
+          (reset! contiene_pescado-producto "")
+          (reset! contiene_cacahuetes-producto "")
+          (reset! contiene_soja-producto "")
+          (reset! contiene_lacteos-producto "")
+          (reset! contiene_frutos_de_cascara-producto "")
+          (reset! contiene_apio-producto "")
+          (reset! contiene_mostaza-producto "")
+          (reset! contiene_granos_de_sesamo-producto "")
+          (reset! contiene_sulfitos-producto "")
+          (reset! contiene_moluscos-producto "")
+          (reset! contiene_altramuces-producto ""))
+        (= 409 status)
+        (do
+          (js/console.warn "Producto duplicado" body)
+          (js/alert (:message body))
+          ;; NO reseteamos nada para que el usuario corrija
+          )
+        :else
+        (do
+          (js/console.error "Error al insertar producto" body)
+          (js/alert "Error al insertar producto, inténtalo de nuevo")
+          ;; NO reseteamos nada para que el usuario corrija
+          )))))
 
 (defn insertar-categoria [categoria]
   (js/console.log "Llamando a insertar-categoria..." categoria)
@@ -103,7 +157,7 @@
       (if (= 201 status)
         (do
           (js/console.log "Categoria insertada correctamente" body)
-          (js/alert "Categoria creada correctamente, recarga la lista de 'Mostrar categorias' dandole al boton, para verla y poder editarla."))
+          (js/alert "Categoria creada correctamente."))
         (js/console.error "Error al insertar categoria" body)))))
 
 (defn eliminar-producto [id]

@@ -7,6 +7,7 @@
             [administracion.core :as core]))
 
 (defonce imagen (r/atom nil)) ;; Átomo para almacenar la imagen seleccionada
+(defonce descripcion (r/atom ""))
 (defonce input-key (r/atom (random-uuid)))
 
 ;; Función para manejar el cambio de archivo
@@ -22,12 +23,13 @@
       (let [form-data (js/FormData.)]
         (.append form-data "imagen" (first @imagen))
         (.append form-data "usuario_id" usuario-id)
+        (.append form-data "descripcion" @descripcion)
         (https/post "/api/subir-imagen"
                     {:body form-data
                      :with-credentials? true
                      :response-format :json
                      :on-success (fn [_response]
-                                   (on-success)) ;; solo callback
+                                   (on-success))
                      :on-failure (fn [_]
                                    (js/alert "Error al subir la imagen"))})))))
 
@@ -63,7 +65,8 @@
 (defn actualizar-listado []
   (db/cargar-imagenes)
   (reset! input-key (random-uuid))
-  (reset! imagen nil))
+  (reset! imagen nil)
+  (reset! descripcion ""))
 
 (defn formulario-subida []
   [:div {:class "formulario"}
@@ -74,6 +77,9 @@
             :on-change handle-file-change
             :class "inputImagen"
             :key @input-key}]
+   [:textarea {:placeholder "Descripción de la imagen"
+               :value @descripcion
+               :on-change #(reset! descripcion (.. % -target -value))}]
    [:button
     {:on-click
      (fn []
