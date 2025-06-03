@@ -11,9 +11,20 @@
 (defonce input-key (r/atom (random-uuid)))
 
 ;; Función para manejar el cambio de archivo
-(defn handle-file-change [event]
-  (let [file (first (.-files (.-target event)))]
-    (when (and file (<= (.-size file) 2048000) (re-matches #".*\.(jpg|jpeg|png|gif|svg)$" (.-name file)))
+(defn comprobacion_archivo [event]
+  (let [file (first (.-files (.-target event)))
+        nombre (.-name file)
+        tamano (.-size file)
+        extensiones-validas #".*\.(jpg|jpeg|png|gif|svg)$"
+        nombre-valido? (re-matches extensiones-validas (.toLowerCase nombre))]
+    (cond
+      (not file)
+      nil ; no se seleccionó ningún archivo
+      (not nombre-valido?)
+      (js/alert "Formato de imagen no válido.")
+      (> tamano 2048000)
+      (js/alert "La imagen no puede superar 2Mb de tamaño.")
+      :else
       (reset! imagen [file]))))
 
 ;; Función para subir la imagen
@@ -74,7 +85,7 @@
    [:p "(solo se puede subir de 1 en 1)"]
    [:p "Para eliminar una imagen, clicka sobre ella y confirma."]
    [:input {:type "file"
-            :on-change handle-file-change
+            :on-change comprobacion_archivo
             :class "inputImagen"
             :key @input-key}]
    [:textarea {:placeholder "Descripción de la imagen"
