@@ -74,135 +74,181 @@
         (.catch (fn [e]
                   (reset! estado-actualizacion "Error de red al actualizar."))))))
 
-
+(def etiquetas-producto
+  {"nombre" "Nombre"
+   "description" "Descripción"
+   "precio" "Precio"
+   "categoria_id" "Categoría"
+   "tipo_plato" "Tipo de plato"
+   "tipo_porcion" "Tipo de porción"
+   "contiene_gluten" "Contiene Gluten"
+   "contiene_crustaceos" "Crustaceos"
+   "contiene_huevos" "Huevos"
+   "contiene_pescado" "Pescados"
+   "contiene_cacahuetes" "Cacahuetes"
+   "contiene_soja" "Soja"
+   "contiene_lacteos" "Lácteos"
+   "contiene_frutos_de_cascara" "Frutos de cascara"
+   "contiene_apio" "Apio"
+   "contiene_mostaza" "Mostaza"
+   "contiene_granos_de_sesamo" "Granos de sesamo"
+   "contiene_sulfitos" "Dióxido de azufre y sulfitos"
+   "contiene_moluscos" "Moluscos"
+   "contiene_altramuces" "Altramuces"})
 
 (defn render-edicion-producto [producto]
-  [:div
-   [:h3 "Selecciona el campo que quieres modificar:"]
-   [:select {:value (or @campo-seleccionado "")
-             :on-change #(reset! campo-seleccionado (-> % .-target .-value))}
-    [:option {:value ""} "-- Selecciona un campo --"]
-    [:option {:value "nombre"} "Nombre"]
-    [:option {:value "description"} "Descripción"]
-    [:option {:value "precio"} "Precio"]
-    [:option {:value "categoria_id"} "Categoría"]
-    [:option {:value "tipo_plato"} "Tipo de plato"]
-    [:option {:value "tipo_porcion"} "Tipo de porción"]
-    [:option {:value ""} "-- Alergenos --"]
-    [:option {:value "contiene_gluten"} "Contiene Gluten"]
-    [:option {:value "contiene_crustaceos"} "Crustaceos"]
-    [:option {:value "contiene_huevos"} "Huevos"]
-    [:option {:value "contiene_pescado"} "Pescados"]
-    [:option {:value "contiene_cacahuetes"} "Cacahuetes"]
-    [:option {:value "contiene_soja"} "Soja"]
-    [:option {:value "contiene_lacteos"} "Lácteos"]
-    [:option {:value "contiene_frutos_de_cascara"} "Frutos de cascara"]
-    [:option {:value "contiene_apio"} "Apio"]
-    [:option {:value "contiene_mostaza"} "Mostaza"]
-    [:option {:value "contiene_granos_de_sesamo"} "Granos de sesamo"]
-    [:option {:value "contiene_sulfitos"} "Dióxido de azufre y sulfitos"]
-    [:option {:value "contiene_moluscos"} "Moluscos"]
-    [:option {:value "contiene_altramuces"} "Altramuces"]]
+  (let [campo-seleccionado (r/atom "")
+        nuevo-valor (r/atom "")]
+    (fn [producto]
+      [:div.edit
+       [:h3 "Selecciona el campo que quieres modificar:"]
+       [:select {:value (or @campo-seleccionado "")
+                 :on-change #(reset! campo-seleccionado (-> % .-target .-value))
+                 :class "selectEdit"}
+        [:option {:value ""} "-- Selecciona un campo --"]
+        [:option {:value "nombre"} "Nombre"]
+        [:option {:value "description"} "Descripción"]
+        [:option {:value "precio"} "Precio"]
+        [:option {:value "categoria_id"} "Categoría"]
+        [:option {:value "tipo_plato"} "Tipo de plato"]
+        [:option {:value "tipo_porcion"} "Tipo de porción"]
+        [:option {:value ""} "-- Alergenos --"]
+        [:option {:value "contiene_gluten"} "Contiene Gluten"]
+        [:option {:value "contiene_crustaceos"} "Crustaceos"]
+        [:option {:value "contiene_huevos"} "Huevos"]
+        [:option {:value "contiene_pescado"} "Pescados"]
+        [:option {:value "contiene_cacahuetes"} "Cacahuetes"]
+        [:option {:value "contiene_soja"} "Soja"]
+        [:option {:value "contiene_lacteos"} "Lácteos"]
+        [:option {:value "contiene_frutos_de_cascara"} "Frutos de cascara"]
+        [:option {:value "contiene_apio"} "Apio"]
+        [:option {:value "contiene_mostaza"} "Mostaza"]
+        [:option {:value "contiene_granos_de_sesamo"} "Granos de sesamo"]
+        [:option {:value "contiene_sulfitos"} "Dióxido de azufre y sulfitos"]
+        [:option {:value "contiene_moluscos"} "Moluscos"]
+        [:option {:value "contiene_altramuces"} "Altramuces"]]
 
-   (when (not= @campo-seleccionado "")
-     [:div {:style {:margin-top "15px"}}
-      [:label (str "Nuevo valor para el campo seleccionado: ")]
-      (cond
-        ;; Booleans
-        (#{"contiene_gluten" "contiene_crustaceos" "contiene_huevos" "contiene_pescado" "contiene_cacahuetes" "contiene_soja" "contiene_lacteos" "contiene_frutos_de_cascara"
-           "contiene_apio" "contiene_mostaza" "contiene_granos_de_sesamo" "contiene_sulfitos" "contiene_moluscos" "contiene_altramuces"} @campo-seleccionado)
-        [:select {:value (or @nuevo-valor "")
-                  :on-change #(reset! nuevo-valor (-> % .-target .-value))}
-         [:option {:value ""} "-- Selecciona una opción --"]
-         [:option {:value "true"} "Sí"]
-         [:option {:value "false"} "No"]]
+       (when (not= @campo-seleccionado "")
+         [:div {:style {:margin-top "15px"}}
+          [:label
+           "Nuevo valor para el campo seleccionado: "
+           [:span.referencia
+            (get etiquetas-producto @campo-seleccionado @campo-seleccionado)]]
+          (cond
+            ;; Booleans
+            (#{"contiene_gluten" "contiene_crustaceos" "contiene_huevos" "contiene_pescado" "contiene_cacahuetes" "contiene_soja" "contiene_lacteos" "contiene_frutos_de_cascara"
+               "contiene_apio" "contiene_mostaza" "contiene_granos_de_sesamo" "contiene_sulfitos" "contiene_moluscos" "contiene_altramuces"} @campo-seleccionado)
+            [:select {:value (or @nuevo-valor "")
+                      :on-change #(reset! nuevo-valor (-> % .-target .-value))}
+             [:option {:value ""} "-- Selecciona una opción --"]
+             [:option {:value "true"} "Sí"]
+             [:option {:value "false"} "No"]]
 
-        ;; Tipo de plato con opciones específicas
-        (= @campo-seleccionado "tipo_porcion")
-        [:select {:value (or @nuevo-valor "")
-                  :on-change #(reset! nuevo-valor (-> % .-target .-value))}
-         [:option {:value ""} "-- Selecciona un tipo de porcion --"]
-         [:option {:value "Media ración"} "Media ración"]
-         [:option {:value "Ración completa"} "Ración completa"]
-         [:option {:value "Por unidad"} "Por unidad"]]
+            ;; Tipo de plato con opciones específicas
+            (= @campo-seleccionado "tipo_porcion")
+            [:select {:value (or @nuevo-valor "")
+                      :on-change #(reset! nuevo-valor (-> % .-target .-value))}
+             [:option {:value ""} "-- Selecciona un tipo de porcion --"]
+             [:option {:value "Media ración"} "Media ración"]
+             [:option {:value "Ración completa"} "Ración completa"]
+             [:option {:value "Por unidad"} "Por unidad"]]
 
-        (= @campo-seleccionado "tipo_plato")
-        [:select {:value (or @nuevo-valor "")
-                  :on-change #(reset! nuevo-valor (-> % .-target .-value))}
-         [:option {:value ""} "-- Selecciona un tipo de plato --"]
-         [:option {:value "Tapa"} "Tapa"]
-         [:option {:value "Al centro"} "Al centro"]
-         [:option {:value "Principal"} "Principal"]
-         [:option {:value "Bebida"} "Bebida"]
-         [:option {:value "Postres"} "Postres"]]
+            (= @campo-seleccionado "tipo_plato")
+            [:select {:value (or @nuevo-valor "")
+                      :on-change #(reset! nuevo-valor (-> % .-target .-value))}
+             [:option {:value ""} "-- Selecciona un tipo de plato --"]
+             [:option {:value "Tapa"} "Tapa"]
+             [:option {:value "Al centro"} "Al centro"]
+             [:option {:value "Principal"} "Principal"]
+             [:option {:value "Bebida"} "Bebida"]
+             [:option {:value "Postres"} "Postres"]]
 
-        ;; Categoría (muestra ID y nombre)
-        (= @campo-seleccionado "categoria_id")
-        [:select {:value (or @nuevo-valor "")
-                  :on-change #(reset! nuevo-valor (-> % .-target .-value))}
-         [:option {:value ""} "-- Selecciona una categoría --"]
-         (for [{:keys [id nombre]} @categorias]
-           ^{:key id} [:option {:value id} (str id " - " nombre)])]
+            ;; Categoría (muestra ID y nombre)
+            (= @campo-seleccionado "categoria_id")
+            [:select {:value (or @nuevo-valor "")
+                      :on-change #(reset! nuevo-valor (-> % .-target .-value))}
+             [:option {:value ""} "-- Selecciona una categoría --"]
+             (for [{:keys [id nombre]} @categorias]
+               ^{:key id} [:option {:value id} (str id " - " nombre)])]
 
-        (= @campo-seleccionado "precio")
-        [:input {:type "number"
-                 :step "0.01"
-                 :min "0"
-                 :value @nuevo-valor
-                 :placeholder (str (get @producto (keyword @campo-seleccionado)))
-                 :on-change #(reset! nuevo-valor (-> % .-target .-value))}]
+            (= @campo-seleccionado "precio")
+            [:input {:type "number"
+                     :step "0.01"
+                     :min "0"
+                     :value @nuevo-valor
+                     :placeholder (str (get @producto (keyword @campo-seleccionado)))
+                     :on-change #(reset! nuevo-valor (-> % .-target .-value))}]
 
-        ;; Resto de campos usan input libre
-        :else
-        [:input {:type "text"
-                 :value @nuevo-valor
-                 :placeholder (str (get @producto (keyword @campo-seleccionado)))
-                 :on-change #(reset! nuevo-valor (-> % .-target .-value))}])
-      [:br]
-      [:button
-       {:on-click #(cond
-                     (= @campo-seleccionado "precio")
-                     (let [valor-num (js/parseFloat @nuevo-valor)]
-                       (cond
-                         (or (js/isNaN valor-num) (< valor-num 0))
-                         (js/alert "El precio debe ser un número mayor o igual que 0")
-                         (tiene-mas-de-dos-decimales? @nuevo-valor)
-                         (js/alert "El precio solo puede tener hasta dos decimales")
+            (= @campo-seleccionado "nombre")
+            [:input {:type "text"
+                     :value @nuevo-valor
+                     :placeholder (str (get @producto (keyword @campo-seleccionado)))
+                     :on-change #(reset! nuevo-valor (-> % .-target .-value))}]
+
+            ;; Resto de campos usan input libre
+            :else
+            [:textarea {:type "text"
+                        :value @nuevo-valor
+                        :placeholder (str (get @producto (keyword @campo-seleccionado)))
+                        :on-change #(reset! nuevo-valor (-> % .-target .-value))}])
+          [:br]
+          [:button
+           {:on-click #(cond
+                         (= @campo-seleccionado "precio")
+                         (let [valor-num (js/parseFloat @nuevo-valor)]
+                           (cond
+                             (or (js/isNaN valor-num) (< valor-num 0))
+                             (js/alert "El precio debe ser un número mayor o igual que 0")
+                             (tiene-mas-de-dos-decimales? @nuevo-valor)
+                             (js/alert "El precio solo puede tener hasta dos decimales")
+                             :else
+                             (do
+                               (actualizar-producto producto @campo-seleccionado @nuevo-valor valor-num)
+                               (reset! nuevo-valor "")
+                               (js/alert "Producto actualizado, dale al boton de 'Mostrar productos' para actualizar el listado."))))
                          :else
                          (do
-                           (actualizar-producto producto @campo-seleccionado @nuevo-valor valor-num)
+                           (actualizar-producto producto @campo-seleccionado @nuevo-valor nil)
                            (reset! nuevo-valor "")
-                           (js/alert "Producto actualizado, dale al boton de 'Mostrar productos' para actualizar el listado."))))
-                     :else
-                     (do
-                       (actualizar-producto producto @campo-seleccionado @nuevo-valor nil)
-                       (reset! nuevo-valor "")
-                       (js/alert "Producto actualizado, dale al boton de 'Mostrar productos' para actualizar el listado.")))}
-       "Actualizar campo"]])])
+                           (js/alert "Producto actualizado, dale al boton de 'Mostrar productos' para actualizar el listado.")))}
+           "Actualizar campo"]])])))
 
+(def etiquetas-categoria
+  {"nombre" "Nombre"
+   "descripcion" "Descripción"})
 
 (defn render-edicion-categoria [id categoria]
-  [:div
-   [:h3 "Selecciona el campo que quieres modificar:"]
-   [:select {:value (or @campo-seleccionado "")
-             :on-change #(reset! campo-seleccionado (-> % .-target .-value))}
-    [:option {:value ""} "-- Selecciona un campo --"]
-    [:option {:value "nombre"} "Nombre"]
-    [:option {:value "descripcion"} "Descripción"]]
-
-   (when (not= @campo-seleccionado "")
-     [:div {:style {:margin-top "15px"}}
-      [:label (str "Nuevo valor para el campo seleccionado: ")]
-      [:input {:type "text"
-               :value @nuevo-valor
-               :placeholder (str (get @categoria (keyword @campo-seleccionado)))
-               :on-change #(reset! nuevo-valor (-> % .-target .-value))}]
-      [:br]
-      [:button {:on-click #(do
-                             (actualizar-categoria categoria @campo-seleccionado @nuevo-valor)
-                             (reset! nuevo-valor "")
-                             (js/alert "Categoria actualizado, dale al boton de 'Mostrar categorias' para actualizar el listado."))}
-       "Actualizar campo"]])])
+  (let [campo-seleccionado (r/atom "")
+        nuevo-valor (r/atom "")]
+    (fn [id categoria]
+      [:div.edit
+       [:h3 "Selecciona el campo que quieres modificar:"]
+       [:select {:value @campo-seleccionado
+                 :on-change #(reset! campo-seleccionado (-> % .-target .-value))
+                 :class "selectEdit"}
+        [:option {:value ""} "-- Selecciona un campo --"]
+        [:option {:value "nombre"} "Nombre"]
+        [:option {:value "descripcion"} "Descripción"]]
+       (when (not= @campo-seleccionado "")
+         [:div {:style {:margin-top "15px"}}
+          [:label
+           "Nuevo valor para el campo seleccionado: "
+           [:span.referencia
+            (get etiquetas-categoria @campo-seleccionado @campo-seleccionado)]]
+          (if (= @campo-seleccionado "descripcion")
+            [:textarea {:value @nuevo-valor
+                        :placeholder (get @categoria (keyword @campo-seleccionado))
+                        :on-change #(reset! nuevo-valor (-> % .-target .-value))}]
+            [:input {:type "text"
+                     :value @nuevo-valor
+                     :placeholder (get @categoria (keyword @campo-seleccionado))
+                     :on-change #(reset! nuevo-valor (-> % .-target .-value))}])
+          [:br]
+          [:button {:on-click #(do
+                                 (actualizar-categoria categoria @campo-seleccionado @nuevo-valor)
+                                 (reset! nuevo-valor "")
+                                 (js/alert "Categoría actualizada. Dale al botón 'Mostrar categorías' para ver los cambios."))}
+           "Actualizar campo"]])])))
 
 (def alergenos
   [[:contiene_gluten               "Gluten"]

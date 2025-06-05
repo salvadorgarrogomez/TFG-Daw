@@ -82,7 +82,7 @@
                        :on-change #(reset! nombre-producto (-> % .-target .-value))}]]]
             [:div
              [:p {:for "description"} "Descripción: "
-              [:input {:type "text"
+              [:textarea {:type "text"
                        :id "description"
                        :value (or @descripcion-producto "")
                        :on-change #(reset! descripcion-producto (-> % .-target .-value))}]]]
@@ -206,7 +206,7 @@
                        :on-change #(reset! nombre-categoria (-> % .-target .-value))}]]]
             [:div
              [:p {:for "descripcion"} "Descripción:"
-              [:input {:type "text"
+              [:textarea {:type "text"
                        :id "descripcion"
                        :value @descripcion-categoria
                        :on-change #(reset! descripcion-categoria (-> % .-target .-value))}]]]

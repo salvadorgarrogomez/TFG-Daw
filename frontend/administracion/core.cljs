@@ -7,6 +7,7 @@
             [reagent.dom :as dom]
             [reitit.frontend.easy :as rfe]))
 
+;; Estado global de la aplicación: contiene la sesión del usuario, datos visibles, filtros y datos cargados
 (defonce logged-in? (r/atom nil))
 (defonce loading? (r/atom false))
 (defonce usuario (r/atom ""))
@@ -22,7 +23,7 @@
 (defonce producto-busqueda (r/atom ""))
 (defonce productos (r/atom []))
 
-
+;; Llamada a la API, para veficiar en caso de recarga de la pagina web como con F5, se compruebe si la sesión es correcta, enviando la cookie al backend para su comprobación
 (defn verificar-sesion []
   (GET "/api/usuario"
     {:with-credentials? true
@@ -41,7 +42,7 @@
                       (reset! datos-usuario nil)
                       (reset! sesion-verificada? true))}))
 
-
+;; Metodo, para mostrar una tabla con todas las categorias de la base de datos, esto aparece al darle al boton para este proposito.
 (defn render-categorias []
   (let [texto (clojure.string/lower-case @categoria-busqueda)
         categorias-filtradas (filter #(clojure.string/includes?
@@ -56,6 +57,7 @@
        :placeholder "Buscar categoría por nombre..."
        :value @categoria-busqueda
        :on-change #(reset! categoria-busqueda (-> % .-target .-value))}]
+     ;; Inicialización de la tabla
      [:table {:class "table table-striped"}
       [:thead
        [:tr
@@ -75,6 +77,7 @@
                                     "✔️/❌"]]])
        [:tr
         [:td
+         ;; Boton, que redirige la vista web a otra vista disponible, donde se renderizara otro contenido
          [:button
           {:on-click
            #(do
@@ -82,6 +85,7 @@
            :class "nuevo"}
           "Añadir nueva categoria"]]]]]]))
 
+;; Metodo, para mostrar una tabla con todos las productos de la base de datos, esto aparece al darle al boton para este proposito.
 (defn render-productos []
   (let [texto (clojure.string/lower-case @producto-busqueda)
         categoria (clojure.string/lower-case @categoria-seleccionada)
@@ -96,6 +100,7 @@
       [:div.col-12.table-responsive
        [:div.form-group.mb-3
         [:h4 {:for "filtro-categoria"} "Filtrar por categoría:"]
+        ;; Selector, para seleccionar la categoria y filtrar los productos en base a ella
         [:select.form-control
          {:id "filtro-categoria"
           :value @categoria-seleccionada
@@ -104,6 +109,7 @@
          (for [{:keys [id nombre]} @categorias]
            ^{:key id}
            [:option {:value nombre} nombre])]]
+       ;; Boton para generar un PDF, consumiendo un metodo asignado en app/db, que hace una llamada a la api, para generarlo
        [:button
         {:on-click
          #(if (empty? productos-ids)
@@ -112,11 +118,13 @@
          :class "pdf"}
         "Generar PDF de la categoria seleccionada"]
        [:h4 "Lista de productos"]
+       ;; Caja de busqueda por nombre
        [:input.form-control.mb-3
         {:type "text"
          :placeholder "Buscar producto por nombre..."
          :value @producto-busqueda
          :on-change #(reset! producto-busqueda (-> % .-target .-value))}]
+       ;; Inicialización de la tabla donde se mostraran todos los productos
        [:table {:class "table table-striped"}
         [:thead
          [:tr
@@ -139,6 +147,7 @@
                                       "✔️/❌"]]])
          [:tr
           [:td
+           ;; Boton, que redirige la vista web a otra vista disponible, donde se renderizara otro contenido
            [:button
             {:on-click
              #(do
@@ -146,7 +155,7 @@
              :class "nuevo"}
             "Añadir nuevo producto"]]]]]])))
 
-
+;; Función para hacer llamada a la API y verificar si las credenciales introducidas por el usuario son correctas, validas.
 (defn login []
   (POST "/api/login"
     {:params {:nombre @usuario
@@ -162,17 +171,17 @@
                  (js/localStorage.setItem "id" (:id %))
                  (reset! sesion-verificada? true)
                  (verificar-sesion))
-
      :error-handler #(do
                        (println "Error en la solicitud: " %)
                        (js/alert "Credenciales incorrectas. Prueba de nuevo o ponte en contacto con el Administrador del sistema.")
                        (reset! loading? false))}))
 
+;; Formulario, donde el usuario introducira los datos, despues se hace llamada al metodo "login" y se comprueba si son correctos
 (defn login-form []
   (r/create-class
    {:component-did-mount
     (fn []
-      ;; Al clickar en el Enter del teclado, se ejecuta el boton de Login
+      ;; Al clickar en el Enter del teclado, se ejecuta el boton de Entrar, para validar el Login
       (let [handler (fn [e]
                       (when (and (= (.-key e) "Enter"))
                         (login)))]
@@ -180,12 +189,13 @@
         (.addEventListener js/document "keydown" handler)))
     :component-will-unmount
     (fn []
-      ;; Limpiamos el event listener al desmontar
+      ;; Se limpia el event listener al desmontar
       (when-let [handler (aget js/window "enterKeyHandler")]
         (.removeEventListener js/document "keydown" handler)
         (aset js/window "enterKeyHandler" nil)))
     :reagent-render
     (fn []
+      ;; Estructura que se vera en el navegador, con input para introducir datos
       [:div.row {:class "administracion"}
        [:div {:class "entrada"}
         [:div.col-12
@@ -203,7 +213,7 @@
          [:div.col-12
           [:button {:on-click #(login)} "Entrar"]]]]])}))
 
-
+;; Metodo que hace llamada al backend, para cerrar la sesion y limpiar el localstorage y las coookies
 (defn logout []
   (POST "/api/logout"
     {:with-credentials? true
@@ -214,6 +224,7 @@
      :error-handler (fn [e]
                       (js/console.log "Error cerrando sesión" e))}))
 
+;; Funcion, con botones de funcionalidad, cada boton al clickar mostrara un dato u otro
 (defn botones-admin []
   [:div {:class "botonesAdmin"}
    [:p "Eres administrador. Puedes editar el contenido."]
@@ -233,6 +244,7 @@
    [:p "Tienes acceso, puedes apuntar las comandas de los clientes."]
    [:button {:on-click #(set! (.-hash js/location) "#/comandas")} "Comandas"]])
 
+;; Panel, de inicio sesión, si las credenciales son correctas se muestran los datos de sesion y los botones, en caso de ser erroneas mostrara el aviso de error.
 (defn admin-panel []
   (r/with-let [_ (do
                    (reset! mostrar-productos? false)
@@ -246,7 +258,6 @@
         [:p "No estás logeado, debes de cerrar sesión y logearte correctamente."]
         [:button {:on-click #(do (logout) (.reload js/location true))} "Cerrar sesión"]]]
       (not @logged-in?) [:div "Acceso denegado."]
-
       :else
       (let [usuario (:rol @datos-usuario)]
         [:div.row.panel
@@ -263,6 +274,7 @@
          (when @mostrar-productos? [render-productos])
          (when @mostrar-categorias? [render-categorias])]))))
 
+;; Funcion page, para mostrar los componentes de la vista
 (defn page []
   (cond
     (not @sesion-verificada?) [:p {:class "administracion"} "Verificando sesión..."]

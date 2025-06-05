@@ -56,7 +56,7 @@
 
 
 (defn mostrar-imagenes-todas []
-  (let [imagenes db/imagenes] ;; reactivo
+  (let [imagenes db/imagenes] 
     (fn []
       (if (empty? @imagenes)
         [:div "No se encontraron imágenes."]
