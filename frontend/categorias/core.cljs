@@ -5,6 +5,7 @@
             [clojure.string :as str]))
 
 (def mensaje-categoria (r/atom ""))
+(defonce categoria-seleccionada (r/atom nil))
 
 ;; Funcion para obtener todos los productos en base a la categoria seleccionada, llamando al metodo que llama a la api en app/db
 (defn obtener-productos [categoria-id]
@@ -50,7 +51,9 @@
             ^{:key (:id categoria)}
             [:li
              [:a.dropdown-item
-              {:on-click #(do
+              {:class (when (= @categoria-seleccionada (:id categoria)) "active")
+               :on-click #(do
+                            (reset! categoria-seleccionada (:id categoria))
                             (obtener-productos (:id categoria))
                             (reset! mensaje-categoria (obtener-descripcion-categoria (:id categoria))))}
               (:nombre categoria)]])]]
@@ -59,7 +62,9 @@
          (for [categoria @categorias]
            ^{:key (:id categoria)}
            [:button.buttons
-            {:on-click #(do
+            {:class (when (= @categoria-seleccionada (:id categoria)) "selected")
+             :on-click #(do
+                          (reset! categoria-seleccionada (:id categoria))
                           (obtener-productos (:id categoria))
                           (reset! mensaje-categoria (obtener-descripcion-categoria (:id categoria))))}
             (:nombre categoria)])]

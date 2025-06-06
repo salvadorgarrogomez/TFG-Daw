@@ -52,6 +52,17 @@ body {
         color: #ffffff;
     }
 
+    .buttons.selected {
+        background-color: #800020;
+        color: white;
+        border: 2px solid #550015;
+    }
+
+    .dropdown-item.active {
+        background-color: #800020;
+        color: white;
+    }
+
     .mensaje-categoria {
         text-align: center;
         background-color: #FAEBD7;
@@ -180,8 +191,8 @@ footer {
     .select:focus,
     .select:active,
     .show>.select {
-        background-color: #ffffff ;
-        color: #800020 ;
+        background-color: #ffffff;
+        color: #800020;
         font-weight: bold;
     }
 

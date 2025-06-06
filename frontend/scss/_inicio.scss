@@ -15,7 +15,6 @@ header {
     padding-inline: 0px;
 }
 
-
 .carousel {
     margin-top: -20px;
     max-width: 550px;
@@ -92,10 +91,12 @@ header {
         height: 35px;
         padding-inline: 0;
         margin: 0;
+        border-radius: 10px;
     }
 
     li {
         text-align: center;
+        border-radius: 10px;
     }
 
     a {
@@ -106,6 +107,14 @@ header {
         color: #800020;
         font-weight: bold;
         padding: 5px 0;
+    }
+
+    a.activo {
+        background-color: #800020 !important;
+        color: white !important;
+        font-weight: bold;
+        border-radius: 10px;
+        padding: 5px;
     }
 
     li:hover {

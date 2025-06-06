@@ -1,19 +1,32 @@
 (ns app.views
   (:require [reagent.core :as r]))
 
+(defonce ruta-activa (r/atom "/"))
+
 ;; Estructura que tendra el SPA (Single Page App) de clojure, lo que es la pagina principal, donde se presenta cada boton, al dar sobre ellos, 
 ;; cambia el aspecto del div principal app.
 (defn header []
-  ;; Estructura del header
   [:header.row
    [:img.col-12 {:class "logo"
                  :src "imgs/logoBar2.1.svg"
                  :alt "Logo Bar ElEscobar"}]
-   [:nav.row {:class "navBar"} ; Ejemplo de utilizacion clases para dar estilos css.
+   [:nav.row {:class "navBar"}
     [:ul.col-12 {:class "barraInicio"}
-     [:li.col-4 [:a {:href "#/"} "Inicio"]]
-     [:li.col-4 [:a {:href "#/categorias"} "Carta"]]
-     [:li.col-4 [:a {:href "#/nosotros"} "Nosotros"]]]]])
+     [:li.col-4
+      [:a {:href "#/"
+           :class (when (= @ruta-activa "/") "activo")
+           :on-click #(reset! ruta-activa "/")}
+       "Inicio"]]
+     [:li.col-4
+      [:a {:href "#/categorias"
+           :class (when (= @ruta-activa "/categorias") "activo")
+           :on-click #(reset! ruta-activa "/categorias")}
+       "Carta"]]
+     [:li.col-4
+      [:a {:href "#/nosotros"
+           :class (when (= @ruta-activa "/nosotros") "activo")
+           :on-click #(reset! ruta-activa "/nosotros")}
+       "Nosotros"]]]]])
 
 
 (defn footer []
