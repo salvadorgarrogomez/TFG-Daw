@@ -8,10 +8,10 @@
 (defn imagenes-carrusel []
   (let [imagenes @db/imagenes]
     (if (empty? imagenes)
-      [:div "No se encontraron imágenes."]
+      [:div ""]
       (let [carousel-id "carouselExampleIndicators"]
         [:div.carousel.slide.container {:id carousel-id}
-         ;; Indicadores de slide (los puntos)
+         ;; Indicadores de slide (los puntos inferiores)
          [:div.carousel-indicators
           (doall
            (map-indexed
@@ -33,9 +33,8 @@
                                    :class (when (= i 0) "active")}
                [:img {:src (str "data:" mime_type ";base64," imagen_base64)
                       :alt descripcion
-                      :class "d-block mx-auto carousel-image"}]])
+                      :class "d-block w-100 carousel-image"}]])
             imagenes))]
-
          ;; Botón "Anterior"
          [:button.carousel-control-prev
           {:type "button"
@@ -57,25 +56,24 @@
 (defn mostrar-imagenes-todas []
   (let [imagenes @db/imagenes]
     (if (empty? imagenes)
-      [:div "No se encontraron imágenes."]
+      [:div ""]
       [:div
-       ;; Galería de imágenes
-       [:div.row {:class "containerImg"}
+       ;; Galería de imágenes en columna
+       [:div {:class "containerImgVertical"}
         (for [idx (range (count imagenes))]
           (let [{:keys [id descripcion imagen_base64 mime_type]} (nth imagenes idx)
                 base64-src (str "data:" mime_type ";base64," imagen_base64)]
-            ^{:key (str id "-" idx)}  ;; Usa id + índice para asegurar unicidad
-            [:div.col-12.col-md-5.conjuntoImagenes
+            ^{:key (str id "-" idx)}
+            [:div.imagen-vertical
              {:on-click #(reset! selected-image {:src base64-src :alt descripcion})}
              [:img {:src base64-src
                     :class "img"
-                    :alt descripcion}]]))]
-
+                    :alt descripcion}]
+             [:p.descripcion descripcion]]))]
        ;; Modal
        (when @selected-image
          [:div.modal-container.active
           {:on-click (fn [e]
-                       ;; Cierra solo si se hace clic directamente en el fondo (contenedor)
                        (when (= (.-target e) (.-currentTarget e))
                          (reset! selected-image nil)))}
           [:div.modal-content

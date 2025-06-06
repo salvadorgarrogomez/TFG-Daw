@@ -6,6 +6,8 @@
 (def current-route (r/atom nil))
 (def rol-usuario (r/atom nil))
 
+;; Metodos para guardar en el estado global el rol de usuario, y asi especificar si tiene permisos o no, y ademas para obtener las cookies guardadas en el navegador para
+;; poder tener acceso y poder enviar solicitudes al backend.
 (defn getCookie [name]
   (let [cookies (clojure.string/split (or (.-cookie js/document) "") #"; ")]
     (some (fn [cookie]

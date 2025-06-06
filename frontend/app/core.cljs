@@ -5,6 +5,7 @@
             [app.state :refer [current-route]]
             [app.views :refer [layout]]))  
 
+;; Inicializacion de la app, desdes aqui la app se inicializa correctamente, llamando a el routes y views, para de esta forma especificar la vista que debe de inicializarse al entrar en la web
 (defn app-view []
   [:div
    (if @current-route

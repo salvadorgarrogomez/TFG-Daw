@@ -33,6 +33,8 @@
 
 ;; Obtener categorías
 ;; Todos los js/console.log los utilizo como mensajes de depuracion para ver en el navegador, y ver si algo falla
+;; Conjunto de todas las llamadas a la API para obtener los datos necesarios para la página principal y demas paginas, menos las llamadas de login o de eliminar imagen, el resto estan todas aqui
+
 
 ;; Pagina principal
 (defn fetch-categorias []

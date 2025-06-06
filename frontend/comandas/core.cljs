@@ -35,7 +35,7 @@
              "Volver al panel de Administración"]]
            [:div.row {:class "adminImagenes"}
             [:div.col-12
-             [:h1 "Apuntar comandas:"]]]])})))) ;; <- ojo, cierro todos los paréntesis correctamente aquí
+             [:h1 "Apuntar comandas:"]]]])})))) 
 
 (defn init []
   (core/verificar-sesion)

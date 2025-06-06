@@ -4,37 +4,40 @@
             [app.db :refer [categorias fetch-categorias fetch-productos productos]]
             [clojure.string :as str]))
 
+(def mensaje-categoria (r/atom ""))
+
+;; Funcion para obtener todos los productos en base a la categoria seleccionada, llamando al metodo que llama a la api en app/db
 (defn obtener-productos [categoria-id]
   (js/console.log "Obteniendo productos para la categoría" categoria-id)
   (fetch-productos categoria-id))
 
+;; Funcion para agrupar productos por nombres coindidentes, existen productos que pueden tener distintos tipo de porciones, estos los agrupamos para que sea mas legible la carta
 (defn agrupar-productos [productos]
   (reduce (fn [acc producto]
             (let [nombre (:nombre producto)]
               (update acc nombre conj producto)))
           {} productos))
 
-(def mensaje-categoria (r/atom ""))
-
+;; Funcion para obtener la descripcion de cada categoria
 (defn obtener-descripcion-categoria [categoria-id]
-  (let [categoria (some #(when (= (:id %) categoria-id) %) @categorias)]
-    (get categoria :descripcion)))
-
-(defn obtener-mensaje-categoria [categoria-id]
-  (let [descripcion (obtener-descripcion-categoria categoria-id)]
-    (if (not-empty descripcion)
+  (let [categoria (some #(when (= (:id %) categoria-id) %) @categorias)
+        descripcion (:descripcion categoria)]
+    (when (not-empty descripcion)
       descripcion)))
 
+;; Estructura de la vista, que se mostrara en el navegador, aplicando los estilos css segun convenga
 (defn page []
   (r/create-class
    {:component-did-mount
     (fn []
+      ;; Mensajes de depuracion para ver fallos o problemas en la consola del navegador, se podrian borrar en versiones futuras
       (js/console.log "Componente montado. Llamando a fetch-categorias...")
       (fetch-categorias))
     :reagent-render
     (fn []
       [:div.row {:class "divProductosyCategorias"}
        [:div.col-12
+        ;; Botones y select responsivos, para mostrar segun convenga y la pantalla
         ;; Encabezado del select para móviles
         [:div.d-sm-none.mb-2
          [:button.btn.dropdown-toggle.select
@@ -49,7 +52,7 @@
              [:a.dropdown-item
               {:on-click #(do
                             (obtener-productos (:id categoria))
-                            (reset! mensaje-categoria (obtener-mensaje-categoria (:id categoria))))}
+                            (reset! mensaje-categoria (obtener-descripcion-categoria (:id categoria))))}
               (:nombre categoria)]])]]
         ;; Botones horizontales visibles en pantallas ≥ sm
         [:div.d-none.d-sm-flex.justify-content-center.flex-wrap.gap-2.mt-3
@@ -58,15 +61,14 @@
            [:button.buttons
             {:on-click #(do
                           (obtener-productos (:id categoria))
-                          (reset! mensaje-categoria (obtener-mensaje-categoria (:id categoria))))}
+                          (reset! mensaje-categoria (obtener-descripcion-categoria (:id categoria))))}
             (:nombre categoria)])]
-        ;; Mensaje inferior
+        ;; Mensaje inferior, descripcion de cada categoria
         [:div
          (if (not-empty @mensaje-categoria)
            [:p.mensaje-categoria @mensaje-categoria]
            [:p.mensaje-categoria @mensaje-categoria "Selecciona uno de los elementos de nuestra carta."])]
-
-        ;; Bloque de productos
+        ;; Bloque de productos, estructura de la carta de productos obtenidos al seleccionar cada categoria, utilizamos los metodos anteriores, para obtener todos ellos
         [:div.row
          [:div.col-12 {:class "divProductos"}
           (if (empty? @productos)
@@ -109,7 +111,6 @@
                                    :alt nombre-img
                                    :title (str (clojure.string/replace nombre-img "_" " "))
                                    :class "alergeno-icono"}])])])]
-
                    (for [producto lista-productos]
                      ^{:key (:id producto)}
                      [:div {:class "producto-item"} ;; Div donde en su interior ira todo el contenido de cada producto
@@ -118,6 +119,7 @@
                        (let [tipo-porcion (:tipo_porcion producto)
                              producto-id (:id producto)]  ;; Se guarda el ID de producto, al dar en las imagenes, saldra un alert en el navegador para ver el id
                          (cond
+                           ;; Segun la porcion obtenida desde el json enviado por el backend, revisamos con este cond, para segun la porcion, se mostrara una imagen u otra
                            (= tipo-porcion "Media ración")
                            [:img {:class "racion"
                                   :src "/imgs/medio-circulo.png"

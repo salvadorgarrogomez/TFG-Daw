@@ -10,7 +10,7 @@
 (defonce descripcion (r/atom ""))
 (defonce input-key (r/atom (random-uuid)))
 
-;; Función para manejar el cambio de archivo
+;; Función para manejar la validez del archivo, tanto en formato como en tamaño, en el backend tambien se ha establecido la misma limitacion
 (defn comprobacion_archivo [event]
   (let [file (first (.-files (.-target event)))
         nombre (.-name file)
@@ -27,7 +27,7 @@
       :else
       (reset! imagen [file]))))
 
-;; Función para subir la imagen
+;; Función para subir la imagen llamando a la api
 (defn subir-imagen [on-success]
   (let [usuario-id (.getItem js/localStorage "id")]
     (when (not (empty? @imagen))
@@ -44,6 +44,7 @@
                      :on-failure (fn [_]
                                    (js/alert "Error al subir la imagen"))})))))
 
+;; Llamando a la api, para eliminar la imagen seleccionada
 (defn eliminar-imagen [id]
   (when (js/confirm "¿Estás seguro de que quieres eliminar esta imagen?")
     (https/delete (str "/api/imagen/eliminar/" id)
@@ -54,7 +55,7 @@
                    :on-failure (fn [_]
                                  (js/alert "Error al eliminar la imagen"))})))
 
-
+;; Funcion, para mostrar todas las imagenes y estruturarlas en la vista
 (defn mostrar-imagenes-todas []
   (let [imagenes db/imagenes] 
     (fn []
@@ -72,13 +73,14 @@
                                 (eliminar-imagen id)
                                 (db/cargar-imagenes))}]])]))))
 
-
+;; Funcion para actualizar la lista de imagenes a mostrar, tras subir una imagen hay que darle a este boton
 (defn actualizar-listado []
   (db/cargar-imagenes)
   (reset! input-key (random-uuid))
   (reset! imagen nil)
   (reset! descripcion ""))
 
+;; Estructura en la vista para el formulario de subida de imagenes
 (defn formulario-subida []
   [:div {:class "formulario"}
    [:h4 "Subir Imagen"]

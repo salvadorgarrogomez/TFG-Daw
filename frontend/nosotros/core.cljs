@@ -3,98 +3,44 @@
             [reagent.dom :as dom]
             [clojure.string :as str]))
 
-(defn tabla-alergenos []
-  [:div.row {:class "tablealergenos"}
-   [:ul.col-3
-    [:li
-     [:a
-      [:img {:class "alergenos"
-             :src "/imgs/alergenos/gluten.png"
-             :alt "Contiene gluten"}]]
-     [:p "Contiene gluten"]]
-    [:li
-     [:a
-      [:img {:class "alergenos"
-             :src "/imgs/alergenos/crustaceos.png"
-             :alt "Crustáceos"}]]
-     [:p "Crustáceos"]]
-    [:li
-     [:a
-      [:img {:class "alergenos"
-             :src "/imgs/alergenos/huevos.png"
-             :alt "Huevos"}]]
-     [:p "Huevos"]]]
-   [:ul.col-3
-    [:li
-     [:a
-      [:img {:class "alergenos"
-             :src "/imgs/alergenos/pescado.png"
-             :alt "pescado"}]]
-     [:p "Pescados"]]
-    [:li
-     [:a
-      [:img {:class "alergenos"
-             :src "/imgs/alergenos/cacahuetes.png"
-             :alt "Cacahuetes"}]]
-     [:p "Cacahuetes"]]
-    [:li
-     [:a
-      [:img {:class "alergenos"
-             :src "/imgs/alergenos/soja.png"
-             :alt "Soja"}]]
-     [:p "Soja"]]
-    [:li
-     [:a
-      [:img {:class "alergenos"
-             :src "/imgs/alergenos/lacteos.png"
-             :alt "Lacteos"}]]
-     [:p "Lácteos"]]]
-   [:ul.col-3
-    [:li
-     [:a
-      [:img {:class "alergenos"
-             :src "/imgs/alergenos/cascaras.png"
-             :alt "Frutos de cascaras"}]]
-     [:p "Frutos de cascaras"]]
-    [:li
-     [:a
-      [:img {:class "alergenos"
-             :src "/imgs/alergenos/apio.png"
-             :alt "Apio"}]]
-     [:p "Apio"]]
-    [:li
-     [:a
-      [:img {:class "alergenos"
-             :src "/imgs/alergenos/mostaza.png"
-             :alt "Mostaza"}]]
-     [:p "Mostaza"]]
-    [:li
-     [:a
-      [:img {:class "alergenos"
-             :src "/imgs/alergenos/sesamo.png"
-             :alt "Sésamo"}]]
-     [:p "Granos de sésamo"]]]
-   [:ul.col-3
-    [:li
-     [:a
-      [:img {:class "alergenos"
-             :src "/imgs/alergenos/sulfitos.png"
-             :alt "Sulfitos"}]]
-     [:p "Sulfitos"]]
-    [:li
-     [:a
-      [:img {:class "alergenos"
-             :src "/imgs/alergenos/moluscos.png"
-             :alt "Moluscos"}]]
-     [:p "Moluscos"]]
-    [:li
-     [:a
-      [:img {:class "alergenos"
-             :src "/imgs/alergenos/altramuces.png"
-             :alt "Altramuces"}]]
-     [:p "Altramuces"]]]])
+;; Metodo para unificar imagen con el nombre de cada alergeno
+(def alergenos
+  [{:nombre "Contiene gluten" :img "gluten.png"}
+   {:nombre "Crustáceos" :img "crustaceos.png"}
+   {:nombre "Huevos" :img "huevos.png"}
+   {:nombre "Pescados" :img "pescado.png"}
+   {:nombre "Cacahuetes" :img "cacahuetes.png"}
+   {:nombre "Soja" :img "soja.png"}
+   {:nombre "Lácteos" :img "lacteos.png"}
+   {:nombre "Frutos de cascaras" :img "cascaras.png"}
+   {:nombre "Apio" :img "apio.png"}
+   {:nombre "Mostaza" :img "mostaza.png"}
+   {:nombre "Granos de sésamo" :img "sesamo.png"}
+   {:nombre "Sulfitos" :img "sulfitos.png"}
+   {:nombre "Moluscos" :img "moluscos.png"}
+   {:nombre "Altramuces" :img "altramuces.png"}])
 
-;; Funcion page para estructurar la pagina
+;; Estructura para la tabla de alergenos, no es una tabla al uso sin una estructura ul-li-a estilizado
+(defn tabla-alergenos []
+  (let [chunked-alergenos (partition-all 4 alergenos)]
+    [:div.row {:class "tablealergenos"}
+     (doall
+      (map-indexed
+       (fn [idx grupo]
+         [:ul {:class "col-3" :key (str "columna-" idx)}
+          (doall
+           (map-indexed
+            (fn [i {:keys [nombre img]}]
+              [:li {:key (str "alergeno-" i "-" idx)}
+               [:a
+                [:img {:class "alergenos"
+                       :src (str "/imgs/alergenos/" img)
+                       :alt nombre}]]
+               [:p nombre]])
+            grupo))])
+       chunked-alergenos))]))
+
+;; Funcion page para estructurar la pagina, ordenando todos los elementos
 (defn page []
   [:div
    [:div.row {:class "nosotros"}
@@ -121,6 +67,7 @@
     [:div.row {:class "divMapa"}
      [:div.col-12 {:class "mapa"}
       [:h2 "Nuestra ubicación:" "🗺️"]
+      ;; Script obtenido de google maps, para indexar el mapa de google maps en la web. Google proporciona de forma gratuita esta informacion
       [:iframe {:src "https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3153.8014201774745!2d-1.2165041!3d37.7712542!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd649d30b26be2b7%3A0xb9cfcb36c9e33146!2sBar%20El%20Escobar!5e0!3m2!1ses!2ses!4v1709664912209!5m2!1ses!2ses"
                 :allowFullScreen true
                 :loading "lazy"

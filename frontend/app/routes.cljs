@@ -12,6 +12,8 @@
             [comandas.core :as comandas]
             [app.state :refer [current-route]]))
 
+;; Archivo, donde se encuentran todas las rutas disponibles en la pagina, sin este archivo, no se podria navegar por la web a traves de los distintos botones
+
 (defn requiere-permisos [context]
   (if (app.state/rol-admin?)
     context

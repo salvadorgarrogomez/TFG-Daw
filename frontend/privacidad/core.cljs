@@ -1,6 +1,7 @@
 (ns privacidad.core
   (:require [reagent.core :as r]))
 
+;; Estructura sencilla para esta vista, esta estructura es una basica para estructura el texto
 (defn page []
   [:div.row {:class "divPrivacidad"}
    [:div.col-12

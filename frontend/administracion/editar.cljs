@@ -6,6 +6,7 @@
             [app.db :refer [list-productos categorias]]
             [administracion.core :as core]))
 
+;; Estado global de la aplicación: contiene datos cargados, seleccion de campos
 (def producto (r/atom {}))
 (def categoria (r/atom {}))
 (def campo-seleccionado (r/atom nil))
@@ -13,12 +14,15 @@
 
 (def estado-actualizacion (r/atom nil))
 
+;; Utilizando el metodo de app/db para consumir la api, se clasifican los productos por id
 (defn get-producto-por-id [id]
   (some #(when (= (:id %) id) %) @list-productos))
 
+;; Utilizando el metodo de app/db para consumir la api, se clasifican las categorias por id
 (defn get-categoria-por-id [id]
   (some #(when (= (:id %) id) %) @categorias))
 
+;; Funcion de comprobacion con expresion regular para comprobar el numero de decimales
 (defn tiene-mas-de-dos-decimales? [valor]
   (let [[_ decimales] (clojure.string/split valor #"\.")]
     (and decimales (> (count decimales) 2))))
@@ -96,6 +100,7 @@
    "contiene_moluscos" "Moluscos"
    "contiene_altramuces" "Altramuces"})
 
+;; Estructura para la edicion de los datos, se mostrara un select para seleccionar el campo a modificar
 (defn render-edicion-producto [producto]
   (let [campo-seleccionado (r/atom "")
         nuevo-valor (r/atom "")]
@@ -143,7 +148,6 @@
              [:option {:value ""} "-- Selecciona una opción --"]
              [:option {:value "true"} "Sí"]
              [:option {:value "false"} "No"]]
-
             ;; Tipo de plato con opciones específicas
             (= @campo-seleccionado "tipo_porcion")
             [:select {:value (or @nuevo-valor "")
@@ -152,7 +156,6 @@
              [:option {:value "Media ración"} "Media ración"]
              [:option {:value "Ración completa"} "Ración completa"]
              [:option {:value "Por unidad"} "Por unidad"]]
-
             (= @campo-seleccionado "tipo_plato")
             [:select {:value (or @nuevo-valor "")
                       :on-change #(reset! nuevo-valor (-> % .-target .-value))}
@@ -162,7 +165,6 @@
              [:option {:value "Principal"} "Principal"]
              [:option {:value "Bebida"} "Bebida"]
              [:option {:value "Postres"} "Postres"]]
-
             ;; Categoría (muestra ID y nombre)
             (= @campo-seleccionado "categoria_id")
             [:select {:value (or @nuevo-valor "")
@@ -170,7 +172,6 @@
              [:option {:value ""} "-- Selecciona una categoría --"]
              (for [{:keys [id nombre]} @categorias]
                ^{:key id} [:option {:value id} (str id " - " nombre)])]
-
             (= @campo-seleccionado "precio")
             [:input {:type "number"
                      :step "0.01"
@@ -178,14 +179,12 @@
                      :value @nuevo-valor
                      :placeholder (str (get @producto (keyword @campo-seleccionado)))
                      :on-change #(reset! nuevo-valor (-> % .-target .-value))}]
-
             (= @campo-seleccionado "nombre")
             [:input {:type "text"
                      :value @nuevo-valor
                      :placeholder (str (get @producto (keyword @campo-seleccionado)))
                      :on-change #(reset! nuevo-valor (-> % .-target .-value))}]
-
-            ;; Resto de campos usan input libre
+            ;; Resto de campos usan textarea
             :else
             [:textarea {:type "text"
                         :value @nuevo-valor
@@ -194,6 +193,7 @@
           [:br]
           [:button
            {:on-click #(cond
+                         ;; Si el valor de precio se modifica, se llama a la funcion tiene-mas... para comprobar y avisar al usuario si el varlor introducioo es valido
                          (= @campo-seleccionado "precio")
                          (let [valor-num (js/parseFloat @nuevo-valor)]
                            (cond
@@ -203,16 +203,19 @@
                              (js/alert "El precio solo puede tener hasta dos decimales")
                              :else
                              (do
+                               ;; Aviso de exito en la modificacion del precio
                                (actualizar-producto producto @campo-seleccionado @nuevo-valor valor-num)
                                (reset! nuevo-valor "")
                                (js/alert "Producto actualizado, dale al boton de 'Mostrar productos' para actualizar el listado."))))
                          :else
                          (do
+                           ;; Mensaje de exiteo, para confirmar el cambio de cualquier otro valor seleccionado
                            (actualizar-producto producto @campo-seleccionado @nuevo-valor nil)
                            (reset! nuevo-valor "")
                            (js/alert "Producto actualizado, dale al boton de 'Mostrar productos' para actualizar el listado.")))}
            "Actualizar campo"]])])))
 
+;; Etiquetas enbellecidas, para mostrar al usuario el dato de forma mas grafica y saber el campo seleccionado
 (def etiquetas-categoria
   {"nombre" "Nombre"
    "descripcion" "Descripción"})
@@ -250,6 +253,7 @@
                                  (js/alert "Categoría actualizada. Dale al botón 'Mostrar categorías' para ver los cambios."))}
            "Actualizar campo"]])])))
 
+;; Conjunto de alergenos
 (def alergenos
   [[:contiene_gluten               "Gluten"]
    [:contiene_crustaceos           "Crustáceos"]
@@ -266,6 +270,7 @@
    [:contiene_moluscos             "Moluscos"]
    [:contiene_altramuces           "Altramuces"]])
 
+;; Funcion, para crear el mismo componente para todos los alergenos y no repetir codigo
 (defn columnas-alergenos [producto]
   (let [vals       @producto
         mitad      (quot (count alergenos) 2)
@@ -288,7 +293,7 @@
            [:span.text-success "✔️"]
            [:span.text-danger  "❌"])])]]))
 
-
+;; Estrututura principal de la vista, con validacion de seguridad
 (defn page []
   (fn []
     (cond

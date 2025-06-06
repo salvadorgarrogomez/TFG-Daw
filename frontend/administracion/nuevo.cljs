@@ -13,6 +13,7 @@
 (defonce descripcion-categoria (r/atom ""))
 (defonce tipo-porciones-disponibles (r/atom ["Por unidad" "Media ración" "Ración completa"]))
 
+;; Campos similares a los de la vista Editar, para validar si los datos introducidos son correctos
 (defn get-categoria-por-id [id]
   (some #(when (= (:id %) id) %) @categorias))
 
@@ -29,11 +30,12 @@
    (when (campo-vacio? valor)
      [:span {:style {:color "red" :margin-left "5px"}} "*"])])
 
+;; Funcion para convertir los valores boolean de string a booleanos correctos, que pueda interpretar el backend y la base de datos
 (defn boolean-select [label ratom id]
   [:div
    [:p {:for id}
     (campo-obligatorio-label label @ratom)
-    [:select {:value (or (str @ratom) "") ; convertir a string explícitamente
+    [:select {:value (or (str @ratom) "") 
               :id id
               :on-change #(reset! ratom (case (-> % .-target .-value)
                                           "true" true
@@ -43,6 +45,7 @@
      [:option {:value "true"} "Sí"]
      [:option {:value "false"} "No"]]]])
 
+;; Estructura de la vista, si un usuario no esta logeado, redirige al panel de Login
 (defn page []
   (fn []
     (cond

@@ -15,17 +15,14 @@ header {
     padding-inline: 0px;
 }
 
-.carousel-item {
-    height: 500px;
-    justify-content: center;
-    align-items: center;
-}
 
 .carousel {
-    width: 100%;
-    height: auto;
+    margin-top: -20px;
+    max-width: 550px;
+    max-height: 650px;
     margin-bottom: 20px;
-    justify-content: center;
+    border-radius: 10px;
+
 
     .carousel-control-prev,
     .carousel-control-next {
@@ -37,14 +34,8 @@ header {
 .carousel-image {
     max-width: 100%;
     max-height: 100%;
-    object-fit: contain;
-}
-
-
-.containerImg {
-    justify-content: center;
-    align-items: center;
-    align-content: center;
+    object-fit: cover;
+    border-radius: 10px;
 }
 
 .conjuntoImagenes {
@@ -138,15 +129,52 @@ header {
         padding-left: 25px;
     }
 
-    .carousel-item {
-        height: 50vh;
-        transition: transform 0.5s ease-in-out;
-    }
+}
+
+.containerImgVertical {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.imagen-vertical {
+    cursor: pointer;
+    text-align: center;
+}
+
+.imagen-vertical img {
+    max-width: 100%;
+    max-height: 650px;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0px 4px 50px rgba(0, 0, 0, 0.9);
+    transition: transform 0.2s;
+}
+
+.imagen-vertical img:hover {
+    transform: scale(1.02);
 }
 
 @media (max-width: 1024px) {
     .carousel-inner {
         display: block;
+    }
+
+    .carousel {
+        max-width: 450px;
+        max-height: 400px;
+        margin-bottom: 20px;
+        border-radius: 10px;
+    }
+
+    .carousel-image {
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: contain;
+    }
+
+    .containerImgVertical {
+        margin: 20px;
     }
 
     .modal-content {

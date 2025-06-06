@@ -1,13 +1,15 @@
 (ns app.views
   (:require [reagent.core :as r]))
 
-;; Estructura que tendra el SPA (Single Page App) de clojure, lo que es la pagina principal, donde se presenta cada boton, al dar sobre ellos, cambia el aspecto del div principal app.
+;; Estructura que tendra el SPA (Single Page App) de clojure, lo que es la pagina principal, donde se presenta cada boton, al dar sobre ellos, 
+;; cambia el aspecto del div principal app.
 (defn header []
+  ;; Estructura del header
   [:header.row
    [:img.col-12 {:class "logo"
                  :src "imgs/logoBar2.1.svg"
                  :alt "Logo Bar ElEscobar"}]
-   [:nav.row {:class "navBar"} ; <- Clase personalizada
+   [:nav.row {:class "navBar"} ; Ejemplo de utilizacion clases para dar estilos css.
     [:ul.col-12 {:class "barraInicio"}
      [:li.col-4 [:a {:href "#/"} "Inicio"]]
      [:li.col-4 [:a {:href "#/categorias"} "Carta"]]
@@ -15,6 +17,7 @@
 
 
 (defn footer []
+  ;; Estructura del footer
   [:footer.container-fluid
    [:div.row
     [:div.col-12 {:class "botonesFooter"}
