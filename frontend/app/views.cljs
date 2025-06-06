@@ -1,7 +1,8 @@
 (ns app.views
   (:require [reagent.core :as r]))
 
-(defonce ruta-activa (r/atom "/"))
+(defonce ruta-activa
+  (r/atom (or (some-> js/window.location.hash (clojure.string/replace #"^#" "")) "/")))
 
 ;; Estructura que tendra el SPA (Single Page App) de clojure, lo que es la pagina principal, donde se presenta cada boton, al dar sobre ellos, 
 ;; cambia el aspecto del div principal app.
