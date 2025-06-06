@@ -68,8 +68,7 @@
              {:on-click #(reset! selected-image {:src base64-src :alt descripcion})}
              [:img {:src base64-src
                     :class "img"
-                    :alt descripcion}]
-             [:p.descripcion descripcion]]))]
+                    :alt descripcion}]]))]
        ;; Modal
        (when @selected-image
          [:div.modal-container.active
