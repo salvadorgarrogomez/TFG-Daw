@@ -29,22 +29,33 @@
            :on-click #(reset! ruta-activa "/nosotros")}
        "Nosotros"]]]]])
 
+;; Funcion para automatizar el año en curso del copyright
+(defn enCurso []
+  (let [year (.getFullYear (js/Date.))]
+    [:div.row
+     [:div.col-12
+      [:p {:class "estiloFooter"} (str "© " year)]]]))
 
 (defn footer []
   ;; Estructura del footer
   [:footer.container-fluid
    [:div.row
     [:div.col-12 {:class "botonesFooter"}
-     [:h3 "Teléfonos de contacto (reservas):"]
+     [:p {:class "estiloFooter"} "Teléfonos de contacto (reservas):"]
      [:a {:href "tel:+34623191754"}
       [:button [:span.ml-2 "📞" "623191754"]]]
      [:a {:href "tel:+34683572682"}
       [:button [:span.ml-2 "📞" "683572682"]]]]]
    [:div.row {:class "privacidad"}
     [:div.col-12
-     [:a {:href "#/privacidad"} "Privacidad"]
+     [:a {:href "#/privacidad"
+          :on-click #(reset! ruta-activa "/privacidad")} "➡️ Privacidad"]
      [:a {:href "#/administracion"
-          :class "login"} "Administración"]]]])
+          :class "login"
+          :on-click #(reset! ruta-activa "/administracion")} "➡️ Administración"]]]
+   [:div.row
+    [:div.col-12
+     [enCurso]]]])
 
 ;; Layout de la pagina principal
 (defn layout [content]

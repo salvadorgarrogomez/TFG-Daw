@@ -15,6 +15,7 @@
               (when (= k name) v)))
           cookies)))
 
+;; Funciones de identificacion de rol, al hacer login, el backend envia por cookies el rol del usuario loegeado, en base al rol enviado, se mostraran unas vista u otras.
 (defn set-rol [rol]
   (reset! rol-usuario rol))
 

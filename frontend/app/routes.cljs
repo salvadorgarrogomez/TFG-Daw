@@ -12,8 +12,7 @@
             [comandas.core :as comandas]
             [app.state :refer [current-route]]))
 
-;; Archivo, donde se encuentran todas las rutas disponibles en la pagina, sin este archivo, no se podria navegar por la web a traves de los distintos botones
-
+;; Archivo, donde se encuentran todas las rutas disponibles en la pagina, sin este archivo, no se podria navegar por la web a traves de los distintos botones o enlaces
 (defn requiere-permisos [context]
   (if (app.state/rol-admin?)
     context
@@ -22,6 +21,7 @@
       (rfe/push-state "/administracion")
       nil)))
 
+;; Funcion de restriccion de acceso, si el usuario no esta logueado, no podra acceder a ciertas paginas como imagenes o comandas
 (defn redirigir-si-no-logueado [context]
   (if (nil? @app.state/rol-usuario)
     (do

@@ -22,6 +22,7 @@
 (defonce categoria-busqueda (r/atom ""))
 (defonce producto-busqueda (r/atom ""))
 (defonce productos (r/atom []))
+(defonce boton-activo (r/atom nil))
 
 ;; Llamada a la API, para veficiar en caso de recarga de la pagina web como con F5, se compruebe si la sesión es correcta, enviando la cookie al backend para su comprobación
 (defn verificar-sesion []
@@ -228,16 +229,28 @@
 (defn botones-admin []
   [:div {:class "botonesAdmin"}
    [:p "Eres administrador. Puedes editar el contenido."]
-   [:button {:on-click #(do
+   [:button {:class (when (= @boton-activo :productos) "activo")
+             :on-click #(do
+                          (reset! boton-activo :productos)
                           (reset! mostrar-productos? true)
                           (reset! mostrar-categorias? false)
-                          (fetch-list-productos))} "Mostrar Productos"]
-   [:button {:on-click #(do
+                          (fetch-list-productos))}
+    "Mostrar Productos"]
+   [:button {:class (when (= @boton-activo :categorias) "activo")
+             :on-click #(do
+                          (reset! boton-activo :categorias)
                           (reset! mostrar-categorias? true)
                           (reset! mostrar-productos? false)
-                          (fetch-list-categorias))} "Mostrar Categorías"]
-   [:button {:on-click #(set! (.-hash js/location) "#/imagenes")} "Mostrar fotografías"]
-   [:button {:on-click #(set! (.-hash js/location) "#/comandas")} "Comandas"]])
+                          (fetch-list-categorias))}
+    "Mostrar Categorías"]
+   [:button {:on-click #(do
+                          (reset! boton-activo :imagenes)
+                          (set! (.-hash js/location) "#/imagenes"))}
+    "Mostrar fotografías"]
+   [:button {:on-click #(do
+                          (reset! boton-activo :comandas)
+                          (set! (.-hash js/location) "#/comandas"))}
+    "Comandas"]])
 
 (defn botones-user []
   [:div {:class "botonesUser"}
@@ -278,7 +291,9 @@
 (defn page []
   (cond
     (not @sesion-verificada?) [:p {:class "administracion"} "Verificando sesión..."]
-    @logged-in? [admin-panel]
+    @logged-in? (do
+                  (reset! boton-activo nil) ;; resetea al entrar en admin-panel
+                  [admin-panel])
     :else [login-form]))
 
 ;; Monta la aplicación en el DOM

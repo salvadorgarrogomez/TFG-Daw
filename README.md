@@ -2,14 +2,17 @@
 
 Cada uno de estos comandos, en una terminal independiente:
 
-Inicializacion proyecto:
+Instalacion dependencias PHP:
 - composer install
+Inicializacion backend Laravel:
 - php artisan serve
 
-Compilar .cljs
+Instalacion dependencias Clojure:
 - npm install
+Compilar .cljs para crear .js
 - npx shadow-cljs watch app
 
-Compilar .scss
+Instalacion dependencias Sass:
 - npm install sass --save-dev
+Compilar .scss para crear .css
 - npx sass --watch frontend/scss:public/css
