@@ -8,7 +8,7 @@ Cada uno de estos comandos, en una terminal independiente:
 **Inicializacion backend Laravel:**
 > php artisan serve
 
-**Instalacion dependencias Clojure:**
+**Instalacion dependencias JavaScript:**
 > npm install
 
 **Compilar .cljs para crear .js**
