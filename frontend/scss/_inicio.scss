@@ -165,6 +165,16 @@ header {
 }
 
 @media (max-width: 1024px) {
+    body {
+        max-width: 100%;
+        overflow-x: hidden;
+    }
+
+    .logo {
+        width: 95%;
+        max-width: 500px;
+    }
+
     .carousel-inner {
         display: block;
     }
