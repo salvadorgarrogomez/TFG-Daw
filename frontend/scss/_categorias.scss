@@ -129,13 +129,6 @@ footer {
 }
 
 @media (max-width: 1024px) {
-    body {
-        padding: 10px;
-        margin-left: -30px;
-        margin-right: -30px;
-        padding-top: 0;
-    }
-
     .logo {
         width: 110%;
         max-width: 600px;
@@ -143,7 +136,7 @@ footer {
         display: flex;
         justify-content: center;
         align-items: center;
-
+        overflow-x: hidden;
     }
 
     .desplegable {
@@ -162,15 +155,18 @@ footer {
         }
 
         .divProductos {
-            padding-right: 45px;
+            margin-left: -5px;
         }
+    }
+
+    .mensaje-categoria {
+        margin-right: 5px;
     }
 
     footer {
         position: fixed;
         bottom: 0;
         left: 0;
-        width: 100%;
         background-color: #343a40;
         color: #ffffff;
         text-align: center;

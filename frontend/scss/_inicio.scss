@@ -166,7 +166,17 @@ header {
 
 @media (max-width: 1024px) {
     body {
-        max-width: 120%;
+        margin: 0;
+        padding: 10px;
+        padding-top: 0;
+        box-sizing: border-box;
+        overflow-x: hidden;
+    }
+
+    #app {
+        margin-left: -30px;
+        margin-right: -30px;
+        padding-top: 0;
         overflow-x: hidden;
     }
 
