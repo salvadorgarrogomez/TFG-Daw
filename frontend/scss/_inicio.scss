@@ -174,14 +174,19 @@ header {
     }
 
     #app {
-        margin-left: -30px;
-        margin-right: -30px;
+        margin-left: -10px;
+        margin-right: -10px;
         padding-top: 0;
         overflow-x: hidden;
     }
 
+    .navBar {
+        margin: 0;
+        padding: 0;
+    }
+
     .logo {
-        width: 95%;
+        width: 100%;
         max-width: 500px;
     }
 
